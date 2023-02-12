@@ -1,0 +1,30 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Memorizable"
+include ':app'
+include ':theme_list_ui'
+
+include ':about_theme_ui'
+include ':theme_list_data'
+include ':about_theme_data'
+include ':about_theme_domain'
+include ':theme_list_domain'
+include ':AI'
+include ':core'
+include ':add_theme_ui'
+include ':add_theme_domain'
+include ':add_theme_data'
+include ':navigation'
+include ':onboarding'

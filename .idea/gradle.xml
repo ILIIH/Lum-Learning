@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AI" />
+            <option value="$PROJECT_DIR$/about_theme_data" />
+            <option value="$PROJECT_DIR$/about_theme_domain" />
+            <option value="$PROJECT_DIR$/about_theme_ui" />
+            <option value="$PROJECT_DIR$/add_theme_data" />
+            <option value="$PROJECT_DIR$/add_theme_domain" />
+            <option value="$PROJECT_DIR$/add_theme_ui" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/onboarding" />
+            <option value="$PROJECT_DIR$/theme_list_data" />
+            <option value="$PROJECT_DIR$/theme_list_domain" />
+            <option value="$PROJECT_DIR$/theme_list_ui" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

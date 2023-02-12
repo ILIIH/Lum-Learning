@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/onboarding_nav">
+
+
+
+    <navigation android:id="@+id/theme_list_nav"
+        app:startDestination="@id/theme_list_nav_graph">
+        <include app:graph="@navigation/theme_list_nav_graph" />
+        <action
+            android:id="@+id/to_add_theme"
+            app:destination="@id/add_new_theme_nav"
+            app:popUpTo="@id/theme_list_nav" />
+        <action
+            android:id="@+id/to_about_theme"
+            app:destination="@id/abot_theme_nav"
+            app:popUpTo="@id/theme_list_nav" />
+    </navigation>
+    <navigation android:id="@+id/add_new_theme_nav"
+        app:startDestination="@id/add_new_theme_nav_graph">
+        <include app:graph="@navigation/add_new_theme_nav_graph" />
+        <action
+            android:id="@+id/continue_to_theme_list"
+            app:destination="@id/theme_list_nav" />
+    </navigation>
+    <navigation android:id="@+id/abot_theme_nav"
+        app:startDestination="@id/abot_theme_navigation">
+        <include app:graph="@navigation/abot_theme_navigation" />
+    </navigation>
+    <navigation android:id="@+id/onboarding_nav"
+        app:startDestination="@id/onboarding_nav_gaph">
+        <include app:graph="@navigation/onboarding_nav_gaph" />
+        <action
+            android:id="@+id/to_theme_list"
+            app:destination="@id/theme_list_nav" />
+    </navigation>
+
+</navigation>

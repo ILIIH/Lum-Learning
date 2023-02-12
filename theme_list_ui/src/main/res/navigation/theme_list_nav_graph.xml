@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/theme_list_nav_graph"
+    app:startDestination="@id/themeListFragment">
+
+    <fragment
+        android:id="@+id/themeListFragment"
+        android:name="com.example.theme_list_ui.ThemeListFragment"
+        android:label="fragment_theme_list"
+        tools:layout="@layout/fragment_theme_list" >
+        <action
+            android:id="@+id/to_about_theme"
+            app:destination="@id/abot_theme_navigation" />
+            </fragment>
+    <include app:graph="@navigation/abot_theme_navigation" />
+
+</navigation>

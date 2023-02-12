@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="theme_importance">
+        <item>Extremely important</item>
+        <item>Very important</item>
+        <item>Important</item>
+        <item>Not important</item>
+    </string-array>
+</resources>

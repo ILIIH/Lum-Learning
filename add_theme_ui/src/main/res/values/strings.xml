@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">add_theme_ui</string>
+    <string name="Theme_name">Enter theme name</string>
+    <string name="Enter_your_years_experience">Enter your years experience in this theme</string>
+    <string name="Continue">Continue</string>
+    <string name="Add_theme_photo">Add photo</string>
+    <string name="theme_importance">Theme importance</string>
+    <string name="theme_type">Theme type</string>
+
+
+</resources>
