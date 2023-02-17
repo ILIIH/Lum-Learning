@@ -6,10 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "themeEntity")
 class ThemeEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "themeName") val themeName: String?,
     @ColumnInfo(name = "photoThemeURI") val photoThemeURI: String?,
-    @ColumnInfo(name = "memoPhotoCardID") val memoPhotoCardID: Int?,
-    @ColumnInfo(name = "memoTextCardID") val memoTextCardID: Int?
+    @ColumnInfo(name = "yearExperience") val yearExperience: Int,
+    @ColumnInfo(name = "themeImportance") val themeImportance: String,
+    @ColumnInfo(name = "themeTesis") val themeType: String,
+    @ColumnInfo(name = "memoPhotoCardIDs") val memoPhotoCardIDs: List<Int>?,
+    @ColumnInfo(name = "memoTextCardIDs") val memoTextCardIDs: List<Int>?
 
-    )
+)

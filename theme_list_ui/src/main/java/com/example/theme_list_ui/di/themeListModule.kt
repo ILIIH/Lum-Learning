@@ -6,9 +6,9 @@ import org.koin.dsl.module
 
 val themeListModule = module {
     viewModel {
-        ThemeViewModule(get(), get());
+        ThemeViewModule(get(), get())
     }
     single {
-        ProfileAdapter(get())
+        ProfileAdapter(get(), get())
     }
 }

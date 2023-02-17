@@ -11,6 +11,8 @@ val RoomModule = module {
             androidContext(),
             ThemeDatabace::class.java,
             "theme-database"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 }

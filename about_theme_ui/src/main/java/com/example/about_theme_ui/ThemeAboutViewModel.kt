@@ -5,41 +5,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.add_theme_data.SaveTheme
-import com.example.add_theme_data.Theme
+import com.example.about_theme_data.GetThemeMetric
+import com.example.about_theme_data.ThemeMetric
 import kotlinx.coroutines.launch
 
 class ThemeAboutViewModel(
-    private val saveTheme: SaveTheme,
-    private val navigator: AddThemeNavigation,
+    private val getTheme: GetThemeMetric,
+    private val navigator: AddThemeNavigation
 ) : ViewModel() {
+    private val themeInfo = MutableLiveData<ThemeMetric>()
+    val _themeInfo: LiveData<ThemeMetric>
+        get() = themeInfo
 
-    private val photo = MutableLiveData<Bitmap>()
-    val _photo: LiveData<Bitmap>
-        get() = photo
-
-    private val photoURI = MutableLiveData<String>()
-    fun setPhotoURI(URI: String) {
-        photoURI.postValue(URI)
-    }
-
-    fun setPhoto(bitmap: Bitmap) {
-        photo.postValue(bitmap)
-    }
-
-    fun addTheme(tile: String, yearExperience: Int, themeImportance: String, themeTesis: String) {
+    fun loadThemeInfo(id: Int) {
         viewModelScope.launch {
-            saveTheme.execute(
-                Theme(
-                    tile,
-                    photoURI.value!!,
-                    yearExperience,
-                    themeImportance,
-                    themeTesis
-                )
-            )
+            themeInfo.postValue(getTheme.execute(id))
         }
+    }
 
-        navigator.contin()
+    fun toTrainingScreen() {
+        navigator.toTrain()
+    }
+
+    fun toEditScreen() {
+        navigator.toEdit()
+    }
+
+    fun toCreateScreen() {
+        navigator.toCreate()
     }
 }

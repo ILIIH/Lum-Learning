@@ -41,6 +41,8 @@ dependencies {
     implementation project(path: ':add_theme_domain')
     implementation project(path: ':navigation')
     implementation project(path: ':onboarding')
+    implementation project(path: ':about_theme_ui')
+    implementation project(path: ':about_theme_domain')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 

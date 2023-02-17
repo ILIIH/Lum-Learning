@@ -14,6 +14,6 @@ val ThemeListDomainModule = module {
     }
 
     single<ThemeRepo> {
-        ThemeRepoImp(androidContext())
+        ThemeRepoImp(get())
     }
 }

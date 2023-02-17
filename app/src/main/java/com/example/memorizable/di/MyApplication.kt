@@ -1,6 +1,8 @@
 package com.example.memorizable.di
 
 import android.app.Application
+import com.example.about_theme_domain.di.aboutThemeModule
+import com.example.about_theme_ui.di.aboutThemeUiModule
 import com.example.add_theme_domain.di.addThemeDomainModule
 import com.example.add_theme_ui.di.addThemeModule
 import com.example.core.DB.di.RoomModule
@@ -24,7 +26,10 @@ class MyApplication : Application() {
                 addThemeModule,
                 addThemeDomainModule,
                 navigationModule,
-                onBoardingModule
+                onBoardingModule,
+                aboutThemeModule,
+                aboutThemeUiModule,
+                imageProviderModule
             )
         }
     }

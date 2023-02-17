@@ -1,18 +1,20 @@
 package com.example.theme_list_ui.adapter
 
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.core.DB.domain.photoLoader
 import com.example.theme_list_data.Theme
-import com.example.theme_list_ui.R
 import com.example.theme_list_ui.databinding.ThemeItemBinding
 import com.example.theme_list_ui.themeListNavigation
 
 class ProfileAdapter(
-    private val navigator: themeListNavigation
+    private val navigator: themeListNavigation,
+    private val photoLoader: photoLoader
 ) : ListAdapter<Theme, ProfileAdapter.ThemeItemViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeItemViewHolder {
@@ -40,7 +42,11 @@ class ProfileAdapter(
                 baceImgLayout.setOnClickListener {
                     navigator.toAboutTheme()
                 }
-                // TO_DO baceImgLayout
+                if (themeItem.ImageUri != null) {
+                    val bitmap = photoLoader.getPhoto(themeItem.ImageUri!!)
+                    val bitmapDr: Drawable = BitmapDrawable(bitmap)
+                    baceImgLayout.setBackgroundDrawable(bitmapDr)
+                }
             }
         }
     }

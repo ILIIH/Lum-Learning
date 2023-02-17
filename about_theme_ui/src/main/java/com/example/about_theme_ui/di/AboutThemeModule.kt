@@ -4,8 +4,8 @@ import com.example.about_theme_ui.ThemeAboutViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val addThemeModule = module {
+val aboutThemeUiModule = module {
     viewModel {
-        ThemeAboutViewModel(get())
+        ThemeAboutViewModel(get(), get())
     }
 }

@@ -9,6 +9,7 @@
       <module name="Memorizable.add_theme_ui" target="11" />
       <module name="Memorizable.AI" target="11" />
       <module name="Memorizable.app" target="11" />
+      <module name="Memorizable.ask_answer_ui" target="11" />
       <module name="Memorizable.core" target="11" />
       <module name="Memorizable.myapplication" target="11" />
       <module name="Memorizable.navigation" target="11" />

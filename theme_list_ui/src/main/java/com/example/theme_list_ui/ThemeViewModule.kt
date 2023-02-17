@@ -8,6 +8,7 @@ import com.example.theme_list_data.GetTheme
 import com.example.theme_list_data.Theme
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class ThemeViewModule(
     private val getTheme: GetTheme,
@@ -19,11 +20,14 @@ class ThemeViewModule(
         get() = themes
 
     init {
-        getTheme.execute().onEach {
-            themes.postValue(it)
-        }.launchIn(viewModelScope)
+        viewModelScope.launch {
+            getTheme.execute().onEach {
+                themes.postValue(it)
+            }.launchIn(viewModelScope)
+        }
     }
-    fun toAddNewTheme(){
+
+    fun toAddNewTheme() {
         navigator.toAddNewTheme()
     }
 }
