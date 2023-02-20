@@ -1,6 +1,6 @@
 package com.example.about_theme_ui
 
-interface AddThemeNavigation {
+interface AboutThemeNavigation {
     fun toTrain()
     fun toEdit()
     fun toCreate()

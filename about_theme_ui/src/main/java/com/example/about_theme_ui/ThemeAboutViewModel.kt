@@ -1,6 +1,5 @@
 package com.example.about_theme_ui
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ThemeAboutViewModel(
     private val getTheme: GetThemeMetric,
-    private val navigator: AddThemeNavigation
+    private val navigator: AboutThemeNavigation
 ) : ViewModel() {
     private val themeInfo = MutableLiveData<ThemeMetric>()
     val _themeInfo: LiveData<ThemeMetric>
@@ -23,7 +22,7 @@ class ThemeAboutViewModel(
         }
     }
 
-    fun toTrainingScreen() {
+    fun toTrainScreen() {
         navigator.toTrain()
     }
 

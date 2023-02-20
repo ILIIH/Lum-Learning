@@ -5,6 +5,8 @@ import com.example.about_theme_domain.di.aboutThemeModule
 import com.example.about_theme_ui.di.aboutThemeUiModule
 import com.example.add_theme_domain.di.addThemeDomainModule
 import com.example.add_theme_ui.di.addThemeModule
+import com.example.ask_answer_domain.di.askAnswerDomainModule
+import com.example.ask_answer_ui.di.askAnswerUiModule
 import com.example.core.DB.di.RoomModule
 import com.example.navigation.di.navigationModule
 import com.example.onboarding.di.onBoardingModule
@@ -29,7 +31,9 @@ class MyApplication : Application() {
                 onBoardingModule,
                 aboutThemeModule,
                 aboutThemeUiModule,
-                imageProviderModule
+                imageProviderModule,
+                askAnswerUiModule,
+                askAnswerDomainModule
             )
         }
     }

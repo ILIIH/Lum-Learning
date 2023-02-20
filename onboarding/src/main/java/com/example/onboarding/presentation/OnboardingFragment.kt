@@ -18,10 +18,14 @@ class OnboardingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       val view = FragmentOnboardingBinding.inflate(inflater, container, false)
+        val view = FragmentOnboardingBinding.inflate(inflater, container, false)
         view.startButton.setOnClickListener {
             viewModule.navigateToThemeList()
         }
+        view.plainButton.setOnClickListener {
+            viewModule.navigateToPlain()
+        }
+
         return view.root
     }
 }

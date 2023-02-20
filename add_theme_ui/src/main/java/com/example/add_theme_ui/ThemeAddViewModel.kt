@@ -40,6 +40,6 @@ class ThemeAddViewModel(
             )
         }
 
-        navigator.contin()
+        navigator.submit()
     }
 }

@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.theme_list_ui.adapter.ProfileAdapter
+import com.example.theme_list_ui.adapter.ThemeAdapter
 import com.example.theme_list_ui.databinding.FragmentThemeListBinding
 import org.koin.android.ext.android.inject
 
 class ThemeListFragment : Fragment() {
 
     val viewModule: ThemeViewModule by inject()
-    val themeListAdapter: ProfileAdapter by inject()
+    val themeListAdapter: ThemeAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,

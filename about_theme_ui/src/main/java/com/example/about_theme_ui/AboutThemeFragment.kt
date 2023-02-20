@@ -21,14 +21,25 @@ class AboutThemeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = FragmentAboutThemeBinding.inflate(inflater,  container, false)
+        val view = FragmentAboutThemeBinding.inflate(inflater, container, false)
         data.add("True answ", 20.0, "#FF00A49D")
         data.add("Wrong nasw", 20.0, "#900D09")
-        data.add("Triple wrong answ", 40.0, "#000000")
+        data.add("Triple wrong answ", 60.0, "#000000")
 
         view.pieChart.setData(data)
 
-        view.horizontalChart.setData(100.0F, Color.parseColor("#000000"))
+        view.horizontalChartTripleWrong.setData(60.0F, Color.parseColor("#000000"))
+        view.horizontalChartWrong.setData(20.0F, Color.parseColor("#900D09"))
+        view.horizontalChartRight.setData(20.0F, Color.parseColor("#FF00A49D"))
+
+        view.toTrain.setOnClickListener {
+            viewModel.toTrainScreen()
+        }
+
+        view.createNewItem.setOnClickListener {
+            viewModel.toCreateScreen()
+        }
+
         return view.root
     }
 }

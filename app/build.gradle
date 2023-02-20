@@ -43,6 +43,8 @@ dependencies {
     implementation project(path: ':onboarding')
     implementation project(path: ':about_theme_ui')
     implementation project(path: ':about_theme_domain')
+    implementation project(path: ':ask_answer_ui')
+    implementation project(path: ':ask_answer_domain')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 

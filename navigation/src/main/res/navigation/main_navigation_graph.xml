@@ -3,8 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/abot_theme_nav">
+    app:startDestination="@id/onboarding_nav">
 
+
+    <navigation android:id="@+id/formula_builder_graph"
+        app:startDestination="@id/formula_builder_navgraph">
+        <include app:graph="@navigation/formula_builder_navgraph" />
+    </navigation>
 
 
     <navigation android:id="@+id/theme_list_nav"
@@ -16,7 +21,7 @@
             app:popUpTo="@id/theme_list_nav" />
         <action
             android:id="@+id/to_about_theme"
-            app:destination="@id/abot_theme_nav"
+            app:destination="@id/about_theme_nav"
             app:popUpTo="@id/theme_list_nav" />
     </navigation>
     <navigation android:id="@+id/add_new_theme_nav"
@@ -26,9 +31,15 @@
             android:id="@+id/continue_to_theme_list"
             app:destination="@id/theme_list_nav" />
     </navigation>
-    <navigation android:id="@+id/abot_theme_nav"
+    <navigation android:id="@+id/about_theme_nav"
         app:startDestination="@id/abot_theme_navigation">
         <include app:graph="@navigation/abot_theme_navigation" />
+        <action
+            android:id="@+id/to_ask_answer_game"
+            app:destination="@id/ask_answer_ui_navigation" />
+        <action
+            android:id="@+id/to_formula_builder"
+            app:destination="@id/formula_builder_graph" />
     </navigation>
     <navigation android:id="@+id/onboarding_nav"
         app:startDestination="@id/onboarding_nav_gaph">
@@ -36,6 +47,20 @@
         <action
             android:id="@+id/to_theme_list"
             app:destination="@id/theme_list_nav" />
+        <action
+            android:id="@+id/to_plain_navigation_graph"
+            app:destination="@id/plain_navigation_graph" />
     </navigation>
+
+    <navigation android:id="@+id/ask_answer_ui_navigation"
+        app:startDestination="@id/ask_answer_game_nav_graph">
+        <include app:graph="@navigation/ask_answer_game_nav_graph" />
+    </navigation>
+
+    <navigation android:id="@+id/plain_navigation_graph"
+        app:startDestination="@id/plain_nav_graph">
+        <include app:graph="@navigation/plain_nav_graph" />
+    </navigation>
+
 
 </navigation>

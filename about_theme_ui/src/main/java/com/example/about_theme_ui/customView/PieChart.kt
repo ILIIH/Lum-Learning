@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 
 class PieChart @JvmOverloads constructor(
@@ -23,7 +22,7 @@ class PieChart @JvmOverloads constructor(
     private val indicatorCirclePaint = Paint()
     private var indicatorCircleRadius = 0f
     private val mainTextPaint = Paint()
-    private val ovals: MutableList<RectF> = ArrayList<RectF>(10)
+    private val ovals: MutableList<RectF> = ArrayList(10)
 
     init {
         borderPaint.apply {
@@ -88,7 +87,7 @@ class PieChart @JvmOverloads constructor(
         right: Float = (width / 2).toFloat(),
         value: Int
     ) {
-        val random =  (value..value*8).random().toFloat()
+        val random = (value..value * 4).random().toFloat()
 
         val oval = RectF()
 
@@ -97,9 +96,7 @@ class PieChart @JvmOverloads constructor(
         oval.left = left - (layoutParams.height / 2).toFloat() + random
         oval.right = right + (layoutParams.height / 2).toFloat() - random
         ovals.add(oval)
-
     }
-
 
     private fun setGraphicSizes() {
         mainTextPaint.textSize = height / 15f
@@ -112,7 +109,7 @@ class PieChart @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
         setGraphicSizes()
         data?.pieSlices?.forEach {
-            setCircleBounds( value = it.value.value.toInt())
+            setCircleBounds(value = it.value.value.toInt())
             setIndicatorLocation(it.key)
         }
     }

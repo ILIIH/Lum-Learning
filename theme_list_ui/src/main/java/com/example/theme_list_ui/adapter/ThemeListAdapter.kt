@@ -12,10 +12,10 @@ import com.example.theme_list_data.Theme
 import com.example.theme_list_ui.databinding.ThemeItemBinding
 import com.example.theme_list_ui.themeListNavigation
 
-class ProfileAdapter(
+class ThemeAdapter(
     private val navigator: themeListNavigation,
     private val photoLoader: photoLoader
-) : ListAdapter<Theme, ProfileAdapter.ThemeItemViewHolder>(DiffCallBack()) {
+) : ListAdapter<Theme, ThemeAdapter.ThemeItemViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeItemViewHolder {
         val view = ThemeItemBinding.inflate(

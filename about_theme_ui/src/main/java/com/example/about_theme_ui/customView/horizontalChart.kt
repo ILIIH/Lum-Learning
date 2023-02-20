@@ -42,7 +42,7 @@ class horizontalChart @JvmOverloads constructor(
         val bottomPercentageIndexMagrin = height / 2 + PERCENTAGE_INDEX_WITH / 2
 
         percentageIndexPaint.color = percentageColor
-        val percentageMargin = (0.6* width * percentage) / 100
+        val percentageMargin = (0.6 * width * percentage) / 100
         canvas?.drawRect((width * 0.2).toFloat(), topPercentageIndexMagrin, (percentageMargin + width * 0.2).toFloat(), bottomPercentageIndexMagrin, percentageIndexPaint)
     }
 

@@ -1,5 +1,6 @@
 package com.example.navigation.di
 
+import com.example.about_theme_ui.AboutThemeNavigation
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.navigation.CoreNavigation
 import com.example.navigation.Navigator
@@ -13,6 +14,7 @@ val navigationModule = module {
         CoreNavigation::class,
         onboardingNavigation::class,
         themeListNavigation::class,
-        AddThemeNavigation::class
+        AddThemeNavigation::class,
+        AboutThemeNavigation::class
     )
 }

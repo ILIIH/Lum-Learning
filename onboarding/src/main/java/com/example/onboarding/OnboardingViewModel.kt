@@ -10,4 +10,8 @@ class OnboardingViewModel(
     fun navigateToThemeList() {
         navigator.toThemeList()
     }
+
+    fun navigateToPlain() {
+        navigator.toPlain()
+    }
 }

@@ -16,13 +16,34 @@
 
 
     <com.example.about_theme_ui.customView.horizontalChart
-        android:id="@+id/horizontal_chart"
+        android:id="@+id/horizontal_chart_right"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/horizontal_chart_wrong"
+        app:layout_constraintTop_toTopOf="@+id/horizontal_chart_wrong" />
+
+    <com.example.about_theme_ui.customView.horizontalChart
+        android:id="@+id/horizontal_chart_triple_wrong"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/horizontal_chart_wrong"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pie_chart" />
+
+    <com.example.about_theme_ui.customView.horizontalChart
+        android:id="@+id/horizontal_chart_wrong"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/horizontal_chart_right"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/horizontal_chart_triple_wrong"
+        app:layout_constraintTop_toTopOf="@+id/horizontal_chart_triple_wrong" />
 
     <TextView
         android:id="@+id/title"
@@ -36,7 +57,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/edit"
+        android:id="@+id/to_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -46,14 +67,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/traine" />
+        app:layout_constraintTop_toBottomOf="@+id/to_train" />
 
     <Button
-        android:id="@+id/traine"
+        android:id="@+id/to_train"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:text="ТРЕНИРОВАТЬСЯ"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,18 +93,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit" />
+        app:layout_constraintTop_toBottomOf="@+id/to_edit" />
 
     <TextView
         android:id="@+id/rightRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="50% right answers"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal_chart" />
+        android:layout_marginTop="12dp"
+        android:text="20% right answers"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_right"
+        app:layout_constraintStart_toStartOf="@+id/horizontal_chart_right"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_chart_right" />
+
+
+    <TextView
+        android:id="@+id/wrongRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20% right answers"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_wrong"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="@+id/horizontal_chart_wrong"
+        app:layout_constraintTop_toTopOf="@+id/rightRate" />
+
+    <TextView
+        android:id="@+id/repitedWrongRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60% repited wrong answers"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_triple_wrong"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="@+id/horizontal_chart_triple_wrong"
+        app:layout_constraintTop_toTopOf="@+id/wrongRate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

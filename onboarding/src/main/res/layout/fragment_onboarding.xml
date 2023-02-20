@@ -20,12 +20,12 @@
         android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Начать" />
+        android:text="@string/Start" />
 
     <Button
-        android:layout_marginTop="40dp"
-        android:id="@+id/restart_button"
+        android:id="@+id/plain_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Сбросить настройки ИИ" />
+        android:layout_marginTop="40dp"
+        android:text="@string/plain" />
 </LinearLayout>
