@@ -3,7 +3,6 @@ package com.example.ask_answer_ui.customView
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 
 class timeView @JvmOverloads constructor(
@@ -19,6 +18,8 @@ class timeView @JvmOverloads constructor(
     private val rectCircleIndex = RectF()
     private var traitRect: Path = Path()
 
+    val clockRadius = 40F
+    val clockSecondRadius = 15F
     val MAX_TRAIT = 17
     var endTime = 100F
     var currentTimeAngle = 180F
@@ -86,11 +87,35 @@ class timeView @JvmOverloads constructor(
             )
             lineTo(rectWith + widthOffset, radius + heightOffset)
 
-            arcTo(rectWith + widthOffset - 2 * radius, height - heightOffset - 2 * radius, rectWith + widthOffset, height.toFloat() - heightOffset, 0F, 90F, false)
+            arcTo(
+                rectWith + widthOffset - 2 * radius,
+                height - heightOffset - 2 * radius,
+                rectWith + widthOffset,
+                height.toFloat() - heightOffset,
+                0F,
+                90F,
+                false
+            )
             lineTo(widthOffset + radius, height - heightOffset)
-            arcTo(widthOffset, height.toFloat() - heightOffset - 2 * radius, 2 * radius + widthOffset, height.toFloat() - heightOffset, 90F, 90F, false)
+            arcTo(
+                widthOffset,
+                height.toFloat() - heightOffset - 2 * radius,
+                2 * radius + widthOffset,
+                height.toFloat() - heightOffset,
+                90F,
+                90F,
+                false
+            )
             lineTo(widthOffset, heightOffset)
-            arcTo(widthOffset, heightOffset, 2 * radius + widthOffset, 2 * radius + heightOffset, 180F, 90F, false)
+            arcTo(
+                widthOffset,
+                heightOffset,
+                2 * radius + widthOffset,
+                2 * radius + heightOffset,
+                180F,
+                90F,
+                false
+            )
         }
     }
 
@@ -105,8 +130,6 @@ class timeView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         prepareBackground()
-        val clockRadius = 40F
-        val clockSecondRadius = 15F
 
         canvas?.drawPath(backgroundRect, backgroundColor)
         canvas?.drawCircle(100F, (height / 2).toFloat(), clockRadius, backgroundClock)

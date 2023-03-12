@@ -1,5 +1,6 @@
 package com.example.theme_list_ui.adapter
 
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -42,11 +43,10 @@ class ThemeAdapter(
                 baceImgLayout.setOnClickListener {
                     navigator.toAboutTheme()
                 }
-                if (themeItem.ImageUri != null) {
-                    val bitmap = photoLoader.getPhoto(themeItem.ImageUri!!)
-                    val bitmapDr: Drawable = BitmapDrawable(bitmap)
-                    baceImgLayout.setBackgroundDrawable(bitmapDr)
-                }
+
+                val bitmap = BitmapFactory.decodeByteArray(themeItem.photo, 0, themeItem.photo.size)
+                val bitmapDr: Drawable = BitmapDrawable(bitmap)
+                baceImgLayout.setBackgroundDrawable(bitmapDr)
             }
         }
     }

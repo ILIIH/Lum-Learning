@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.add_theme_data.SaveTheme
 import com.example.add_theme_data.Theme
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 class ThemeAddViewModel(
     private val saveTheme: SaveTheme,
@@ -29,13 +30,18 @@ class ThemeAddViewModel(
 
     fun addTheme(tile: String, yearExperience: Int, themeImportance: String, themeTesis: String) {
         viewModelScope.launch {
+            val stream = ByteArrayOutputStream()
+            photo.value!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val imageByteArray: ByteArray = stream.toByteArray()
+            photo.value!!.recycle()
             saveTheme.execute(
                 Theme(
                     tile,
                     photoURI.value!!,
                     yearExperience,
                     themeImportance,
-                    themeTesis
+                    themeTesis,
+                    imageByteArray
                 )
             )
         }

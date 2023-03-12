@@ -10,5 +10,6 @@ fun Theme.toDatabsce() = ThemeEntity(
     themeImportance = this.themeImportance,
     themeType = this.themeType,
     memoPhotoCardIDs = null,
-    memoTextCardIDs = null
+    memoTextCardIDs = null,
+    photo = photo
 )

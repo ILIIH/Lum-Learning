@@ -17,7 +17,7 @@ class GrantDiagram @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    // region
+    // region,
     // Для строк
     private val rowPaint = Paint().apply { style = Paint.Style.FILL }
 
@@ -248,7 +248,7 @@ class GrantDiagram @JvmOverloads constructor(
         return if (event.pointerCount > 1) scaleGestureDetector.onTouchEvent(event) else processMove(event)
     }
 
-    private fun processMove(event: MotionEvent): Boolean {
+    private fun processMove(event: MotionEvent): Boolean   {
         return when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 lastPoint.set(event.x, event.y)

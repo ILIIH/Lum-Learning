@@ -21,6 +21,8 @@ class ThemeListFragment : Fragment() {
     ): View {
         val view = FragmentThemeListBinding.inflate(inflater, container, false)
 
+        viewModule.LoadThemeList()
+
         view.themeList.adapter = themeListAdapter
 
         viewModule._themes.observe(requireActivity()) {

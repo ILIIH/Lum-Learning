@@ -13,6 +13,6 @@ class ThemeEntity(
     @ColumnInfo(name = "themeImportance") val themeImportance: String,
     @ColumnInfo(name = "themeTesis") val themeType: String,
     @ColumnInfo(name = "memoPhotoCardIDs") val memoPhotoCardIDs: List<Int>?,
-    @ColumnInfo(name = "memoTextCardIDs") val memoTextCardIDs: List<Int>?
-
+    @ColumnInfo(name = "memoTextCardIDs") val memoTextCardIDs: List<Int>?,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val photo: ByteArray
 )

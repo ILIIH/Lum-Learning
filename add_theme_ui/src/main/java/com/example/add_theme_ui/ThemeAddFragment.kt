@@ -16,7 +16,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.add_theme_ui.databinding.FragmentThemeAddBinding
 import org.koin.android.ext.android.inject
 

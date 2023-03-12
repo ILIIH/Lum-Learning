@@ -1,6 +1,8 @@
 package com.example.navigation
 
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
 import com.example.about_theme_ui.AboutThemeNavigation
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.ask_answer_ui.navigation.AskAnswerGameNav
@@ -51,7 +53,7 @@ class Navigator :
     }
 
     override fun toTrain() {
-        navController?.navigate(R.id.to_ask_answer_game)
+        navController?.navigate(AboutThemeNavDirections.toAskAnswerGame())
     }
 
     override fun toEdit() {
@@ -64,5 +66,11 @@ class Navigator :
 
     override fun finshGame() {
         TODO("Not yet implemented")
+    }
+}
+
+fun NavController.navigateSafe(directions: NavDirections, navOptions: NavOptions? = null) {
+    currentDestination?.getAction(directions.actionId)?.let {
+        navigate(directions, navOptions)
     }
 }

@@ -90,8 +90,8 @@ class AiTainingWorker(context: Context, workerParams: WorkerParameters) : Worker
         val trainData = floatArrayOf(22.2F, 21.2F, 20.2F, 21.2F)
 
         val (train, test) = Pair(
-            OnHeapDataset.create(arrayOf(trainData, trainData), trainData),
-            OnHeapDataset.create(arrayOf(trainData, trainData), trainData)
+            OnHeapDataset.create(arrayOf(trainData), trainData),
+            OnHeapDataset.create(arrayOf(trainData), trainData)
         )
 
         model.use {
