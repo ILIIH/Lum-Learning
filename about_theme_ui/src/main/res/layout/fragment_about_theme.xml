@@ -129,4 +129,15 @@
         app:layout_constraintStart_toStartOf="@+id/horizontal_chart_triple_wrong"
         app:layout_constraintTop_toTopOf="@+id/wrongRate" />
 
+    <TextView
+        android:id="@+id/theme_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="60% repited wrong answers"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

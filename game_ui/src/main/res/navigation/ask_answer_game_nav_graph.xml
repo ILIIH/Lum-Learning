@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ask_answer_game_nav_graph"
+    app:startDestination="@id/ruleFragment">
+
+    <fragment
+        android:id="@+id/visualAssociationFragment"
+        android:name="com.example.ask_answer_ui.fragments.VAFragment"
+        android:label="fragment_ask_answer"
+        tools:layout="@layout/fragment_visual_assosiation" />
+    <fragment
+        android:id="@+id/ruleFragment"
+        android:name="com.example.ask_answer_ui.fragments.RuleFragment"
+        android:label="fragment_rule"
+        tools:layout="@layout/fragment_rule" >
+        <action
+            android:id="@+id/to_VAFragment"
+            app:destination="@id/visualAssociationFragment" />
+        <action
+            android:id="@+id/to_SAFragment"
+            app:destination="@id/SAFragment" />
+        <action
+            android:id="@+id/to_DAFragment"
+            app:destination="@id/DAFragment" />
+        <action
+            android:id="@+id/to_MCFragment"
+            app:destination="@id/MCFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SAFragment"
+        android:name="com.example.ask_answer_ui.fragments.SAFragment"
+        android:label="SAFragment" />
+    <fragment
+        android:id="@+id/DAFragment"
+        android:name="com.example.ask_answer_ui.fragments.DAFragment.DAFragment"
+        android:label="DAFragment" />
+    <fragment
+        android:id="@+id/MCFragment"
+        android:name="com.example.ask_answer_ui.fragments.MCFragment"
+        android:label="fragment_m_c"
+        tools:layout="@layout/fragment_m_c" />
+</navigation>

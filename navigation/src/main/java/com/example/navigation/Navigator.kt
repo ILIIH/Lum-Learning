@@ -1,5 +1,6 @@
 package com.example.navigation
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -24,8 +25,10 @@ class Navigator :
 
     private var navController: NavController? = null
 
-    override fun toAboutTheme() {
-        navController?.navigate(R.id.to_about_theme)
+    override fun toAboutTheme(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt("id", id)
+        navController?.navigate(R.id.to_about_theme, bundle)
     }
 
     override fun toAddNewTheme() {

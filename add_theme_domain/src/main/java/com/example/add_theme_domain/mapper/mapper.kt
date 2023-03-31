@@ -9,7 +9,5 @@ fun Theme.toDatabsce() = ThemeEntity(
     yearExperience = this.yearExperience,
     themeImportance = this.themeImportance,
     themeType = this.themeType,
-    memoPhotoCardIDs = null,
-    memoTextCardIDs = null,
     photo = photo
 )

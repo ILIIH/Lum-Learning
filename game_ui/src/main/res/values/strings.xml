@@ -1,0 +1,7 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description_of_the_field">Description of the field</string>
+    <string name="discribe_how_hard_to_learn_this_info">Describe how hard to learn this info</string>
+    <string name="use">Describe how you can use this info</string>
+</resources>

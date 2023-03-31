@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.about_theme_ui.customView.PieData
 import com.example.about_theme_ui.databinding.FragmentAboutThemeBinding
 import org.koin.android.ext.android.inject
@@ -15,16 +16,22 @@ class AboutThemeFragment : Fragment() {
 
     val viewModel: ThemeAboutViewModel by inject()
     val data = PieData()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         val view = FragmentAboutThemeBinding.inflate(inflater, container, false)
         data.add("True answ", 20.0, "#FF00A49D")
         data.add("Wrong nasw", 20.0, "#900D09")
         data.add("Triple wrong answ", 60.0, "#000000")
+
+        viewModel.loadThemeInfo(requireArguments().getInt("id"))
+
+        viewModel._themeInfo.observe(viewLifecycleOwner) {
+            view.themeType.text = it.themeType
+            view.title.text = it.title
+        }
 
         view.pieChart.setData(data)
 
@@ -33,11 +40,15 @@ class AboutThemeFragment : Fragment() {
         view.horizontalChartRight.setData(20.0F, Color.parseColor("#FF00A49D"))
 
         view.toTrain.setOnClickListener {
-            viewModel.toTrainScreen()
+            val bundle = Bundle()
+            bundle.putInt("mnemo_type", viewModel.getMnemoType())
+            bundle.putInt("theme_type", viewModel.getThemeType())
+
+            findNavController().navigate(R.id.to_ask_answer_game, bundle)
         }
 
         view.createNewItem.setOnClickListener {
-            viewModel.toCreateScreen()
+            findNavController().navigate(R.id.to_formula_builder)
         }
 
         return view.root

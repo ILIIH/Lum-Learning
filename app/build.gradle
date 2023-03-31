@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.memorizable"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -44,15 +44,21 @@ dependencies {
     implementation project(path: ':onboarding')
     implementation project(path: ':about_theme_ui')
     implementation project(path: ':about_theme_domain')
-    implementation project(path: ':ask_answer_ui')
+    implementation project(path: ':game_ui')
     implementation project(path: ':ask_answer_domain')
+    implementation project(path: ':AI')
+    implementation project(path: ':learning_card_domain')
 
-    implementation "io.insert-koin:koin-android:3.3.2"
 
+    implementation 'io.insert-koin:koin-android:3.3.3'
+    implementation 'io.insert-koin:koin-androidx-workmanager:3.3.3'
+
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
 
 }

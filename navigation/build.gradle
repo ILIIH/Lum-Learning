@@ -39,14 +39,13 @@ dependencies {
     implementation project(path: ':about_theme_ui')
     implementation project(path: ':theme_list_ui')
     implementation project(path: ':onboarding')
-    implementation project(path: ':ask_answer_ui')
+    implementation project(path: ':game_ui')
     implementation project(path: ':formula_builder_ui')
     implementation project(path: ':plain_ui')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 
     implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
-
 
     implementation project(path: ':core')
 

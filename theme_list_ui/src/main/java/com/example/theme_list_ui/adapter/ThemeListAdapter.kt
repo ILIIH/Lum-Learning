@@ -41,7 +41,7 @@ class ThemeAdapter(
             with(binding) {
                 title.text = themeItem.Title
                 baceImgLayout.setOnClickListener {
-                    navigator.toAboutTheme()
+                    navigator.toAboutTheme(themeItem.id)
                 }
 
                 val bitmap = BitmapFactory.decodeByteArray(themeItem.photo, 0, themeItem.photo.size)

@@ -17,12 +17,19 @@
         <include app:graph="@navigation/theme_list_nav_graph" />
         <action
             android:id="@+id/to_add_theme"
-            app:destination="@id/formula_builder_graph"
+            app:destination="@id/add_new_theme_nav"
             app:popUpTo="@id/theme_list_nav" />
         <action
             android:id="@+id/to_about_theme"
             app:destination="@id/about_theme_nav"
-            app:popUpTo="@id/theme_list_nav" />
+            app:popUpTo="@id/theme_list_nav">
+            />
+
+        </action>
+
+
+
+
     </navigation>
     <navigation android:id="@+id/add_new_theme_nav"
         app:startDestination="@id/add_new_theme_nav_graph">

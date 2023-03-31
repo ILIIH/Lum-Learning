@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dataset-jvm">
+    <output-path>$PROJECT_DIR$/dataset/build/libs</output-path>
+    <root id="archive" name="dataset-jvm.jar">
+      <element id="module-output" name="Memorizable.dataset.jvmMain" />
+    </root>
+  </artifact>
+</component>

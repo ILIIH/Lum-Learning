@@ -6,15 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.about_theme_data.GetThemeMetric
 import com.example.about_theme_data.ThemeMetric
+import com.example.core.data.usecases.getPredictedMnemoType
+import com.example.core.domain.models.learningMethod
 import kotlinx.coroutines.launch
 
 class ThemeAboutViewModel(
     private val getTheme: GetThemeMetric,
-    private val navigator: AboutThemeNavigation
+    private val getPredictedMnemoType: getPredictedMnemoType,
 ) : ViewModel() {
     private val themeInfo = MutableLiveData<ThemeMetric>()
     val _themeInfo: LiveData<ThemeMetric>
         get() = themeInfo
+
+    private val prefferedLearningMethod = MutableLiveData<learningMethod>()
 
     fun loadThemeInfo(id: Int) {
         viewModelScope.launch {
@@ -22,15 +26,13 @@ class ThemeAboutViewModel(
         }
     }
 
-    fun toTrainScreen() {
-        navigator.toTrain()
-    }
+    fun getMnemoType() = prefferedLearningMethod.value!!.mnemoType
+    fun getThemeType() = prefferedLearningMethod.value!!.themeType
 
-    fun toEditScreen() {
-        navigator.toEdit()
-    }
-
-    fun toCreateScreen() {
-        navigator.toCreate()
+    init {
+        viewModelScope.launch {
+            val result = getPredictedMnemoType.execute()
+            prefferedLearningMethod.postValue(result!!)
+        }
     }
 }
