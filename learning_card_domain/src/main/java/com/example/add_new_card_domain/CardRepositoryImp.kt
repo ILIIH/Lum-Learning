@@ -34,15 +34,15 @@ class CardRepositoryImp(private val repo: ThemeDatabase) : CardRepository {
         repo.cardsDAO().changeALCrad(card.toData())
     }
 
-    override suspend fun incestVLCard(card: VL_Card) {
+    override suspend fun incestVACard(card: VL_Card) {
         repo.cardsDAO().insertVLCard(card.toData())
     }
 
-    override suspend fun getAllVLCardByThemeId(id: Int): List<VL_Card> =
+    override suspend fun getAllVACardByThemeId(id: Int): List<VL_Card> =
         repo.cardsDAO().getAllVLCrad().map { it.toDomain() }.filter { it.themeId == id }
 
 
-    override suspend fun editVLCard(card: VL_Card) {
+    override suspend fun editVACard(card: VL_Card) {
         repo.cardsDAO().changeVLCrad(card.toData())
     }
 }

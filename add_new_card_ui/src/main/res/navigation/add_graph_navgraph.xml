@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_visual_card"
+    app:startDestination="@id/ruleFragment">
+
+    <fragment
+        android:id="@+id/addVA_Fragment"
+        android:name="com.example.add_new_card.fragments.AddVisualCard.AddVisualCardFragment"
+        android:label="fragment_add_v_a_"
+        tools:layout="@layout/fragment_add_visual_card" />
+    <fragment
+        android:id="@+id/ruleFragment"
+        android:name="com.example.add_new_card.fragments.RuleFragment.RuleFragment"
+        android:label="fragment_rule"
+        tools:layout="@layout/fragment_rule" >
+        <action
+            android:id="@+id/to_addVA_Fragment"
+            app:destination="@id/addVA_Fragment" />
+    </fragment>
+</navigation>

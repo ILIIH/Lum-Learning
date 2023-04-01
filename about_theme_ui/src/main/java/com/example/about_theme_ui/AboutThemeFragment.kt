@@ -26,7 +26,8 @@ class AboutThemeFragment : Fragment() {
         data.add("Wrong nasw", 20.0, "#900D09")
         data.add("Triple wrong answ", 60.0, "#000000")
 
-        viewModel.loadThemeInfo(requireArguments().getInt("id"))
+        val themeId = requireArguments().getInt("id")
+        viewModel.loadThemeInfo(themeId)
 
         viewModel._themeInfo.observe(viewLifecycleOwner) {
             view.themeType.text = it.themeType
@@ -48,7 +49,9 @@ class AboutThemeFragment : Fragment() {
         }
 
         view.createNewItem.setOnClickListener {
-            findNavController().navigate(R.id.to_formula_builder)
+            val bundle = Bundle()
+            bundle.putInt("id", themeId)
+            findNavController().navigate(R.id.to_add_new_card, bundle)
         }
 
         return view.root

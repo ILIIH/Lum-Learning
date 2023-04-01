@@ -5,6 +5,7 @@ import androidx.work.DelegatingWorkerFactory
 import androidx.work.WorkerFactory
 import com.example.about_theme_domain.di.aboutThemeModule
 import com.example.about_theme_ui.di.aboutThemeUiModule
+import com.example.add_new_card.di.addNewCardModule
 import com.example.add_new_card_domain.di.cardModule
 import com.example.add_theme_domain.di.addThemeDomainModule
 import com.example.add_theme_ui.di.addThemeModule
@@ -30,6 +31,7 @@ class MyApplication : Application(), KoinComponent {
             androidContext(this@MyApplication)
             workManagerFactory()
             modules(
+                addNewCardModule,
                 cardModule,
                 workerModule,
                 ThemeListDomainModule,

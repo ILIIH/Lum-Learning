@@ -43,6 +43,7 @@ dependencies {
     implementation project(path: ':about_theme_data')
     implementation project(path: ':formula_builder_ui')
     implementation project(path: ':game_ui')
+    implementation project(path: ':add_new_card_ui')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

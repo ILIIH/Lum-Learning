@@ -45,9 +45,10 @@ dependencies {
     implementation project(path: ':about_theme_ui')
     implementation project(path: ':about_theme_domain')
     implementation project(path: ':game_ui')
-    implementation project(path: ':ask_answer_domain')
+    implementation project(path: ':game_domain')
     implementation project(path: ':AI')
     implementation project(path: ':learning_card_domain')
+    implementation project(path: ':add_new_card_ui')
 
 
     implementation 'io.insert-koin:koin-android:3.3.3'

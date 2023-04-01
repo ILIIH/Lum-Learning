@@ -13,7 +13,7 @@ interface CardRepository {
     suspend fun getAllALCardByThemeId(id: Int): List<AL_Card>
     suspend fun editALCard(card: AL_Card)
 
-    suspend fun incestVLCard(card: VL_Card)
-    suspend fun getAllVLCardByThemeId(id: Int): List<VL_Card>
-    suspend fun editVLCard(card: VL_Card)
+    suspend fun incestVACard(card: VL_Card)
+    suspend fun getAllVACardByThemeId(id: Int): List<VL_Card>
+    suspend fun editVACard(card: VL_Card)
 }

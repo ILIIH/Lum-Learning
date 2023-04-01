@@ -13,7 +13,6 @@
       <module name="Memorizable.api.main" target="11" />
       <module name="Memorizable.api.test" target="11" />
       <module name="Memorizable.app" target="11" />
-      <module name="Memorizable.ask_answer_domain" target="11" />
       <module name="Memorizable.core" target="11" />
       <module name="Memorizable.data_base" target="11" />
       <module name="Memorizable.dataset.commonMain" target="1.8" />
@@ -22,6 +21,7 @@
       <module name="Memorizable.dataset.jvmTest" target="1.8" />
       <module name="Memorizable.formula_builder" target="11" />
       <module name="Memorizable.formula_builder_ui" target="11" />
+      <module name="Memorizable.game_domain" target="11" />
       <module name="Memorizable.game_ui" target="11" />
       <module name="Memorizable.impl.commonMain" target="1.8" />
       <module name="Memorizable.impl.commonTest" target="1.8" />

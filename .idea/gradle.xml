@@ -20,10 +20,10 @@
             <option value="$PROJECT_DIR$/add_theme_domain" />
             <option value="$PROJECT_DIR$/add_theme_ui" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/ask_answer_data" />
-            <option value="$PROJECT_DIR$/ask_answer_domain" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/formula_builder_ui" />
+            <option value="$PROJECT_DIR$/game_data" />
+            <option value="$PROJECT_DIR$/game_domain" />
             <option value="$PROJECT_DIR$/game_ui" />
             <option value="$PROJECT_DIR$/learning_card_data" />
             <option value="$PROJECT_DIR$/learning_card_domain" />

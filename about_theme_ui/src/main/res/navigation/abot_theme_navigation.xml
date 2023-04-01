@@ -10,14 +10,13 @@
         android:name="com.example.about_theme_ui.AboutThemeFragment"
         android:label="AboutThemeFragment" >
         <action
-            android:id="@+id/to_formula_builder"
-            app:destination="@id/formula_builder_navgraph"
-            app:popUpTo="@id/aboutThemeFragment" />
-        <action
             android:id="@+id/to_ask_answer_game"
             app:destination="@id/ask_answer_game_nav_graph"
             app:popUpTo="@id/aboutThemeFragment" />
+        <action
+            android:id="@+id/to_add_new_card"
+            app:destination="@id/add_visual_card" />
     </fragment>
     <include app:graph="@navigation/ask_answer_game_nav_graph" />
-    <include app:graph="@navigation/formula_builder_navgraph" />
+    <include app:graph="@navigation/add_graph_navgraph" />
 </navigation>
