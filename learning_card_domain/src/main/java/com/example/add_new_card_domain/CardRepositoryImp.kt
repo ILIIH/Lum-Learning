@@ -28,6 +28,9 @@ class CardRepositoryImp(private val repo: ThemeDatabase) : CardRepository {
     override suspend fun getAllALCardByThemeId(id: Int): List<AL_Card> =
         repo.cardsDAO().getAllALCrad().map { it.toDomain() }.filter { it.themeId == id }
 
+    override suspend fun getAllALCard(): List<AL_Card> =
+        repo.cardsDAO().getAllALCrad().map { it.toDomain() }
+
 
 
     override suspend fun editALCard(card: AL_Card) {

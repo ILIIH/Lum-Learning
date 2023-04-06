@@ -11,6 +11,8 @@ interface CardRepository {
 
     suspend fun incestALCard(card: AL_Card)
     suspend fun getAllALCardByThemeId(id: Int): List<AL_Card>
+    suspend fun getAllALCard(): List<AL_Card>
+
     suspend fun editALCard(card: AL_Card)
 
     suspend fun incestVACard(card: VL_Card)

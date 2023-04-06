@@ -4,7 +4,7 @@ import com.example.core.domain.models.learningMethod
 import com.example.core.domain.repo.GameSettingsRepository
 import kotlin.random.Random
 
-class saveDayPrediction (val repo: GameSettingsRepository) {
+class saveDayPrediction(val repo: GameSettingsRepository) {
     suspend fun execute(memoTypeVariation: DoubleArray) {
         val maxProbability = memoTypeVariation.maxByOrNull { it }
         var dayPrediction = 1
@@ -26,7 +26,7 @@ class saveDayPrediction (val repo: GameSettingsRepository) {
                     Random.nextInt(1, 8),
                     dayPrediction,
                     Random.nextInt(1, 3),
-                )
+                ),
             )
         } else {
             val lastIdItem = listOfLearningMethod.last()
@@ -37,7 +37,7 @@ class saveDayPrediction (val repo: GameSettingsRepository) {
                     lastIdItem.timeLearningInterval,
                     dayPrediction,
                     lastIdItem.themeType,
-                )
+                ),
             )
         }
     }

@@ -18,5 +18,12 @@
         <action
             android:id="@+id/to_addVA_Fragment"
             app:destination="@id/addVA_Fragment" />
+        <action
+            android:id="@+id/to_addAudioCardFragment"
+            app:destination="@id/addAudioCardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addAudioCardFragment"
+        android:name="com.example.add_new_card.fragments.AddAudioCard.AddAudioCardFragment"
+        android:label="AddAudioCardFragment" />
 </navigation>

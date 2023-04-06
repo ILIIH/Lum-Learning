@@ -41,8 +41,8 @@ class ThemeAddViewModel(
                     yearExperience,
                     themeImportance,
                     themeTesis,
-                    imageByteArray
-                )
+                    imageByteArray,
+                ),
             )
         }
 

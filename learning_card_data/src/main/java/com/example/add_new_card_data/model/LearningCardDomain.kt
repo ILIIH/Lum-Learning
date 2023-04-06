@@ -7,6 +7,6 @@ data class LearningCardDomain(
     val RACurrentMonth: Double,
     val RALastMonth: Double,
     val AverageRA: Double,
+    val themeType: Int,
+
 )
-
-

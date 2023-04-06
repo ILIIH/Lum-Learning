@@ -16,6 +16,7 @@ fun LearningCardDomain.toData() = LearningCrad(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
+    themeType = themeType
 )
 
 fun LearningCrad.toDomain() = LearningCardDomain(
@@ -27,6 +28,7 @@ fun LearningCrad.toDomain() = LearningCardDomain(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
+    themeType = themeType
 )
 
 fun AL_Card.toData() = AudioLearningCard(
@@ -35,10 +37,10 @@ fun AL_Card.toData() = AudioLearningCard(
     answers = answers.map {
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
-    audio = audio,
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
+    id = Id
 )
 
 fun AudioLearningCard.toDomain() = AL_Card(
@@ -47,10 +49,10 @@ fun AudioLearningCard.toDomain() = AL_Card(
     answers = answers.map {
         com.example.add_new_card_data.model.Answer(it.answer, it.description, it.correct)
     },
-    audio = audio,
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
+    Id = id
 )
 
 fun VL_Card.toData() = VisualLearningCard(

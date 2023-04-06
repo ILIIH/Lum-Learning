@@ -1,7 +1,6 @@
 package com.example.core.data.usecases
 
 import com.example.core.domain.models.toDoubleArr
-import com.example.core.domain.models.toMnemoTypeArr
 import com.example.core.domain.models.toSpacedFactorArr
 import com.example.core.domain.repo.GameSettingsRepository
 
@@ -13,8 +12,8 @@ class getMnemoTypeDataset(val repo: GameSettingsRepository) {
             result.add(
                 Pair(
                     method.toSpacedFactorArr(),
-                    game.toDoubleArr()
-                )
+                    game.toDoubleArr(),
+                ),
             )
         }
         return result

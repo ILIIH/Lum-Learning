@@ -51,7 +51,9 @@ val coreDataModule = module {
     single {
         getPredictedMnemoType(get())
     }
-
+    single {
+        getMnemoTypePrediction(get())
+    }
     single<GameSettingsRepository> {
         gameSettingsRepoImp(get())
     }

@@ -21,5 +21,6 @@ class LearningCrad(
     val RALastMonth: Double,
     @ColumnInfo(name = "AverageRA")
     val AverageRA: Double,
-
+    @ColumnInfo(name = "themeType")
+    val themeType: Int,
     )

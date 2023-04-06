@@ -22,7 +22,7 @@ class RuleFragment : Fragment() {
     ): View {
         val view = FragmentRuleBinding.inflate(inflater, container, false)
         view.startButton.setOnClickListener {
-            findNavController().navigate(R.id.to_addVA_Fragment)
+            findNavController().navigate(R.id.to_addAudioCardFragment)
         }
 
         viewModel.setThemeId(requireArguments().getInt("id"))

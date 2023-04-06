@@ -1,40 +1,31 @@
-package com.example.add_new_card.fragments.AddVisualCard
+package com.example.add_new_card.fragments.AddLearningCard
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Color
-import android.graphics.ImageDecoder
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.add_new_card.R
-import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
+import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.MainFragmentViewModel
 import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 
-class AddVisualCardFragment : Fragment() {
+class AddLearningCardFragment : Fragment() {
 
     val textFields = ArrayList<TextInputLayout>(13)
-    val viewModel: AddVisualCardViewmodel by inject()
+    val viewModel: AddLearningCardViewmodel by inject()
     val mainViewModel: MainFragmentViewModel by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentAddVisualCardBinding.inflate(inflater, container, false)
-        view.answer1.editText!!.text
+        val view = FragmentAddLearningCardBinding.inflate(inflater, container, false)
 
         textFields.add(view.question)
         textFields.add(view.answer1Discription)
@@ -46,12 +37,7 @@ class AddVisualCardFragment : Fragment() {
         textFields.add(view.answer4Discription)
         textFields.add(view.answer4)
 
-        val themeId = mainViewModel.getThemeId()
-
-        view.addPhoto.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            launcher.launch(intent)
-        }
+        val themeID = mainViewModel.getThemeId()
 
         view.continueBtn.setOnClickListener {
             var isAnyFieldEmpty = false
@@ -96,7 +82,7 @@ class AddVisualCardFragment : Fragment() {
                         getString(R.string.continue_creation),
                     ) { _, _ ->
                         viewModel.addNewCard(
-                            themeId = themeId,
+                            themeId = themeID,
                             question = view.question.editText!!.text.toString(),
                             answers,
                         )
@@ -105,7 +91,7 @@ class AddVisualCardFragment : Fragment() {
                         R.string.save_and_exit,
                     ) { _, _ ->
                         viewModel.addNewCard(
-                            themeId = themeId,
+                            themeId = themeID,
                             question = view.question.editText!!.text.toString(),
                             answers,
                         )
@@ -115,31 +101,6 @@ class AddVisualCardFragment : Fragment() {
             }
         }
 
-        viewModel._photo.observe(requireActivity()) {
-            view.addPhoto.setImageBitmap(it)
-        }
         return view.root
     }
-
-    private val launcher: ActivityResultLauncher<Intent> =
-        registerForActivityResult<Intent, ActivityResult>(
-            ActivityResultContracts.StartActivityForResult(),
-        ) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK &&
-                result.data != null
-            ) {
-                val photoUri: Uri = result.data!!.data!!
-                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    ImageDecoder.decodeBitmap(
-                        ImageDecoder.createSource(
-                            requireContext().contentResolver,
-                            photoUri,
-                        ),
-                    )
-                } else {
-                    MediaStore.Images.Media.getBitmap(requireContext().contentResolver, photoUri)
-                }
-                viewModel.setPhoto(bitmap)
-            }
-        }
 }

@@ -220,13 +220,38 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/add_audio"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
-                android:src="@drawable/baseline_music_note_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                >
+                <ImageView
+                    android:id="@+id/stard_record"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/baseline_mic_24" />
+                <ImageView
+                    android:clickable="false"
+                    android:id="@+id/stop_record"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/baseline_stop_circle_non_clicable" />
+                <ImageView
+                    android:clickable="false"
+                    android:id="@+id/play_audio"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/baseline_music_note_24" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/continue_btn"

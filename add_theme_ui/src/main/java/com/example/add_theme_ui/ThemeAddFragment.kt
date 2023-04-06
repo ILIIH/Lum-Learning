@@ -26,7 +26,7 @@ class ThemeAddFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val view = FragmentThemeAddBinding.inflate(inflater, container, false)
 
@@ -35,7 +35,7 @@ class ThemeAddFragment : Fragment() {
                 view.themeTitleTextInput.text.toString(),
                 view.yesrsExpirenceTextInput.text.toString().toInt(),
                 view.themeImportanceSpinner.selectedItem.toString(),
-                view.themeTypeSpinner.selectedItem.toString()
+                view.themeTypeSpinner.selectedItem.toString(),
             )
         }
 
@@ -51,7 +51,7 @@ class ThemeAddFragment : Fragment() {
         ArrayAdapter.createFromResource(
             requireActivity(),
             R.array.theme_importance,
-            android.R.layout.simple_spinner_item
+            android.R.layout.simple_spinner_item,
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             view.themeImportanceSpinner.adapter = adapter
@@ -60,7 +60,7 @@ class ThemeAddFragment : Fragment() {
         ArrayAdapter.createFromResource(
             requireActivity(),
             R.array.theme_types,
-            android.R.layout.simple_spinner_item
+            android.R.layout.simple_spinner_item,
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             view.themeTypeSpinner.adapter = adapter
@@ -71,7 +71,7 @@ class ThemeAddFragment : Fragment() {
 
     private val launcher: ActivityResultLauncher<Intent> =
         registerForActivityResult<Intent, ActivityResult>(
-            ActivityResultContracts.StartActivityForResult()
+            ActivityResultContracts.StartActivityForResult(),
         ) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK &&
                 result.data != null

@@ -15,7 +15,6 @@ class AudioLearningCard(
     val question: String,
     @ColumnInfo(name = "answers")
     val answers: List<Answer>,
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val audio: ByteArray,
     @ColumnInfo(name = "RACurrentMonth")
     val RACurrentMonth: Double,
     @ColumnInfo(name = "RALastMonth")
