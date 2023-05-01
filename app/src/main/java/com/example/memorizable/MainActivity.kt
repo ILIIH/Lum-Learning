@@ -1,5 +1,6 @@
 package com.example.memorizable
 
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +11,7 @@ import com.example.core.data.usecases.SetRandomLearningMethodType
 import com.example.navigation.CoreNavigation
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,9 +35,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initWorkers() {
-        val uploadWorkRequest = OneTimeWorkRequestBuilder<AiTainingWorker>().build()
-        WorkManager.getInstance().enqueue(uploadWorkRequest)
-
         val mnemoTypeWorkRequest = OneTimeWorkRequestBuilder<MnemoTypeWorker>().build()
         WorkManager.getInstance().enqueue(mnemoTypeWorkRequest)
 

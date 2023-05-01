@@ -21,9 +21,17 @@
         <action
             android:id="@+id/to_addAudioCardFragment"
             app:destination="@id/addAudioCardFragment" />
+        <action
+            android:id="@+id/to_addLearningCardFragment"
+            app:destination="@id/addLearningCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAudioCardFragment"
         android:name="com.example.add_new_card.fragments.AddAudioCard.AddAudioCardFragment"
         android:label="AddAudioCardFragment" />
+    <fragment
+        android:id="@+id/addLearningCardFragment"
+        android:name="com.example.add_new_card.fragments.AddLearningCard.AddLearningCardFragment"
+        android:label="fragment_add_learning_card"
+        tools:layout="@layout/fragment_add_learning_card" />
 </navigation>

@@ -39,6 +39,9 @@ dependencies {
     implementation "io.insert-koin:koin-android:3.3.2"
     implementation("androidx.cardview:cardview:1.0.0")
     implementation project(path: ':game_data')
+    implementation project(path: ':learning_card_data')
+    implementation project(path: ':core')
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

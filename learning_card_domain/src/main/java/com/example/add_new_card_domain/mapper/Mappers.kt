@@ -2,7 +2,7 @@ package com.example.add_new_card_domain.mapper
 
 import com.example.add_new_card_data.model.AL_Card
 import com.example.add_new_card_data.model.LearningCardDomain
-import com.example.add_new_card_data.model.VL_Card
+import com.example.add_new_card_data.model.VA_Card
 import com.example.core.DB.Entities.AudioLearningCard
 import com.example.core.DB.Entities.LearningCrad
 import com.example.core.DB.Entities.VisualLearningCard
@@ -16,10 +16,16 @@ fun LearningCardDomain.toData() = LearningCrad(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
-    themeType = themeType
+    themeType = themeType,
+    dateCreation = dateCreation,
+    description = discription,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    repetitionAmount = repetitionAmount,
 )
 
 fun LearningCrad.toDomain() = LearningCardDomain(
+    Id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -28,7 +34,12 @@ fun LearningCrad.toDomain() = LearningCardDomain(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
-    themeType = themeType
+    themeType = themeType,
+    dateCreation = dateCreation,
+    discription = description,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    repetitionAmount = repetitionAmount,
+    lastMonthUpdateNumber = lastUpdateNumber,
 )
 
 fun AL_Card.toData() = AudioLearningCard(
@@ -40,7 +51,10 @@ fun AL_Card.toData() = AudioLearningCard(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
-    id = Id
+    dateCreation = dateCreation,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    repetitionAmount = repetitionAmount,
 )
 
 fun AudioLearningCard.toDomain() = AL_Card(
@@ -52,10 +66,15 @@ fun AudioLearningCard.toDomain() = AL_Card(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
-    Id = id
+    Id = id,
+    dateCreation = dateCreation,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    repetitionAmount = repetitionAmount,
+    lastMonthUpdateNumber = lastUpdateNumber,
+
 )
 
-fun VL_Card.toData() = VisualLearningCard(
+fun VA_Card.toData() = VisualLearningCard(
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -65,9 +84,14 @@ fun VL_Card.toData() = VisualLearningCard(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
+    dateCreation = dateCreation,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    repetitionAmount = repetitionAmount,
 )
 
-fun VisualLearningCard.toDomain() = VL_Card(
+fun VisualLearningCard.toDomain() = VA_Card(
+    Id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -77,4 +101,8 @@ fun VisualLearningCard.toDomain() = VL_Card(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
+    dateCreation = dateCreation,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    repetitionAmount = repetitionAmount,
+    lastMonthUpdateNumber = lastUpdateNumber,
 )

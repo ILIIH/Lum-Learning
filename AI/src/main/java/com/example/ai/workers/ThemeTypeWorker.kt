@@ -25,14 +25,7 @@ class ThemeTypeWorker(
             "ThemeTypeWorker started}",
         )
         val dataSet = downloadDataset()
-        if (dataSet.size < 15) {
-            setRandomType()
-            Log.i(
-                "Prediction2",
-                "ThemeTypeWorker ended}",
-            )
-            return Result.success()
-        } else {
+        if(dataSet.size>15) {
             val model = Model(
                 inputDims = 6,
                 layers = arrayOf(
@@ -75,6 +68,7 @@ class ThemeTypeWorker(
             )
             return Result.success()
         }
+        else return Result.success()
     }
 
     private suspend fun saveMnemoType(prediction: DoubleArray) {

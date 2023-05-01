@@ -20,3 +20,4 @@ interface ThemeDAO {
     suspend fun getThemeById(themeId: Int): ThemeEntity
 
 }
+

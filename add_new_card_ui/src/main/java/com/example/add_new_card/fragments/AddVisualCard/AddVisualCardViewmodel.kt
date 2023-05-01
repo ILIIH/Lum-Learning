@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
 import com.example.add_new_card_data.model.Answer
-import com.example.add_new_card_data.model.VL_Card
+import com.example.add_new_card_data.model.VA_Card
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
@@ -21,14 +21,14 @@ class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
         photo.postValue(bitmap)
     }
 
-    fun addNewCard(themeId: Int, question: String, answers: List<Answer>) {
+    fun addNewCard(themeId: Int, question: String, answers: List<Answer>, currentDate: String, monthNumber: Int) {
         viewModelScope.launch {
             val bitmap = photo.value
             val stream = ByteArrayOutputStream()
             bitmap!!.compress(Bitmap.CompressFormat.PNG, 90, stream)
             val image = stream.toByteArray()
-            repo.incestVACard(
-                VL_Card(
+            repo.insertVACard(
+                VA_Card(
                     themeId = themeId,
                     question = question,
                     answers = answers,
@@ -36,6 +36,11 @@ class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
                     RALastMonth = 0.0,
                     RACurrentMonth = 0.0,
                     AverageRA = 0.0,
+                    dateCreation = currentDate,
+                    repetitionAmount = 0,
+                    lastMonthUpdateNumber = monthNumber,
+                    lastMonthRepetitionNumber = 0,
+                    Id = 0,
                 ),
             )
         }

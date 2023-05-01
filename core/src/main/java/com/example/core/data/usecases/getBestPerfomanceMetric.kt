@@ -1,9 +1,8 @@
 package com.example.core.data.usecases
 
-import com.example.core.domain.models.gameResult
-import com.example.core.domain.repo.GameSettingsRepository
+import com.example.core.domain.repo.GameRepository
 
-class getBestPerfomanceMetric(val repo: GameSettingsRepository) {
+class getBestPerfomanceMetric(val repo: GameRepository) {
     suspend fun execute(): DoubleArray {
         val bestPerfomanceMetric = repo.getAllGameResult()
             .minByOrNull {

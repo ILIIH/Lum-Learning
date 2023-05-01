@@ -22,5 +22,9 @@ class GameResults(
     @ColumnInfo(name = "CurrentDay")
     val CurrentDay: Int,
     @ColumnInfo(name = "learningMethodId")
-    val learningMethodId: Int
+    val learningMethodId: Int,
+    @ColumnInfo(name = "themeId")
+    val themeId: Int,
+    @ColumnInfo(name = "date")
+    val date: String,
 )

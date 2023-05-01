@@ -3,8 +3,10 @@ package com.example.add_new_card.fragments.AddVisualCard
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ImageDecoder
+import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,18 +18,21 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
-import com.example.add_new_card.fragments.RuleFragment.MainFragmentViewModel
+import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AddVisualCardFragment : Fragment() {
 
     val textFields = ArrayList<TextInputLayout>(13)
     val viewModel: AddVisualCardViewmodel by inject()
-    val mainViewModel: MainFragmentViewModel by inject()
+    val mainViewModel: ThemeInfoProvider by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -99,7 +104,14 @@ class AddVisualCardFragment : Fragment() {
                             themeId = themeId,
                             question = view.question.editText!!.text.toString(),
                             answers,
+                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                            monthNumber =  Date().month
                         )
+                        textFields.forEach {
+                            it.editText?.text?.clear()
+                        }
+                        view.Title.requestFocus()
+                        view.addPhoto.setBackgroundResource(R.drawable.baseline_image_search_24)
                     }
                     .setNegativeButton(
                         R.string.save_and_exit,
@@ -108,7 +120,10 @@ class AddVisualCardFragment : Fragment() {
                             themeId = themeId,
                             question = view.question.editText!!.text.toString(),
                             answers,
+                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                            monthNumber =  Date().month
                         )
+                        findNavController().popBackStack()
                     }
                     .setIcon(R.drawable.baseline_credit_card_24)
                     .show()
@@ -139,7 +154,20 @@ class AddVisualCardFragment : Fragment() {
                 } else {
                     MediaStore.Images.Media.getBitmap(requireContext().contentResolver, photoUri)
                 }
-                viewModel.setPhoto(bitmap)
+                viewModel.setPhoto(getResizedBitmap(bitmap, 1000)!!)
             }
         }
+    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
+        var width: Int = image.getWidth()
+        var height: Int = image.getHeight()
+        val bitmapRatio = width.toFloat() / height.toFloat()
+        if (bitmapRatio > 1) {
+            width = maxSize
+            height = (width / bitmapRatio).toInt()
+        } else {
+            height = maxSize
+            width = (height * bitmapRatio).toInt()
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true)
+    }
 }

@@ -29,9 +29,9 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         }
     }
 
-    fun addNewCard(themeId: Int, question: String, answers: List<Answer>) {
+    fun addNewCard(themeId: Int, question: String, answers: List<Answer>, currentDate: String,monthNumber:Int) {
         viewModelScope.launch {
-            repo.incestALCard(
+            repo.insertALCard(
                 AL_Card(
                     themeId = themeId,
                     question = question,
@@ -40,6 +40,10 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
                     RACurrentMonth = 0.0,
                     AverageRA = 0.0,
                     Id = maxId,
+                    dateCreation = currentDate,
+                    repetitionAmount = 0,
+                    lastMonthUpdateNumber =  monthNumber,
+                    lastMonthRepetitionNumber = 0
                 ),
             )
         }

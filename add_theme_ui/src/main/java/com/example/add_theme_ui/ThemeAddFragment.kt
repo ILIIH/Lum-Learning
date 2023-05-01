@@ -3,6 +3,7 @@ package com.example.add_theme_ui
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -82,8 +83,22 @@ class ThemeAddFragment : Fragment() {
                 } else {
                     MediaStore.Images.Media.getBitmap(requireContext().contentResolver, photoUri)
                 }
-                viewModule.setPhoto(bitmap)
+                viewModule.setPhoto(getResizedBitmap(bitmap, 1000)!!)
                 viewModule.setPhotoURI(photoUri.toString())
             }
         }
+
+    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
+        var width: Int = image.getWidth()
+        var height: Int = image.getHeight()
+        val bitmapRatio = width.toFloat() / height.toFloat()
+        if (bitmapRatio > 1) {
+            width = maxSize
+            height = (width / bitmapRatio).toInt()
+        } else {
+            height = maxSize
+            width = (height * bitmapRatio).toInt()
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true)
+    }
 }

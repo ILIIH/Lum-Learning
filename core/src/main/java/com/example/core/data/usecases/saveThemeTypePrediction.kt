@@ -1,10 +1,10 @@
 package com.example.core.data.usecases
 
 import com.example.core.domain.models.learningMethod
-import com.example.core.domain.repo.GameSettingsRepository
+import com.example.core.domain.repo.GameRepository
 import kotlin.random.Random
 
-class saveThemeTypePrediction (val repo: GameSettingsRepository) {
+class saveThemeTypePrediction (val repo: GameRepository) {
     suspend fun execute(memoTypeVariation: DoubleArray) {
         val maxProbability = memoTypeVariation.maxByOrNull { it }
         var themeType = 1

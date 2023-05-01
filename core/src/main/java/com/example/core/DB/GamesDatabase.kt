@@ -16,9 +16,11 @@ import com.example.core.DB.Entities.LearningMethod
         GameResults::class,
         LearningMethod::class,
     ],
-    version = 4,
+    version = 5,
 )
 abstract class GamesDatabase : RoomDatabase() {
     abstract fun learningMethodDAO(): LearningMethodDAO
     abstract fun gamesDAO(): GamesDAO
 }
+
+

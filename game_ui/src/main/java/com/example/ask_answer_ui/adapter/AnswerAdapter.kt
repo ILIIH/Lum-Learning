@@ -1,22 +1,21 @@
 package com.example.ask_answer_ui.adapter
 
-import android.util.Log
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ask_answer_data.Answer
+import com.example.add_new_card_data.model.Answer
 import com.example.ask_answer_ui.databinding.AnswerItemBinding
 
-class AnswerAdapter : ListAdapter<Answer, AnswerAdapter.AnswerItemViewHolder>(DiffCallBack()) {
+class AnswerAdapter(private val goToNextCard: (answerResult:Boolean) -> Unit) : ListAdapter<Answer, AnswerAdapter.AnswerItemViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerItemViewHolder {
         val view = AnswerItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         )
 
         return AnswerItemViewHolder(view)
@@ -24,17 +23,26 @@ class AnswerAdapter : ListAdapter<Answer, AnswerAdapter.AnswerItemViewHolder>(Di
 
     override fun onBindViewHolder(holder: AnswerItemViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.bind(currentItem, currentList.size - 1 == position)
+        holder.bind(currentItem)
     }
 
     inner class AnswerItemViewHolder(
-        private val binding: AnswerItemBinding
+        private val binding: AnswerItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(answerItem: Answer, isLast: Boolean) {
+        fun bind(answerItem: Answer) {
             with(binding) {
+                cardView.setOnClickListener {
+                    if (answerItem.correct) {
+                        cardView.setCardBackgroundColor(Color.parseColor("#5EFF8D"))
+                        goToNextCard(true)
+                    } else {
+                        cardView.setCardBackgroundColor(Color.parseColor("#FA5757"))
+                        goToNextCard(false)
+                    }
+                }
                 Title.text = answerItem.answer
-                SubTitle.text = answerItem.association
+                SubTitle.text = answerItem.description
             }
         }
     }
@@ -45,13 +53,5 @@ class AnswerAdapter : ListAdapter<Answer, AnswerAdapter.AnswerItemViewHolder>(Di
 
         override fun areContentsTheSame(oldItem: Answer, newItem: Answer): Boolean =
             oldItem == newItem
-    }
-
-    private fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
-        if (view.layoutParams is ViewGroup.MarginLayoutParams) {
-            val p = view.layoutParams as ViewGroup.MarginLayoutParams
-            p.setMargins(left, top, right, bottom)
-            view.requestLayout()
-        }
     }
 }

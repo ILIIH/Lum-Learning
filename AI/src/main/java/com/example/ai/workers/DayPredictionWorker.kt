@@ -26,14 +26,7 @@ class DayPredictionWorker(
             "DayPredictionWorker started}",
         )
         val dataSet = downloadDataset()
-        if (dataSet.size < 15) {
-            setRandomType()
-            Log.i(
-                "Prediction2",
-                "DayPredictionWorker ended}",
-            )
-            return Result.success()
-        } else {
+        if(dataSet.size > 15)  {
             val model = Model(
                 inputDims = 6,
                 layers = arrayOf(
@@ -76,6 +69,7 @@ class DayPredictionWorker(
             )
             return Result.success()
         }
+        else return Result.success()
     }
 
     private suspend fun saveDayPredictionType(prediction: DoubleArray) {

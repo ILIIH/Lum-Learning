@@ -7,6 +7,29 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val RoomModule = module {
+
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            ThemeDatabase::class.java,
+            "theme-database",
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+            .themeDao()
+    }
+
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            ThemeDatabase::class.java,
+            "theme-database",
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+            .cardsDAO()
+    }
+
     single {
         Room.databaseBuilder(
             androidContext(),

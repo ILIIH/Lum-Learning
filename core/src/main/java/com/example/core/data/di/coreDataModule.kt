@@ -1,7 +1,7 @@
 package com.example.core.data
 
 import com.example.core.data.usecases.*
-import com.example.core.domain.repo.GameSettingsRepository
+import com.example.core.domain.repo.GameRepository
 import org.koin.dsl.module
 
 val coreDataModule = module {
@@ -54,7 +54,10 @@ val coreDataModule = module {
     single {
         getMnemoTypePrediction(get())
     }
-    single<GameSettingsRepository> {
+    single<GameRepository> {
         gameSettingsRepoImp(get())
+    }
+    single {
+        insertGameResult(get())
     }
 }

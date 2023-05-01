@@ -9,6 +9,7 @@
 
 
     <application
+        android:exported="true"
         android:largeHeap="true"
         android:name=".di.MyApplication"
         android:allowBackup="true"

@@ -4,4 +4,7 @@
     <string name="description_of_the_field">Description of the field</string>
     <string name="discribe_how_hard_to_learn_this_info">Describe how hard to learn this info</string>
     <string name="use">Describe how you can use this info</string>
+    <string name="repeat_again">Repeat again</string>
+    <string name="exit">Exit</string>
+
 </resources>

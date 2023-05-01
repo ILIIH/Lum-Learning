@@ -2,6 +2,8 @@
 <resources>
     <color name="main_background">#FFF0F4F8</color>
     <color name="main_text_color">#FF77838F</color>
+    <color name="wrong_answer_color">#FA5757</color>
+    <color name="true_answer_color">#5EFF8D</color>
 
 
 </resources>

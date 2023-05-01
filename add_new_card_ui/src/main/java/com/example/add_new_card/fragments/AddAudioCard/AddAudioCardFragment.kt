@@ -5,6 +5,7 @@ import android.Manifest.permission.*
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
@@ -16,21 +17,24 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
-import com.example.add_new_card.fragments.RuleFragment.MainFragmentViewModel
+import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AddAudioCardFragment : Fragment() {
 
     val textFields = ArrayList<TextInputLayout>(13)
 
     lateinit var mr: MediaRecorder
-    val mainViewModel: MainFragmentViewModel by inject()
+    val mainViewModel: ThemeInfoProvider by inject()
     val viewModel: AddAudioCardViewmodel by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -145,6 +149,8 @@ class AddAudioCardFragment : Fragment() {
                             themeId = themeId,
                             question = view.question.editText!!.text.toString(),
                             answers,
+                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                            Date().month
                         )
                     }
                     .setNegativeButton(
@@ -154,7 +160,10 @@ class AddAudioCardFragment : Fragment() {
                             themeId = themeId,
                             question = view.question.editText!!.text.toString(),
                             answers,
+                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                            Date().month
                         )
+                        findNavController().popBackStack()
                     }
                     .setIcon(R.drawable.baseline_credit_card_24)
                     .show()

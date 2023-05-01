@@ -1,21 +1,22 @@
 package com.example.add_new_card_data.model
 
-data class AL_Card(
+data class VA_Card(
     val Id: Int,
     val themeId: Int,
     val question: String,
     val answers: List<Answer>,
+    val photo: ByteArray,
     val RACurrentMonth: Double,
     val RALastMonth: Double,
     val AverageRA: Double,
     val dateCreation: String,
     val repetitionAmount: Int,
     val lastMonthUpdateNumber: Int,
-    val lastMonthRepetitionNumber: Int,
+    val lastMonthRepetitionNumber: Int
 
 )
 
-fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
+fun VA_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): VA_Card {
     val averageRA =
         if (thisGameResult) {
             (1 + (this.AverageRA * this.repetitionAmount)) / (this.repetitionAmount + 1)
@@ -45,7 +46,7 @@ fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
         }
     }
 
-    return AL_Card(
+    return VA_Card(
         Id = this.Id,
         themeId = this.themeId,
         question = this.question,
@@ -57,5 +58,6 @@ fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
         AverageRA = averageRA,
         dateCreation = this.dateCreation,
         lastMonthUpdateNumber = currentMonth,
+        photo = this.photo
     )
 }

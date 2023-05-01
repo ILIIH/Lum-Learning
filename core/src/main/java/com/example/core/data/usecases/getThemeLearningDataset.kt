@@ -1,11 +1,10 @@
 package com.example.core.data.usecases
 
 import com.example.core.domain.models.toDoubleArr
-import com.example.core.domain.models.toMnemoTypeArr
 import com.example.core.domain.models.toTimeInterval
-import com.example.core.domain.repo.GameSettingsRepository
+import com.example.core.domain.repo.GameRepository
 
-class getThemeLearningDataset (val repo: GameSettingsRepository) {
+class getThemeLearningDataset(val repo: GameRepository) {
     suspend fun execute(): List<Pair<DoubleArray, DoubleArray>> {
         var result = ArrayList<Pair<DoubleArray, DoubleArray>>(50)
         repo.getAllGameResult().forEach { game ->
@@ -13,8 +12,8 @@ class getThemeLearningDataset (val repo: GameSettingsRepository) {
             result.add(
                 Pair(
                     method.toTimeInterval(),
-                    game.toDoubleArr()
-                )
+                    game.toDoubleArr(),
+                ),
             )
         }
         return result

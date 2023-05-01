@@ -119,7 +119,7 @@
         app:layout_constraintTop_toTopOf="@+id/rightRate" />
 
     <TextView
-        android:id="@+id/repitedWrongRate"
+        android:id="@+id/lastMonthWrongAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="60% repited wrong answers"

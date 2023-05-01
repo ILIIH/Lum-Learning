@@ -1,7 +1,6 @@
 package com.example.ai.workers
 
 import android.content.Context
-import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.ai.base_ai_classes.*
@@ -21,19 +20,8 @@ class SpacedFactorWorker(
     CoroutineWorker(context, workerParams), KoinComponent {
 
     override suspend fun doWork(): Result {
-        Log.i(
-            "Prediction2",
-            "SpacedRepetitionFactorWorker started",
-        )
         val dataSet = downloadDataset()
-        if (dataSet.size < 15) {
-            setRandomType()
-            Log.i(
-                "Prediction2",
-                "SpacedRepetitionFactorWorker ended",
-            )
-            return Result.success()
-        } else {
+        if (dataSet.size > 15) {
             val model = Model(
                 inputDims = 6,
                 layers = arrayOf(
@@ -71,16 +59,14 @@ class SpacedFactorWorker(
             )
 
             saveSpacedFactorType(prediction.returnFirstRow())
-            Log.i(
-                "Prediction2",
-                "SpacedRepetitionFactorWorker ended",
-            )
+            return Result.success()
+        } else {
             return Result.success()
         }
     }
 
     private suspend fun saveSpacedFactorType(prediction: DoubleArray) {
-   //     saveSpacedFactor.execute(prediction)
+        saveSpacedFactor.execute(prediction)
     }
 
     private suspend fun getBestPerformanceMetrics(): DoubleArray {
@@ -96,8 +82,7 @@ class SpacedFactorWorker(
         //  metrics                        K     D    Ch   T     Tw1   Tw2
         //  SpacedRepetitionFactor 1 = 1 ,2 =1.2, 3 =1.4, 4 = 1.8, 5 = 2
 
-        return getSpacedFactorDataset.execute().map {
-                (first, second) ->
+        return getSpacedFactorDataset.execute().map { (first, second) ->
             Pair(
                 MatrixOps.uniform(1, first),
                 MatrixOps.uniform(1, second),

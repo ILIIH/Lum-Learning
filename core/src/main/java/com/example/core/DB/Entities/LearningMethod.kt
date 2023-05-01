@@ -20,3 +20,5 @@ class LearningMethod(
     @ColumnInfo(name = "themeType")
     val themeType: Int,
 )
+
+

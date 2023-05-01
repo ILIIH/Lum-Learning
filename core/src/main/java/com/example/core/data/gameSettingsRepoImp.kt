@@ -5,9 +5,9 @@ import com.example.core.domain.models.gameResult
 import com.example.core.domain.models.learningMethod
 import com.example.core.domain.models.toData
 import com.example.core.domain.models.toDomain
-import com.example.core.domain.repo.GameSettingsRepository
+import com.example.core.domain.repo.GameRepository
 
-class gameSettingsRepoImp(val DB: GamesDatabase) : GameSettingsRepository {
+class gameSettingsRepoImp(val DB: GamesDatabase) : GameRepository {
     override suspend fun insertGameResult(result: gameResult) {
         DB.gamesDAO().insertGameResult(result.toData())
     }
@@ -35,6 +35,10 @@ class gameSettingsRepoImp(val DB: GamesDatabase) : GameSettingsRepository {
     }
 
     override suspend fun getLearningMethodById(methodId: Int): learningMethod {
-        TODO("Not yet implemented")
+        return DB.learningMethodDAO().getAllLearningMethod().sortedBy { it.id == methodId  }.first().toDomain()
+    }
+
+    override suspend fun getCurrentLearningMethodId(): Int {
+        return DB.learningMethodDAO().getAllLearningMethod().sortedBy { it.id }.last().id
     }
 }

@@ -1,9 +1,6 @@
 package com.example.ask_answer_ui.di
 
-import com.example.ask_answer_ui.viewModel.DA_ViewModel
-import com.example.ask_answer_ui.viewModel.MC_ViewModel
-import com.example.ask_answer_ui.viewModel.SA_ViewModel
-import com.example.ask_answer_ui.viewModel.VA_ViewModel
+import com.example.ask_answer_ui.viewModel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -19,5 +16,11 @@ val askAnswerUiModule = module {
     }
     viewModel {
         MC_ViewModel(get())
+    }
+    viewModel {
+        mainViewModel(get())
+    }
+    single {
+        cardProvider(get(), get())
     }
 }

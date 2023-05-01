@@ -1,10 +1,10 @@
 package com.example.core.data.usecases
 
 import com.example.core.domain.models.learningMethod
-import com.example.core.domain.repo.GameSettingsRepository
+import com.example.core.domain.repo.GameRepository
 import kotlin.random.Random
 
-class SetRandomLearningMethodType(val repo: GameSettingsRepository) {
+class SetRandomLearningMethodType(val repo: GameRepository) {
     suspend fun execute() {
         repo.insertLearningMethod(
             learningMethod(

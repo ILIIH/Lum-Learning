@@ -22,6 +22,7 @@ class DescriptionDialog(
         builder.setView(binding.root)
 
         binding.continueBtn.setOnClickListener { dismiss() }
+        binding.description.text = description
 
         val dialog = builder.create()
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
