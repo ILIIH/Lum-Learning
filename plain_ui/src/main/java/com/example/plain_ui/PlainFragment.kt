@@ -24,27 +24,27 @@ class PlainFragment : Fragment() {
         view.plainView.setTasks(
             listOf(
                 Task(
-                    name = "Task 1",
+                    name = "Математика",
                     dateStart = now.minusMonths(1),
                     dateEnd = now
                 ),
                 Task(
-                    name = "Task 2 long name",
+                    name = "Фізика",
                     dateStart = now.minusWeeks(2),
                     dateEnd = now.plusWeeks(1)
                 ),
                 Task(
-                    name = "Task 3",
+                    name = "Англійська мова",
                     dateStart = now.minusMonths(2),
                     dateEnd = now.plusMonths(2)
                 ),
                 Task(
-                    name = "Some Task 4",
+                    name = "Англійська мова",
                     dateStart = now.plusWeeks(2),
                     dateEnd = now.plusMonths(2).plusWeeks(1)
                 ),
                 Task(
-                    name = "Task 5",
+                    name = "Фізика",
                     dateStart = now.minusMonths(2).minusWeeks(1),
                     dateEnd = now.plusWeeks(1)
                 )

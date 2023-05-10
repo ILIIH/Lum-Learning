@@ -45,7 +45,7 @@ fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
         }
     }
 
-    return AL_Card(
+    val nexAL = AL_Card(
         Id = this.Id,
         themeId = this.themeId,
         question = this.question,
@@ -58,4 +58,6 @@ fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
         dateCreation = this.dateCreation,
         lastMonthUpdateNumber = currentMonth,
     )
+
+    return nexAL
 }

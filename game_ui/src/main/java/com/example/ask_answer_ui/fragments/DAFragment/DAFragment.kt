@@ -48,7 +48,7 @@ class DAFragment : Fragment() {
                     AverageRA = currentCard.AverageRA,
                     result = true,
                     Time = begin - System.nanoTime(),
-                    card = currentCard
+                    card = currentCard,
                 )
             } else {
                 cardProvider.updateLearningCardInfoAndMetrics(
@@ -59,7 +59,7 @@ class DAFragment : Fragment() {
                     AverageRA = currentCard.AverageRA,
                     result = false,
                     Time = begin - System.nanoTime(),
-                    card = currentCard
+                    card = currentCard,
                 )
             }
             isFragmentClosed = true
@@ -97,7 +97,7 @@ class DAFragment : Fragment() {
                         AverageRA = currentCard.AverageRA,
                         result = false,
                         Time = begin - System.nanoTime(),
-                        card = currentCard
+                        card = currentCard,
                     )
                     goToNextCard(view)
                 }

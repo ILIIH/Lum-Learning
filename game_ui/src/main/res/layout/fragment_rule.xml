@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".fragments.RuleFragment">
+    tools:context=".fragments.RuleFragment.RuleFragment">
 
     <TextView
         android:id="@+id/rule_tile"

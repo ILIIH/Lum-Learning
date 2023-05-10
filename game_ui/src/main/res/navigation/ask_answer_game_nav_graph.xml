@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_visual_assosiation" />
     <fragment
         android:id="@+id/ruleFragment"
-        android:name="com.example.ask_answer_ui.fragments.RuleFragment"
+        android:name="com.example.ask_answer_ui.fragments.RuleFragment.RuleFragment"
         android:label="fragment_rule"
         tools:layout="@layout/fragment_rule" >
         <action

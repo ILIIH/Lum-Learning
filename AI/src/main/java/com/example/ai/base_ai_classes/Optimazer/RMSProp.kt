@@ -47,11 +47,11 @@ class RMSProp : Optimizer() {
             epsilon_2 = MatrixOps.constant(S_db!!, 10e-8)
             layers[ i ].W = optimize(
                 dJ_dwi / (MatrixOps.sqrt(S_dw!!) + epsilon_1!!),
-                layers[ i ].W!!
+                layers[ i ].W!!,
             )
             layers[ i ].B = optimize(
                 dJ_dthetai / (MatrixOps.sqrt(S_db!!) + epsilon_2!!),
-                layers[ i ].B
+                layers[ i ].B,
             )
             dJ_dtheta = dJ_dthetai
             dtheta_dX = layers[ i ].dtheta_dX

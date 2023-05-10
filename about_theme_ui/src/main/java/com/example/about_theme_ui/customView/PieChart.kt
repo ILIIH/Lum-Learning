@@ -6,12 +6,13 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 
 class PieChart @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
     // Data
     private var data: PieData? = null
@@ -85,9 +86,9 @@ class PieChart @JvmOverloads constructor(
         bottom: Float = layoutParams.height.toFloat(),
         left: Float = ((width / 2).toFloat()),
         right: Float = (width / 2).toFloat(),
-        value: Int
+        value: Int,
     ) {
-        val random = (value..value * 4).random().toFloat()
+        val random = (0..50).random().toFloat()
 
         val oval = RectF()
 
@@ -116,6 +117,8 @@ class PieChart @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        Log.i("RA_test", "inside onDraw PieChart")
+
         var index = 0
         data?.pieSlices?.let { slices ->
             slices.forEach {
@@ -142,7 +145,7 @@ class PieChart @JvmOverloads constructor(
             pieItem.indicatorCircleLocation.x,
             pieItem.indicatorCircleLocation.y,
             indicatorCircleRadius,
-            indicatorCirclePaint
+            indicatorCirclePaint,
         )
     }
 
@@ -153,19 +156,22 @@ class PieChart @JvmOverloads constructor(
             pieItem.indicatorCircleLocation.y,
             pieItem.indicatorCircleLocation.x + xOffset,
             pieItem.indicatorCircleLocation.y,
-            linePaint
+            linePaint,
         )
     }
 
     private fun drawIndicatorText(canvas: Canvas?, pieItem: PieSlice, alignment: IndicatorAlignment) {
         val xOffset = if (alignment == IndicatorAlignment.LEFT) width / 4 * -1 else width / 4
-        if (alignment == IndicatorAlignment.LEFT) mainTextPaint.textAlign = Paint.Align.LEFT
-        else mainTextPaint.textAlign = Paint.Align.RIGHT
+        if (alignment == IndicatorAlignment.LEFT) {
+            mainTextPaint.textAlign = Paint.Align.LEFT
+        } else {
+            mainTextPaint.textAlign = Paint.Align.RIGHT
+        }
         canvas?.drawText(
             pieItem.name,
             pieItem.indicatorCircleLocation.x + xOffset,
             pieItem.indicatorCircleLocation.y - 10,
-            mainTextPaint
+            mainTextPaint,
         )
     }
 }

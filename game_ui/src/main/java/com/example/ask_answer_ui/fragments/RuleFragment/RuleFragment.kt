@@ -1,6 +1,5 @@
-package com.example.ask_answer_ui.fragments
+package com.example.ask_answer_ui.fragments.RuleFragment
 
-import android.app.AlertDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +16,6 @@ import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.databinding.FragmentRuleBinding
 import com.example.ask_answer_ui.viewModel.cardProvider
-import com.example.ask_answer_ui.viewModel.mainViewModel
 import org.koin.android.ext.android.inject
 import java.time.LocalDateTime
 import java.util.*
@@ -25,7 +23,7 @@ import java.util.*
 class RuleFragment : Fragment() {
 
     val cardProvider: cardProvider by inject()
-    val mainViewModel: mainViewModel by inject()
+    var isDialogShown = false
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -37,9 +35,16 @@ class RuleFragment : Fragment() {
 
         val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
+
         cardProvider.cardList.observe(requireActivity()) {
             when (cardProvider._currentCard) {
                 // TO_DO_MILLER_LAW at 1
+                null -> {
+                    if (!isDialogShown) {
+                        isDialogShown = true
+                        callEndDialog(themeId)
+                    }
+                }
                 is LearningCardDomain -> {
                     val currentCard = cardProvider._currentCard as LearningCardDomain
                     when (currentCard.themeType) {
@@ -115,38 +120,44 @@ class RuleFragment : Fragment() {
                     }
                 }
                 else -> {
-                    AlertDialog.Builder(context)
-                        .setTitle("Cards ended")
-                        .setMessage("You had repeated all cards, congratulation! You answered for a lot of card truly")
-                        .setPositiveButton(
-                            getString(R.string.repeat_again),
-                        ) { _, _ ->
-                            cardProvider.startFromFirstCard()
-                            cardProvider.saveGameResult(
-                                currentDay = LocalDateTime.now().dayOfWeek.value,
-                                themeId = themeId,
-                                date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-
-                            )
-                        }
-                        .setNegativeButton(
-                            R.string.exit,
-                        ) { _, _ ->
-                            cardProvider.saveGameResult(
-                                currentDay = LocalDateTime.now().dayOfWeek.value,
-                                themeId = themeId,
-                                date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-
-                            )
-                            lifecycleScope.launchWhenResumed {
-                                findNavController().popBackStack()
-                            }
-                        }
-                        .show()
+                    TODO()
                 }
                 // TO_DO_COMBINED_APPROACH at 6
             }
         }
         return view.root
+    }
+
+    fun callEndDialog(themeId: Int) {
+        CardEndDialog(correctAsw = {
+            cardProvider.startFromFirstCard(themeId)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                cardProvider.saveGameResult(
+                    currentDay = LocalDateTime.now().dayOfWeek.value,
+                    themeId = themeId,
+                    date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+
+                )
+            } else {
+                TODO()
+            }
+            isDialogShown = false
+        }, wrongAsw = {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                cardProvider.saveGameResult(
+                    currentDay = LocalDateTime.now().dayOfWeek.value,
+                    themeId = themeId,
+                    date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+
+                )
+            } else {
+                TODO()
+            }
+            isDialogShown = false
+
+            lifecycleScope.launchWhenResumed {
+                findNavController().popBackStack()
+            }
+        }).show(parentFragmentManager, "description_dialog")
     }
 }

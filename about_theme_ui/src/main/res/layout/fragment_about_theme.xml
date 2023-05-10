@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="@+id/horizontal_chart_wrong" />
 
     <com.example.about_theme_ui.customView.horizontalChart
-        android:id="@+id/horizontal_chart_triple_wrong"
+        android:id="@+id/horizontal_prev_month_right"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
@@ -42,8 +42,8 @@
         android:layout_height="40dp"
         app:layout_constraintEnd_toStartOf="@+id/horizontal_chart_right"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/horizontal_chart_triple_wrong"
-        app:layout_constraintTop_toTopOf="@+id/horizontal_chart_triple_wrong" />
+        app:layout_constraintStart_toEndOf="@+id/horizontal_prev_month_right"
+        app:layout_constraintTop_toTopOf="@+id/horizontal_prev_month_right" />
 
     <TextView
         android:id="@+id/title"
@@ -100,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:gravity="center"
         android:text="20% right answers"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_right"
@@ -111,6 +112,7 @@
         android:id="@+id/wrongRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="20% right answers"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_wrong"
@@ -122,11 +124,12 @@
         android:id="@+id/lastMonthWrongAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="60% repited wrong answers"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_triple_wrong"
+        app:layout_constraintEnd_toEndOf="@+id/horizontal_prev_month_right"
         app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toStartOf="@+id/horizontal_chart_triple_wrong"
+        app:layout_constraintStart_toStartOf="@+id/horizontal_prev_month_right"
         app:layout_constraintTop_toTopOf="@+id/wrongRate" />
 
     <TextView

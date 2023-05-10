@@ -7,6 +7,23 @@ import com.example.core.DB.Entities.AudioLearningCard
 import com.example.core.DB.Entities.LearningCrad
 import com.example.core.DB.Entities.VisualLearningCard
 
+fun LearningCardDomain.toDataWithSaveId() = LearningCrad(
+    id = Id,
+    themeId = themeId,
+    question = question,
+    answers = answers.map {
+        com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
+    },
+    RACurrentMonth = RACurrentMonth,
+    RALastMonth = RALastMonth,
+    AverageRA = AverageRA,
+    themeType = themeType,
+    dateCreation = dateCreation,
+    description = discription,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    repetitionAmount = repetitionAmount,
+)
 fun LearningCardDomain.toData() = LearningCrad(
     themeId = themeId,
     question = question,
@@ -57,6 +74,21 @@ fun AL_Card.toData() = AudioLearningCard(
     repetitionAmount = repetitionAmount,
 )
 
+fun AL_Card.toDataWithId() = AudioLearningCard(
+    id = Id,
+    themeId = themeId,
+    question = question,
+    answers = answers.map {
+        com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
+    },
+    RACurrentMonth = RACurrentMonth,
+    RALastMonth = RALastMonth,
+    AverageRA = AverageRA,
+    dateCreation = dateCreation,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    repetitionAmount = repetitionAmount,
+)
 fun AudioLearningCard.toDomain() = AL_Card(
     themeId = themeId,
     question = question,
@@ -75,6 +107,23 @@ fun AudioLearningCard.toDomain() = AL_Card(
 )
 
 fun VA_Card.toData() = VisualLearningCard(
+    themeId = themeId,
+    question = question,
+    answers = answers.map {
+        com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
+    },
+    photo = photo,
+    RACurrentMonth = RACurrentMonth,
+    RALastMonth = RALastMonth,
+    AverageRA = AverageRA,
+    dateCreation = dateCreation,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    repetitionAmount = repetitionAmount,
+)
+
+fun VA_Card.toDataWithId() = VisualLearningCard(
+    id = Id,
     themeId = themeId,
     question = question,
     answers = answers.map {

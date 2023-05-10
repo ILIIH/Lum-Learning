@@ -33,10 +33,12 @@ class cardProvider(
     val cardList = MutableLiveData<ArrayList<Any>>()
     val _currentCard: Any?
         get() {
+            Log.i("game_logging", "currentCardIndex $currentCardIndex")
+            Log.i("game_logging", "cardList.value!!.size ${cardList.value!!.size}")
+
             return if (currentCardIndex < cardList.value!!.size) {
                 cardList.value?.get(currentCardIndex)
             } else {
-                Log.i("game_logging", "Index out of Boundless")
                 null
             }
         }
@@ -115,7 +117,7 @@ class cardProvider(
         Time: Long,
         card: LearningCardDomain,
     ) {
-        val launch = GlobalScope.launch {
+        GlobalScope.launch {
             repo.editLearningCard(card.changeRA(result, currentDate.month))
         }
         calculateGameMetrics(
@@ -149,8 +151,9 @@ class cardProvider(
         }
     }
 
-    fun startFromFirstCard() {
+    fun startFromFirstCard(themeId: Int) {
         this.currentCardIndex = 0
+        downloadCards(themeId)
     }
 
     fun goToNextCard() {
@@ -202,7 +205,7 @@ class cardProvider(
             val currentList = ArrayList<Any>(100)
             currentList.addAll(repo.getAllALCardByThemeId(id))
             currentList.addAll(repo.getAllVACardByThemeId(id))
-            currentList.addAll(repo.getAllCardByThemeId(id))
+             currentList.addAll(repo.getAllCardByThemeId(id))
             cardList.postValue(currentList)
         }
     }

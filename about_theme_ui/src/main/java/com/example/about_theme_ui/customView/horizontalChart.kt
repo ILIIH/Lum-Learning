@@ -10,7 +10,7 @@ import android.view.View
 class horizontalChart @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
 
     val MIDDLE_STICK_WITH = 5F

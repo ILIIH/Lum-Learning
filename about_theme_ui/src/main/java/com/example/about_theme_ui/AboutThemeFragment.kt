@@ -12,11 +12,11 @@ import com.example.about_theme_ui.customView.PieData
 import com.example.about_theme_ui.databinding.FragmentAboutThemeBinding
 import org.koin.android.ext.android.inject
 import org.koin.java.KoinJavaComponent.inject
+import kotlin.math.roundToInt
 
 class AboutThemeFragment : Fragment() {
 
     val viewModel: ThemeAboutViewModel by inject()
-    val data = PieData()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,35 +27,38 @@ class AboutThemeFragment : Fragment() {
         val themeId = requireArguments().getInt("id")
         viewModel.loadThemeInfo(themeId)
 
+        val data = PieData()
+        data.add("True answ", 0.0, "#FF00A49D")
+        data.add("Wrong answ", 0.0, "#900D09")
+        data.add("Triple wrong answ", 100.0, "#000000")
+
+        view.pieChart.setData(data)
+
         viewModel._themeInfo.observe(viewLifecycleOwner) {
-            Log.i("RA_test", "AverageLastMonthRA = ${it.AverageLastMonthRA.toFloat() * 100}")
-            Log.i("RA_test", "wrongRate = ${100 - it.AverageLastMonthRA.toFloat() * 100}")
-            Log.i("RA_test", "lastMonthWrongAnswers = ${it.AverageLastMonthRA.toFloat() * 100}")
-
             if (it.AverageRA != 0.0) {
-                data.add("True answ", it.AverageRA * 100, "#FF00A49D")
-                data.add("Wrong answ", 100 - it.AverageRA * 100, "#900D09")
-                data.add("Triple wrong answ", it.AverageLastMonthRA * 100, "#000000")
+                val dataNotNull = PieData()
 
-                view.pieChart.setData(data)
+                Log.i("RA_test", "AverageLastMonthRA = ${it.AverageLastMonthRA * 100}")
+                Log.i("RA_test", "wrongRate = ${100 - it.AverageLastMonthRA * 100}")
+                Log.i("RA_test", "lastMonthWrongAnswers = ${it.AverageLastMonthRA * 100}")
 
-                view.horizontalChartTripleWrong.setData(it.AverageLastMonthRA.toFloat() * 100, Color.parseColor("#000000"))
+                dataNotNull.add("True answ", it.AverageRA * 100, "#FF00A49D")
+                dataNotNull.add("Wrong answ", 100 - it.AverageRA * 100, "#900D09")
+                dataNotNull.add("Last month right answer rate", it.AverageLastMonthRA * 100, "#000000")
+
+                view.pieChart.setData(dataNotNull)
+
+                Log.i("RA_test", "data = $data")
+
+                view.horizontalPrevMonthRight.setData(it.AverageLastMonthRA.toFloat() * 100, Color.parseColor("#000000"))
                 view.horizontalChartWrong.setData(100 - it.AverageRA.toFloat() * 100, Color.parseColor("#900D09"))
-                view.horizontalChartRight.setData(it.AverageLastMonthRA.toFloat() * 100, Color.parseColor("#FF00A49D"))
+                view.horizontalChartRight.setData(it.AverageRA.toFloat() * 100, Color.parseColor("#FF00A49D"))
 
-                view.rightRate.text = "${it.AverageLastMonthRA.toFloat() * 100}% right answers"
-                view.wrongRate.text = "${100 - it.AverageLastMonthRA.toFloat() * 100}% wrong answers"
-                view.lastMonthWrongAnswers.text = "${it.AverageLastMonthRA.toFloat() * 100}% prev month right answers"
+                view.rightRate.text = "${(it.AverageRA * 100.0).roundToInt()}% \n right answers"
+                view.wrongRate.text = "${(100 - it.AverageRA * 100.0).roundToInt()}% \n wrong answers"
+                view.lastMonthWrongAnswers.text = "${(it.AverageLastMonthRA * 100.0).roundToInt()}% \n prev month right answers"
             } else {
-                Log.i("RA_test", "inside zero")
-
-                data.add("True answ", 280.0, "#FF00A49D")
-                data.add("Wrong answ", 80.0, "#900D09")
-                data.add("Triple wrong answ", 20.0, "#000000")
-
-                view.pieChart.setData(data)
-
-                view.horizontalChartTripleWrong.setData(0.0F, Color.parseColor("#000000"))
+                view.horizontalPrevMonthRight.setData(0.0F, Color.parseColor("#000000"))
                 view.horizontalChartWrong.setData(0.0F, Color.parseColor("#900D09"))
                 view.horizontalChartRight.setData(0.0F, Color.parseColor("#FF00A49D"))
 
@@ -67,7 +70,6 @@ class AboutThemeFragment : Fragment() {
             view.themeType.text = it.themeType
             view.title.text = it.title
         }
-
 
         view.toTrain.setOnClickListener {
             val bundle = Bundle()
