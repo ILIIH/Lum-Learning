@@ -40,7 +40,7 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation project(path: ':game_data')
     implementation project(path: ':learning_card_data')
-    implementation project(path: ':core')
+    implementation project(path: ':data_base')
 
 
     implementation 'androidx.core:core-ktx:1.7.0'

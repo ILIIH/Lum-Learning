@@ -34,7 +34,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.5.0")
     
     implementation project(path: ':theme_list_data')
-    implementation project(path: ':core')
+    implementation project(path: ':data_base')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 

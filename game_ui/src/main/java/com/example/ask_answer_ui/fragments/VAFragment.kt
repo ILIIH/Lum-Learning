@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentVisualAssosiationBinding
@@ -37,57 +36,24 @@ class VAFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentVisualAssosiationBinding.inflate(inflater, container, false)
-        val currentCard = cardProvider._currentCard as VA_Card
-        val begin = System.nanoTime()
+        cardProvider.setCurrentCard()
+        cardProvider.currentCard.observe(requireActivity()) { card ->
+            val currentCard = card as VA_Card
+            val begin = System.nanoTime()
 
-        answerAdapter = AnswerAdapter {
-            if (it) {
-                cardProvider.updateVACardInfoAndMetrics(
-                    currentDate = Date(),
-                    cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                        currentCard.dateCreation,
-                    ),
-                    AverageRA = currentCard.AverageRA,
-                    result = true,
-                    Time = begin - System.nanoTime(),
-                    card = currentCard
-                )
-            } else {
-                cardProvider.updateVACardInfoAndMetrics(
-                    currentDate = Date(),
-                    cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                        currentCard.dateCreation,
-                    ),
-                    AverageRA = currentCard.AverageRA,
-                    result = false,
-                    Time = begin - System.nanoTime(),
-                    card = currentCard
-                )
-            }
-            isFragmentClosed = true
-            goToNextCard(view)
-        }
-
-        view.answerList.adapter = answerAdapter
-
-        view.question.text = currentCard.question
-        view.answerList.isNestedScrollingEnabled = false
-        val photo = BitmapFactory.decodeByteArray(currentCard.photo, 0, currentCard.photo.size)
-        view.assosiationImg.setImageBitmap(photo)
-        val endTime = 10000L
-        view.timeView.setEndingTime(endTime.toFloat())
-
-        val timer = object : CountDownTimer(endTime, 100) {
-            override fun onTick(millisUntilFinished: Long) {
-                view.timeView.setCurTime(millisUntilFinished.toFloat())
-            }
-
-            override fun onFinish() {
-                if (!isFragmentClosed) {
-                    DescriptionDialog("Time is ended").show(
-                        parentFragmentManager,
-                        "description_dialog",
+            answerAdapter = AnswerAdapter {
+                if (it) {
+                    cardProvider.updateVACardInfoAndMetrics(
+                        currentDate = Date(),
+                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            currentCard.dateCreation,
+                        ),
+                        AverageRA = currentCard.AverageRA,
+                        result = true,
+                        Time = begin - System.nanoTime(),
+                        card = currentCard,
                     )
+                } else {
                     cardProvider.updateVACardInfoAndMetrics(
                         currentDate = Date(),
                         cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
@@ -96,16 +62,52 @@ class VAFragment : Fragment() {
                         AverageRA = currentCard.AverageRA,
                         result = false,
                         Time = begin - System.nanoTime(),
-                        card = currentCard
+                        card = currentCard,
                     )
-                    goToNextCard(view)
+                }
+                isFragmentClosed = true
+                goToNextCard(view)
+            }
+
+            view.answerList.adapter = answerAdapter
+
+            view.question.text = currentCard.question
+            view.answerList.isNestedScrollingEnabled = false
+            val photo = BitmapFactory.decodeByteArray(currentCard.photo, 0, currentCard.photo.size)
+            view.assosiationImg.setImageBitmap(photo)
+            val endTime = 10000L
+            view.timeView.setEndingTime(endTime.toFloat())
+
+            val timer = object : CountDownTimer(endTime, 100) {
+                override fun onTick(millisUntilFinished: Long) {
+                    view.timeView.setCurTime(millisUntilFinished.toFloat())
+                }
+
+                override fun onFinish() {
+                    if (!isFragmentClosed) {
+                        DescriptionDialog("Time is ended").show(
+                            parentFragmentManager,
+                            "description_dialog",
+                        )
+                        cardProvider.updateVACardInfoAndMetrics(
+                            currentDate = Date(),
+                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                currentCard.dateCreation,
+                            ),
+                            AverageRA = currentCard.AverageRA,
+                            result = false,
+                            Time = begin - System.nanoTime(),
+                            card = currentCard,
+                        )
+                        goToNextCard(view)
+                    }
                 }
             }
+
+            answerAdapter.submitList(currentCard.answers)
+
+            timer.start()
         }
-
-        answerAdapter.submitList(currentCard.answers)
-
-        timer.start()
         return view.root
     }
 
@@ -118,7 +120,7 @@ class VAFragment : Fragment() {
                 }
             }, 1000)
         } else {
-            val currentCard = cardProvider._currentCard as VA_Card
+            val currentCard = cardProvider.currentCard as VA_Card
             answerAdapter.submitList(currentCard.answers)
             view.question.text = currentCard.question
             DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")

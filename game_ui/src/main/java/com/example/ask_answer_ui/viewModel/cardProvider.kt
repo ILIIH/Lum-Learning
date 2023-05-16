@@ -8,6 +8,7 @@ import com.example.add_new_card_data.model.AL_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
 import com.example.add_new_card_data.model.changeRA
+import com.example.ask_answer_data.ResultOf
 import com.example.core.data.usecases.insertGameResult
 import com.example.core.domain.models.gameResult
 import kotlinx.coroutines.GlobalScope
@@ -30,42 +31,51 @@ class cardProvider(
     var Tw1: Double = 0.0
     var Tw2: Double = 0.0
 
-    val cardList = MutableLiveData<ArrayList<Any>>()
-    val _currentCard: Any?
-        get() {
-            Log.i("game_logging", "currentCardIndex $currentCardIndex")
-            Log.i("game_logging", "cardList.value!!.size ${cardList.value!!.size}")
+    val cardList = MutableLiveData<ResultOf<ArrayList<Any>>>()
+    val currentCard = MutableLiveData<Any?>()
 
-            return if (currentCardIndex < cardList.value!!.size) {
-                cardList.value?.get(currentCardIndex)
-            } else {
-                null
+    fun isItTheEndOfCardList() = currentCardIndex > (cardList.value as ResultOf.Success).value.size
+
+    fun setCurrentCard() {
+        Log.i("CardList",cardList.value.toString())
+        when (cardList.value) {
+            is ResultOf.Success -> {
+                with((cardList.value as ResultOf.Success)) {
+                    currentCard.postValue(this.value[currentCardIndex])
+                }
             }
         }
+    }
 
     fun saveGameResult(currentDay: Int, themeId: Int, date: String) {
         GlobalScope.launch {
-            saveResult.execute(
-                gameResult(
-                    K = K * 100 / cardList.value!!.size,
-                    D = D * 100 / cardList.value!!.size,
-                    Ch = Ch * 100 / cardList.value!!.size,
-                    T = T * 100 / cardList.value!!.size,
-                    Tw1 = Tw1 * 100 / cardList.value!!.size,
-                    Tw2 = Tw2 * 100 / cardList.value!!.size,
-                    CurrentDay = currentDay,
-                    learningMethodId = 0,
-                    themeId = themeId,
-                    date = date,
-                ),
-            )
-            K = 0.0
-            D = 0.0
-            Ch = 0.0
-            T = 0.0
-            Tw1 = 0.0
-            Tw2 = 0.0
-            cardList.value!!.clear()
+            when (cardList.value) {
+                is ResultOf.Success -> {
+                    val list = (cardList.value as ResultOf.Success<ArrayList<Any>>).value
+
+                    saveResult.execute(
+                        gameResult(
+                            K = K * 100 / list.size,
+                            D = D * 100 / list.size,
+                            Ch = Ch * 100 / list.size,
+                            T = T * 100 / list.size,
+                            Tw1 = Tw1 * 100 / list.size,
+                            Tw2 = Tw2 * 100 / list.size,
+                            CurrentDay = currentDay,
+                            learningMethodId = 0,
+                            themeId = themeId,
+                            date = date,
+                        ),
+                    )
+                    K = 0.0
+                    D = 0.0
+                    Ch = 0.0
+                    T = 0.0
+                    Tw1 = 0.0
+                    Tw2 = 0.0
+                    (cardList.value as ResultOf.Success<ArrayList<Any>>).value.clear()
+                }
+            }
         }
     }
 
@@ -161,52 +171,97 @@ class cardProvider(
     }
 
     fun hasALCard(): Boolean {
-        return if (currentCardIndex < cardList.value!!.size) {
-            cardList.value?.get(currentCardIndex) is AL_Card
-        } else {
-            false
+        when (cardList.value) {
+            is ResultOf.Success -> {
+                with((cardList.value as ResultOf.Success)) {
+                    return if (currentCardIndex < this.value.size) {
+                        this.value[currentCardIndex] is AL_Card
+                    } else {
+                        false
+                    }
+                }
+            }
+            else -> {
+                return false
+            }
         }
     }
 
     fun hasVACard(): Boolean {
-        return if (currentCardIndex < cardList.value!!.size) {
-            cardList.value?.get(currentCardIndex) is VA_Card
-        } else {
-            false
+        when (cardList.value) {
+            is ResultOf.Success -> {
+                with((cardList.value as ResultOf.Success)) {
+                    return if (currentCardIndex < this.value.size) {
+                        this.value[currentCardIndex] is VA_Card
+                    } else {
+                        false
+                    }
+                }
+            }
+            else -> {
+                return false
+            }
         }
     }
 
     fun hasDACard(): Boolean {
-        return if (currentCardIndex < cardList.value!!.size) {
-            if (cardList.value?.get(currentCardIndex) is LearningCardDomain) {
-                (cardList.value?.get(currentCardIndex) as LearningCardDomain).themeType == 5
-            } else {
-                false
+        when (cardList.value) {
+            is ResultOf.Success -> {
+                with((cardList.value as ResultOf.Success)) {
+                    return if (currentCardIndex < this.value.size) {
+                        if (this.value[currentCardIndex] is LearningCardDomain) {
+                            (this.value.get(currentCardIndex) as LearningCardDomain).themeType == 5
+                        } else {
+                            false
+                        }
+                    } else {
+                        false
+                    }
+                }
             }
-        } else {
-            false
+            else -> {
+                return false
+            }
         }
     }
 
     fun hasMCCard(): Boolean {
-        return if (currentCardIndex < cardList.value!!.size) {
-            if (cardList.value?.get(currentCardIndex) is LearningCardDomain) {
-                (cardList.value?.get(currentCardIndex) as LearningCardDomain).themeType == 2
-            } else {
-                false
+        when (cardList.value) {
+            is ResultOf.Success -> {
+                with((cardList.value as ResultOf.Success)) {
+                    return if (currentCardIndex < this.value.size) {
+                        if (this.value[currentCardIndex] is LearningCardDomain) {
+                            (this.value[currentCardIndex] as LearningCardDomain).themeType == 2
+                        } else {
+                            false
+                        }
+                    } else {
+                        false
+                    }
+                }
             }
-        } else {
-            false
+            else -> {
+                return false
+            }
         }
     }
 
     fun downloadCards(id: Int) {
+        cardList.postValue(ResultOf.Loading(arrayListOf()))
+
         GlobalScope.launch {
-            val currentList = ArrayList<Any>(100)
-            currentList.addAll(repo.getAllALCardByThemeId(id))
-            currentList.addAll(repo.getAllVACardByThemeId(id))
-             currentList.addAll(repo.getAllCardByThemeId(id))
-            cardList.postValue(currentList)
+            try {
+                val currentList = ArrayList<Any>(100)
+                currentList.addAll(repo.getAllALCardByThemeId(id))
+                currentList.addAll(repo.getAllVACardByThemeId(id))
+                currentList.addAll(repo.getAllCardByThemeId(id))
+                cardList.postValue(ResultOf.Success(currentList))
+                Log.i("CardList",ResultOf.Success(currentList).toString())
+
+                setCurrentCard()
+            } catch (e: Throwable) {
+                cardList.postValue(ResultOf.Failure(e.message, e))
+            }
         }
     }
 }

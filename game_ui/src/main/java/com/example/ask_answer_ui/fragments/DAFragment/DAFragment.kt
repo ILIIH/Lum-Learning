@@ -35,60 +35,25 @@ class DAFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentDABinding.inflate(inflater, container, false)
-        val currentCard = cardProvider._currentCard as LearningCardDomain
-        val begin = System.nanoTime()
+        cardProvider.setCurrentCard()
+        cardProvider.currentCard.observe(requireActivity()) { card ->
+            val currentCard = card as LearningCardDomain
 
-        answerAdapter = AnswerAdapter {
-            if (it) {
-                cardProvider.updateLearningCardInfoAndMetrics(
-                    currentDate = Date(),
-                    cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                        currentCard.dateCreation,
-                    ),
-                    AverageRA = currentCard.AverageRA,
-                    result = true,
-                    Time = begin - System.nanoTime(),
-                    card = currentCard,
-                )
-            } else {
-                cardProvider.updateLearningCardInfoAndMetrics(
-                    currentDate = Date(),
-                    cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                        currentCard.dateCreation,
-                    ),
-                    AverageRA = currentCard.AverageRA,
-                    result = false,
-                    Time = begin - System.nanoTime(),
-                    card = currentCard,
-                )
-            }
-            isFragmentClosed = true
-            goToNextCard(view)
-        }
+            val begin = System.nanoTime()
 
-        DescriptionDialog(currentCard.discription).show(parentFragmentManager, "description_dialog")
-
-        view.answerList.adapter = answerAdapter
-
-        view.answerList.isNestedScrollingEnabled = false
-
-        Log.i("card_logging", "Question : " + currentCard.question)
-        view.question.text = currentCard.question
-
-        val endTime = 10000L
-        view.timeView.setEndingTime(endTime.toFloat())
-
-        val timer = object : CountDownTimer(endTime, 100) {
-            override fun onTick(millisUntilFinished: Long) {
-                view.timeView.setCurTime(millisUntilFinished.toFloat())
-            }
-
-            override fun onFinish() {
-                if (!isFragmentClosed) {
-                    DescriptionDialog("Time is ended").show(
-                        parentFragmentManager,
-                        "description_dialog",
+            answerAdapter = AnswerAdapter {
+                if (it) {
+                    cardProvider.updateLearningCardInfoAndMetrics(
+                        currentDate = Date(),
+                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            currentCard.dateCreation,
+                        ),
+                        AverageRA = currentCard.AverageRA,
+                        result = true,
+                        Time = begin - System.nanoTime(),
+                        card = currentCard,
                     )
+                } else {
                     cardProvider.updateLearningCardInfoAndMetrics(
                         currentDate = Date(),
                         cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
@@ -99,15 +64,56 @@ class DAFragment : Fragment() {
                         Time = begin - System.nanoTime(),
                         card = currentCard,
                     )
-                    goToNextCard(view)
+                }
+                isFragmentClosed = true
+                goToNextCard(view)
+            }
+
+            DescriptionDialog(currentCard.discription).show(
+                parentFragmentManager,
+                "description_dialog",
+            )
+
+            view.answerList.adapter = answerAdapter
+
+            view.answerList.isNestedScrollingEnabled = false
+
+            Log.i("card_logging", "Question : " + currentCard.question)
+            view.question.text = currentCard.question
+
+            val endTime = 10000L
+            view.timeView.setEndingTime(endTime.toFloat())
+
+            val timer = object : CountDownTimer(endTime, 100) {
+                override fun onTick(millisUntilFinished: Long) {
+                    view.timeView.setCurTime(millisUntilFinished.toFloat())
+                }
+
+                override fun onFinish() {
+                    if (!isFragmentClosed) {
+                        DescriptionDialog("Time is ended").show(
+                            parentFragmentManager,
+                            "description_dialog",
+                        )
+                        cardProvider.updateLearningCardInfoAndMetrics(
+                            currentDate = Date(),
+                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                currentCard.dateCreation,
+                            ),
+                            AverageRA = currentCard.AverageRA,
+                            result = false,
+                            Time = begin - System.nanoTime(),
+                            card = currentCard,
+                        )
+                        goToNextCard(view)
+                    }
                 }
             }
+
+            answerAdapter.submitList(currentCard.answers)
+
+            timer.start()
         }
-
-        answerAdapter.submitList(currentCard.answers)
-
-        timer.start()
-
         return view.root
     }
 
@@ -120,7 +126,7 @@ class DAFragment : Fragment() {
                 }
             }, 1000)
         } else {
-            val currentCard = cardProvider._currentCard as LearningCardDomain
+            val currentCard = cardProvider.currentCard as LearningCardDomain
             answerAdapter.submitList(currentCard.answers)
             view.question.text = currentCard.question
             DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")

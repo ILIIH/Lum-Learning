@@ -36,8 +36,8 @@ dependencies {
 
     implementation project(path: ':theme_list_ui')
     implementation project(path: ':theme_list_domain')
-    implementation project(path: ':core')
-    runtimeOnly project(path: ':core')
+    implementation project(path: ':data_base')
+    runtimeOnly project(path: ':data_base')
     implementation project(path: ':add_theme_ui')
     implementation project(path: ':add_theme_domain')
     implementation project(path: ':navigation')

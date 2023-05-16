@@ -40,8 +40,8 @@ dependencies {
 
     implementation project(path: ':theme_list_data')
     implementation project(path: ':about_theme_ui')
+    implementation project(path: ':data_base')
 
-    implementation project(path: ':core')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 

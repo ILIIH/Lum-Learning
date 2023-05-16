@@ -36,17 +36,17 @@ class RuleFragment : Fragment() {
         val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
 
-        cardProvider.cardList.observe(requireActivity()) {
-            when (cardProvider._currentCard) {
-                // TO_DO_MILLER_LAW at 1
-                null -> {
-                    if (!isDialogShown) {
-                        isDialogShown = true
-                        callEndDialog(themeId)
-                    }
+        cardProvider.currentCard.observe(requireActivity()) {
+            if (cardProvider.isItTheEndOfCardList()) {
+                if (!isDialogShown) {
+                    isDialogShown = true
+                    callEndDialog(themeId)
                 }
+            }
+            when (it) {
+                // TO_DO_MILLER_LAW at 1
                 is LearningCardDomain -> {
-                    val currentCard = cardProvider._currentCard as LearningCardDomain
+                    val currentCard = cardProvider.currentCard as LearningCardDomain
                     when (currentCard.themeType) {
                         2 -> {
                             view.ruleTile.text = "Meta cognition test rule: "
@@ -86,45 +86,48 @@ class RuleFragment : Fragment() {
             }
         }
 
-        view.startButton.setOnClickListener {
-            when (cardProvider._currentCard) {
-                // TO_DO_MILLER_LAW at 1
-                is LearningCardDomain -> {
-                    val currentCard = cardProvider._currentCard as LearningCardDomain
-                    when (currentCard.themeType) {
-                        2 -> {
-                            lifecycleScope.launchWhenResumed {
-                                findNavController().navigate(R.id.to_MCFragment)
+        cardProvider.currentCard.observe(requireActivity()) { card ->
+            view.startButton.setOnClickListener {
+                when (card) {
+                    // TO_DO_MILLER_LAW at 1
+                    is LearningCardDomain -> {
+                        val currentCard = cardProvider.currentCard as LearningCardDomain
+                        when (currentCard.themeType) {
+                            2 -> {
+                                lifecycleScope.launchWhenResumed {
+                                    findNavController().navigate(R.id.to_MCFragment)
+                                }
                             }
-                        }
-                        5 -> {
-                            lifecycleScope.launchWhenResumed {
-                                findNavController().navigate(R.id.to_DAFragment)
+                            5 -> {
+                                lifecycleScope.launchWhenResumed {
+                                    findNavController().navigate(R.id.to_DAFragment)
+                                }
                             }
-                        }
-                        else -> {
-                            lifecycleScope.launchWhenResumed {
-                                findNavController().navigate(R.id.to_DAFragment) // NEED_REFACTOR
+                            else -> {
+                                lifecycleScope.launchWhenResumed {
+                                    findNavController().navigate(R.id.to_DAFragment) // NEED_REFACTOR
+                                }
                             }
                         }
                     }
-                }
-                is VA_Card -> {
-                    lifecycleScope.launchWhenResumed {
-                        findNavController().navigate(R.id.to_VAFragment)
+                    is VA_Card -> {
+                        lifecycleScope.launchWhenResumed {
+                            findNavController().navigate(R.id.to_VAFragment)
+                        }
                     }
-                }
-                is AL_Card -> {
-                    lifecycleScope.launchWhenResumed {
-                        findNavController().navigate(R.id.to_SAFragment)
+                    is AL_Card -> {
+                        lifecycleScope.launchWhenResumed {
+                            findNavController().navigate(R.id.to_SAFragment)
+                        }
                     }
+                    else -> {
+                        TODO()
+                    }
+                    // TO_DO_COMBINED_APPROACH at 6
                 }
-                else -> {
-                    TODO()
-                }
-                // TO_DO_COMBINED_APPROACH at 6
             }
         }
+
         return view.root
     }
 

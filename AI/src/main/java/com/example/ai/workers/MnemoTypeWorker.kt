@@ -70,7 +70,7 @@ class MnemoTypeWorker(
             saveMnemoType(prediction.returnFirstRow())
             Log.i(
                 "Prediction2",
-                "Worker ended}",
+                "Worker ended",
             )
             return Result.success()
         } else {
@@ -79,7 +79,7 @@ class MnemoTypeWorker(
     }
 
     private suspend fun saveMnemoType(prediction: DoubleArray) {
-        //      saveMnemoType.execute(prediction)
+              saveMnemoType.execute(prediction)
     }
 
     private suspend fun getBestPerformanceMetrics(): DoubleArray {

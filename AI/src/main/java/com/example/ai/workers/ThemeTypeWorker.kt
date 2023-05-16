@@ -25,7 +25,7 @@ class ThemeTypeWorker(
             "ThemeTypeWorker started}",
         )
         val dataSet = downloadDataset()
-        if(dataSet.size>15) {
+        if (dataSet.size > 15) {
             val model = Model(
                 inputDims = 6,
                 layers = arrayOf(
@@ -67,12 +67,13 @@ class ThemeTypeWorker(
                 "ThemeTypeWorker ended}",
             )
             return Result.success()
+        } else {
+            return Result.success()
         }
-        else return Result.success()
     }
 
     private suspend fun saveMnemoType(prediction: DoubleArray) {
-       // saveThemeTypePrediction.execute(prediction)
+        // saveThemeTypePrediction.execute(prediction)
     }
 
     private suspend fun getBestPerformanceMetrics(): DoubleArray {

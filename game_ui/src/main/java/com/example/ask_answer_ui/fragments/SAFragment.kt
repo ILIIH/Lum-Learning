@@ -36,61 +36,25 @@ class SAFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentSABinding.inflate(inflater, container, false)
-        val currentCard = cardProvider._currentCard as AL_Card
-        val begin = System.nanoTime()
+        cardProvider.setCurrentCard()
+        cardProvider.currentCard.observe(requireActivity()) { card ->
+            val currentCard = card as AL_Card
 
-        answerAdapter = AnswerAdapter {
-            if (it) {
-                cardProvider.updateSACardInfoAndMetrics(
-                    currentDate = Date(),
-                    cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                        currentCard.dateCreation,
-                    ),
-                    AverageRA = currentCard.AverageRA,
-                    result = true,
-                    Time = begin - System.nanoTime(),
-                    card = currentCard
-                )
-            } else {
-                cardProvider.updateSACardInfoAndMetrics(
-                    currentDate = Date(),
-                    cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                        currentCard.dateCreation,
-                    ),
-                    AverageRA = currentCard.AverageRA,
-                    result = false,
-                    Time = begin - System.nanoTime(),
-                    card = currentCard
+            val begin = System.nanoTime()
 
-                )
-            }
-            isFragmentClosed = true
-            cardProvider.goToNextCard()
-            goToNextCard(view)
-        }
-
-        view.playSound.setOnClickListener {
-        }
-
-        view.question.text = currentCard.question
-        view.answerList.adapter = answerAdapter
-
-        view.answerList.isNestedScrollingEnabled = false
-
-        val endTime = 10000L
-        view.timeView.setEndingTime(endTime.toFloat())
-
-        val timer = object : CountDownTimer(endTime, 100) {
-            override fun onTick(millisUntilFinished: Long) {
-                view.timeView.setCurTime(millisUntilFinished.toFloat())
-            }
-
-            override fun onFinish() {
-                if (!isFragmentClosed) {
-                    DescriptionDialog("Time is ended").show(
-                        parentFragmentManager,
-                        "description_dialog",
+            answerAdapter = AnswerAdapter {
+                if (it) {
+                    cardProvider.updateSACardInfoAndMetrics(
+                        currentDate = Date(),
+                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            currentCard.dateCreation,
+                        ),
+                        AverageRA = currentCard.AverageRA,
+                        result = true,
+                        Time = begin - System.nanoTime(),
+                        card = currentCard,
                     )
+                } else {
                     cardProvider.updateSACardInfoAndMetrics(
                         currentDate = Date(),
                         cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
@@ -99,21 +63,60 @@ class SAFragment : Fragment() {
                         AverageRA = currentCard.AverageRA,
                         result = false,
                         Time = begin - System.nanoTime(),
-                        card = currentCard
+                        card = currentCard,
+
                     )
-                    goToNextCard(view)
+                }
+                isFragmentClosed = true
+                cardProvider.goToNextCard()
+                goToNextCard(view, currentCard)
+            }
+
+            view.playSound.setOnClickListener {
+            }
+
+            view.question.text = currentCard.question
+            view.answerList.adapter = answerAdapter
+
+            view.answerList.isNestedScrollingEnabled = false
+
+            val endTime = 10000L
+            view.timeView.setEndingTime(endTime.toFloat())
+
+            val timer = object : CountDownTimer(endTime, 100) {
+                override fun onTick(millisUntilFinished: Long) {
+                    view.timeView.setCurTime(millisUntilFinished.toFloat())
+                }
+
+                override fun onFinish() {
+                    if (!isFragmentClosed) {
+                        DescriptionDialog("Time is ended").show(
+                            parentFragmentManager,
+                            "description_dialog",
+                        )
+                        cardProvider.updateSACardInfoAndMetrics(
+                            currentDate = Date(),
+                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                currentCard.dateCreation,
+                            ),
+                            AverageRA = currentCard.AverageRA,
+                            result = false,
+                            Time = begin - System.nanoTime(),
+                            card = currentCard,
+                        )
+                        goToNextCard(view, currentCard)
+                    }
                 }
             }
+
+            answerAdapter.submitList(currentCard.answers)
+
+            timer.start()
         }
-
-        answerAdapter.submitList(currentCard.answers)
-
-        timer.start()
-
         return view.root
     }
 
-    fun goToNextCard(view: FragmentSABinding) {
+    fun goToNextCard(view: FragmentSABinding, currentCard:AL_Card ) {
         cardProvider.goToNextCard()
         if (!cardProvider.hasALCard()) {
             Handler().postDelayed({
@@ -122,7 +125,6 @@ class SAFragment : Fragment() {
                 }
             }, 1000)
         } else {
-            val currentCard = cardProvider._currentCard as LearningCardDomain
             answerAdapter.submitList(currentCard.answers)
             view.question.text = currentCard.question
             DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")
