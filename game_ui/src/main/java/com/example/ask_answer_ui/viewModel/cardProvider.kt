@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.add_new_card_data.CardRepository
-import com.example.add_new_card_data.model.AL_Card
+import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
 import com.example.add_new_card_data.model.changeRA
@@ -31,17 +31,37 @@ class cardProvider(
     var Tw1: Double = 0.0
     var Tw2: Double = 0.0
 
-    val cardList = MutableLiveData<ResultOf<ArrayList<Any>>>()
+    private val cardList = MutableLiveData<ResultOf<ArrayList<Any>>>()
+    val _cardList: MutableLiveData<ResultOf<ArrayList<Any>>>
+        get() = cardList
     val currentCard = MutableLiveData<Any?>()
 
-    fun isItTheEndOfCardList() = currentCardIndex > (cardList.value as ResultOf.Success).value.size
+    fun exitTheme() {
+        this.K = 0.0
+        this.D = 0.0
+        this.Ch = 0.0
+        this.T = 0.0
+        this.Tw1 = 0.0
+        this.Tw2 = 0.0
+
+        this.currentCardIndex = 0
+    }
+
+    fun isItTheEndOfCardList(): Boolean {
+        return if (cardList.value is ResultOf.Success) {
+            currentCardIndex > (cardList.value as ResultOf.Success).value.size - 1
+        } else {
+            false
+        }
+    }
 
     fun setCurrentCard() {
-        Log.i("CardList",cardList.value.toString())
         when (cardList.value) {
             is ResultOf.Success -> {
                 with((cardList.value as ResultOf.Success)) {
-                    currentCard.postValue(this.value[currentCardIndex])
+                    if (currentCardIndex < this.value.size) {
+                        currentCard.postValue(this.value[currentCardIndex])
+                    }
                 }
             }
         }
@@ -73,7 +93,7 @@ class cardProvider(
                     T = 0.0
                     Tw1 = 0.0
                     Tw2 = 0.0
-                    (cardList.value as ResultOf.Success<ArrayList<Any>>).value.clear()
+                    list.clear()
                 }
             }
         }
@@ -105,7 +125,7 @@ class cardProvider(
         result: Boolean,
         AverageRA: Double,
         Time: Long,
-        card: AL_Card,
+        card: SA_Card,
     ) {
         GlobalScope.launch {
             repo.editALCard(card.changeRA(result, currentDate.month))
@@ -167,6 +187,8 @@ class cardProvider(
     }
 
     fun goToNextCard() {
+        Log.i("CardList1", "go to next card ")
+
         this.currentCardIndex = currentCardIndex + 1
     }
 
@@ -175,7 +197,7 @@ class cardProvider(
             is ResultOf.Success -> {
                 with((cardList.value as ResultOf.Success)) {
                     return if (currentCardIndex < this.value.size) {
-                        this.value[currentCardIndex] is AL_Card
+                        this.value[currentCardIndex] is SA_Card
                     } else {
                         false
                     }
@@ -204,7 +226,7 @@ class cardProvider(
         }
     }
 
-    fun hasDACard(): Boolean {
+    fun hasLearningCard(): Boolean {
         when (cardList.value) {
             is ResultOf.Success -> {
                 with((cardList.value as ResultOf.Success)) {
@@ -256,9 +278,6 @@ class cardProvider(
                 currentList.addAll(repo.getAllVACardByThemeId(id))
                 currentList.addAll(repo.getAllCardByThemeId(id))
                 cardList.postValue(ResultOf.Success(currentList))
-                Log.i("CardList",ResultOf.Success(currentList).toString())
-
-                setCurrentCard()
             } catch (e: Throwable) {
                 cardList.postValue(ResultOf.Failure(e.message, e))
             }

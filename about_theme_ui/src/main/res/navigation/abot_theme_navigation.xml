@@ -16,7 +16,11 @@
         <action
             android:id="@+id/to_add_new_card"
             app:destination="@id/add_visual_card" />
+        <action
+            android:id="@+id/to_edit_cards_navgraph"
+            app:destination="@id/edit_cards_navgraph" />
     </fragment>
     <include app:graph="@navigation/ask_answer_game_nav_graph" />
     <include app:graph="@navigation/add_graph_navgraph" />
+    <include app:graph="@navigation/edit_cards_navgraph" />
 </navigation>

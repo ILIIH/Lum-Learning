@@ -36,7 +36,7 @@ class MCFragment : Fragment() {
     ): View {
         val view = FragmentMCBinding.inflate(inflater, container, false)
         cardProvider.setCurrentCard()
-        cardProvider.currentCard.observe(requireActivity()) { card ->
+        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
             val currentCard = card as LearningCardDomain
             val begin = System.nanoTime()
 
@@ -65,7 +65,7 @@ class MCFragment : Fragment() {
                     )
                 }
                 isFragmentClosed = true
-                goToNextCard(view)
+                goToNextCard()
             }
 
             view.question.text = currentCard.question
@@ -98,7 +98,7 @@ class MCFragment : Fragment() {
                             Time = begin - System.nanoTime(),
                             card = currentCard,
                         )
-                        goToNextCard(view)
+                        goToNextCard()
                     }
                 }
             }
@@ -111,19 +111,12 @@ class MCFragment : Fragment() {
         return view.root
     }
 
-    fun goToNextCard(view: FragmentMCBinding) {
+    fun goToNextCard() {
         cardProvider.goToNextCard()
-        if (!cardProvider.hasMCCard()) {
-            Handler().postDelayed({
-                lifecycleScope.launchWhenResumed {
-                    findNavController().popBackStack()
-                }
-            }, 1000)
-        } else {
-            val currentCard = cardProvider.currentCard as LearningCardDomain
-            answerAdapter.submitList(currentCard.answers)
-            view.question.text = currentCard.question
-            DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")
-        }
+        Handler().postDelayed({
+            lifecycleScope.launchWhenResumed {
+                findNavController().popBackStack()
+            }
+        }, 1000)
     }
 }

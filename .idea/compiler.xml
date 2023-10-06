@@ -2,43 +2,44 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
-      <module name="Memorizable.about_theme_domain" target="11" />
-      <module name="Memorizable.about_theme_ui" target="11" />
-      <module name="Memorizable.add_new_card_ui" target="11" />
-      <module name="Memorizable.add_theme_domain" target="11" />
+      <module name="Memorizable.about_theme_domain" target="17" />
+      <module name="Memorizable.about_theme_ui" target="17" />
+      <module name="Memorizable.add_new_card_ui" target="17" />
+      <module name="Memorizable.add_theme_domain" target="17" />
       <module name="Memorizable.add_theme_module" target="11" />
-      <module name="Memorizable.add_theme_ui" target="11" />
-      <module name="Memorizable.AI" target="11" />
+      <module name="Memorizable.add_theme_ui" target="17" />
+      <module name="Memorizable.AI" target="17" />
       <module name="Memorizable.api" target="11" />
       <module name="Memorizable.api.main" target="11" />
       <module name="Memorizable.api.test" target="11" />
-      <module name="Memorizable.app" target="11" />
-      <module name="Memorizable.data_base" target="11" />
+      <module name="Memorizable.app" target="17" />
+      <module name="Memorizable.data_base" target="17" />
       <module name="Memorizable.dataset.commonMain" target="1.8" />
       <module name="Memorizable.dataset.commonTest" target="1.8" />
       <module name="Memorizable.dataset.jvmMain" target="1.8" />
       <module name="Memorizable.dataset.jvmTest" target="1.8" />
+      <module name="Memorizable.edit_card_ui" target="17" />
       <module name="Memorizable.formula_builder" target="11" />
-      <module name="Memorizable.formula_builder_ui" target="11" />
-      <module name="Memorizable.game_domain" target="11" />
-      <module name="Memorizable.game_ui" target="11" />
+      <module name="Memorizable.formula_builder_ui" target="17" />
+      <module name="Memorizable.game_domain" target="17" />
+      <module name="Memorizable.game_ui" target="17" />
       <module name="Memorizable.impl.commonMain" target="1.8" />
       <module name="Memorizable.impl.commonTest" target="1.8" />
       <module name="Memorizable.impl.jvmMain" target="1.8" />
       <module name="Memorizable.impl.jvmTest" target="1.8" />
-      <module name="Memorizable.learning_card_domain" target="11" />
+      <module name="Memorizable.learning_card_domain" target="17" />
       <module name="Memorizable.myapplication" target="11" />
-      <module name="Memorizable.navigation" target="11" />
-      <module name="Memorizable.onboarding" target="11" />
+      <module name="Memorizable.navigation" target="17" />
+      <module name="Memorizable.onboarding" target="17" />
       <module name="Memorizable.onnx.commonMain" target="1.8" />
       <module name="Memorizable.onnx.commonTest" target="1.8" />
       <module name="Memorizable.onnx.jvmMain" target="1.8" />
       <module name="Memorizable.onnx.jvmTest" target="1.8" />
-      <module name="Memorizable.plain_ui" target="11" />
+      <module name="Memorizable.plain_ui" target="17" />
       <module name="Memorizable.tensorflow.main" target="11" />
       <module name="Memorizable.tensorflow.test" target="11" />
-      <module name="Memorizable.theme_list_domain" target="11" />
-      <module name="Memorizable.theme_list_ui" target="11" />
+      <module name="Memorizable.theme_list_domain" target="17" />
+      <module name="Memorizable.theme_list_ui" target="17" />
       <module name="Memorizable.visualization.commonMain" target="1.8" />
       <module name="Memorizable.visualization.commonTest" target="1.8" />
       <module name="Memorizable.visualization.jvmMain" target="1.8" />

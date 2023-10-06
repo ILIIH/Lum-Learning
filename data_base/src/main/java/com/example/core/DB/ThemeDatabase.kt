@@ -19,7 +19,7 @@ import com.example.core.DB.Entities.*
         AudioLearningCard::class,
         VisualLearningCard::class,
     ],
-    version = 7,
+    version = 8,
 )
 abstract class ThemeDatabase : RoomDatabase() {
     abstract fun themeDao(): ThemeDAO

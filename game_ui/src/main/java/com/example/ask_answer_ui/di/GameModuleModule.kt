@@ -4,7 +4,7 @@ import com.example.ask_answer_ui.viewModel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val askAnswerUiModule = module {
+val flashCardUiModule = module {
     viewModel {
         VA_ViewModel(get())
     }
@@ -17,9 +17,7 @@ val askAnswerUiModule = module {
     viewModel {
         MC_ViewModel(get())
     }
-    viewModel {
-        mainViewModel(get())
-    }
+
     single {
         cardProvider(get(), get())
     }

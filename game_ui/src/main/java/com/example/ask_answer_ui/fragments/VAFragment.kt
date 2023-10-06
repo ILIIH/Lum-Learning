@@ -37,7 +37,7 @@ class VAFragment : Fragment() {
     ): View {
         val view = FragmentVisualAssosiationBinding.inflate(inflater, container, false)
         cardProvider.setCurrentCard()
-        cardProvider.currentCard.observe(requireActivity()) { card ->
+        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
             val currentCard = card as VA_Card
             val begin = System.nanoTime()
 
@@ -66,7 +66,7 @@ class VAFragment : Fragment() {
                     )
                 }
                 isFragmentClosed = true
-                goToNextCard(view)
+                goToNextCard()
             }
 
             view.answerList.adapter = answerAdapter
@@ -99,7 +99,7 @@ class VAFragment : Fragment() {
                             Time = begin - System.nanoTime(),
                             card = currentCard,
                         )
-                        goToNextCard(view)
+                        goToNextCard()
                     }
                 }
             }
@@ -111,19 +111,13 @@ class VAFragment : Fragment() {
         return view.root
     }
 
-    fun goToNextCard(view: FragmentVisualAssosiationBinding) {
+    fun goToNextCard() {
         cardProvider.goToNextCard()
-        if (!cardProvider.hasVACard()) {
-            Handler().postDelayed({
-                lifecycleScope.launchWhenResumed {
-                    findNavController().popBackStack()
-                }
-            }, 1000)
-        } else {
-            val currentCard = cardProvider.currentCard as VA_Card
-            answerAdapter.submitList(currentCard.answers)
-            view.question.text = currentCard.question
-            DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")
-        }
+
+        Handler().postDelayed({
+            lifecycleScope.launchWhenResumed {
+                findNavController().popBackStack()
+            }
+        }, 1000)
     }
 }

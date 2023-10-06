@@ -1,6 +1,6 @@
 package com.example.add_new_card_data.model
 
-data class AL_Card(
+data class SA_Card(
     val Id: Int,
     val themeId: Int,
     val question: String,
@@ -15,7 +15,7 @@ data class AL_Card(
 
 )
 
-fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
+fun SA_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): SA_Card {
     val averageRA =
         if (thisGameResult) {
             (1 + (this.AverageRA * this.repetitionAmount)) / (this.repetitionAmount + 1)
@@ -45,7 +45,7 @@ fun AL_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): AL_Card {
         }
     }
 
-    val nexAL = AL_Card(
+    val nexAL = SA_Card(
         Id = this.Id,
         themeId = this.themeId,
         question = this.question,

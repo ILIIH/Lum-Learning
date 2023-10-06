@@ -12,8 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.add_new_card_data.model.AL_Card
-import com.example.add_new_card_data.model.LearningCardDomain
+import com.example.add_new_card_data.model.SA_Card
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentSABinding
 import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
@@ -37,10 +36,40 @@ class SAFragment : Fragment() {
     ): View {
         val view = FragmentSABinding.inflate(inflater, container, false)
         cardProvider.setCurrentCard()
-        cardProvider.currentCard.observe(requireActivity()) { card ->
-            val currentCard = card as AL_Card
 
+        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
+            val currentCard = card as SA_Card
             val begin = System.nanoTime()
+            val endTime = 10000L
+            view.timeView.setEndingTime(endTime.toFloat())
+
+            val timer = object : CountDownTimer(endTime, 100) {
+                override fun onTick(millisUntilFinished: Long) {
+                    view.timeView.setCurTime(millisUntilFinished.toFloat())
+                }
+
+                override fun onFinish() {
+                    if (!isFragmentClosed) {
+                        DescriptionDialog("Time is ended").show(
+                            parentFragmentManager,
+                            "description_dialog",
+                        )
+                        cardProvider.updateSACardInfoAndMetrics(
+                            currentDate = Date(),
+                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                currentCard.dateCreation,
+                            ),
+                            AverageRA = currentCard.AverageRA,
+                            result = false,
+                            Time = begin - System.nanoTime(),
+                            card = currentCard,
+                        )
+                        this.cancel()
+                        goToNextCard()
+                    }
+                }
+            }
+            timer.start()
 
             answerAdapter = AnswerAdapter {
                 if (it) {
@@ -68,8 +97,9 @@ class SAFragment : Fragment() {
                     )
                 }
                 isFragmentClosed = true
+
                 cardProvider.goToNextCard()
-                goToNextCard(view, currentCard)
+                goToNextCard()
             }
 
             view.playSound.setOnClickListener {
@@ -80,54 +110,16 @@ class SAFragment : Fragment() {
 
             view.answerList.isNestedScrollingEnabled = false
 
-            val endTime = 10000L
-            view.timeView.setEndingTime(endTime.toFloat())
-
-            val timer = object : CountDownTimer(endTime, 100) {
-                override fun onTick(millisUntilFinished: Long) {
-                    view.timeView.setCurTime(millisUntilFinished.toFloat())
-                }
-
-                override fun onFinish() {
-                    if (!isFragmentClosed) {
-                        DescriptionDialog("Time is ended").show(
-                            parentFragmentManager,
-                            "description_dialog",
-                        )
-                        cardProvider.updateSACardInfoAndMetrics(
-                            currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                                currentCard.dateCreation,
-                            ),
-                            AverageRA = currentCard.AverageRA,
-                            result = false,
-                            Time = begin - System.nanoTime(),
-                            card = currentCard,
-                        )
-                        goToNextCard(view, currentCard)
-                    }
-                }
-            }
-
             answerAdapter.submitList(currentCard.answers)
-
-            timer.start()
         }
         return view.root
     }
 
-    fun goToNextCard(view: FragmentSABinding, currentCard:AL_Card ) {
-        cardProvider.goToNextCard()
-        if (!cardProvider.hasALCard()) {
-            Handler().postDelayed({
-                lifecycleScope.launchWhenResumed {
-                    findNavController().popBackStack()
-                }
-            }, 1000)
-        } else {
-            answerAdapter.submitList(currentCard.answers)
-            view.question.text = currentCard.question
-            DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")
-        }
+    fun goToNextCard() {
+        Handler().postDelayed({
+            lifecycleScope.launchWhenResumed {
+                findNavController().popBackStack()
+            }
+        }, 1000)
     }
 }

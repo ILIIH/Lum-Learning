@@ -1,6 +1,6 @@
 package com.example.add_new_card_domain.mapper
 
-import com.example.add_new_card_data.model.AL_Card
+import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
 import com.example.core.DB.Entities.AudioLearningCard
@@ -59,7 +59,7 @@ fun LearningCrad.toDomain() = LearningCardDomain(
     lastMonthUpdateNumber = lastUpdateNumber,
 )
 
-fun AL_Card.toData() = AudioLearningCard(
+fun SA_Card.toData() = AudioLearningCard(
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -74,7 +74,7 @@ fun AL_Card.toData() = AudioLearningCard(
     repetitionAmount = repetitionAmount,
 )
 
-fun AL_Card.toDataWithId() = AudioLearningCard(
+fun SA_Card.toDataWithId() = AudioLearningCard(
     id = Id,
     themeId = themeId,
     question = question,
@@ -89,7 +89,7 @@ fun AL_Card.toDataWithId() = AudioLearningCard(
     lastUpdateNumber = lastMonthUpdateNumber,
     repetitionAmount = repetitionAmount,
 )
-fun AudioLearningCard.toDomain() = AL_Card(
+fun AudioLearningCard.toDomain() = SA_Card(
     themeId = themeId,
     question = question,
     answers = answers.map {

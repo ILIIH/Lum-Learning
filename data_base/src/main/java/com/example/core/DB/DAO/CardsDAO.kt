@@ -13,6 +13,9 @@ interface CardsDAO {
     @Delete
     suspend fun deleteLearningCrad(vararg card: LearningCrad)
 
+    @Query("DELETE FROM LearningCrad WHERE id = :ID")
+    suspend fun deleteLearningCardById(ID: Int)
+
     @Update
     suspend fun changeLearningCrad(vararg card: LearningCrad)
 
@@ -31,6 +34,9 @@ interface CardsDAO {
     @Query("SELECT * FROM VisualLearningCard")
     suspend fun getAllVLCrad(): List<VisualLearningCard>
 
+    @Query("DELETE FROM VisualLearningCard WHERE id = :ID")
+    suspend fun deleteVACardId(ID: Int)
+
     @Insert
     suspend fun insertALCard(vararg card: AudioLearningCard)
 
@@ -42,4 +48,7 @@ interface CardsDAO {
 
     @Query("SELECT * FROM AudioLearningCard")
     suspend fun getAllALCrad(): List<AudioLearningCard>
+
+    @Query("DELETE FROM AudioLearningCard WHERE id = :ID")
+    suspend fun deleteALCardId(ID: Int)
 }

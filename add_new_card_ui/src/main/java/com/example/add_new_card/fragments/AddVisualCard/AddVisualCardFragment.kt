@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.add_new_card.util.hideKeyboard
 import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
@@ -123,6 +124,7 @@ class AddVisualCardFragment : Fragment() {
                             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
                             monthNumber =  Date().month
                         )
+                        hideKeyboard(requireActivity())
                         findNavController().popBackStack()
                     }
                     .setIcon(R.drawable.baseline_credit_card_24)
@@ -131,6 +133,7 @@ class AddVisualCardFragment : Fragment() {
         }
 
         viewModel._photo.observe(requireActivity()) {
+            view.addPhoto.setImageDrawable(null)
             view.addPhoto.setImageBitmap(it)
         }
         return view.root

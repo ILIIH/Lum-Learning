@@ -1,6 +1,6 @@
 package com.example.ai.base_ai_classes
 
-class   Matrix(val m: Int, val n: Int, var name: String = "matrix") {
+class Matrix(val m: Int, val n: Int, var name: String = "matrix") {
 
     private var data = Array(m) { DoubleArray(n) }
 
@@ -12,7 +12,7 @@ class   Matrix(val m: Int, val n: Int, var name: String = "matrix") {
         return data
     }
 
-    fun returnFirstRow(): DoubleArray{
+    fun returnFirstRow(): DoubleArray {
         return data[0]
     }
 

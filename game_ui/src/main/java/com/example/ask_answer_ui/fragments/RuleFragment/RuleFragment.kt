@@ -10,9 +10,10 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.add_new_card_data.model.AL_Card
+import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
+import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.databinding.FragmentRuleBinding
 import com.example.ask_answer_ui.viewModel.cardProvider
@@ -36,6 +37,12 @@ class RuleFragment : Fragment() {
         val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
 
+        cardProvider._cardList.observe(requireActivity()) { result ->
+            if (result is ResultOf.Success) {
+                cardProvider.setCurrentCard()
+            }
+        }
+
         cardProvider.currentCard.observe(requireActivity()) {
             if (cardProvider.isItTheEndOfCardList()) {
                 if (!isDialogShown) {
@@ -46,7 +53,8 @@ class RuleFragment : Fragment() {
             when (it) {
                 // TO_DO_MILLER_LAW at 1
                 is LearningCardDomain -> {
-                    val currentCard = cardProvider.currentCard as LearningCardDomain
+                    val currentCard = it
+
                     when (currentCard.themeType) {
                         2 -> {
                             view.ruleTile.text = "Meta cognition test rule: "
@@ -63,6 +71,7 @@ class RuleFragment : Fragment() {
                                 "2) Answer the question, your time is restricted\n\n "
                         }
                         else -> {
+
                             // NEED REFACTOR
                             view.ruleTile.text = "Description association test rule: "
                             view.ruleText.text =
@@ -77,7 +86,7 @@ class RuleFragment : Fragment() {
                         "1) First you will see the photo association on answer to question\n\n" +
                         "2) Answer the question, your time is restricted\n\n "
                 }
-                is AL_Card -> {
+                is SA_Card -> {
                     view.ruleTile.text = "Audio association test rule: "
                     view.ruleText.text =
                         "1) First you will hear the audio association on answer to question\n\n" +
@@ -91,8 +100,7 @@ class RuleFragment : Fragment() {
                 when (card) {
                     // TO_DO_MILLER_LAW at 1
                     is LearningCardDomain -> {
-                        val currentCard = cardProvider.currentCard as LearningCardDomain
-                        when (currentCard.themeType) {
+                        when (card.themeType) {
                             2 -> {
                                 lifecycleScope.launchWhenResumed {
                                     findNavController().navigate(R.id.to_MCFragment)
@@ -100,12 +108,12 @@ class RuleFragment : Fragment() {
                             }
                             5 -> {
                                 lifecycleScope.launchWhenResumed {
-                                    findNavController().navigate(R.id.to_DAFragment)
+                                    findNavController().navigate(R.id.to_LearningCard)
                                 }
                             }
                             else -> {
                                 lifecycleScope.launchWhenResumed {
-                                    findNavController().navigate(R.id.to_DAFragment) // NEED_REFACTOR
+                                    findNavController().navigate(R.id.to_LearningCard) //TO_DO NEED_REFACTOR
                                 }
                             }
                         }
@@ -115,7 +123,7 @@ class RuleFragment : Fragment() {
                             findNavController().navigate(R.id.to_VAFragment)
                         }
                     }
-                    is AL_Card -> {
+                    is SA_Card -> {
                         lifecycleScope.launchWhenResumed {
                             findNavController().navigate(R.id.to_SAFragment)
                         }
@@ -146,6 +154,7 @@ class RuleFragment : Fragment() {
             }
             isDialogShown = false
         }, wrongAsw = {
+            cardProvider.exitTheme()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cardProvider.saveGameResult(
                     currentDay = LocalDateTime.now().dayOfWeek.value,

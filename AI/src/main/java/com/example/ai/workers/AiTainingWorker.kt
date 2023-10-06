@@ -11,7 +11,6 @@ import com.example.ai.base_ai_classes.Model
 import com.example.ai.base_ai_classes.Optimazer.RMSProp
 import com.example.ai.base_ai_classes.loss.MeanSquaredError
 
-
 class AiTainingWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
     override fun doWork(): Result {
@@ -24,8 +23,8 @@ class AiTainingWorker(context: Context, workerParams: WorkerParameters) :
             layers = arrayOf(
                 Dense(12, ActivationOps.ReLU()),
                 Dense(6, ActivationOps.Sigmoid()),
-                Dense(2, ActivationOps.Softmax())
-            )
+                Dense(2, ActivationOps.Softmax()),
+            ),
         )
         val loss = MeanSquaredError()
         val optimizer = RMSProp().apply { learningRate = 0.01 }
@@ -33,13 +32,13 @@ class AiTainingWorker(context: Context, workerParams: WorkerParameters) :
 
         val x = MatrixOps.uniform(1, trainData)
         val y = MatrixOps.uniform(1, answerData)
-        for(i in 0..40) {
+        for (i in 0..40) {
             model.forward(x, y)
             model.backward()
         }
         val x2 = MatrixOps.uniform(1, trainData2)
         val y2 = MatrixOps.uniform(1, answerData2)
-        for(i in 0..40) {
+        for (i in 0..40) {
             model.forward(x2, y2)
             model.backward()
         }
@@ -47,7 +46,9 @@ class AiTainingWorker(context: Context, workerParams: WorkerParameters) :
             "Prediction2",
             "predicted = ${ model.forward(
                 MatrixOps.uniform(1,doubleArrayOf(500.0, -500.0))
-                , y)}"
+                ,
+                y,
+            )}",
         )
 
         return Result.success()

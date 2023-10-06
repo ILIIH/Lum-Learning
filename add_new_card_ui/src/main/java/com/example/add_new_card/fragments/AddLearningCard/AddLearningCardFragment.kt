@@ -1,5 +1,6 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
@@ -7,16 +8,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.add_new_card.util.hideKeyboard
 import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class AddLearningCardFragment : Fragment() {
 
@@ -151,6 +155,7 @@ class AddLearningCardFragment : Fragment() {
 
                             )
                         }
+                        hideKeyboard(requireActivity())
                         findNavController().popBackStack()
                     }
                     .setIcon(R.drawable.baseline_credit_card_24)
@@ -160,4 +165,6 @@ class AddLearningCardFragment : Fragment() {
 
         return view.root
     }
+
+
 }

@@ -36,7 +36,7 @@ class DAFragment : Fragment() {
     ): View {
         val view = FragmentDABinding.inflate(inflater, container, false)
         cardProvider.setCurrentCard()
-        cardProvider.currentCard.observe(requireActivity()) { card ->
+        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
             val currentCard = card as LearningCardDomain
 
             val begin = System.nanoTime()
@@ -119,7 +119,7 @@ class DAFragment : Fragment() {
 
     fun goToNextCard(view: FragmentDABinding) {
         cardProvider.goToNextCard()
-        if (!cardProvider.hasDACard()) {
+        if (!cardProvider.hasLearningCard()) {
             Handler().postDelayed({
                 lifecycleScope.launchWhenResumed {
                     findNavController().popBackStack()

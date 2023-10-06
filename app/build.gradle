@@ -49,6 +49,7 @@ dependencies {
     implementation project(path: ':AI')
     implementation project(path: ':learning_card_domain')
     implementation project(path: ':add_new_card_ui')
+    implementation project(path: ':edit_card_ui')
 
 
     implementation 'io.insert-koin:koin-android:3.3.3'

@@ -8,21 +8,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.DB.domain.photoLoader
 import com.example.theme_list_data.Theme
 import com.example.theme_list_ui.databinding.ThemeItemBinding
 import com.example.theme_list_ui.themeListNavigation
 
 class ThemeAdapter(
     private val navigator: themeListNavigation,
-    private val photoLoader: photoLoader
 ) : ListAdapter<Theme, ThemeAdapter.ThemeItemViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeItemViewHolder {
         val view = ThemeItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         )
 
         return ThemeItemViewHolder(view)
@@ -34,7 +32,7 @@ class ThemeAdapter(
     }
 
     inner class ThemeItemViewHolder(
-        private val binding: ThemeItemBinding
+        private val binding: ThemeItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(themeItem: Theme) {

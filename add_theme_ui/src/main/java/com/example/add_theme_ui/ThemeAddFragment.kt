@@ -41,6 +41,7 @@ class ThemeAddFragment : Fragment() {
         }
 
         viewModule._photo.observe(requireActivity()) {
+            view.themeAvatar.setImageDrawable(null)
             view.themeAvatar.setImageBitmap(it)
         }
 

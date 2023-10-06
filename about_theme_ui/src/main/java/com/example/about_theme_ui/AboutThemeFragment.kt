@@ -80,6 +80,12 @@ class AboutThemeFragment : Fragment() {
             findNavController().navigate(R.id.to_ask_answer_game, bundle)
         }
 
+        view.toEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", themeId)
+            findNavController().navigate(R.id.to_edit_cards_navgraph, bundle)
+        }
+
         view.createNewItem.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("id", themeId)

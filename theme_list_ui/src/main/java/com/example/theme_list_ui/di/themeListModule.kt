@@ -9,6 +9,6 @@ val themeListModule = module {
         ThemeViewModule(get(), get())
     }
     single {
-        ThemeAdapter(get(), get())
+        ThemeAdapter(get())
     }
 }

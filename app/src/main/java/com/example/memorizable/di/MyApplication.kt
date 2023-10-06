@@ -10,9 +10,10 @@ import com.example.add_new_card_domain.di.cardModule
 import com.example.add_theme_domain.di.addThemeDomainModule
 import com.example.add_theme_ui.di.addThemeModule
 import com.example.ask_answer_domain.di.askAnswerDomainModule
-import com.example.ask_answer_ui.di.askAnswerUiModule
+import com.example.ask_answer_ui.di.flashCardUiModule
 import com.example.core.DB.di.RoomModule
 import com.example.core.data.coreDataModule
+import com.example.edit_ui.di.editCardUiModule
 import com.example.navigation.di.navigationModule
 import com.example.onboarding.di.onBoardingModule
 import com.example.theme_list_domain.di.ThemeListDomainModule
@@ -44,9 +45,10 @@ class MyApplication : Application(), KoinComponent {
                 aboutThemeModule,
                 aboutThemeUiModule,
                 imageProviderModule,
-                askAnswerUiModule,
+                flashCardUiModule,
                 askAnswerDomainModule,
-                coreDataModule
+                coreDataModule,
+                editCardUiModule,
             )
         }
         setupWorkManagerFactory()

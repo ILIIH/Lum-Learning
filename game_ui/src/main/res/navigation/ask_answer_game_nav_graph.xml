@@ -31,6 +31,10 @@
             android:id="@+id/to_MCFragment"
             app:destination="@id/MCFragment"
             app:popUpTo="@id/ruleFragment" />
+        <action
+            android:id="@+id/to_LearningCard"
+            app:destination="@id/learningCard"
+            app:popUpTo="@id/ruleFragment"/>
     </fragment>
     <fragment
         android:id="@+id/SAFragment"
@@ -45,4 +49,9 @@
         android:name="com.example.ask_answer_ui.fragments.MCFragment"
         android:label="fragment_m_c"
         tools:layout="@layout/fragment_m_c" />
+    <fragment
+        android:id="@+id/learningCard"
+        android:name="com.example.ask_answer_ui.fragments.LearningCard"
+        android:label="fragment_learning_card"
+        tools:layout="@layout/fragment_learning_card" />
 </navigation>
