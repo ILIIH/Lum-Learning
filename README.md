@@ -10,18 +10,7 @@ In today's information age, we are constantly surrounded by various forms of inf
 2. [UML diagram](#2-uml-diagram)
 3. [Neural network topologies](#3-to-be-diagram)
 4. [Software architecture overview](#4-software-architecture-overview)
-5. [Features](#5-features)
-   - [User registration](#user-registration)
-   - [Find accommodation](#find-accommodation)
-   - [Find airlines flights](#find-airlines-flights)
-   - [Find local bus tickets](#find-local-bus-tickets)
-   - [Find attraction tickets](#find-attraction-bus-tickets)
-   - [Tables reservation in a restaurants](#tables-reservation)
-   - [Excursions booking ](#excursions-booking)
-   - [Account Page](#account-page)
-   - [Register, Login/logout](#register-loginlogout-pages)
-   - [Basket Page](#shopping-basket)
-   - [Checkout Page](#checkout-page)
+
 
 ## **2. UML diagram:**
 
