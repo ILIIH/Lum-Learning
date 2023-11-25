@@ -1,4 +1,4 @@
-# **Memorizable**
+# **Luminous  learning**
 
 ## **1. Overview.**
 
