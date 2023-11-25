@@ -10,6 +10,7 @@ import com.example.add_new_card_data.model.VA_Card
 import com.example.add_new_card_data.model.changeRA
 import com.example.ask_answer_data.ResultOf
 import com.example.core.data.usecases.insertGameResult
+import com.example.core.domain.ILError
 import com.example.core.domain.models.gameResult
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -279,7 +280,7 @@ class cardProvider(
                 currentList.addAll(repo.getAllCardByThemeId(id))
                 cardList.postValue(ResultOf.Success(currentList))
             } catch (e: Throwable) {
-                cardList.postValue(ResultOf.Failure(e.message, e))
+                cardList.postValue(ResultOf.Failure(ILError.IO_ERROR))
             }
         }
     }

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">edit_ui</string>
+    <string name="empty_title_error">Your theme name is empty, you should fix this</string>
+    <string name="years_error">Your years of experience is empty, you should fix this</string>
+    <string name="theme_photo_error">Your photo for theme is not chosen, you should fix this</string>
+    <string name="io_error">Download error, please contact supports</string>
+    <string name="general_error">Something happened, please contact supports</string>
+
+</resources>

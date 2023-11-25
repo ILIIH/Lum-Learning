@@ -13,14 +13,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
 import com.example.add_theme_ui.databinding.FragmentThemeAddBinding
+import com.example.core.ui.BaseFragment
 import org.koin.android.ext.android.inject
 
-class ThemeAddFragment : Fragment() {
+class ThemeAddFragment : BaseFragment() {
 
     val viewModule: ThemeAddViewModel by inject()
 
@@ -34,10 +35,14 @@ class ThemeAddFragment : Fragment() {
         view.continueBtn.setOnClickListener {
             viewModule.addTheme(
                 view.themeTitleTextInput.text.toString(),
-                view.yesrsExpirenceTextInput.text.toString().toInt(),
+                view.yesrsExpirenceTextInput.text.toString(),
                 view.themeImportanceSpinner.selectedItem.toString(),
                 view.themeTypeSpinner.selectedItem.toString(),
             )
+        }
+
+        viewModule._validation.observe(requireActivity()) {
+            showError(it)
         }
 
         viewModule._photo.observe(requireActivity()) {
