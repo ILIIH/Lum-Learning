@@ -20,7 +20,6 @@ class CardListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentCardListBinding.inflate(inflater, container, false)
-
         val listAdapter = CardListAdapter { id, type ->
             when (type) {
                 CardType.LEARNING_CARD -> viewModel.deleteLearningCardById(id)

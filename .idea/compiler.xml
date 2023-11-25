@@ -13,6 +13,7 @@
       <module name="Memorizable.api.main" target="11" />
       <module name="Memorizable.api.test" target="11" />
       <module name="Memorizable.app" target="17" />
+      <module name="Memorizable.core" target="17" />
       <module name="Memorizable.data_base" target="17" />
       <module name="Memorizable.dataset.commonMain" target="1.8" />
       <module name="Memorizable.dataset.commonTest" target="1.8" />

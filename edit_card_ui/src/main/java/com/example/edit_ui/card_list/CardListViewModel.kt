@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
 import com.example.ask_answer_data.ResultOf
+import com.example.core.domain.ILError
 import com.example.edit_ui.data.Card
 import com.example.edit_ui.data.toCard
 import kotlinx.coroutines.GlobalScope
@@ -48,7 +49,7 @@ class CardListViewModel(
                 currentList.addAll(repo.getAllCardByThemeId(id).map { it.toCard() })
                 cardList.postValue(ResultOf.Success(currentList))
             } catch (e: Throwable) {
-                cardList.postValue(ResultOf.Failure(e.message, e))
+                cardList.postValue(ResultOf.Failure(ILError.IO_ERROR))
             }
         }
     }
