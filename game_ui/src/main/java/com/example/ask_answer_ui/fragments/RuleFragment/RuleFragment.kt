@@ -38,7 +38,7 @@ class RuleFragment : Fragment() {
         val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
 
-        cardProvider._cardList.observe(requireActivity()) { result ->
+        cardProvider._cardList.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultOf.Success -> {
                     if (result.value.isNotEmpty()) {
@@ -63,7 +63,7 @@ class RuleFragment : Fragment() {
     }
 
     fun showRuleScreen(view: FragmentRuleBinding, themeId: Int) {
-        cardProvider.currentCard.observe(requireActivity()) {
+        cardProvider.currentCard.observe(viewLifecycleOwner) {
             if (cardProvider.isItTheEndOfCardList()) {
                 if (!isDialogShown) {
                     isDialogShown = true
@@ -114,7 +114,7 @@ class RuleFragment : Fragment() {
             }
         }
 
-        cardProvider.currentCard.observe(requireActivity()) { card ->
+        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
             view.startButton.setOnClickListener {
                 when (card) {
                     // TO_DO_MILLER_LAW at 1

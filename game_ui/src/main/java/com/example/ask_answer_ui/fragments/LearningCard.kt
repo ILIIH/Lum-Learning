@@ -25,7 +25,6 @@ class LearningCard : Fragment() {
 
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
-    var isFragmentClosed = false
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -65,7 +64,6 @@ class LearningCard : Fragment() {
                         card = currentCard,
                     )
                 }
-                isFragmentClosed = true
                 goToNextCard()
             }
 
@@ -85,7 +83,7 @@ class LearningCard : Fragment() {
                 }
 
                 override fun onFinish() {
-                    if (!isFragmentClosed) {
+                    if (isResumed) {
                         DescriptionDialog("Time is ended").show(
                             parentFragmentManager,
                             "description_dialog",
