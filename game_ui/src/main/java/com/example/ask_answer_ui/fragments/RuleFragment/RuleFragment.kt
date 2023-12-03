@@ -3,6 +3,7 @@ package com.example.ask_answer_ui.fragments.RuleFragment
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,8 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
+import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
@@ -38,11 +39,30 @@ class RuleFragment : Fragment() {
         cardProvider.downloadCards(themeId)
 
         cardProvider._cardList.observe(requireActivity()) { result ->
-            if (result is ResultOf.Success) {
-                cardProvider.setCurrentCard()
+            when (result) {
+                is ResultOf.Success -> {
+                    if (result.value.isNotEmpty()) {
+                        cardProvider.setCurrentCard()
+                        showRuleScreen(view, themeId)
+                    } else {
+                        showEmptyListRuleScreen(view)
+                    }
+                }
             }
         }
 
+        return view.root
+    }
+    fun showEmptyListRuleScreen(view: FragmentRuleBinding) {
+        view.noCardIcon.visibility = View.VISIBLE
+        view.ruleTile.visibility = View.GONE
+        view.startButton.text = getString(R.string.create_new_card)
+        view.ruleText.text = getString(R.string.no_card_was_created)
+        view.startButton.visibility = View.GONE
+        view.ruleText.gravity = Gravity.CENTER
+    }
+
+    fun showRuleScreen(view: FragmentRuleBinding, themeId: Int) {
         cardProvider.currentCard.observe(requireActivity()) {
             if (cardProvider.isItTheEndOfCardList()) {
                 if (!isDialogShown) {
@@ -71,7 +91,6 @@ class RuleFragment : Fragment() {
                                 "2) Answer the question, your time is restricted\n\n "
                         }
                         else -> {
-
                             // NEED REFACTOR
                             view.ruleTile.text = "Description association test rule: "
                             view.ruleText.text =
@@ -113,7 +132,7 @@ class RuleFragment : Fragment() {
                             }
                             else -> {
                                 lifecycleScope.launchWhenResumed {
-                                    findNavController().navigate(R.id.to_LearningCard) //TO_DO NEED_REFACTOR
+                                    findNavController().navigate(R.id.to_LearningCard) // TO_DO NEED_REFACTOR
                                 }
                             }
                         }
@@ -135,8 +154,6 @@ class RuleFragment : Fragment() {
                 }
             }
         }
-
-        return view.root
     }
 
     fun callEndDialog(themeId: Int) {
