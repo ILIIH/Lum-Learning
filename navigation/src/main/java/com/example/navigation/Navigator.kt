@@ -32,15 +32,15 @@ class Navigator :
     }
 
     override fun toAddNewTheme() {
-        navController?.navigate(R.id.to_add_theme)
+        navController?.navigateSafe(ThemeListNavDirections.toAddTheme())
     }
 
     override fun toThemeList() {
-        navController?.navigate(R.id.to_theme_list)
+        navController?.navigateSafe(OnboardingNavDirections.toThemeList())
     }
 
     override fun toPlain() {
-        navController?.navigate(R.id.to_plain_navigation_graph)
+        navController?.navigateSafe(OnboardingNavDirections.toPlainNavigationGraph())
     }
 
     override fun bind(navController: NavController) {
@@ -52,11 +52,11 @@ class Navigator :
     }
 
     override fun submit() {
-        navController?.navigate(R.id.continue_to_theme_list)
+        navController?.navigateSafe(AddNewThemeNavDirections.continueToThemeList())
     }
 
     override fun toTrain() {
-        navController?.navigate(AboutThemeNavDirections.toAskAnswerGame())
+        navController?.navigateSafe(AboutThemeNavDirections.toAskAnswerGame())
     }
 
     override fun toEdit() {
@@ -64,7 +64,7 @@ class Navigator :
     }
 
     override fun toCreate() {
-        navController?.navigate(R.id.to_formula_builder)
+        navController?.navigateSafe(AboutThemeNavDirections.toFormulaBuilder())
     }
 
     override fun finshGame() {

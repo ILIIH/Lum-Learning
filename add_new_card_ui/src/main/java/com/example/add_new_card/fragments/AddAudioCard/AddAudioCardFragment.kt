@@ -2,6 +2,7 @@ package com.example.add_new_card.fragments.AddAudioCard
 
 import android.Manifest
 import android.Manifest.permission.*
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -54,7 +55,7 @@ class AddAudioCardFragment : Fragment() {
         textFields.add(view.answer4Discription)
         textFields.add(view.answer4)
 
-        viewModel._ciclableStopBtn.observe(requireActivity()) { status ->
+        viewModel._ciclableStopBtn.observe(viewLifecycleOwner) { status ->
             if (status) {
                 view.stopRecord.setBackgroundResource(R.drawable.baseline_stop_circle_24)
             } else {
@@ -164,7 +165,7 @@ class AddAudioCardFragment : Fragment() {
                             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
                             Date().month,
                         )
-                        hideKeyboard(requireActivity())
+                        hideKeyboard(activity as Activity)
 
                         findNavController().popBackStack()
                     }

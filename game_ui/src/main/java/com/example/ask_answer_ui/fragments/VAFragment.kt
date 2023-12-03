@@ -27,7 +27,6 @@ class VAFragment : Fragment() {
     val viewModel: VA_ViewModel by inject()
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
-    var isFragmentClosed = false
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -65,7 +64,6 @@ class VAFragment : Fragment() {
                         card = currentCard,
                     )
                 }
-                isFragmentClosed = true
                 goToNextCard()
             }
 
@@ -84,7 +82,7 @@ class VAFragment : Fragment() {
                 }
 
                 override fun onFinish() {
-                    if (!isFragmentClosed) {
+                    if (isResumed) {
                         DescriptionDialog("Time is ended").show(
                             parentFragmentManager,
                             "description_dialog",
