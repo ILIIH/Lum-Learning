@@ -4,5 +4,6 @@
     <string name="enter_question_info">Enter Question Info</string>
     <string name="continue_creation">Continue</string>
     <string name="save_and_exit">Save and exit</string>
+    <string name="card_rule">Card rule</string>
 
 </resources>
