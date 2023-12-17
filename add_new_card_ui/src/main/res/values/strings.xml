@@ -5,5 +5,7 @@
     <string name="continue_creation">Continue</string>
     <string name="save_and_exit">Save and exit</string>
     <string name="card_rule">Card rule</string>
+    <string name="next">NEXT</string>
+    <string name="visual_mnemotechnic">visual mnemotechnic</string>
 
 </resources>

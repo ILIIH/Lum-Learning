@@ -16,7 +16,7 @@ import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
-import com.example.ask_answer_ui.databinding.FragmentRuleBinding
+import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
 import com.example.ask_answer_ui.viewModel.cardProvider
 import org.koin.android.ext.android.inject
 import java.time.LocalDateTime
@@ -27,13 +27,12 @@ class RuleFragment : Fragment() {
     val cardProvider: cardProvider by inject()
     var isDialogShown = false
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentRuleBinding.inflate(inflater, container, false)
+        val view = FragmentGameRuleBinding.inflate(inflater, container, false)
 
         val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
@@ -53,7 +52,7 @@ class RuleFragment : Fragment() {
 
         return view.root
     }
-    fun showEmptyListRuleScreen(view: FragmentRuleBinding) {
+    fun showEmptyListRuleScreen(view: FragmentGameRuleBinding) {
         view.noCardIcon.visibility = View.VISIBLE
         view.ruleTile.visibility = View.GONE
         view.startButton.text = getString(R.string.create_new_card)
@@ -62,7 +61,7 @@ class RuleFragment : Fragment() {
         view.ruleText.gravity = Gravity.CENTER
     }
 
-    fun showRuleScreen(view: FragmentRuleBinding, themeId: Int) {
+    fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
         cardProvider.currentCard.observe(viewLifecycleOwner) {
             if (cardProvider.isItTheEndOfCardList()) {
                 if (!isDialogShown) {
