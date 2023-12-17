@@ -54,7 +54,6 @@ class RuleFragment : Fragment() {
     }
     fun showEmptyListRuleScreen(view: FragmentGameRuleBinding) {
         view.noCardIcon.visibility = View.VISIBLE
-        view.ruleTile.visibility = View.GONE
         view.startButton.text = getString(R.string.create_new_card)
         view.ruleText.text = getString(R.string.no_card_was_created)
         view.startButton.visibility = View.GONE
@@ -76,7 +75,7 @@ class RuleFragment : Fragment() {
 
                     when (currentCard.themeType) {
                         2 -> {
-                            view.ruleTile.text = "Meta cognition test rule: "
+                            view.title.text = "Meta cognition test rule: "
                             view.ruleText.text =
                                 "1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\n" +
                                 "2) Write down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n " +
@@ -84,14 +83,14 @@ class RuleFragment : Fragment() {
                                 "4) Answer the question, your time is restricted \n\n "
                         }
                         5 -> {
-                            view.ruleTile.text = "Description association test rule: "
+                            view.title.text = "Description association test rule: "
                             view.ruleText.text =
                                 "1) First you will see long description fo this field / subject of the question \n\n" +
                                 "2) Answer the question, your time is restricted\n\n "
                         }
                         else -> {
                             // NEED REFACTOR
-                            view.ruleTile.text = "Description association test rule: "
+                            view.title.text = "Description association test rule: "
                             view.ruleText.text =
                                 "1) First you will see long description fo this field / subject of the question \n\n" +
                                 "2) Answer the question, your time is restricted\n\n "
@@ -99,13 +98,13 @@ class RuleFragment : Fragment() {
                     }
                 }
                 is VA_Card -> {
-                    view.ruleTile.text = "Visual association test rule: "
+                    view.title.text = "Visual association test rule: "
                     view.ruleText.text =
                         "1) First you will see the photo association on answer to question\n\n" +
                         "2) Answer the question, your time is restricted\n\n "
                 }
                 is SA_Card -> {
-                    view.ruleTile.text = "Audio association test rule: "
+                    view.title.text = "Audio association test rule: "
                     view.ruleText.text =
                         "1) First you will hear the audio association on answer to question\n\n" +
                         "2) Answer the question, your time is restricted\n\n "
