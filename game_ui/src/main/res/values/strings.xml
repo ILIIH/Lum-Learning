@@ -8,6 +8,6 @@
     <string name="test_rule">Test rule:</string>
     <string name="start">START</string>
     <string name="create_new_card">CREATE NEW CARD</string>
-    <string name="no_card_was_created">No card was created for this theme</string>
+    <string name="no_card_was_created">No card was created for this theme \n</string>
 
 </resources>

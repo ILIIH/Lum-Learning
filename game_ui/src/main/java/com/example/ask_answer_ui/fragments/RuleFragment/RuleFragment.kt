@@ -16,7 +16,7 @@ import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
-import com.example.ask_answer_ui.databinding.FragmentRuleBinding
+import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
 import com.example.ask_answer_ui.viewModel.cardProvider
 import org.koin.android.ext.android.inject
 import java.time.LocalDateTime
@@ -27,13 +27,12 @@ class RuleFragment : Fragment() {
     val cardProvider: cardProvider by inject()
     var isDialogShown = false
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentRuleBinding.inflate(inflater, container, false)
+        val view = FragmentGameRuleBinding.inflate(inflater, container, false)
 
         val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
@@ -53,16 +52,15 @@ class RuleFragment : Fragment() {
 
         return view.root
     }
-    fun showEmptyListRuleScreen(view: FragmentRuleBinding) {
+    fun showEmptyListRuleScreen(view: FragmentGameRuleBinding) {
         view.noCardIcon.visibility = View.VISIBLE
-        view.ruleTile.visibility = View.GONE
         view.startButton.text = getString(R.string.create_new_card)
         view.ruleText.text = getString(R.string.no_card_was_created)
         view.startButton.visibility = View.GONE
         view.ruleText.gravity = Gravity.CENTER
     }
 
-    fun showRuleScreen(view: FragmentRuleBinding, themeId: Int) {
+    fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
         cardProvider.currentCard.observe(viewLifecycleOwner) {
             if (cardProvider.isItTheEndOfCardList()) {
                 if (!isDialogShown) {
@@ -77,7 +75,7 @@ class RuleFragment : Fragment() {
 
                     when (currentCard.themeType) {
                         2 -> {
-                            view.ruleTile.text = "Meta cognition test rule: "
+                            view.title.text = "Meta cognition test rule: "
                             view.ruleText.text =
                                 "1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\n" +
                                 "2) Write down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n " +
@@ -85,14 +83,14 @@ class RuleFragment : Fragment() {
                                 "4) Answer the question, your time is restricted \n\n "
                         }
                         5 -> {
-                            view.ruleTile.text = "Description association test rule: "
+                            view.title.text = "Description association test rule: "
                             view.ruleText.text =
                                 "1) First you will see long description fo this field / subject of the question \n\n" +
                                 "2) Answer the question, your time is restricted\n\n "
                         }
                         else -> {
                             // NEED REFACTOR
-                            view.ruleTile.text = "Description association test rule: "
+                            view.title.text = "Description association test rule: "
                             view.ruleText.text =
                                 "1) First you will see long description fo this field / subject of the question \n\n" +
                                 "2) Answer the question, your time is restricted\n\n "
@@ -100,13 +98,13 @@ class RuleFragment : Fragment() {
                     }
                 }
                 is VA_Card -> {
-                    view.ruleTile.text = "Visual association test rule: "
+                    view.title.text = "Visual association test rule: "
                     view.ruleText.text =
                         "1) First you will see the photo association on answer to question\n\n" +
                         "2) Answer the question, your time is restricted\n\n "
                 }
                 is SA_Card -> {
-                    view.ruleTile.text = "Audio association test rule: "
+                    view.title.text = "Audio association test rule: "
                     view.ruleText.text =
                         "1) First you will hear the audio association on answer to question\n\n" +
                         "2) Answer the question, your time is restricted\n\n "
