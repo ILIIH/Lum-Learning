@@ -5,7 +5,7 @@
     <string name="theme_photo_error">Your photo for theme is not chosen, you should fix this</string>
     <string name="io_error">Download error, please contact supports</string>
     <string name="general_error">Something happened, please contact supports</string>
-    <string name="enter_question_info">Enter Question Info</string>
+    <string name="enter_question_info">Create card</string>
     <string name="card_rule">Card rule</string>
     <string name="next">NEXT</string>
     <string name="visual_mnemotechnic">visual mnemotechnic</string>

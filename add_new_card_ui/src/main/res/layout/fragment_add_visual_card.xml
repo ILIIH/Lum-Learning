@@ -9,14 +9,30 @@
     tools:context=".fragments.AddVisualCard.AddVisualCardFragment">
 
     <TextView
+        android:fontFamily="@font/inriasansbold"
         android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/enter_question_info"
-        android:textSize="24sp"
-        android:layout_marginBottom="30dp"
+        android:textSize="20pt"
+        android:textColor="#000000"
+        android:layout_marginBottom="10dp"
         />
+
+    <TextView
+        android:id="@+id/sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inriasanslight"
+        android:text="@string/visual_mnemotechnic"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="6pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
     <ScrollView
@@ -35,11 +51,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="30dp"
-                android:hint="Write question">
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:hint="Enter quesstion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
