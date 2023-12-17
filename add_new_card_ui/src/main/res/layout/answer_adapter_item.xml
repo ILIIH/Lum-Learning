@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="26dp"
+    android:layout_marginBottom="26dp"
+    android:layout_marginTop="26dp"
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:orientation="vertical"
     android:background="@drawable/rounded_background"
     android:elevation="8dp"
     >
-    <com.google.android.material.textfield.TextInputLayout
-        android:fontFamily="@font/inriasanslight"
-        android:id="@+id/answer1"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
-        android:background="#FFFFFF"
-        android:hint="Enter answer">
 
-        <com.google.android.material.textfield.TextInputEditText
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/answer_text_background"
+        >
+        <EditText
+            android:fontFamily="@font/inriasanslight"
+            android:background="@null"
+            android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Enter answer"
+            android:padding="14dp"
             />
-    </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,21 +57,22 @@
             />
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:fontFamily="@font/inriasanslight"
-        android:id="@+id/answer_hint"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+    <RelativeLayout
         android:layout_marginTop="20dp"
-        android:background="#FFFFFF"
-        android:hint="Hint">
-
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/answer_text_background"
+        >
+        <EditText
+            android:fontFamily="@font/inriasanslight"
+            android:background="@null"
+            android:id="@+id/answer_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Enter hint to answer"
+            android:padding="14dp"
             />
-    </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
 
 </LinearLayout>

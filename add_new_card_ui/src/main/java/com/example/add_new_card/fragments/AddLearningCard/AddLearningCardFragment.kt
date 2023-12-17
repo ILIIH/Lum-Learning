@@ -1,6 +1,5 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
@@ -8,11 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
+import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
@@ -21,12 +19,13 @@ import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.util.*
 
-
 class AddLearningCardFragment : Fragment() {
 
     val textFields = ArrayList<TextInputLayout>(13)
     val viewModel: AddLearningCardViewmodel by inject()
     val mainViewModel: ThemeInfoProvider by inject()
+
+    val adapter = AnswersAdapters()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +34,9 @@ class AddLearningCardFragment : Fragment() {
     ): View {
         val view = FragmentAddLearningCardBinding.inflate(inflater, container, false)
 
+        view.answers.adapter = adapter
+        adapter.submitList(viewModel.answers)
+
         val themeType = mainViewModel.getThemeType().value!!
         if (themeType == 5) {
             view.description.visibility = View.VISIBLE
@@ -42,14 +44,6 @@ class AddLearningCardFragment : Fragment() {
         }
 
         textFields.add(view.question)
-        textFields.add(view.answer1Discription)
-        textFields.add(view.answer1)
-        textFields.add(view.answer2Discription)
-        textFields.add(view.answer2)
-        textFields.add(view.answer3Discription)
-        textFields.add(view.answer3)
-        textFields.add(view.answer4Discription)
-        textFields.add(view.answer4)
 
         val themeID = mainViewModel.getThemeId()
 
@@ -66,28 +60,7 @@ class AddLearningCardFragment : Fragment() {
             }
 
             if (!isAnyFieldEmpty) {
-                val answers = mutableListOf<Answer>(
-                    Answer(
-                        answer = view.answer1.editText!!.text.toString(),
-                        description = view.answer1Discription.editText!!.text.toString(),
-                        correct = view.answer1True.isChecked,
-                    ),
-                    Answer(
-                        answer = view.answer2.editText!!.text.toString(),
-                        description = view.answer2Discription.editText!!.text.toString(),
-                        correct = view.answer2True.isChecked,
-                    ),
-                    Answer(
-                        answer = view.answer3.editText!!.text.toString(),
-                        description = view.answer3Discription.editText!!.text.toString(),
-                        correct = view.answer3True.isChecked,
-                    ),
-                    Answer(
-                        answer = view.answer4.editText!!.text.toString(),
-                        description = view.answer4Discription.editText!!.text.toString(),
-                        correct = view.answer4True.isChecked,
-                    ),
-                )
+                val answers = mutableListOf<Answer>()
 
                 AlertDialog.Builder(context)
                     .setTitle("Creation card")
@@ -165,6 +138,4 @@ class AddLearningCardFragment : Fragment() {
 
         return view.root
     }
-
-
 }

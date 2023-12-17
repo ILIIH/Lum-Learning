@@ -20,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
+import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
@@ -34,23 +35,20 @@ class AddVisualCardFragment : Fragment() {
     val textFields = ArrayList<TextInputLayout>(13)
     val viewModel: AddVisualCardViewmodel by inject()
     val mainViewModel: ThemeInfoProvider by inject()
+
+    val adapter = AnswersAdapters()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentAddVisualCardBinding.inflate(inflater, container, false)
-        view.answer1.editText!!.text
 
         textFields.add(view.question)
-        textFields.add(view.answer1Discription)
-        textFields.add(view.answer1)
-        textFields.add(view.answer2Discription)
-        textFields.add(view.answer2)
-        textFields.add(view.answer3Discription)
-        textFields.add(view.answer3)
-        textFields.add(view.answer4Discription)
-        textFields.add(view.answer4)
+
+        view.answers.adapter = adapter
+        adapter.submitList(viewModel.answers)
 
         val themeId = mainViewModel.getThemeId()
 
@@ -72,28 +70,7 @@ class AddVisualCardFragment : Fragment() {
             }
 
             if (!isAnyFieldEmpty) {
-                val answers = listOf<Answer>(
-                    Answer(
-                        answer = view.answer1.editText!!.text.toString(),
-                        description = view.answer1Discription.editText!!.text.toString(),
-                        correct = view.answer1True.isChecked,
-                    ),
-                    Answer(
-                        answer = view.answer2.editText!!.text.toString(),
-                        description = view.answer2Discription.editText!!.text.toString(),
-                        correct = view.answer2True.isChecked,
-                    ),
-                    Answer(
-                        answer = view.answer3.editText!!.text.toString(),
-                        description = view.answer3Discription.editText!!.text.toString(),
-                        correct = view.answer3True.isChecked,
-                    ),
-                    Answer(
-                        answer = view.answer4.editText!!.text.toString(),
-                        description = view.answer4Discription.editText!!.text.toString(),
-                        correct = view.answer4True.isChecked,
-                    ),
-                )
+                val answers = listOf<Answer>()
 
                 AlertDialog.Builder(context)
                     .setTitle("Creation card")
@@ -106,7 +83,7 @@ class AddVisualCardFragment : Fragment() {
                             question = view.question.editText!!.text.toString(),
                             answers,
                             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                            monthNumber =  Date().month
+                            monthNumber = Date().month,
                         )
                         textFields.forEach {
                             it.editText?.text?.clear()
@@ -122,7 +99,7 @@ class AddVisualCardFragment : Fragment() {
                             question = view.question.editText!!.text.toString(),
                             answers,
                             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                            monthNumber =  Date().month
+                            monthNumber = Date().month,
                         )
                         hideKeyboard(requireActivity())
                         findNavController().popBackStack()
