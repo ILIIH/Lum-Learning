@@ -9,16 +9,15 @@
     tools:context=".fragments.AddVisualCard.AddVisualCardFragment">
 
     <TextView
-        android:fontFamily="@font/inriasansbold"
         android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/enter_question_info"
-        android:textSize="20pt"
-        android:textColor="#000000"
         android:layout_marginBottom="10dp"
-        />
+        android:fontFamily="@font/inriasansbold"
+        android:text="@string/enter_question_info"
+        android:textColor="#000000"
+        android:textSize="20pt" />
 
     <TextView
         android:id="@+id/sub_title"
@@ -35,15 +34,17 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -52,14 +53,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="40dp"
-                >
+                android:layout_marginRight="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:hint="Enter quesstion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Enter quesstion"
                     android:inputType="textMultiLine"
                     android:lines="2"
                     android:minLines="4" />
@@ -68,11 +67,12 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:id="@+id/answers"
-                android:layout_margin="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ImageView
                 android:id="@+id/add_photo"
@@ -83,14 +83,15 @@
                 android:src="@drawable/baseline_image_search_24" />
 
             <Button
+                android:textColor="#FFF"
+                android:backgroundTint="#000000"
                 android:id="@+id/continue_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Continue"
                 android:layout_margin="20dp"
-                />
+                android:text="@string/create" />
 
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
