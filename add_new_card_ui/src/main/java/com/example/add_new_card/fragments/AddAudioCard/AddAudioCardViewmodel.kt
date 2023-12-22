@@ -15,9 +15,13 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     val _ciclableStopBtn: LiveData<Boolean>
         get() = ciclableStopBtn
 
-    val answers: List<Answer> = listOf(Answer("", "", true), Answer("", "", true), Answer("", "", true), Answer("", "", true))
+    val answers = mutableListOf(Answer("", "", true))
 
     var maxId = 0
+
+    fun addAnswer() {
+        answers.add(Answer("", "", true))
+    }
 
     fun getAudioFilePath(playRecord: (maxID: Int) -> Unit) {
         playRecord(maxId)

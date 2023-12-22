@@ -53,6 +53,11 @@ class AddAudioCardFragment : Fragment() {
         view.answers.adapter = adapter
         adapter.submitList(viewModel.answers)
 
+        view.addNewAnswer.setOnClickListener {
+            viewModel.addAnswer()
+            adapter.submitList(viewModel.answers)
+        }
+
         viewModel._ciclableStopBtn.observe(viewLifecycleOwner) { status ->
             if (status) {
                 view.stopRecord.setBackgroundResource(R.drawable.baseline_stop_circle_24)

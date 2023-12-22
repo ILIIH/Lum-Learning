@@ -71,8 +71,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:hint="Write description"
                 android:visibility="gone">
 
@@ -89,6 +90,16 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:text="@string/answers"
+                android:fontFamily="@font/inriasansregular"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="6pt"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/answers"
@@ -97,6 +108,14 @@
                 android:layout_margin="20dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/add_new_answer"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/add_new_answer" />
 
             <Button
                 android:textColor="#FFF"

@@ -65,20 +65,29 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/answers"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:text="@string/association"
+                android:fontFamily="@font/inriasansregular"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="6pt"
+                />
+
 
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:layout_height="120dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_background"
+                android:elevation="8dp"
+
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/stard_record"
@@ -106,6 +115,34 @@
                     android:clickable="false"
                     android:src="@drawable/baseline_music_note_24" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:text="@string/answers"
+                android:fontFamily="@font/inriasansregular"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textSize="6pt"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/answers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/add_new_answer"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/add_new_answer" />
+
 
             <Button
                 android:textColor="#FFF"

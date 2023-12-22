@@ -50,6 +50,11 @@ class AddVisualCardFragment : Fragment() {
         view.answers.adapter = adapter
         adapter.submitList(viewModel.answers)
 
+        view.addNewAnswer.setOnClickListener {
+            viewModel.addAnswer()
+            adapter.submitList(viewModel.answers)
+        }
+
         val themeId = mainViewModel.getThemeId()
 
         view.addPhoto.setOnClickListener {

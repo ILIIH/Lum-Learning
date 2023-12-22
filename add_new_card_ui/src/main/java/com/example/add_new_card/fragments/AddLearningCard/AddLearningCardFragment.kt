@@ -37,6 +37,11 @@ class AddLearningCardFragment : Fragment() {
         view.answers.adapter = adapter
         adapter.submitList(viewModel.answers)
 
+        view.addNewAnswer.setOnClickListener {
+            viewModel.addAnswer()
+            adapter.submitList(viewModel.answers)
+        }
+
         val themeType = mainViewModel.getThemeType().value!!
         if (themeType == 5) {
             view.description.visibility = View.VISIBLE
