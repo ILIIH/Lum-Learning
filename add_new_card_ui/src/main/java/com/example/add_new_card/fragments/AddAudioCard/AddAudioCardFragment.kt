@@ -56,6 +56,7 @@ class AddAudioCardFragment : Fragment() {
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
             adapter.submitList(viewModel.answers)
+            adapter.notifyItemInserted(viewModel.answers.size)
         }
 
         viewModel._ciclableStopBtn.observe(viewLifecycleOwner) { status ->

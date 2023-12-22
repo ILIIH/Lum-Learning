@@ -53,6 +53,7 @@ class AddVisualCardFragment : Fragment() {
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
             adapter.submitList(viewModel.answers)
+            adapter.notifyItemInserted(viewModel.answers.size)
         }
 
         val themeId = mainViewModel.getThemeId()

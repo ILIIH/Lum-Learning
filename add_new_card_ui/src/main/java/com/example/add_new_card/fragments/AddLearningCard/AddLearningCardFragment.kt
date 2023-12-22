@@ -40,6 +40,7 @@ class AddLearningCardFragment : Fragment() {
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
             adapter.submitList(viewModel.answers)
+            adapter.notifyItemInserted(viewModel.answers.size)
         }
 
         val themeType = mainViewModel.getThemeType().value!!
