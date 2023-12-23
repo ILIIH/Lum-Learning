@@ -66,15 +66,8 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="35dp"
                 android:text="@string/association"
-                android:fontFamily="@font/inriasansregular"
-                android:textColor="@color/design_default_color_on_secondary"
-                android:textSize="6pt"
-                />
+                style="@style/assosiation_subtitle_style" />
 
 
             <LinearLayout
@@ -117,31 +110,23 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="35dp"
-                android:text="@string/answers"
-                android:fontFamily="@font/inriasansregular"
-                android:textColor="@color/design_default_color_on_secondary"
-                android:textSize="6pt"
+                 android:text="@string/answers"
+                style="@style/assosiation_subtitle_style"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/answers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ImageView
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
                 android:id="@+id/add_new_answer"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:src="@drawable/add_new_answer" />
+                android:src="@drawable/add_new_answer"
+                style="@style/refactor_btn" />
 
 
             <Button
