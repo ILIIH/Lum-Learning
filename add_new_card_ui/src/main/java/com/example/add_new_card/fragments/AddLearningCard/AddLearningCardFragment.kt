@@ -54,19 +54,7 @@ class AddLearningCardFragment : Fragment() {
         val themeID = mainViewModel.getThemeId()
 
         view.continueBtn.setOnClickListener {
-            var isAnyFieldEmpty = false
-            textFields.forEach {
-                if (it.editText!!.text.isEmpty()) {
-                    isAnyFieldEmpty = true
-                    it.apply {
-                        boxStrokeColor = Color.parseColor("#FF0000")
-                    }
-                    it.requestFocus()
-                }
-            }
-
-            if (!isAnyFieldEmpty) {
-                val answers = mutableListOf<Answer>()
+                val answers = adapter.getAllAnswers()
 
                 AlertDialog.Builder(context)
                     .setTitle("Creation card")
@@ -140,7 +128,6 @@ class AddLearningCardFragment : Fragment() {
                     .setIcon(R.drawable.baseline_credit_card_24)
                     .show()
             }
-        }
 
         return view.root
     }

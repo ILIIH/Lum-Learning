@@ -1,6 +1,5 @@
 package com.example.add_new_card.adapters
 
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +9,8 @@ import com.example.add_new_card.databinding.AnswerAdapterItemBinding
 import com.example.add_new_card_data.model.Answer
 
 class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder>(DiffCallBack()) {
+
+    val bindings = mutableListOf<AnswerAdapterItemBinding>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerItemViewHolder {
         val view = AnswerAdapterItemBinding.inflate(
@@ -21,16 +22,30 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
         return AnswerItemViewHolder(view)
     }
 
+    fun getAllAnswers(): List<Answer> {
+        val answers = mutableListOf<Answer>()
+        for (binding in bindings) {
+            answers.add(
+                Answer(
+                    answer = binding.answer.text.toString(),
+                    description = binding.answerHint.text.toString(),
+                    correct = binding.answerTrue.isChecked,
+                ),
+            )
+        }
+        return answers
+    }
+
     override fun onBindViewHolder(holder: AnswerItemViewHolder, position: Int) {
-        val currentItem = getItem(position)
-        holder.bind(currentItem)
+        holder.bind()
     }
 
     inner class AnswerItemViewHolder(
         private val binding: AnswerAdapterItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(answerItem: Answer) {
+        fun bind() {
+            bindings.add(binding)
         }
     }
 

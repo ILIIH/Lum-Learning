@@ -7,7 +7,6 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.media.MediaRecorder
@@ -109,48 +108,34 @@ class AddAudioCardFragment : Fragment() {
         }
 
         view.continueBtn.setOnClickListener {
-            var isAnyFieldEmpty = false
-
-            textFields.forEach {
-                if (it.editText!!.text.isEmpty()) {
-                    isAnyFieldEmpty = true
-                    it.apply {
-                        boxStrokeColor = Color.parseColor("#FF0000")
-                    }
-                    it.requestFocus()
+            AlertDialog.Builder(context)
+                .setTitle("Creation card")
+                .setMessage("Do you want to continue creation or add this card and exit?")
+                .setPositiveButton(
+                    getString(R.string.continue_creation),
+                ) { _, _ ->
+                    viewModel.addNewCard(
+                        themeId = themeId,
+                        question = view.question.editText!!.text.toString(),
+                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        Date().month,
+                    )
                 }
-            }
+                .setNegativeButton(
+                    R.string.save_and_exit,
+                ) { _, _ ->
+                    viewModel.addNewCard(
+                        themeId = themeId,
+                        question = view.question.editText!!.text.toString(),
+                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        Date().month,
+                    )
+                    hideKeyboard(activity as Activity)
 
-            if (!isAnyFieldEmpty) {
-                AlertDialog.Builder(context)
-                    .setTitle("Creation card")
-                    .setMessage("Do you want to continue creation or add this card and exit?")
-                    .setPositiveButton(
-                        getString(R.string.continue_creation),
-                    ) { _, _ ->
-                        viewModel.addNewCard(
-                            themeId = themeId,
-                            question = view.question.editText!!.text.toString(),
-                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                            Date().month,
-                        )
-                    }
-                    .setNegativeButton(
-                        R.string.save_and_exit,
-                    ) { _, _ ->
-                        viewModel.addNewCard(
-                            themeId = themeId,
-                            question = view.question.editText!!.text.toString(),
-                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                            Date().month,
-                        )
-                        hideKeyboard(activity as Activity)
-
-                        findNavController().popBackStack()
-                    }
-                    .setIcon(R.drawable.baseline_credit_card_24)
-                    .show()
-            }
+                    findNavController().popBackStack()
+                }
+                .setIcon(R.drawable.baseline_credit_card_24)
+                .show()
         }
         return view.root
     }

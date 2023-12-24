@@ -102,6 +102,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ImageView
+                android:id="@+id/add_new_answer"
                 style="@style/refactor_btn"
                 android:src="@drawable/add_new_answer" />
 

@@ -64,19 +64,7 @@ class AddVisualCardFragment : Fragment() {
         }
 
         view.continueBtn.setOnClickListener {
-            var isAnyFieldEmpty = false
-            textFields.forEach {
-                if (it.editText!!.text.isEmpty()) {
-                    isAnyFieldEmpty = true
-                    it.apply {
-                        boxStrokeColor = Color.parseColor("#FF0000")
-                    }
-                    it.requestFocus()
-                }
-            }
-
-            if (!isAnyFieldEmpty) {
-                val answers = listOf<Answer>()
+                val answers = adapter.getAllAnswers()
 
                 AlertDialog.Builder(context)
                     .setTitle("Creation card")
@@ -112,7 +100,7 @@ class AddVisualCardFragment : Fragment() {
                     }
                     .setIcon(R.drawable.baseline_credit_card_24)
                     .show()
-            }
+
         }
 
         viewModel._photo.observe(requireActivity()) {
