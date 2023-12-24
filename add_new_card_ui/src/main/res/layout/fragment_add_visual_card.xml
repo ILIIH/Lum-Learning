@@ -8,6 +8,12 @@
     android:orientation="vertical"
     tools:context=".fragments.AddVisualCard.AddVisualCardFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_new_title_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"
@@ -24,6 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+
         android:fontFamily="@font/inriasanslight"
         android:text="@string/visual_mnemotechnic"
         android:textColor="@color/design_default_color_on_secondary"
@@ -32,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
-
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -71,6 +79,7 @@
                 />
 
         <LinearLayout
+            android:id="@+id/add_photo_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -108,13 +117,9 @@
 
 
             <Button
-                android:textColor="#FFF"
-                android:backgroundTint="#000000"
                 android:id="@+id/continue_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="@string/create" />
+                android:text="@string/create"
+                style="@style/create_btn" />
 
 
         </LinearLayout>

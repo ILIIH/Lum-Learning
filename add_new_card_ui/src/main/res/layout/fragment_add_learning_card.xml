@@ -8,6 +8,12 @@
     android:orientation="vertical"
     tools:context=".fragments.AddLearningCard.AddLearningCardFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_new_title_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"
@@ -24,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/inriasanslight"
         android:text="@string/text_mnemotechnik"
         android:textColor="@color/design_default_color_on_secondary"
@@ -32,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
-
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -110,12 +117,8 @@
                 android:src="@drawable/add_new_answer" />
 
             <Button
-                android:textColor="#FFF"
-                android:backgroundTint="#000000"
                 android:id="@+id/continue_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                style="@style/create_btn"
                 android:text="@string/create" />
 
 

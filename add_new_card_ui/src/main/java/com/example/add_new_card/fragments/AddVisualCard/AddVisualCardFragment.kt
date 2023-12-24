@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
@@ -24,7 +23,6 @@ import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
-import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -58,49 +56,48 @@ class AddVisualCardFragment : Fragment() {
 
         val themeId = mainViewModel.getThemeId()
 
-        view.addPhoto.setOnClickListener {
+        view.addPhotoLayout.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             launcher.launch(intent)
         }
 
         view.continueBtn.setOnClickListener {
-                val answers = adapter.getAllAnswers()
+            val answers = adapter.getAllAnswers()
 
-                AlertDialog.Builder(context)
-                    .setTitle("Creation card")
-                    .setMessage("Do you want to continue creation or add this card and exit?")
-                    .setPositiveButton(
-                        getString(R.string.continue_creation),
-                    ) { _, _ ->
-                        viewModel.addNewCard(
-                            themeId = themeId,
-                            question = view.question.editText!!.text.toString(),
-                            answers,
-                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                            monthNumber = Date().month,
-                        )
-                        textFields.forEach {
-                            it.editText?.text?.clear()
-                        }
-                        view.Title.requestFocus()
-                        view.addPhoto.setBackgroundResource(R.drawable.baseline_image_search_24)
+            AlertDialog.Builder(context)
+                .setTitle("Creation card")
+                .setMessage("Do you want to continue creation or add this card and exit?")
+                .setPositiveButton(
+                    getString(R.string.continue_creation),
+                ) { _, _ ->
+                    viewModel.addNewCard(
+                        themeId = themeId,
+                        question = view.question.editText!!.text.toString(),
+                        answers,
+                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        monthNumber = Date().month,
+                    )
+                    textFields.forEach {
+                        it.editText?.text?.clear()
                     }
-                    .setNegativeButton(
-                        R.string.save_and_exit,
-                    ) { _, _ ->
-                        viewModel.addNewCard(
-                            themeId = themeId,
-                            question = view.question.editText!!.text.toString(),
-                            answers,
-                            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                            monthNumber = Date().month,
-                        )
-                        hideKeyboard(requireActivity())
-                        findNavController().popBackStack()
-                    }
-                    .setIcon(R.drawable.baseline_credit_card_24)
-                    .show()
-
+                    view.Title.requestFocus()
+                    view.addPhoto.setBackgroundResource(R.drawable.baseline_image_search_24)
+                }
+                .setNegativeButton(
+                    R.string.save_and_exit,
+                ) { _, _ ->
+                    viewModel.addNewCard(
+                        themeId = themeId,
+                        question = view.question.editText!!.text.toString(),
+                        answers,
+                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        monthNumber = Date().month,
+                    )
+                    hideKeyboard(requireActivity())
+                    findNavController().popBackStack()
+                }
+                .setIcon(R.drawable.baseline_credit_card_24)
+                .show()
         }
 
         viewModel._photo.observe(requireActivity()) {

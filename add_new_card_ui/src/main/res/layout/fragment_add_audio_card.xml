@@ -8,37 +8,45 @@
     android:orientation="vertical"
     tools:context=".fragments.AddVisualCard.AddVisualCardFragment">
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/inriasansbold"
-        android:text="@string/enter_question_info"
-        android:textColor="#000000"
-        android:textSize="20pt" />
+        android:background="@drawable/add_new_title_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/sub_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/inriasanslight"
-        android:text="@string/audio_mnemotechnik"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="6pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inriasansbold"
+            android:text="@string/enter_question_info"
+            android:textColor="#000000"
+            android:textSize="20pt" />
 
+        <TextView
+            android:id="@+id/sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/inriasanslight"
+            android:text="@string/audio_mnemotechnik"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="6pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        >
+        android:layout_marginTop="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,8 +74,8 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:text="@string/association"
-                style="@style/assosiation_subtitle_style" />
+                style="@style/assosiation_subtitle_style"
+                android:text="@string/association" />
 
 
             <LinearLayout
@@ -110,32 +118,27 @@
             </LinearLayout>
 
             <TextView
-                 android:text="@string/answers"
                 style="@style/assosiation_subtitle_style"
-                />
+                android:text="@string/answers" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/answers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ImageView
                 android:id="@+id/add_new_answer"
-                android:src="@drawable/add_new_answer"
-                style="@style/refactor_btn" />
+                style="@style/refactor_btn"
+                android:src="@drawable/add_new_answer" />
 
 
             <Button
-                android:textColor="#FFF"
-                android:backgroundTint="#000000"
                 android:id="@+id/continue_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                style="@style/create_btn"
                 android:text="@string/create" />
 
 
