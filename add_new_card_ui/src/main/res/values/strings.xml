@@ -5,4 +5,7 @@
     <string name="create">CREATE</string>
     <string name="answers">Answers :</string>
     <string name="association">Association :</string>
+    <string name="hint">Hint</string>
+    <string name="visual_hint">Visual hint</string>
+    <string name="true_txt">True</string>
 </resources>
