@@ -1,0 +1,59 @@
+name: build-android-app
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    outputs:
+      bundler-path: ${{ steps.set_up_ruby.outputs.bundler-path }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install project dependencies
+        run: bundle install
+
+      - name: Export Bundler path
+        run: echo "bundler-path=$(bundle which bundler)" >> $GITHUB_ENV
+
+  fastlane:
+    runs-on: ubuntu-latest
+
+    needs: setup
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Run Fastlane Tests
+        run: ${{ env.bundler-path }} exec fastlane test
+
+  linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Ktlint
+        run: ./gradlew ktlintCheck
