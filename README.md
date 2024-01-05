@@ -47,7 +47,7 @@ The topology of the neural network for determining the determination of the coef
 
 The topology of the neural network for determining the determination of the learning interval :
 
-![The topology of the neural network for determining the determination of the learning interval ](Documentation/images/Mnemo-type-topology-time.png)
+![The topology of the neural network for determining the determination of the learning interval ](Documentation/images/Mnemo-type-topology-repeating-time.png)
 
 ## **4. Software architecture overview:**
 
