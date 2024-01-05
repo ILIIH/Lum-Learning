@@ -30,7 +30,6 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/rounded_background"
         android:elevation="8dp"
         android:fontFamily="@font/inriasanslight"
         android:gravity="center_horizontal"

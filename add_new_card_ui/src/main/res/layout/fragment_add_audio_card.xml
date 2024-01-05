@@ -75,6 +75,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:fontFamily="@font/inriasansregular"
                 style="@style/assosiation_subtitle_style"
                 android:text="@string/association" />
 
@@ -120,6 +121,7 @@
 
             <TextView
                 style="@style/assosiation_subtitle2_style"
+                android:fontFamily="@font/inriasansregular"
                 android:text="@string/answers" />
 
             <androidx.recyclerview.widget.RecyclerView

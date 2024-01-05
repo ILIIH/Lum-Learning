@@ -100,7 +100,7 @@
             <TextView
                 style="@style/assosiation_subtitle2_style"
                 android:text="@string/answers"
-
+                android:fontFamily="@font/inriasansregular"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
