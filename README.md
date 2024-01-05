@@ -1,4 +1,4 @@
-# **Luminous  learning**
+# **Luminous learning**
 
 ## **1. Overview.**
 
@@ -10,7 +10,6 @@ In today's information age, we are constantly surrounded by various forms of inf
 2. [UML diagram](#2-uml-diagram)
 3. [Neural network topologies](#3-to-be-diagram)
 4. [Software architecture overview](#4-software-architecture-overview)
-
 
 ## **2. UML diagram:**
 
@@ -42,4 +41,23 @@ C — Combined approach
 
 ![The topology of the neural network for determining the type of mnemonics](Documentation/images/Mnemo-type-topology.png)
 
+The topology of the neural network for determining the determination of the coefficient of interval repetition:
 
+![The topology of the neural network for determining the determination of the coefficient of interval repetition](Documentation/images/Mnemo-type-topology-repeating.png)
+
+The topology of the neural network for determining the determination of the learning interval :
+
+![The topology of the neural network for determining the determination of the learning interval ](Documentation/images/Mnemo-type-topology-repeating-time.png)
+
+## **4. Software architecture overview:**
+
+For each feature of our application, 3 modules were created:
+UI - contains a description of the visual interface in xml files and the interaction of the interface with other layers of the program. Data-modules contain interfaces of usecases, repositories, and business models.
+Domain modules implement interfaces described in the Data layer and provide access to them through the Data layer interfaces.
+
+App module - initializes and configures dependencies between modules and navigation.
+Core - describes and initializes the database.
+Navigation - describes navigation between modules.
+AI - describes artificial intelligence.
+
+![The acrchitecture of application ](Documentation/images/architecture.jpg)

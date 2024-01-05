@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
-import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.Answer
+import com.example.add_new_card_data.model.SA_Card
 import kotlinx.coroutines.launch
 
 class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
@@ -15,7 +15,13 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     val _ciclableStopBtn: LiveData<Boolean>
         get() = ciclableStopBtn
 
+    val answers = mutableListOf(Answer("", "", true))
+
     var maxId = 0
+
+    fun addAnswer() {
+        answers.add(Answer("", "", true))
+    }
 
     fun getAudioFilePath(playRecord: (maxID: Int) -> Unit) {
         playRecord(maxId)
@@ -29,7 +35,7 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         }
     }
 
-    fun addNewCard(themeId: Int, question: String, answers: List<Answer>, currentDate: String,monthNumber:Int) {
+    fun addNewCard(themeId: Int, question: String, currentDate: String, monthNumber: Int) {
         viewModelScope.launch {
             repo.insertALCard(
                 SA_Card(
@@ -42,8 +48,8 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
                     Id = maxId,
                     dateCreation = currentDate,
                     repetitionAmount = 0,
-                    lastMonthUpdateNumber =  monthNumber,
-                    lastMonthRepetitionNumber = 0
+                    lastMonthUpdateNumber = monthNumber,
+                    lastMonthRepetitionNumber = 0,
                 ),
             )
         }

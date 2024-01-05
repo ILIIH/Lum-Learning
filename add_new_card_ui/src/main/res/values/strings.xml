@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_mnemotechnik">text mnemotechnik</string>
+    <string name="audio_mnemotechnik">audio mnemotechnik</string>
+    <string name="create">CREATE</string>
+    <string name="answers">Answers :</string>
+    <string name="association">Association :</string>
+    <string name="hint">Hint</string>
+    <string name="visual_hint">Visual hint</string>
+    <string name="true_txt">True</string>
+</resources>

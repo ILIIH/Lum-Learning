@@ -17,8 +17,14 @@ class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
     val _photo: LiveData<Bitmap>
         get() = photo
 
+    var answers = mutableListOf(Answer("", "", true))
+
     fun setPhoto(bitmap: Bitmap) {
         photo.postValue(bitmap)
+    }
+
+    fun addAnswer() {
+        answers.add(Answer("", "", true))
     }
 
     fun addNewCard(themeId: Int, question: String, answers: List<Answer>, currentDate: String, monthNumber: Int) {

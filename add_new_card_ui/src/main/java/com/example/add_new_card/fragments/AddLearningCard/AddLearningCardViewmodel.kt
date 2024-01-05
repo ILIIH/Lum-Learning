@@ -9,6 +9,12 @@ import kotlinx.coroutines.launch
 
 class AddLearningCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
+    val answers = mutableListOf(Answer("", "", true))
+
+    fun addAnswer() {
+        answers.add(Answer("", "", true))
+    }
+
     fun addNewCard(
         themeId: Int,
         question: String,

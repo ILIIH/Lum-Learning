@@ -8,26 +8,52 @@
     android:orientation="vertical"
     tools:context=".fragments.AddVisualCard.AddVisualCardFragment">
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/enter_question_info"
-        android:textSize="24sp"
-        android:layout_marginBottom="30dp"
-        />
-
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_new_title_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/inriasansbold"
+            android:text="@string/enter_question_info"
+            android:textColor="#000000"
+            android:textSize="20pt" />
+
+        <TextView
+            android:id="@+id/sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/inriasanslight"
+            android:text="@string/audio_mnemotechnik"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="6pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
         <LinearLayout
+            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -35,8 +61,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:hint="Write question">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -48,186 +74,23 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:layout_margin="10dp"
-                    android:id="@+id/answer1_true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="True"
-                    />
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/answer1"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="20dp"
-                    android:hint="Write first answer">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/answer1_discription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="20dp"
-                android:hint="Write first answer description">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:layout_margin="10dp"
-                    android:id="@+id/answer2_true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="True"
-                    />
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/answer2"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="20dp"
-                    android:hint="Write second answer">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/answer2_discription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="20dp"
-                android:hint="Write second answer description">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:layout_margin="10dp"
-                    android:id="@+id/answer3_true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="True"
-                    />
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/answer3"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="20dp"
-                    android:hint="Write third answer">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/answer3_discription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="20dp"
-                android:hint="Write third answer description">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:layout_margin="10dp"
-                    android:id="@+id/answer4_true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="True"
-                    />
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/answer4"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="20dp"
-                    android:hint="Write fourth answer">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/answer4_discription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="20dp"
-                android:hint="Write fourth answer discription">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                style="@style/assosiation_subtitle_style"
+                android:text="@string/association" />
 
 
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_background"
+                android:elevation="8dp"
+
                 android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                >
+                android:padding="10dp">
+
                 <ImageView
                     android:id="@+id/stard_record"
                     android:layout_width="80dp"
@@ -235,33 +98,52 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
                     android:src="@drawable/baseline_mic_24" />
+
                 <ImageView
-                    android:clickable="false"
                     android:id="@+id/stop_record"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
-                    android:src="@drawable/baseline_stop_circle_non_clicable" />
-                <ImageView
                     android:clickable="false"
+                    android:src="@drawable/baseline_stop_circle_non_clicable" />
+
+                <ImageView
                     android:id="@+id/play_audio"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
+                    android:clickable="false"
                     android:src="@drawable/baseline_music_note_24" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/continue_btn"
+            <TextView
+                style="@style/assosiation_subtitle2_style"
+                android:text="@string/answers" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/answers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Continue"
-                android:layout_margin="20dp"
-                />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <FrameLayout
+                android:id="@+id/add_new_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                    <include layout="@layout/add_new_answer_btn" />
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/continue_btn"
+                style="@style/create_btn"
+                android:text="@string/create" />
 
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
