@@ -1,6 +1,7 @@
 package com.example.add_new_card.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -18,7 +19,6 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
             parent,
             false,
         )
-
         return AnswerItemViewHolder(view)
     }
 
@@ -43,8 +43,14 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
     inner class AnswerItemViewHolder(
         private val binding: AnswerAdapterItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind() {
+            binding.hint.setOnClickListener {
+                binding.answerHintLayout.visibility = if (binding.answerHintLayout.visibility == View.VISIBLE) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+            }
             bindings.add(binding)
         }
     }

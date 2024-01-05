@@ -26,48 +26,53 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
 
         <CheckBox
-            android:background="@null"
             android:id="@+id/answer_true"
+            android:text=""
+            style="@style/card_checkbox" />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/true_txt"
-            android:button="@drawable/checkbox_selector"
-            android:paddingLeft="12dp"
+            android:fontFamily="@font/inriasanslight"
             />
 
         <CheckBox
             android:id="@+id/hint"
+            style="@style/card_checkbox"
+            android:text="" />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/hint"
-            android:button="@drawable/checkbox_selector"
-            android:background="@null"
-            android:paddingLeft="12dp"
+            android:fontFamily="@string/hint"
             />
-
         <CheckBox
-            android:background="@null"
             android:id="@+id/visual_hint"
+            android:text=""
+            style="@style/card_checkbox"  />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/visual_hint"
-            android:button="@drawable/checkbox_selector"
-            android:paddingLeft="12dp"
+            android:fontFamily="@string/hint"
             />
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/answer_hint_layout"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/answer_text_background">
 

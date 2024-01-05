@@ -44,7 +44,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
         >
 
         <LinearLayout
@@ -56,6 +55,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/question"
+                android:layout_marginTop="40dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                style="@style/assosiation_subtitle_style"
+                style="@style/assosiation_subtitle2_style"
                 android:text="@string/answers"
 
                 />
@@ -111,10 +111,12 @@
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <ImageView
+            <FrameLayout
                 android:id="@+id/add_new_answer"
-                style="@style/refactor_btn"
-                android:src="@drawable/add_new_answer" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include layout="@layout/add_new_answer_btn" />
+            </FrameLayout>
 
             <Button
                 android:id="@+id/continue_btn"
