@@ -10,7 +10,7 @@ android {
         minSdk 24
         targetSdk 32
         ndk {
-            abiFilters "armeabi"
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,6 +37,14 @@ dependencies {
     implementation 'io.insert-koin:koin-android:3.3.3'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     implementation 'io.insert-koin:koin-androidx-workmanager:3.3.3'
+
+    implementation 'com.android.support:appcompat-v7:28.0.0' 
+    implementation 'com.android.support:design:28.0.0' 
+    implementation 'com.android.support:support-v4:28.0.0' 
+    implementation 'org.tensorflow:tensorflow-lite:2.6.0' 
+
+    // NNAPI dependency
+    implementation 'com.android.support:nnapi:1.0.0' 
 
 }
 
