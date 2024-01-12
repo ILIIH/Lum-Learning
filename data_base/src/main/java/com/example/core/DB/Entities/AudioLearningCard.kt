@@ -29,5 +29,4 @@ class AudioLearningCard(
     val lastUpdateNumber: Int,
     @ColumnInfo(name = "lastMonthRepetitionNumber")
     val lastMonthRepetitionNumber: Int,
-
 )

@@ -8,6 +8,8 @@ import com.example.add_new_card_data.CardRepository
 import com.example.add_new_card_data.model.Answer
 import com.example.add_new_card_data.model.SA_Card
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
@@ -16,6 +18,7 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         get() = ciclableStopBtn
 
     val answers = mutableListOf(Answer("", "", true))
+    val recordIdMutex = Mutex()
 
     var maxId = 0
 
@@ -29,29 +32,33 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
     fun addRecordPath(startRecord: (maxID: Int) -> Unit) {
         viewModelScope.launch {
-            val max = repo.getAllALCard().maxByOrNull { it.Id }
-            maxId = max?.Id?.plus(1) ?: 0
-            startRecord(maxId)
+            recordIdMutex.withLock {
+                val max = repo.getAllALCard().maxByOrNull { it.Id }
+                maxId = max?.Id?.plus(1) ?: 0
+                startRecord(maxId)
+            }
         }
     }
 
     fun addNewCard(themeId: Int, question: String, currentDate: String, monthNumber: Int) {
         viewModelScope.launch {
-            repo.insertALCard(
-                SA_Card(
-                    themeId = themeId,
-                    question = question,
-                    answers = answers,
-                    RALastMonth = 0.0,
-                    RACurrentMonth = 0.0,
-                    AverageRA = 0.0,
-                    Id = maxId,
-                    dateCreation = currentDate,
-                    repetitionAmount = 0,
-                    lastMonthUpdateNumber = monthNumber,
-                    lastMonthRepetitionNumber = 0,
-                ),
-            )
+            recordIdMutex.withLock {
+                repo.insertALCard(
+                    SA_Card(
+                        themeId = themeId,
+                        question = question,
+                        answers = answers,
+                        RALastMonth = 0.0,
+                        RACurrentMonth = 0.0,
+                        AverageRA = 0.0,
+                        Id = maxId,
+                        dateCreation = currentDate,
+                        repetitionAmount = 0,
+                        lastMonthUpdateNumber = monthNumber,
+                        lastMonthRepetitionNumber = 0,
+                    ),
+                )
+            }
         }
     }
 

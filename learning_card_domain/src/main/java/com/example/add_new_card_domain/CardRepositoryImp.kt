@@ -28,8 +28,6 @@ class CardRepositoryImp(private val repo: ThemeDatabase) : CardRepository {
     }
 
     override suspend fun insertALCard(card: SA_Card) {
-        Log.i("card_logging", "INSERT themeId: ${card.themeId}")
-
         repo.cardsDAO().insertALCard(card.toData())
     }
 
