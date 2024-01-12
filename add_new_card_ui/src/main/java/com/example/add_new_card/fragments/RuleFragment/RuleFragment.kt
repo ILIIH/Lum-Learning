@@ -1,7 +1,6 @@
 package com.example.add_new_card.fragments.RuleFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,8 +65,6 @@ class RuleFragment : Fragment() {
 
         val themeId = requireArguments().getInt("id")
         themeInfoProvider.setThemeId(themeId)
-        Log.i("card_logging", "themeId game$themeId")
-
         return view.root
     }
 }
