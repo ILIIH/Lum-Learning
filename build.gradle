@@ -29,6 +29,10 @@ android {
     }
 }
 
+attributes {
+    'com.android.build.api.attributes.AgpVersionAttr' '7.2.1'
+}
+
 dependencies {
 
     implementation project(path: ':about_theme_data')
