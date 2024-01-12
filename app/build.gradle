@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,7 +34,8 @@ android {
 }
 
 dependencies {
-
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
     implementation project(path: ':theme_list_ui')
     implementation project(path: ':theme_list_domain')
     implementation project(path: ':data_base')
