@@ -33,3 +33,4 @@ configurations.all {
         resources.excludes.add("META-INF/*")
     }
 }
+

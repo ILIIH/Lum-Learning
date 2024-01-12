@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_theme_data.SaveTheme
 import com.example.add_theme_data.Theme
-import com.example.ask_answer_data.ResultOf
 import com.example.core.domain.ILError
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
@@ -52,7 +51,7 @@ class ThemeAddViewModel(
     }
 
     fun addTheme(tile: String, yearExperience: String, themeImportance: String, themeTesis: String) {
-        if(!validateFields(tile, yearExperience)) return
+        if (!validateFields(tile, yearExperience)) return
         viewModelScope.launch {
             val stream = ByteArrayOutputStream()
             photo.value!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
