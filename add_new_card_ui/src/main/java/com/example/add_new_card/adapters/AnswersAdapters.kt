@@ -44,6 +44,7 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
         private val binding: AnswerAdapterItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+            binding.answerTrue.setOnClickListener { }
             binding.hint.setOnClickListener {
                 binding.answerHintLayout.visibility = if (binding.answerHintLayout.visibility == View.VISIBLE) {
                     View.GONE
