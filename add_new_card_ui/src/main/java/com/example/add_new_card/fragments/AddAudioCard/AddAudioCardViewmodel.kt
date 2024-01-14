@@ -40,7 +40,13 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         }
     }
 
-    fun addNewCard(themeId: Int, question: String, currentDate: String, monthNumber: Int) {
+    fun addNewCard(
+        themeId: Int,
+        answers: List<Answer>,
+        question: String,
+        currentDate: String,
+        monthNumber: Int,
+    ) {
         viewModelScope.launch {
             recordIdMutex.withLock {
                 repo.insertALCard(
