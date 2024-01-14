@@ -1,7 +1,6 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
 import android.app.AlertDialog
-import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
-import com.example.add_new_card_data.model.Answer
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -54,80 +52,80 @@ class AddLearningCardFragment : Fragment() {
         val themeID = mainViewModel.getThemeId()
 
         view.continueBtn.setOnClickListener {
-                val answers = adapter.getAllAnswers()
+            val answers = adapter.getAllAnswers()
 
-                AlertDialog.Builder(context)
-                    .setTitle("Creation card")
-                    .setMessage("Do you want to continue creation or add this card and exit?")
-                    .setPositiveButton(
-                        getString(R.string.continue_creation),
-                    ) { _, _ ->
-                        if (themeType == 5) {
-                            viewModel.addNewCard(
-                                themeId = themeID,
-                                question = view.question.editText!!.text.toString(),
-                                answers = answers,
-                                themeType = themeType,
-                                currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
-                                    Date(),
-                                ),
-                                description = view.description.editText!!.text.toString(),
-                                monthNumber = Date().month,
-                            )
-                        } else {
-                            viewModel.addNewCard(
-                                themeId = themeID,
-                                question = view.question.editText!!.text.toString(),
-                                answers = answers,
-                                themeType = themeType,
-                                currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
-                                    Date(),
-                                ),
-                                description = "-",
-                                monthNumber = Date().month,
-                            )
-                        }
-
-                        textFields.forEach {
-                            it.editText?.text?.clear()
-                        }
-                        view.Title.requestFocus()
+            AlertDialog.Builder(context)
+                .setTitle("Creation card")
+                .setMessage("Do you want to continue creation or add this card and exit?")
+                .setPositiveButton(
+                    getString(R.string.continue_creation),
+                ) { _, _ ->
+                    if (themeType == 5) {
+                        viewModel.addNewCard(
+                            themeId = themeID,
+                            question = view.question.editText!!.text.toString(),
+                            answers = answers,
+                            themeType = themeType,
+                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                                Date(),
+                            ),
+                            description = view.description.editText!!.text.toString(),
+                            monthNumber = Date().month,
+                        )
+                    } else {
+                        viewModel.addNewCard(
+                            themeId = themeID,
+                            question = view.question.editText!!.text.toString(),
+                            answers = answers,
+                            themeType = themeType,
+                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                                Date(),
+                            ),
+                            description = "-",
+                            monthNumber = Date().month,
+                        )
                     }
-                    .setNegativeButton(
-                        R.string.save_and_exit,
-                    ) { _, _ ->
-                        if (themeType == 5) {
-                            viewModel.addNewCard(
-                                themeId = themeID,
-                                question = view.question.editText!!.text.toString(),
-                                answers = answers,
-                                themeType = themeType,
-                                currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
-                                    Date(),
-                                ),
-                                description = view.description.editText!!.text.toString(),
-                                monthNumber = Date().month,
-                            )
-                        } else {
-                            viewModel.addNewCard(
-                                themeId = themeID,
-                                question = view.question.editText!!.text.toString(),
-                                answers = answers,
-                                themeType = themeType,
-                                currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
-                                    Date(),
-                                ),
-                                description = "-",
-                                monthNumber = Date().month,
 
-                            )
-                        }
-                        hideKeyboard(requireActivity())
-                        findNavController().popBackStack()
+                    textFields.forEach {
+                        it.editText?.text?.clear()
                     }
-                    .setIcon(R.drawable.baseline_credit_card_24)
-                    .show()
-            }
+                    view.Title.requestFocus()
+                }
+                .setNegativeButton(
+                    R.string.save_and_exit,
+                ) { _, _ ->
+                    if (themeType == 5) {
+                        viewModel.addNewCard(
+                            themeId = themeID,
+                            question = view.question.editText!!.text.toString(),
+                            answers = answers,
+                            themeType = themeType,
+                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                                Date(),
+                            ),
+                            description = view.description.editText!!.text.toString(),
+                            monthNumber = Date().month,
+                        )
+                    } else {
+                        viewModel.addNewCard(
+                            themeId = themeID,
+                            question = view.question.editText!!.text.toString(),
+                            answers = answers,
+                            themeType = themeType,
+                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                                Date(),
+                            ),
+                            description = "-",
+                            monthNumber = Date().month,
+
+                        )
+                    }
+                    hideKeyboard(requireActivity())
+                    findNavController().popBackStack()
+                }
+                .setIcon(R.drawable.baseline_credit_card_24)
+                .show()
+        }
 
         return view.root
     }
