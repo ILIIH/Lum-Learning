@@ -23,6 +23,13 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.component.KoinComponent
 import org.koin.core.context.startKoin
+import android.content.res.AssetManager
+import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.nnapi.NnApiDelegate
+import java.io.FileInputStream
+import java.io.IOException
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
 
 class MyApplication : Application(), KoinComponent {
 
@@ -52,7 +59,29 @@ class MyApplication : Application(), KoinComponent {
             )
         }
         setupWorkManagerFactory()
+
     }
+}
+
+fun setUpNNAPI(){
+
+    val options = Interpreter.Options()
+    var nnApiDelegate: NnApiDelegate? = null
+    // Initialize interpreter with NNAPI delegate for Android Pie or above
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        nnApiDelegate = NnApiDelegate()
+        options.addDelegate(nnApiDelegate)
+    }
+    val assetManager = assets
+
+    // Initialize TFLite interpreter
+    val tfLite: Interpreter
+    try {
+        tfLite = Interpreter(loadModelFile(assetManager, "model.tflite"), options)
+    } catch (e: Exception) {
+        throw RuntimeException(e)
+    }
+
 }
 
 fun Application.setupWorkManagerFactory() {

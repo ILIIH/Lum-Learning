@@ -44,7 +44,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:2.6.0' 
 
     // NNAPI dependency
-    implementation 'com.android.support:nnapi:1.0.0' 
+    implementation 'org.tensorflow:tensorflow-lite:1.14.0'
 
 }
 
