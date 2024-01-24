@@ -1,6 +1,5 @@
 package com.example.add_new_card.fragments.AddAudioCard
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +20,7 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     val answers = mutableListOf(Answer("", "", true))
     val recordIdMutex = Mutex()
 
-    var maxId = 1
+    var maxId = 0
 
     fun addAnswer() {
         answers.add(Answer("", "", true))
@@ -35,15 +34,19 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         viewModelScope.launch {
             recordIdMutex.withLock {
                 val max = repo.getAllALCard().maxByOrNull { it.Id }
-                maxId = max?.Id?.plus(1) ?: 1
+                maxId = max?.Id?.plus(1) ?: 0
                 startRecord(maxId)
             }
         }
     }
 
-    fun addNewCard(themeId: Int, question: String, currentDate: String, monthNumber: Int) {
-        Log.i("audio_payer_debug","addNewCard  maxId ${maxId}")
-
+    fun addNewCard(
+        themeId: Int,
+        answers: List<Answer>,
+        question: String,
+        currentDate: String,
+        monthNumber: Int,
+    ) {
         viewModelScope.launch {
             recordIdMutex.withLock {
                 repo.insertALCard(

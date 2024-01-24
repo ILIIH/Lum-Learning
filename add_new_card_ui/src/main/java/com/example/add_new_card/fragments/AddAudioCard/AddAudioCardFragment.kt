@@ -12,7 +12,6 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -109,6 +108,8 @@ class AddAudioCardFragment : Fragment() {
         }
 
         view.continueBtn.setOnClickListener {
+            val answers = adapter.getAllAnswers()
+
             AlertDialog.Builder(context)
                 .setTitle("Creation card")
                 .setMessage("Do you want to continue creation or add this card and exit?")
@@ -118,8 +119,9 @@ class AddAudioCardFragment : Fragment() {
                     viewModel.addNewCard(
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
-                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                        Date().month,
+                        answers = answers,
+                        currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        monthNumber = Date().month,
                     )
                 }
                 .setNegativeButton(
@@ -130,6 +132,8 @@ class AddAudioCardFragment : Fragment() {
                         question = view.question.editText!!.text.toString(),
                         currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
                         monthNumber = Date().month,
+                        answers = answers
+
                     )
                     hideKeyboard(activity as Activity)
 
