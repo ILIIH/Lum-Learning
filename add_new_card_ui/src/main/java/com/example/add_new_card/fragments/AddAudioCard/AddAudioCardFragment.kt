@@ -128,8 +128,9 @@ class AddAudioCardFragment : Fragment() {
                     viewModel.addNewCard(
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
-                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-                        Date().month,
+                        currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        monthNumber = Date().month,
+                        answers = answers
                     )
                     hideKeyboard(activity as Activity)
 
