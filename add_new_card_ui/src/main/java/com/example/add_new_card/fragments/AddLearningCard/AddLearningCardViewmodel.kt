@@ -1,5 +1,6 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository

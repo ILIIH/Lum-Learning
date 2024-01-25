@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.2.1" type="incidents">
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of io.insert-koin:koin-android than 3.3.2 is available: 3.3.3">
+        <fix-replace
+            description="Change to 3.3.3"
+            family="Update versions"
+            oldString="3.3.2"
+            replacement="3.3.3"/>
+        <location
+            file="${:about_theme_domain*projectDir}/build.gradle"
+            line="39"
+            column="20"
+            startOffset="877"
+            endLine="39"
+            endColumn="55"
+            endOffset="912"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.core:core-ktx than 1.7.0 is available: 1.9.0">
+        <fix-replace
+            description="Change to 1.9.0"
+            family="Update versions"
+            oldString="1.7.0"
+            replacement="1.9.0"/>
+        <location
+            file="${:about_theme_domain*projectDir}/build.gradle"
+            line="41"
+            column="20"
+            startOffset="933"
+            endLine="41"
+            endColumn="50"
+            endOffset="963"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.5.1 is available: 1.6.1">
+        <fix-replace
+            description="Change to 1.6.1"
+            family="Update versions"
+            oldString="1.5.1"
+            replacement="1.6.1"/>
+        <location
+            file="${:about_theme_domain*projectDir}/build.gradle"
+            line="42"
+            column="20"
+            startOffset="983"
+            endLine="42"
+            endColumn="56"
+            endOffset="1019"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.7.0 is available: 1.8.0">
+        <fix-replace
+            description="Change to 1.8.0"
+            family="Update versions"
+            oldString="1.7.0"
+            replacement="1.8.0"/>
+        <location
+            file="${:about_theme_domain*projectDir}/build.gradle"
+            line="43"
+            column="20"
+            startOffset="1039"
+            endLine="43"
+            endColumn="64"
+            endOffset="1083"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of junit:junit than 4.12 is available: 4.13.2">
+        <fix-replace
+            description="Change to 4.13.2"
+            family="Update versions"
+            oldString="4.12"
+            replacement="4.13.2"/>
+        <location
+            file="${:about_theme_domain*projectDir}/build.gradle"
+            line="45"
+            column="24"
+            startOffset="1108"
+            endLine="45"
+            endColumn="42"
+            endOffset="1126"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of junit:junit than 4.12 is available: 4.13.2">
+        <fix-replace
+            description="Change to 4.13.2"
+            family="Update versions"
+            oldString="4.12"
+            replacement="4.13.2"/>
+        <location
+            file="${:about_theme_domain*projectDir}/build.gradle"
+            line="46"
+            column="31"
+            startOffset="1157"
+            endLine="46"
+            endColumn="49"
+            endOffset="1175"/>
+    </incident>
+
+</incidents>

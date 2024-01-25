@@ -1,14 +1,17 @@
 package com.example.ask_answer_ui.fragments
 
 import android.icu.text.SimpleDateFormat
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,6 +21,7 @@ import com.example.ask_answer_ui.databinding.FragmentSABinding
 import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
 import com.example.ask_answer_ui.viewModel.SA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
+import java.io.File
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -100,6 +104,18 @@ class SAFragment : Fragment() {
             }
 
             view.playSound.setOnClickListener {
+                view.playSound.isClickable = false
+                Log.i("audio_payer_debug", "maxif litening ${currentCard.Id}")
+                val mp = MediaPlayer.create(requireContext(), File(requireActivity().cacheDir, "record${currentCard.Id}").toUri())
+                mp.start()
+
+                mp.setOnCompletionListener {
+                    view.playSound.isClickable = true
+                }
+
+                mp.setOnBufferingUpdateListener { mediaPlayer, i ->
+                    view.progressBar.progress = i
+                }
             }
 
             view.question.text = currentCard.question

@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class ThemeInfoProvider(private val getPrediction: getMnemoTypePrediction) {
 
-    private var themeId: Int = 0
+    private var themeId: Int = 1
 
     private val themeType = MutableLiveData<Int> ()
     val _themeType: LiveData<Int>

@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 24
+        minSdk 26
         targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -37,6 +37,7 @@ dependencies {
 
     implementation project(path: ':learning_card_data')
     implementation project(path: ':data_base')
+    implementation project(path: ':core')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 
