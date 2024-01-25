@@ -1,12 +1,12 @@
 <lint-module
     format="1"
-    dir="D:\ChPI\Diplom\about_theme_domain"
+    dir="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain"
     name=":about_theme_domain"
     type="LIBRARY"
     maven="Memorizable:about_theme_domain:"
     gradle="7.2.1"
     buildFolder="build"
-    bootClassPath="C:\Users\linar\AppData\Local\Android\Sdk\platforms\android-33\android.jar;C:\Users\linar\AppData\Local\Android\Sdk\build-tools\30.0.3\core-lambda-stubs.jar"
+    bootClassPath="/Users/illiabranchuk/Library/Android/sdk/platforms/android-33/android.jar:/Users/illiabranchuk/Library/Android/sdk/build-tools/30.0.3/core-lambda-stubs.jar"
     javaSourceLevel="1.8"
     compileTarget="android-33"
     neverShrinking="true">

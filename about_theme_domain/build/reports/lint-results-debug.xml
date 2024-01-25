@@ -4,39 +4,7 @@
     <issue
         id="GradleDependency"
         severity="Warning"
-        message="A newer version of androidx.room:room-runtime than 2.5.0 is available: 2.6.1"
-        category="Correctness"
-        priority="4"
-        summary="Obsolete Gradle Dependency"
-        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
-        errorLine1="    implementation(&quot;androidx.room:room-runtime:2.5.0&quot;)"
-        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="37"
-            column="20"/>
-    </issue>
-
-    <issue
-        id="GradleDependency"
-        severity="Warning"
-        message="A newer version of androidx.room:room-compiler than 2.5.0 is available: 2.6.1"
-        category="Correctness"
-        priority="4"
-        summary="Obsolete Gradle Dependency"
-        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
-        errorLine1="    annotationProcessor(&quot;androidx.room:room-compiler:2.5.0&quot;)"
-        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="39"
-            column="25"/>
-    </issue>
-
-    <issue
-        id="GradleDependency"
-        severity="Warning"
-        message="A newer version of io.insert-koin:koin-android than 3.3.2 is available: 3.4.3"
+        message="A newer version of io.insert-koin:koin-android than 3.3.2 is available: 3.3.3"
         category="Correctness"
         priority="4"
         summary="Obsolete Gradle Dependency"
@@ -44,15 +12,15 @@
         errorLine1="    implementation &quot;io.insert-koin:koin-android:3.3.2&quot;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="40"
+            file="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain/build.gradle"
+            line="39"
             column="20"/>
     </issue>
 
     <issue
         id="GradleDependency"
         severity="Warning"
-        message="A newer version of androidx.core:core-ktx than 1.7.0 is available: 1.12.0"
+        message="A newer version of androidx.core:core-ktx than 1.7.0 is available: 1.9.0"
         category="Correctness"
         priority="4"
         summary="Obsolete Gradle Dependency"
@@ -60,8 +28,8 @@
         errorLine1="    implementation &apos;androidx.core:core-ktx:1.7.0&apos;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="42"
+            file="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain/build.gradle"
+            line="41"
             column="20"/>
     </issue>
 
@@ -76,15 +44,15 @@
         errorLine1="    implementation &apos;androidx.appcompat:appcompat:1.5.1&apos;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="43"
+            file="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain/build.gradle"
+            line="42"
             column="20"/>
     </issue>
 
     <issue
         id="GradleDependency"
         severity="Warning"
-        message="A newer version of com.google.android.material:material than 1.7.0 is available: 1.11.0"
+        message="A newer version of com.google.android.material:material than 1.7.0 is available: 1.8.0"
         category="Correctness"
         priority="4"
         summary="Obsolete Gradle Dependency"
@@ -92,8 +60,8 @@
         errorLine1="    implementation &apos;com.google.android.material:material:1.7.0&apos;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="44"
+            file="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain/build.gradle"
+            line="43"
             column="20"/>
     </issue>
 
@@ -108,8 +76,8 @@
         errorLine1="    testImplementation &apos;junit:junit:4.12&apos;"
         errorLine2="                       ~~~~~~~~~~~~~~~~~~">
         <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="46"
+            file="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain/build.gradle"
+            line="45"
             column="24"/>
     </issue>
 
@@ -124,8 +92,8 @@
         errorLine1="    androidTestImplementation &apos;junit:junit:4.12&apos;"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~">
         <location
-            file="D:\ChPI\Diplom\about_theme_domain\build.gradle"
-            line="47"
+            file="/Users/illiabranchuk/Desktop/Luminous-learning/about_theme_domain/build.gradle"
+            line="46"
             column="31"/>
     </issue>
 

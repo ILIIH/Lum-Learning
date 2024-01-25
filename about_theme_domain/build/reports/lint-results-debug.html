@@ -177,17 +177,17 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 8 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 6 warnings</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-Check performed at Sun Jan 14 10:50:16 GMT 2024      </nav>
+Check performed at Thu Jan 25 14:28:04 GMT 2024      </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Issue Types</span>
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="#overview"><i class="material-icons">dashboard</i>Overview</a>
-      <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (8)</a>
+      <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (6)</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -203,7 +203,7 @@ Check performed at Sun Jan 14 10:50:16 GMT 2024      </nav>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
 <tr>
-<td class="countColumn">8</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<td class="countColumn">6</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#GradleDependency">GradleDependency</a>: Obsolete Gradle Dependency</td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (35)</a>
 </td></tr></table>
@@ -223,77 +223,60 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:37</span>: <span class="message">A newer version of androidx.room:room-runtime than 2.5.0 is available: 2.6.1</span><br /><pre class="errorlines">
-<span class="lineno"> 34 </span>    implementation project(path: <span class="string">':about_theme_data'</span>)
-<span class="lineno"> 35 </span>    implementation project(path: <span class="string">':data_base'</span>)
-<span class="lineno"> 36 </span>
-<span class="caretline"><span class="lineno"> 37 </span>    implementation(<span class="warning"><span class="string">"androidx.room:room-runtime:2.5.0"</span></span>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 38 </span>    implementation <span class="string">'androidx.test.ext:junit-ktx:1.1.5'</span>
-<span class="lineno"> 39 </span>    annotationProcessor(<span class="string">"androidx.room:room-compiler:2.5.0"</span>)
-<span class="lineno"> 40 </span>    implementation <span class="string">"io.insert-koin:koin-android:3.3.2"</span></pre>
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:39</span>: <span class="message">A newer version of io.insert-koin:koin-android than 3.3.2 is available: 3.3.3</span><br /><pre class="errorlines">
+<span class="lineno"> 36 </span>    implementation <span class="string">"androidx.room:room-runtime:2.5.0"</span>
+<span class="lineno"> 37 </span>    annotationProcessor <span class="string">"androidx.room:room-compiler:2.5.0"</span>
+<span class="lineno"> 38 </span>
+<span class="caretline"><span class="lineno"> 39 </span>    implementation <span class="warning"><span class="string">"io.insert-koin:koin-android:3.3.2"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 40 </span>
+<span class="lineno"> 41 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span>
+<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span></pre>
 
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:39</span>: <span class="message">A newer version of androidx.room:room-compiler than 2.5.0 is available: 2.6.1</span><br /><pre class="errorlines">
-<span class="lineno"> 36 </span>
-<span class="lineno"> 37 </span>    implementation(<span class="string">"androidx.room:room-runtime:2.5.0"</span>)
-<span class="lineno"> 38 </span>    implementation <span class="string">'androidx.test.ext:junit-ktx:1.1.5'</span>
-<span class="caretline"><span class="lineno"> 39 </span>    annotationProcessor(<span class="warning"><span class="string">"androidx.room:room-compiler:2.5.0"</span></span>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 40 </span>    implementation <span class="string">"io.insert-koin:koin-android:3.3.2"</span>
-<span class="lineno"> 41 </span>
-<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span></pre>
-
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:40</span>: <span class="message">A newer version of io.insert-koin:koin-android than 3.3.2 is available: 3.4.3</span><br /><pre class="errorlines">
-<span class="lineno"> 37 </span>    implementation(<span class="string">"androidx.room:room-runtime:2.5.0"</span>)
-<span class="lineno"> 38 </span>    implementation <span class="string">'androidx.test.ext:junit-ktx:1.1.5'</span>
-<span class="lineno"> 39 </span>    annotationProcessor(<span class="string">"androidx.room:room-compiler:2.5.0"</span>)
-<span class="caretline"><span class="lineno"> 40 </span>    implementation <span class="warning"><span class="string">"io.insert-koin:koin-android:3.3.2"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 41 </span>
-<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span>
-<span class="lineno"> 43 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span></pre>
-
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:42</span>: <span class="message">A newer version of androidx.core:core-ktx than 1.7.0 is available: 1.12.0</span><br /><pre class="errorlines">
-<span class="lineno"> 39 </span>    annotationProcessor(<span class="string">"androidx.room:room-compiler:2.5.0"</span>)
-<span class="lineno"> 40 </span>    implementation <span class="string">"io.insert-koin:koin-android:3.3.2"</span>
-<span class="lineno"> 41 </span>
-<span class="caretline"><span class="lineno"> 42 </span>    implementation <span class="warning"><span class="string">'androidx.core:core-ktx:1.7.0'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 43 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span>
-<span class="lineno"> 44 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:41</span>: <span class="message">A newer version of androidx.core:core-ktx than 1.7.0 is available: 1.9.0</span><br /><pre class="errorlines">
+<span class="lineno"> 38 </span>
+<span class="lineno"> 39 </span>    implementation <span class="string">"io.insert-koin:koin-android:3.3.2"</span>
+<span class="lineno"> 40 </span>
+<span class="caretline"><span class="lineno"> 41 </span>    implementation <span class="warning"><span class="string">'androidx.core:core-ktx:1.7.0'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span>
+<span class="lineno"> 43 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
 </pre>
 
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:43</span>: <span class="message">A newer version of androidx.appcompat:appcompat than 1.5.1 is available: 1.6.1</span><br /><pre class="errorlines">
-<span class="lineno"> 40 </span>    implementation <span class="string">"io.insert-koin:koin-android:3.3.2"</span>
-<span class="lineno"> 41 </span>
-<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span>
-<span class="caretline"><span class="lineno"> 43 </span>    implementation <span class="warning"><span class="string">'androidx.appcompat:appcompat:1.5.1'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 44 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    testImplementation <span class="string">'junit:junit:4.12'</span></pre>
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:42</span>: <span class="message">A newer version of androidx.appcompat:appcompat than 1.5.1 is available: 1.6.1</span><br /><pre class="errorlines">
+<span class="lineno"> 39 </span>    implementation <span class="string">"io.insert-koin:koin-android:3.3.2"</span>
+<span class="lineno"> 40 </span>
+<span class="lineno"> 41 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span>
+<span class="caretline"><span class="lineno"> 42 </span>    implementation <span class="warning"><span class="string">'androidx.appcompat:appcompat:1.5.1'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 43 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
+<span class="lineno"> 44 </span>
+<span class="lineno"> 45 </span>    testImplementation <span class="string">'junit:junit:4.12'</span></pre>
 
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:44</span>: <span class="message">A newer version of com.google.android.material:material than 1.7.0 is available: 1.11.0</span><br /><pre class="errorlines">
-<span class="lineno"> 41 </span>
-<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span>
-<span class="lineno"> 43 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span>
-<span class="caretline"><span class="lineno"> 44 </span>    implementation <span class="warning"><span class="string">'com.google.android.material:material:1.7.0'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
-<span class="lineno"> 47 </span>    androidTestImplementation <span class="string">'junit:junit:4.12'</span></pre>
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:43</span>: <span class="message">A newer version of com.google.android.material:material than 1.7.0 is available: 1.8.0</span><br /><pre class="errorlines">
+<span class="lineno"> 40 </span>
+<span class="lineno"> 41 </span>    implementation <span class="string">'androidx.core:core-ktx:1.7.0'</span>
+<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span>
+<span class="caretline"><span class="lineno"> 43 </span>    implementation <span class="warning"><span class="string">'com.google.android.material:material:1.7.0'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 44 </span>
+<span class="lineno"> 45 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
+<span class="lineno"> 46 </span>    androidTestImplementation <span class="string">'junit:junit:4.12'</span></pre>
+
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:45</span>: <span class="message">A newer version of junit:junit than 4.12 is available: 4.13.2</span><br /><pre class="errorlines">
+<span class="lineno"> 42 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span>
+<span class="lineno"> 43 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
+<span class="lineno"> 44 </span>
+<span class="caretline"><span class="lineno"> 45 </span>    testImplementation <span class="warning"><span class="string">'junit:junit:4.12'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 46 </span>    androidTestImplementation <span class="string">'junit:junit:4.12'</span>
+<span class="lineno"> 47 </span>
+<span class="lineno"> 48 </span>    testImplementation <span class="string">"org.mockito.kotlin:mockito-kotlin:4.1.0"</span></pre>
 
 <span class="location"><a href="../../build.gradle">../../build.gradle</a>:46</span>: <span class="message">A newer version of junit:junit than 4.12 is available: 4.13.2</span><br /><pre class="errorlines">
-<span class="lineno"> 43 </span>    implementation <span class="string">'androidx.appcompat:appcompat:1.5.1'</span>
-<span class="lineno"> 44 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
-<span class="lineno"> 45 </span>
-<span class="caretline"><span class="lineno"> 46 </span>    testImplementation <span class="warning"><span class="string">'junit:junit:4.12'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 47 </span>    androidTestImplementation <span class="string">'junit:junit:4.12'</span>
-<span class="lineno"> 48 </span>
-<span class="lineno"> 49 </span>    testImplementation <span class="string">"org.mockito.kotlin:mockito-kotlin:4.1.0"</span></pre>
-
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:47</span>: <span class="message">A newer version of junit:junit than 4.12 is available: 4.13.2</span><br /><pre class="errorlines">
-<span class="lineno"> 44 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
-<span class="caretline"><span class="lineno"> 47 </span>    androidTestImplementation <span class="warning"><span class="string">'junit:junit:4.12'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 48 </span>
-<span class="lineno"> 49 </span>    testImplementation <span class="string">"org.mockito.kotlin:mockito-kotlin:4.1.0"</span>
-<span class="lineno"> 50 </span>}</pre>
+<span class="lineno"> 43 </span>    implementation <span class="string">'com.google.android.material:material:1.7.0'</span>
+<span class="lineno"> 44 </span>
+<span class="lineno"> 45 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
+<span class="caretline"><span class="lineno"> 46 </span>    androidTestImplementation <span class="warning"><span class="string">'junit:junit:4.12'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 47 </span>
+<span class="lineno"> 48 </span>    testImplementation <span class="string">"org.mockito.kotlin:mockito-kotlin:4.1.0"</span>
+<span class="lineno"> 49 </span>}
+</pre>
 
 </div>
 <div class="metadata"><div class="explanation" id="explanationGradleDependency" style="display: none;">

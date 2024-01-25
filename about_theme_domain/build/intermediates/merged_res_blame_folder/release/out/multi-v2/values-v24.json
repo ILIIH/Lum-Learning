@@ -4,7 +4,7 @@
             "outputFile": "com.example.about_theme_domain-mergeReleaseResources-41:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\512ff6ddfc18f001fdff892138d378c3\\transformed\\appcompat-1.5.1\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/512ff6ddfc18f001fdff892138d378c3/transformed/appcompat-1.5.1/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\cda1f96cac4f766c217e9f304502ef85\\transformed\\material-1.7.0\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/cda1f96cac4f766c217e9f304502ef85/transformed/material-1.7.0/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,9,12,15",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
             "outputFile": "com.example.about_theme_domain-merged_res-43:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\512ff6ddfc18f001fdff892138d378c3\\transformed\\appcompat-1.5.1\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/512ff6ddfc18f001fdff892138d378c3/transformed/appcompat-1.5.1/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -48,7 +48,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\cda1f96cac4f766c217e9f304502ef85\\transformed\\material-1.7.0\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/cda1f96cac4f766c217e9f304502ef85/transformed/material-1.7.0/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,9,12,15",
                         "startColumns": "4,4,4,4,4,4,4,4",

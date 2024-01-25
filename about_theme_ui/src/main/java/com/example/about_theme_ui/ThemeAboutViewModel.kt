@@ -22,7 +22,8 @@ class ThemeAboutViewModel(
 
     fun loadThemeInfo(id: Int) {
         viewModelScope.launch {
-            themeInfo.postValue(getTheme.execute(id))
+            val theme = getTheme.execute(id)
+            themeInfo.postValue(theme)
         }
     }
 

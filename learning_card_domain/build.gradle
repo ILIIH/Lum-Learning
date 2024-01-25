@@ -4,11 +4,10 @@ plugins {
 }
 
 android {
-    namespace 'com.example.add_new_card_domain'
     compileSdk 33
 
     defaultConfig {
-        minSdk 24
+        minSdk 26
         targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

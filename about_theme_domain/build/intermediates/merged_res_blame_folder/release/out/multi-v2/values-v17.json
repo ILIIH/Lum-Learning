@@ -4,7 +4,7 @@
             "outputFile": "com.example.about_theme_domain-mergeReleaseResources-41:/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\512ff6ddfc18f001fdff892138d378c3\\transformed\\appcompat-1.5.1\\res\\values-v17\\values-v17.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/512ff6ddfc18f001fdff892138d378c3/transformed/appcompat-1.5.1/res/values-v17/values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -20,7 +20,7 @@
             "outputFile": "com.example.about_theme_domain-merged_res-43:/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\512ff6ddfc18f001fdff892138d378c3\\transformed\\appcompat-1.5.1\\res\\values-v17\\values-v17.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/512ff6ddfc18f001fdff892138d378c3/transformed/appcompat-1.5.1/res/values-v17/values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

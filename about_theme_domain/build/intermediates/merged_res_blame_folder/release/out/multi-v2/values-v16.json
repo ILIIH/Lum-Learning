@@ -4,7 +4,7 @@
             "outputFile": "com.example.about_theme_domain-mergeReleaseResources-41:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\512ff6ddfc18f001fdff892138d378c3\\transformed\\appcompat-1.5.1\\res\\values-v16\\values-v16.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/512ff6ddfc18f001fdff892138d378c3/transformed/appcompat-1.5.1/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\a1aa07c06de864765701aa6a359bd444\\transformed\\core-1.8.0\\res\\values-v16\\values-v16.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/a1aa07c06de864765701aa6a359bd444/transformed/core-1.8.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -38,7 +38,7 @@
             "outputFile": "com.example.about_theme_domain-merged_res-43:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\512ff6ddfc18f001fdff892138d378c3\\transformed\\appcompat-1.5.1\\res\\values-v16\\values-v16.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/512ff6ddfc18f001fdff892138d378c3/transformed/appcompat-1.5.1/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -57,7 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\linar\\.gradle\\caches\\transforms-3\\a1aa07c06de864765701aa6a359bd444\\transformed\\core-1.8.0\\res\\values-v16\\values-v16.xml",
+                    "source": "/Users/illiabranchuk/.gradle/caches/transforms-3/a1aa07c06de864765701aa6a359bd444/transformed/core-1.8.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
