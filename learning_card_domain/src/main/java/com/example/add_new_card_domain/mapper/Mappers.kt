@@ -72,10 +72,10 @@ fun SA_Card.toData() = AudioLearningCard(
     lastMonthRepetitionNumber = lastMonthRepetitionNumber,
     lastUpdateNumber = lastMonthUpdateNumber,
     repetitionAmount = repetitionAmount,
+    audioFileId = audioFileId
 )
 
 fun SA_Card.toDataWithId() = AudioLearningCard(
-    id = Id,
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -88,6 +88,7 @@ fun SA_Card.toDataWithId() = AudioLearningCard(
     lastMonthRepetitionNumber = lastMonthRepetitionNumber,
     lastUpdateNumber = lastMonthUpdateNumber,
     repetitionAmount = repetitionAmount,
+    audioFileId = audioFileId
 )
 fun AudioLearningCard.toDomain() = SA_Card(
     themeId = themeId,
@@ -98,11 +99,11 @@ fun AudioLearningCard.toDomain() = SA_Card(
     RACurrentMonth = RACurrentMonth,
     RALastMonth = RALastMonth,
     AverageRA = AverageRA,
-    Id = id,
     dateCreation = dateCreation,
     lastMonthRepetitionNumber = lastMonthRepetitionNumber,
     repetitionAmount = repetitionAmount,
     lastMonthUpdateNumber = lastUpdateNumber,
+    audioFileId = audioFileId
 
 )
 

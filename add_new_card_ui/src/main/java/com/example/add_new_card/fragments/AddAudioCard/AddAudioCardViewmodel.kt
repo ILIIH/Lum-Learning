@@ -33,8 +33,8 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     fun addRecordPath(startRecord: (maxID: Int) -> Unit) {
         viewModelScope.launch {
             recordIdMutex.withLock {
-                val max = repo.getAllALCard().maxByOrNull { it.Id }
-                maxId = max?.Id?.plus(1) ?: 0
+                val max = repo.getAllALCard().maxByOrNull { it.audioFileId }
+                maxId = max?.audioFileId?.plus(1) ?: 0
                 startRecord(maxId)
             }
         }
@@ -57,7 +57,7 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
                         RALastMonth = 0.0,
                         RACurrentMonth = 0.0,
                         AverageRA = 0.0,
-                        Id = maxId,
+                        audioFileId = maxId,
                         dateCreation = currentDate,
                         repetitionAmount = 0,
                         lastMonthUpdateNumber = monthNumber,
