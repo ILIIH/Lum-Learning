@@ -1,7 +1,7 @@
 package com.example.add_new_card_data.model
 
 data class SA_Card(
-    val Id: Int,
+    val audioFileId: Int,
     val themeId: Int,
     val question: String,
     val answers: List<Answer>,
@@ -46,7 +46,6 @@ fun SA_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): SA_Card {
     }
 
     val nexAL = SA_Card(
-        Id = this.Id,
         themeId = this.themeId,
         question = this.question,
         answers = this.answers,
@@ -57,6 +56,7 @@ fun SA_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): SA_Card {
         AverageRA = averageRA,
         dateCreation = this.dateCreation,
         lastMonthUpdateNumber = currentMonth,
+        audioFileId = this.audioFileId
     )
 
     return nexAL

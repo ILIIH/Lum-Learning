@@ -61,8 +61,8 @@
 
             <ImageView
                 android:id="@+id/playSound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
@@ -70,6 +70,7 @@
 
             <ProgressBar
                 android:id="@+id/progressBar"
+                android:max="100"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

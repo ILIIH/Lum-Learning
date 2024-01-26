@@ -8,9 +8,11 @@ import androidx.room.PrimaryKey
 class AudioLearningCard(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int = 1,
+    val id: Int = 0,
     @ColumnInfo(name = "themeId")
     val themeId: Int,
+    @ColumnInfo(name = "audioFileId")
+    val audioFileId: Int,
     @ColumnInfo(name = "question")
     val question: String,
     @ColumnInfo(name = "answers")

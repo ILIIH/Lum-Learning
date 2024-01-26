@@ -6,10 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -30,8 +32,10 @@ class SAFragment : Fragment() {
     val viewModel: SA_ViewModel by inject()
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var  mp: MediaPlayer
+    private lateinit var progressBar: ProgressBar
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +43,7 @@ class SAFragment : Fragment() {
     ): View {
         val view = FragmentSABinding.inflate(inflater, container, false)
         cardProvider.setCurrentCard()
+        progressBar = view.progressBar
 
         cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
             val currentCard = card as SA_Card
@@ -105,17 +110,15 @@ class SAFragment : Fragment() {
 
             view.playSound.setOnClickListener {
                 view.playSound.isClickable = false
-                Log.i("audio_payer_debug", "maxif litening ${currentCard.Id}")
-                val mp = MediaPlayer.create(requireContext(), File(requireActivity().cacheDir, "record${currentCard.Id}").toUri())
-                mp.start()
-
+                mp = MediaPlayer.create(requireContext(), File(requireActivity().cacheDir, "record${currentCard.audioFileId}").toUri())
+                view.progressBar
                 mp.setOnCompletionListener {
                     view.playSound.isClickable = true
+                    handler.removeCallbacks(updateProgress)
+                    view.progressBar.progress = 0
                 }
 
-                mp.setOnBufferingUpdateListener { mediaPlayer, i ->
-                    view.progressBar.progress = i
-                }
+                startPlayback()
             }
 
             view.question.text = currentCard.question
@@ -128,6 +131,28 @@ class SAFragment : Fragment() {
         return view.root
     }
 
+    private fun startPlayback() {
+        // Reset progress handler
+        handler.removeCallbacks(updateProgress)
+        handler.post(updateProgress)
+
+        // Start playback
+        mp.start()
+    }
+
+    // Runnable to update progress
+    private val updateProgress = object : Runnable {
+        override fun run() {
+            val percentage = (mp.currentPosition.toFloat() / mp.duration) * 100
+            progressBar.progress = percentage.toInt()
+            handler.postDelayed(this, 100) // Update every 100 milliseconds
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mp.stop()
+    }
     fun goToNextCard() {
         Handler().postDelayed({
             lifecycleScope.launchWhenResumed {
