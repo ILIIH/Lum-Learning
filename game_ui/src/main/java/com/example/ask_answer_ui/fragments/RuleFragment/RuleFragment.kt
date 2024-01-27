@@ -57,10 +57,14 @@ class RuleFragment : Fragment() {
         view.startButton.text = getString(R.string.create_new_card)
         view.ruleText.text = getString(R.string.no_card_was_created)
         view.startButton.visibility = View.GONE
-        view.ruleText.gravity = Gravity.CENTER
     }
 
     fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
+        view.noCardIcon.visibility = View.GONE
+        view.startButton.visibility = View.VISIBLE
+        view.startButton.text = getString(com.example.core.R.string.next)
+
+
         cardProvider.currentCard.observe(viewLifecycleOwner) {
             if (cardProvider.isItTheEndOfCardList()) {
                 if (!isDialogShown) {
