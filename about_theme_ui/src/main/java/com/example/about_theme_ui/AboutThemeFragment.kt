@@ -37,6 +37,15 @@ class AboutThemeFragment : Fragment() {
         viewModel._themeInfo.observe(viewLifecycleOwner) {
             if (it.AverageRA != 0.0) {
                 val dataNotNull = PieData()
+                view.pieChart.visibility = View.VISIBLE
+
+                view.horizontalPrevMonthRight.visibility = View.VISIBLE
+                view.horizontalChartWrong.visibility = View.VISIBLE
+                view.horizontalChartRight.visibility = View.VISIBLE
+
+                view.rightRate.visibility = View.VISIBLE
+                view.wrongRate.visibility = View.VISIBLE
+                view.lastMonthWrongAnswers.visibility = View.VISIBLE
 
                 Log.i("RA_test", "AverageLastMonthRA = ${it.AverageLastMonthRA * 100}")
                 Log.i("RA_test", "wrongRate = ${100 - it.AverageLastMonthRA * 100}")
@@ -58,13 +67,7 @@ class AboutThemeFragment : Fragment() {
                 view.wrongRate.text = "${(100 - it.AverageRA * 100.0).roundToInt()}% \n wrong answers"
                 view.lastMonthWrongAnswers.text = "${(it.AverageLastMonthRA * 100.0).roundToInt()}% \n prev month right answers"
             } else {
-                view.horizontalPrevMonthRight.setData(0.0F, Color.parseColor("#000000"))
-                view.horizontalChartWrong.setData(0.0F, Color.parseColor("#900D09"))
-                view.horizontalChartRight.setData(0.0F, Color.parseColor("#FF00A49D"))
-
-                view.rightRate.text = "0% right answers"
-                view.wrongRate.text = "0% wrong answers"
-                view.lastMonthWrongAnswers.text = "0% prev month right answers"
+                view.emptyStatsImg.visibility = View.VISIBLE
             }
 
             view.themeType.text = it.themeType

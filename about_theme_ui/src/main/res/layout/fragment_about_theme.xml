@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.example.about_theme_ui.customView.PieChart
+       android:visibility="gone"
         android:id="@+id/pie_chart"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -20,12 +20,14 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginStart="4dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/horizontal_chart_wrong"
         app:layout_constraintTop_toTopOf="@+id/horizontal_chart_wrong" />
 
     <com.example.about_theme_ui.customView.horizontalChart
+        android:visibility="gone"
         android:id="@+id/horizontal_prev_month_right"
         android:layout_width="100dp"
         android:layout_height="40dp"
@@ -39,6 +41,7 @@
     <com.example.about_theme_ui.customView.horizontalChart
         android:id="@+id/horizontal_chart_wrong"
         android:layout_width="100dp"
+        android:visibility="gone"
         android:layout_height="40dp"
         app:layout_constraintEnd_toStartOf="@+id/horizontal_chart_right"
         app:layout_constraintHorizontal_bias="0.5"
@@ -63,7 +66,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:text="РЕДАКТИРОВАТЬ"
+        android:backgroundTint="#000000"
+        android:text="@string/edit"
+        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,13 +79,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="20dp"
-        android:text="ТРЕНИРОВАТЬСЯ"
+        android:backgroundTint="#000000"
+        android:text="@string/start_game"
+        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rightRate" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/create_new_item"
@@ -89,7 +96,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:text="СОЗДАТЬ"
+        android:backgroundTint="#000000"
+        android:text="@string/create_card"
+        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
+        android:visibility="gone"
         android:text="20% right answers"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_right"
@@ -115,6 +125,7 @@
         android:gravity="center"
         android:text="20% right answers"
         android:textSize="10sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/horizontal_chart_wrong"
         app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintStart_toStartOf="@+id/horizontal_chart_wrong"
@@ -122,6 +133,7 @@
 
     <TextView
         android:id="@+id/lastMonthWrongAnswers"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -142,5 +154,24 @@
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/empty_stats_img"
+        app:layout_constraintBottom_toTopOf="@+id/to_train"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:srcCompat="@drawable/empty_stats"
+        style="@style/empty_stats" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
