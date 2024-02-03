@@ -2,4 +2,9 @@
     <string name="app_name">about_theme_ui</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start_game">START GAME</string>
+    <string name="create_card">CREATE CARD</string>
+    <string name="edit">EDIT</string>
+    <string name="play_game">play game</string>
+    <string name="there_will_be_your_statistics">There will be your statistics</string>
 </resources>
