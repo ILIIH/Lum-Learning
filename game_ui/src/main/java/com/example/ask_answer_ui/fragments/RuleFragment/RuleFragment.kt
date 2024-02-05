@@ -1,8 +1,18 @@
 package com.example.ask_answer_ui.fragments.RuleFragment
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +27,10 @@ import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
+import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.ask_answer_ui.viewModel.cardProvider
 import org.koin.android.ext.android.inject
+import java.lang.Exception
 import java.time.LocalDateTime
 import java.util.*
 
@@ -44,7 +56,7 @@ class RuleFragment : Fragment() {
                         cardProvider.setCurrentCard()
                         showRuleScreen(view, themeId)
                     } else {
-                        showEmptyListRuleScreen(view)
+                        showEmptyListRuleScreen(view, themeId)
                     }
                 }
             }
@@ -52,15 +64,33 @@ class RuleFragment : Fragment() {
 
         return view.root
     }
-    fun showEmptyListRuleScreen(view: FragmentGameRuleBinding) {
-        view.noCardIcon.visibility = View.VISIBLE
+    fun showEmptyListRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
         view.startButton.text = getString(R.string.create_new_card)
-        view.ruleText.text = getString(R.string.no_card_was_created)
+
+        SpannableString(getString(R.string.no_card_was_created)).apply {
+            val create = getString(R.string.create_btn_text)
+            val createIndex = indexOf(create)
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    findNavController().navigate(R.id.to_add_new_card, Bundle().apply { putInt("id", themeId) })
+                }
+            }
+
+            setSpan(clickableSpan, createIndex, createIndex + create.length, 0)
+            setSpan(ForegroundColorSpan(resources.getColor(android.R.color.black)), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            setSpan(StyleSpan(Typeface.BOLD), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(UnderlineSpan(), createIndex, +createIndex+ create.length, 0)
+
+            view.ruleText.text = this
+            view.ruleText.movementMethod = LinkMovementMethod.getInstance()
+        }
+
+
         view.startButton.visibility = View.GONE
     }
 
     fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
-        view.noCardIcon.visibility = View.GONE
         view.startButton.visibility = View.VISIBLE
         view.startButton.text = getString(com.example.core.R.string.next)
 

@@ -62,12 +62,16 @@
     <navigation android:id="@+id/ask_answer_ui_navigation"
         app:startDestination="@id/ask_answer_game_nav_graph">
         <include app:graph="@navigation/ask_answer_game_nav_graph" />
+        <action
+            android:id="@+id/from_game_to_add_new_card"
+            app:destination="@id/add_visual_card" />
     </navigation>
 
     <navigation android:id="@+id/plain_navigation_graph"
         app:startDestination="@id/plain_nav_graph">
         <include app:graph="@navigation/plain_nav_graph" />
     </navigation>
+    <include app:graph="@navigation/add_graph_navgraph" />
 
 
 </navigation>

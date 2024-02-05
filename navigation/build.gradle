@@ -42,6 +42,7 @@ dependencies {
     implementation project(path: ':game_ui')
     implementation project(path: ':formula_builder_ui')
     implementation project(path: ':plain_ui')
+    implementation project(path: ':game_ui')
 
     implementation "io.insert-koin:koin-android:3.3.2"
 
