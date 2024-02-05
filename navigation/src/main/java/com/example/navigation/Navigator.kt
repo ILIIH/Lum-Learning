@@ -6,7 +6,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import com.example.about_theme_ui.AboutThemeNavigation
 import com.example.add_theme_ui.AddThemeNavigation
-import com.example.ask_answer_ui.navigation.AskAnswerGameNav
+import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.onboarding.navigation.onboardingNavigation
 import com.example.theme_list_ui.themeListNavigation
 
@@ -20,7 +20,7 @@ class Navigator :
     onboardingNavigation,
     themeListNavigation,
     AddThemeNavigation,
-    AskAnswerGameNav,
+    GameNavigation,
     AboutThemeNavigation {
 
     private var navController: NavController? = null
@@ -69,6 +69,12 @@ class Navigator :
 
     override fun finshGame() {
         TODO("Not yet implemented")
+    }
+
+    override fun toAddNewCard(themeId: Int) {
+        val bundle = Bundle()
+        bundle.putInt("id", themeId)
+        navController?.navigate(R.id.from_game_to_add_new_card, bundle)
     }
 }
 

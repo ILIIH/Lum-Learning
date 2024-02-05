@@ -35,6 +35,9 @@
             android:id="@+id/to_LearningCard"
             app:destination="@id/learningCard"
             app:popUpTo="@id/ruleFragment"/>
+        <action
+            android:id="@+id/to_add_new_card"
+            app:destination="@id/add_visual_card" />
     </fragment>
     <fragment
         android:id="@+id/SAFragment"
@@ -54,4 +57,5 @@
         android:name="com.example.ask_answer_ui.fragments.LearningCard"
         android:label="fragment_learning_card"
         tools:layout="@layout/fragment_learning_card" />
+    <include app:graph="@navigation/add_graph_navgraph" />
 </navigation>
