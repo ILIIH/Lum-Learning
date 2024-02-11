@@ -200,7 +200,6 @@ class cardProvider(
 
     fun startFromFirstCard(themeId: Int) {
         this.currentCardIndex = 0
-        val temp = _cardList.value
         downloadCards(themeId)
     }
 
@@ -302,8 +301,6 @@ class cardProvider(
                 currentList.addAll(repo.getAllALCardByThemeId(id))
                 currentList.addAll(repo.getAllVACardByThemeId(id))
                 currentList.addAll(repo.getAllCardByThemeId(id))
-
-
 
                 val loadingTime = System.currentTimeMillis() - startTime
 
