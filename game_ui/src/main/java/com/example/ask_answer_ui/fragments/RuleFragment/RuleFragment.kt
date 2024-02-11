@@ -1,24 +1,20 @@
 package com.example.ask_answer_ui.fragments.RuleFragment
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
-import android.view.Gravity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card_data.model.LearningCardDomain
@@ -27,43 +23,75 @@ import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
-import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.ask_answer_ui.viewModel.cardProvider
+import com.example.core.domain.ILError
+import com.example.core.ui.BaseFragment
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import java.lang.Exception
+import org.koin.ext.getFullName
 import java.time.LocalDateTime
 import java.util.*
-
-class RuleFragment : Fragment() {
+const val ARG_THEME_ID = "id"
+class RuleFragment : BaseFragment() {
 
     val cardProvider: cardProvider by inject()
-    var isDialogShown = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
-        val view = FragmentGameRuleBinding.inflate(inflater, container, false)
+        val binding = FragmentGameRuleBinding.inflate(inflater, container, false)
+        val themeId = requireArguments().getInt(ARG_THEME_ID)
 
-        val themeId = requireArguments().getInt("id")
         cardProvider.downloadCards(themeId)
+        setupCardListObserver(binding, themeId)
+        setupSkipDescriptionObserver()
 
-        cardProvider._cardList.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is ResultOf.Success -> {
-                    if (result.value.isNotEmpty()) {
-                        cardProvider.setCurrentCard()
-                        showRuleScreen(view, themeId)
-                    } else {
-                        showEmptyListRuleScreen(view, themeId)
+        return binding.root
+    }
+
+    private fun setupCardListObserver(binding: FragmentGameRuleBinding, themeId: Int) {
+        lifecycleScope.launchWhenStarted {
+            cardProvider.cardList.collect { result ->
+                when (result) {
+                        is ResultOf.Success -> handleCardListSuccess(binding, result.value, themeId)
+                        is ResultOf.Loading -> showLoading()
+                        is ResultOf.Failure -> handleFailure(result.error)
+                    }
+                }
+        }
+    }
+
+    private fun handleCardListSuccess(binding: FragmentGameRuleBinding, cardList: List<Any>, themeId: Int) {
+        dismissLoading()
+        if (cardList.isNotEmpty()) {
+            showRuleScreen(binding, themeId)
+        } else {
+            showEmptyListRuleScreen(binding, themeId)
+        }
+    }
+
+    private fun setupSkipDescriptionObserver() {
+        lifecycleScope.launchWhenStarted {
+            cardProvider.doSkipDescription.collect { card ->
+                lifecycleScope.launchWhenResumed {
+                    if (!cardProvider.isItTheEndOfCardList()&& count !=1) {
+                        dismissLoading()
+                        count++;
+                        navigateToGame(card)
                     }
                 }
             }
         }
-
-        return view.root
     }
+
+    var count = 0 ;
+
+    private fun handleFailure(error: ILError?) {
+        dismissLoading()
+        showError(error)
+    }
+
     fun showEmptyListRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
         view.startButton.text = getString(R.string.create_new_card)
 
@@ -92,104 +120,116 @@ class RuleFragment : Fragment() {
 
     fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
         view.startButton.visibility = View.VISIBLE
+        view.exitButton.visibility = View.GONE
+
         view.startButton.text = getString(com.example.core.R.string.next)
 
+        lifecycleScope.launchWhenStarted {
+            cardProvider.getCurrentCard().apply {
+                if (cardProvider.isItTheEndOfCardList()) {
+                    dismissLoading()
+                    view.exitButton.visibility = View.VISIBLE
+                    callEndDialog(themeId, view)
+                } else {
+                    when (this) {
+                        // TO_DO_MILLER_LAW at 1
+                        is LearningCardDomain -> {
+                            val currentCard = this
+                            when (currentCard.themeType) {
+                                2 -> {
+                                    view.subTitle.text = "Meta cognition test rule: "
+                                    view.ruleText.text =
+                                        "1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\n" +
+                                                "2) Write down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n " +
+                                                "3) Write down how you could use information in this question\n\n " +
+                                                "4) Answer the question, your time is restricted \n\n "
+                                }
 
-        cardProvider.currentCard.observe(viewLifecycleOwner) {
-            if (cardProvider.isItTheEndOfCardList()) {
-                if (!isDialogShown) {
-                    isDialogShown = true
-                    callEndDialog(themeId)
-                }
-            }
-            when (it) {
-                // TO_DO_MILLER_LAW at 1
-                is LearningCardDomain -> {
-                    val currentCard = it
+                                5 -> {
+                                    view.subTitle.text = "Description association test rule: "
+                                    view.ruleText.text =
+                                        "1) First you will see long description fo this field / subject of the question \n\n" +
+                                                "2) Answer the question, your time is restricted\n\n "
+                                }
 
-                    when (currentCard.themeType) {
-                        2 -> {
-                            view.subTitle.text = "Meta cognition test rule: "
-                            view.ruleText.text =
-                                "1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\n" +
-                                "2) Write down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n " +
-                                "3) Write down how you could use information in this question\n\n " +
-                                "4) Answer the question, your time is restricted \n\n "
+                                else -> {
+                                    // NEED REFACTOR
+                                    view.subTitle.text = "Description association test rule: "
+                                    view.ruleText.text =
+                                        "1) First you will see long description fo this field / subject of the question \n\n" +
+                                                "2) Answer the question, your time is restricted\n\n "
+                                }
+                            }
                         }
-                        5 -> {
-                            view.subTitle.text = "Description association test rule: "
+
+                        is VA_Card -> {
+                            view.subTitle.text = "Visual association test rule: "
                             view.ruleText.text =
-                                "1) First you will see long description fo this field / subject of the question \n\n" +
-                                "2) Answer the question, your time is restricted\n\n "
+                                "1) First you will see the photo association on answer to question\n\n" +
+                                        "2) Answer the question, your time is restricted\n\n "
                         }
-                        else -> {
-                            // NEED REFACTOR
-                            view.subTitle.text = "Description association test rule: "
+
+                        is SA_Card -> {
+                            view.subTitle.text = "Audio association test rule: "
                             view.ruleText.text =
-                                "1) First you will see long description fo this field / subject of the question \n\n" +
-                                "2) Answer the question, your time is restricted\n\n "
+                                "1) First you will hear the audio association on answer to question\n\n" +
+                                        "2) Answer the question, your time is restricted\n\n "
                         }
                     }
-                }
-                is VA_Card -> {
-                    view.subTitle.text = "Visual association test rule: "
-                    view.ruleText.text =
-                        "1) First you will see the photo association on answer to question\n\n" +
-                        "2) Answer the question, your time is restricted\n\n "
-                }
-                is SA_Card -> {
-                    view.subTitle.text = "Audio association test rule: "
-                    view.ruleText.text =
-                        "1) First you will hear the audio association on answer to question\n\n" +
-                        "2) Answer the question, your time is restricted\n\n "
                 }
             }
         }
-
-        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
-            view.startButton.setOnClickListener {
-                when (card) {
-                    // TO_DO_MILLER_LAW at 1
-                    is LearningCardDomain -> {
-                        when (card.themeType) {
-                            2 -> {
-                                lifecycleScope.launchWhenResumed {
-                                    findNavController().navigate(R.id.to_MCFragment)
-                                }
-                            }
-                            5 -> {
-                                lifecycleScope.launchWhenResumed {
-                                    findNavController().navigate(R.id.to_LearningCard)
-                                }
-                            }
-                            else -> {
-                                lifecycleScope.launchWhenResumed {
-                                    findNavController().navigate(R.id.to_LearningCard) // TO_DO NEED_REFACTOR
-                                }
-                            }
-                        }
-                    }
-                    is VA_Card -> {
-                        lifecycleScope.launchWhenResumed {
-                            findNavController().navigate(R.id.to_VAFragment)
-                        }
-                    }
-                    is SA_Card -> {
-                        lifecycleScope.launchWhenResumed {
-                            findNavController().navigate(R.id.to_SAFragment)
-                        }
-                    }
-                    else -> {
-                        TODO()
-                    }
-                    // TO_DO_COMBINED_APPROACH at 6
+        lifecycleScope.launchWhenStarted {
+            cardProvider.getCurrentCard().apply {
+                view.startButton.setOnClickListener {
+                    showSkipDescrDialog(this::class.getFullName()) { navigateToGame(this) }
                 }
             }
         }
     }
 
-    fun callEndDialog(themeId: Int) {
-        CardEndDialog(correctAsw = {
+    private fun navigateToGame(card:Any?) {
+        when (card) {
+            // TO_DO_MILLER_LAW at 1
+            is LearningCardDomain -> {
+                    when (card.themeType) {
+                        2 -> {
+                            findNavController().navigate(R.id.to_MCFragment)
+                        }
+
+                        5 -> {
+                            findNavController().navigate(R.id.to_LearningCard)
+                        }
+
+                        else -> {
+                            findNavController().navigate(R.id.to_LearningCard) // TO_DO NEED_REFACTOR
+                        }
+                    }
+            }
+            is VA_Card -> {
+                    findNavController().navigate(R.id.to_VAFragment)
+            }
+            is SA_Card -> {
+                    findNavController().navigate(R.id.to_SAFragment)
+            }
+            else -> {
+                TODO()
+            }
+            // TO_DO_COMBINED_APPROACH at 6
+        }
+    }
+
+    private fun showSkipDescrDialog(cardType: String, navigateToGame: () -> Unit) {
+        CardSkipDialog({ cardProvider.setSkipCardDescription(cardType) },navigateToGame)
+            .show(parentFragmentManager, "CardSkipDialogFragmentTag")
+    }
+
+    private fun callEndDialog(themeId: Int, view: FragmentGameRuleBinding) {
+        view.startButton.visibility = View.GONE
+        view.restartButton.visibility = View.VISIBLE
+        view.ruleText.text = getString(R.string.card_end_text)
+
+        view.restartButton.setOnClickListener {
             cardProvider.startFromFirstCard(themeId)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cardProvider.saveGameResult(
@@ -197,28 +237,25 @@ class RuleFragment : Fragment() {
                     themeId = themeId,
                     date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
 
-                )
+                    )
             } else {
                 TODO()
             }
-            isDialogShown = false
-        }, wrongAsw = {
+        }
+        view.exitButton.setOnClickListener {
             cardProvider.exitTheme()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cardProvider.saveGameResult(
                     currentDay = LocalDateTime.now().dayOfWeek.value,
                     themeId = themeId,
                     date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
-
-                )
+                    )
             } else {
                 TODO()
             }
-            isDialogShown = false
-
             lifecycleScope.launchWhenResumed {
                 findNavController().popBackStack()
             }
-        }).show(parentFragmentManager, "description_dialog")
+        }
     }
 }

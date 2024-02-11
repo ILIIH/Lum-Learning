@@ -1,5 +1,7 @@
 package com.example.core.data
 
+import com.example.core.SharedPrefManager.SharedPrefManager
+import com.example.core.SharedPrefManager.SharedPrefManagerIml
 import com.example.core.data.usecases.*
 import com.example.core.domain.repo.GameRepository
 import org.koin.dsl.module
@@ -56,6 +58,9 @@ val coreDataModule = module {
     }
     single<GameRepository> {
         gameSettingsRepoImp(get())
+    }
+    single<SharedPrefManager> {
+        SharedPrefManagerIml(get())
     }
     single {
         insertGameResult(get())

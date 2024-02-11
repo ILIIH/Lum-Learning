@@ -34,58 +34,24 @@ class MCFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentMCBinding.inflate(inflater, container, false)
-        cardProvider.setCurrentCard()
-        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
-            val currentCard = card as LearningCardDomain
-            val begin = System.nanoTime()
+        lifecycleScope.launchWhenStarted {
+            cardProvider.getCurrentCard().apply {
+                val currentCard = this as LearningCardDomain
+                val begin = System.nanoTime()
 
-            answerAdapter = AnswerAdapter {
-                if (it) {
-                    cardProvider.updateLearningCardInfoAndMetrics(
-                        currentDate = Date(),
-                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                            currentCard.dateCreation,
-                        ),
-                        AverageRA = currentCard.AverageRA,
-                        result = true,
-                        Time = begin - System.nanoTime(),
-                        card = currentCard,
-                    )
-                } else {
-                    cardProvider.updateLearningCardInfoAndMetrics(
-                        currentDate = Date(),
-                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                            currentCard.dateCreation,
-                        ),
-                        AverageRA = currentCard.AverageRA,
-                        result = false,
-                        Time = begin - System.nanoTime(),
-                        card = currentCard,
-                    )
-                }
-                goToNextCard()
-            }
-
-            view.question.text = currentCard.question
-
-            view.answerList.setNestedScrollingEnabled(false)
-            view.answerList.adapter = answerAdapter
-            view.answerList.isNestedScrollingEnabled = false
-
-            val endTime = 10000L
-            view.timeView.setEndingTime(endTime.toFloat())
-
-            val timer = object : CountDownTimer(endTime, 100) {
-                override fun onTick(millisUntilFinished: Long) {
-                    view.timeView.setCurTime(millisUntilFinished.toFloat())
-                }
-
-                override fun onFinish() {
-                    if (isResumed) {
-                        DescriptionDialog("Time is ended").show(
-                            parentFragmentManager,
-                            "description_dialog",
+                answerAdapter = AnswerAdapter {
+                    if (it) {
+                        cardProvider.updateLearningCardInfoAndMetrics(
+                            currentDate = Date(),
+                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                currentCard.dateCreation,
+                            ),
+                            AverageRA = currentCard.AverageRA,
+                            result = true,
+                            Time = begin - System.nanoTime(),
+                            card = currentCard,
                         )
+                    } else {
                         cardProvider.updateLearningCardInfoAndMetrics(
                             currentDate = Date(),
                             cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
@@ -96,16 +62,50 @@ class MCFragment : Fragment() {
                             Time = begin - System.nanoTime(),
                             card = currentCard,
                         )
-                        goToNextCard()
+                    }
+                    goToNextCard()
+                }
+
+                view.question.text = currentCard.question
+
+                view.answerList.setNestedScrollingEnabled(false)
+                view.answerList.adapter = answerAdapter
+                view.answerList.isNestedScrollingEnabled = false
+
+                val endTime = 10000L
+                view.timeView.setEndingTime(endTime.toFloat())
+
+                val timer = object : CountDownTimer(endTime, 100) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        view.timeView.setCurTime(millisUntilFinished.toFloat())
+                    }
+
+                    override fun onFinish() {
+                        if (isResumed) {
+                            DescriptionDialog("Time is ended").show(
+                                parentFragmentManager,
+                                "description_dialog",
+                            )
+                            cardProvider.updateLearningCardInfoAndMetrics(
+                                currentDate = Date(),
+                                cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                    currentCard.dateCreation,
+                                ),
+                                AverageRA = currentCard.AverageRA,
+                                result = false,
+                                Time = begin - System.nanoTime(),
+                                card = currentCard,
+                            )
+                            goToNextCard()
+                        }
                     }
                 }
+
+                answerAdapter.submitList(currentCard.answers)
+
+                timer.start()
             }
-
-            answerAdapter.submitList(currentCard.answers)
-
-            timer.start()
         }
-
         return view.root
     }
 

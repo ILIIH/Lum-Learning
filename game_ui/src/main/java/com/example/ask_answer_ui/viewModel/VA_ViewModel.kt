@@ -10,7 +10,6 @@ class VA_ViewModel(private val getQuestions: getAllQuestion) : ViewModel() {
     private val question = MutableLiveData<Question>()
     val _question: LiveData<Question>
         get() = question
-
     init {
         question.postValue(getQuestions.execute().first())
     }

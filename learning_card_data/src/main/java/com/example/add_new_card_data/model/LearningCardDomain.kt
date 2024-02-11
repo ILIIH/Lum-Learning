@@ -14,7 +14,6 @@ data class LearningCardDomain(
     val repetitionAmount: Int,
     val lastMonthUpdateNumber: Int,
     val lastMonthRepetitionNumber: Int,
-
 )
 
 fun LearningCardDomain.changeRA(thisGameResult: Boolean, currentMonth: Int): LearningCardDomain {

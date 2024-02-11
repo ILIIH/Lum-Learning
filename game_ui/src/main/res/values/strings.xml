@@ -10,5 +10,9 @@
     <string name="create_new_card">CREATE NEW CARD</string>
     <string name="no_card_was_created">No card was created for this theme \nCreate new card to start</string>
     <string name="create_btn_text">Create</string>
-
+    <string name="skip_description">Skip description ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="restart">RESTART</string>
+    <string name="card_end_text">You have done a good job \nLearning cards is ended</string>
 </resources>

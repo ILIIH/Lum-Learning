@@ -1,6 +1,7 @@
 package com.example.ask_answer_ui.viewModel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.add_new_card_data.CardRepository
@@ -9,11 +10,20 @@ import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
 import com.example.add_new_card_data.model.changeRA
 import com.example.ask_answer_data.ResultOf
+import com.example.core.SharedPrefManager.SharedPrefManager
 import com.example.core.data.usecases.insertGameResult
 import com.example.core.domain.ILError
 import com.example.core.domain.models.gameResult
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.koin.ext.getFullName
 import java.util.*
 
 var DAY_IN_MS = (1000 * 60 * 60 * 24).toLong()
@@ -21,6 +31,7 @@ var DAY_IN_MS = (1000 * 60 * 60 * 24).toLong()
 class cardProvider(
     private val repo: CardRepository,
     private val saveResult: insertGameResult,
+    private val sharedPrefManager: SharedPrefManager
 ) : ViewModel() {
 
     private var currentCardIndex = 0
@@ -32,11 +43,12 @@ class cardProvider(
     var Tw1: Double = 0.0
     var Tw2: Double = 0.0
 
-    private val cardList = MutableLiveData<ResultOf<ArrayList<Any>>>()
-    val _cardList: MutableLiveData<ResultOf<ArrayList<Any>>>
-        get() = cardList
-    val currentCard = MutableLiveData<Any?>()
-
+    val doSkipDescription: SharedFlow<Any>
+        get() = _skipDescription.asSharedFlow()
+    private val _skipDescription = MutableSharedFlow<Any>(extraBufferCapacity = 1)
+    val cardList: StateFlow<ResultOf<ArrayList<Any>>>
+        get() = _cardList.asStateFlow()
+    private val _cardList = MutableStateFlow<ResultOf<ArrayList<Any>>>(ResultOf.Loading(arrayListOf()))
     fun exitTheme() {
         this.K = 0.0
         this.D = 0.0
@@ -56,16 +68,20 @@ class cardProvider(
         }
     }
 
-    fun setCurrentCard() {
+    fun setSkipCardDescription(className: String){
+        sharedPrefManager.setSkipCardDescription(className)
+    }
+    fun getCurrentCard() : Any {
         when (cardList.value) {
             is ResultOf.Success -> {
                 with((cardList.value as ResultOf.Success)) {
                     if (currentCardIndex < this.value.size) {
-                        currentCard.postValue(this.value[currentCardIndex])
+                        return this.value[currentCardIndex]
                     }
                 }
             }
         }
+        return Any()
     }
 
     fun saveGameResult(currentDay: Int, themeId: Int, date: String) {
@@ -184,12 +200,11 @@ class cardProvider(
 
     fun startFromFirstCard(themeId: Int) {
         this.currentCardIndex = 0
+        val temp = _cardList.value
         downloadCards(themeId)
     }
 
     fun goToNextCard() {
-        Log.i("CardList1", "go to next card ")
-
         this.currentCardIndex = currentCardIndex + 1
     }
 
@@ -269,8 +284,17 @@ class cardProvider(
         }
     }
 
+    private fun doSkipDescription(card: Any) {
+        val className = card::class.getFullName()
+        val doSkip = sharedPrefManager.doSkipCardDescription(className)
+        if(doSkip) {
+            _skipDescription.tryEmit(card)
+        }
+    }
     fun downloadCards(id: Int) {
-        cardList.postValue(ResultOf.Loading(arrayListOf()))
+        _cardList.tryEmit(ResultOf.Loading(arrayListOf()))
+
+        val startTime = System.currentTimeMillis()
 
         GlobalScope.launch {
             try {
@@ -278,9 +302,23 @@ class cardProvider(
                 currentList.addAll(repo.getAllALCardByThemeId(id))
                 currentList.addAll(repo.getAllVACardByThemeId(id))
                 currentList.addAll(repo.getAllCardByThemeId(id))
-                cardList.postValue(ResultOf.Success(currentList))
+
+
+
+                val loadingTime = System.currentTimeMillis() - startTime
+
+                if (loadingTime < 1000) {
+                    delay(1000 - loadingTime) // Delay to show stub downloading animation
+                }
+
+                _cardList.tryEmit(ResultOf.Success(currentList))
+
+                if(currentCardIndex<currentList.size){
+                    doSkipDescription(currentList[currentCardIndex])
+                }
+
             } catch (e: Throwable) {
-                cardList.postValue(ResultOf.Failure(ILError.IO_ERROR))
+                _cardList.tryEmit(ResultOf.Failure(ILError.IO_ERROR))
             }
         }
     }
