@@ -42,26 +42,56 @@ class SAFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentSABinding.inflate(inflater, container, false)
-        cardProvider.setCurrentCard()
         progressBar = view.progressBar
 
-        cardProvider.currentCard.observe(viewLifecycleOwner) { card ->
-            val currentCard = card as SA_Card
-            val begin = System.nanoTime()
-            val endTime = 10000L
-            view.timeView.setEndingTime(endTime.toFloat())
+        lifecycleScope.launchWhenStarted {
+            cardProvider.getCurrentCard().apply {
+                val currentCard = this as SA_Card
+                val begin = System.nanoTime()
+                val endTime = 10000L
+                view.timeView.setEndingTime(endTime.toFloat())
 
-            val timer = object : CountDownTimer(endTime, 100) {
-                override fun onTick(millisUntilFinished: Long) {
-                    view.timeView.setCurTime(millisUntilFinished.toFloat())
+                val timer = object : CountDownTimer(endTime, 100) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        view.timeView.setCurTime(millisUntilFinished.toFloat())
+                    }
+
+                    override fun onFinish() {
+                        if (isResumed) {
+                            DescriptionDialog("Time is ended").show(
+                                parentFragmentManager,
+                                "description_dialog",
+                            )
+                            cardProvider.updateSACardInfoAndMetrics(
+                                currentDate = Date(),
+                                cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                    currentCard.dateCreation,
+                                ),
+                                AverageRA = currentCard.AverageRA,
+                                result = false,
+                                Time = begin - System.nanoTime(),
+                                card = currentCard,
+                            )
+                            this.cancel()
+                            goToNextCard()
+                        }
+                    }
                 }
+                timer.start()
 
-                override fun onFinish() {
-                    if (isResumed) {
-                        DescriptionDialog("Time is ended").show(
-                            parentFragmentManager,
-                            "description_dialog",
+                answerAdapter = AnswerAdapter {
+                    if (it) {
+                        cardProvider.updateSACardInfoAndMetrics(
+                            currentDate = Date(),
+                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                currentCard.dateCreation,
+                            ),
+                            AverageRA = currentCard.AverageRA,
+                            result = true,
+                            Time = begin - System.nanoTime(),
+                            card = currentCard,
                         )
+                    } else {
                         cardProvider.updateSACardInfoAndMetrics(
                             currentDate = Date(),
                             cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
@@ -71,62 +101,36 @@ class SAFragment : Fragment() {
                             result = false,
                             Time = begin - System.nanoTime(),
                             card = currentCard,
-                        )
-                        this.cancel()
-                        goToNextCard()
+
+                            )
                     }
+                    cardProvider.goToNextCard()
+                    goToNextCard()
                 }
-            }
-            timer.start()
 
-            answerAdapter = AnswerAdapter {
-                if (it) {
-                    cardProvider.updateSACardInfoAndMetrics(
-                        currentDate = Date(),
-                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                            currentCard.dateCreation,
-                        ),
-                        AverageRA = currentCard.AverageRA,
-                        result = true,
-                        Time = begin - System.nanoTime(),
-                        card = currentCard,
+                view.playSound.setOnClickListener {
+                    view.playSound.isClickable = false
+                    mp = MediaPlayer.create(
+                        requireContext(),
+                        File(requireActivity().cacheDir, "record${currentCard.audioFileId}").toUri()
                     )
-                } else {
-                    cardProvider.updateSACardInfoAndMetrics(
-                        currentDate = Date(),
-                        cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
-                            currentCard.dateCreation,
-                        ),
-                        AverageRA = currentCard.AverageRA,
-                        result = false,
-                        Time = begin - System.nanoTime(),
-                        card = currentCard,
+                    view.progressBar
+                    mp.setOnCompletionListener {
+                        view.playSound.isClickable = true
+                        handler.removeCallbacks(updateProgress)
+                        view.progressBar.progress = 0
+                    }
 
-                    )
-                }
-                cardProvider.goToNextCard()
-                goToNextCard()
-            }
-
-            view.playSound.setOnClickListener {
-                view.playSound.isClickable = false
-                mp = MediaPlayer.create(requireContext(), File(requireActivity().cacheDir, "record${currentCard.audioFileId}").toUri())
-                view.progressBar
-                mp.setOnCompletionListener {
-                    view.playSound.isClickable = true
-                    handler.removeCallbacks(updateProgress)
-                    view.progressBar.progress = 0
+                    startPlayback()
                 }
 
-                startPlayback()
+                view.question.text = currentCard.question
+                view.answerList.adapter = answerAdapter
+
+                view.answerList.isNestedScrollingEnabled = false
+
+                answerAdapter.submitList(currentCard.answers)
             }
-
-            view.question.text = currentCard.question
-            view.answerList.adapter = answerAdapter
-
-            view.answerList.isNestedScrollingEnabled = false
-
-            answerAdapter.submitList(currentCard.answers)
         }
         return view.root
     }

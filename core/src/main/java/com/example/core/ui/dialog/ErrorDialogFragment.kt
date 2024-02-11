@@ -1,4 +1,4 @@
-package com.example.core.ui
+package com.example.core.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

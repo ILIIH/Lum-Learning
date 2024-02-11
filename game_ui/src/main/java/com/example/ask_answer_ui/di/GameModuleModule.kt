@@ -19,6 +19,6 @@ val flashCardUiModule = module {
     }
 
     single {
-        cardProvider(get(), get())
+        cardProvider(get(), get(), get())
     }
 }
