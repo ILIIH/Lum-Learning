@@ -18,6 +18,7 @@ class ThemeAddViewModel(
 ) : ViewModel() {
 
     private lateinit var themeName: String
+    private lateinit var themeImportance: String
     private var yearOfExperience: Int = 0
 
     private val photo = MutableLiveData<Bitmap>()
@@ -38,7 +39,9 @@ class ThemeAddViewModel(
             true
         }
     }
-
+    fun setThemeImportance(importance: String) {
+        themeImportance = importance
+    }
     fun setExperience(expLevel: Int) {
         yearOfExperience = expLevel
     }

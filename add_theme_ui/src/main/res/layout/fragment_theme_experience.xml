@@ -88,7 +88,6 @@ android:gravity="center_horizontal">
         android:layout_margin="20dp"
         android:src="@drawable/middle_level" />
 </LinearLayout>
-
 <LinearLayout
     android:id="@+id/expert_level_card"
     android:layout_width="match_parent"
