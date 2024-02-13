@@ -8,5 +8,15 @@
     <string name="theme_type">Theme type</string>
     <string name="create_your_theme">Create your Theme</string>
 
+    <string name="enter_theme_name">Enter theme name</string>
+    <string name="enter_theme_importance">Choose theme importance</string>
+    <string name="enter_theme_experience_level">Choose theme experience level</string>
+    <string name="enter_theme_type">Choose theme type</string>
+    <string name="add_theme_photo">Add theme photo</string>
+    <string name="beginner">BEGINNER</string>
+    <string name="average">AVERAGE</string>
+    <string name="advanced">ADVANCED</string>
+    <string name="incorrect_theme_name">Incorrect theme name!</string>
+
 
 </resources>

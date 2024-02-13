@@ -5,5 +5,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="half_transparent_background">#99000000</color>
     <color name="transparent">#00FFFFFF</color>
-
+    <color name="secondary_color">#B0F1FF</color>\
 </resources>

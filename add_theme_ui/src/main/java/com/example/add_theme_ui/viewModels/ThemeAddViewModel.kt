@@ -1,4 +1,4 @@
-package com.example.add_theme_ui
+package com.example.add_theme_ui.viewModels
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_theme_data.SaveTheme
 import com.example.add_theme_data.Theme
-import com.example.ask_answer_data.ResultOf
+import com.example.add_theme_ui.AddThemeNavigation
 import com.example.core.domain.ILError
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
@@ -16,6 +16,9 @@ class ThemeAddViewModel(
     private val saveTheme: SaveTheme,
     private val navigator: AddThemeNavigation,
 ) : ViewModel() {
+
+    private lateinit var themeName: String
+    private var yearOfExperience: Int = 0
 
     private val photo = MutableLiveData<Bitmap>()
     val _photo: LiveData<Bitmap>
@@ -26,6 +29,19 @@ class ThemeAddViewModel(
         get() = validation
 
     private val photoURI = MutableLiveData<String>()
+
+    fun setThemeName(name: String) : Boolean{
+        return if(name.isEmpty()) {
+            false
+        } else {
+            themeName = name
+            true
+        }
+    }
+
+    fun setExperience(expLevel: Int) {
+        yearOfExperience = expLevel
+    }
     fun setPhotoURI(URI: String) {
         photoURI.postValue(URI)
     }

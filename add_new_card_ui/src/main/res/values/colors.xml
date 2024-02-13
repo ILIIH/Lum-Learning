@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="secondary_color">#B0F1FF</color>\
     <color name="transparent_secondary_color">#7AB0F1FF</color>
 
 </resources>

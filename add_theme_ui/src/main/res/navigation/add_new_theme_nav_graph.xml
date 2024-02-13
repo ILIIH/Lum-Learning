@@ -3,11 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/add_new_theme_nav_graph"
-    app:startDestination="@id/themeAddFragment">
+    app:startDestination="@id/themeExperienceFragment">
 
     <fragment
-        android:id="@+id/themeAddFragment"
-        android:name="com.example.add_theme_ui.ThemeAddFragment"
-        android:label="fragment_theme_add"
-        tools:layout="@layout/fragment_theme_add" />
+        android:id="@+id/themeExperienceFragment"
+        android:name="com.example.add_theme_ui.fragments.ThemeExperienceFragment"
+        android:label="ThemeExperienceFragment" >
+        <action
+            android:id="@+id/to_themeImportanceFragment"
+            app:destination="@id/themeImportanceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/themeImportanceFragment"
+        android:name="com.example.add_theme_ui.fragments.ThemeImportanceFragment"
+        android:label="ThemeImportanceFragment" >
+        <action
+            android:id="@+id/action_themeImportanceFragment_to_themeTypeFragment"
+            app:destination="@id/themeTypeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/themeTypeFragment"
+        android:name="com.example.add_theme_ui.fragments.ThemeTypeFragment"
+        android:label="ThemeTypeFragment" >
+        <action
+            android:id="@+id/action_themeTypeFragment_to_themePhotoFragment"
+            app:destination="@id/themePhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/themePhotoFragment"
+        android:name="com.example.add_theme_ui.ThemePhotoFragment"
+        android:label="ThemePhotoFragment" />
 </navigation>

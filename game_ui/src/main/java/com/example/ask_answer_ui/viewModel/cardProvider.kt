@@ -200,7 +200,6 @@ class cardProvider(
 
     fun startFromFirstCard(themeId: Int) {
         this.currentCardIndex = 0
-        val temp = _cardList.value
         downloadCards(themeId)
     }
 
