@@ -1,5 +1,5 @@
 
-package com.example.add_theme_ui
+package com.example.add_theme_ui.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -13,10 +13,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.add_theme_ui.R
+import com.example.add_theme_ui.viewModels.ThemeAddViewModel
 import com.example.add_theme_ui.databinding.FragmentThemeAddBinding
 import com.example.core.ui.BaseFragment
 import org.koin.android.ext.android.inject
