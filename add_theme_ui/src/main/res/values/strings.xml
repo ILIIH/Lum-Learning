@@ -17,6 +17,9 @@
     <string name="average">AVERAGE</string>
     <string name="advanced">ADVANCED</string>
     <string name="incorrect_theme_name">Incorrect theme name!</string>
+    <string name="high">HIGH</string>
+    <string name="middle">MIDDLE</string>
+    <string name="low">LOW</string>
 
 
 </resources>

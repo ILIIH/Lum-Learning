@@ -18,7 +18,7 @@
         android:name="com.example.add_theme_ui.fragments.ThemeImportanceFragment"
         android:label="ThemeImportanceFragment" >
         <action
-            android:id="@+id/action_themeImportanceFragment_to_themeTypeFragment"
+            android:id="@+id/to_themeTypeFragment"
             app:destination="@id/themeTypeFragment" />
     </fragment>
     <fragment
