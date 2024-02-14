@@ -56,24 +56,6 @@ class ThemeAddFragment : BaseFragment() {
             launcher.launch(intent)
         }
 
-        ArrayAdapter.createFromResource(
-            requireActivity(),
-            R.array.theme_importance,
-            android.R.layout.simple_spinner_item,
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            view.themeImportanceSpinner.adapter = adapter
-        }
-
-        ArrayAdapter.createFromResource(
-            requireActivity(),
-            R.array.theme_types,
-            android.R.layout.simple_spinner_item,
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            view.themeTypeSpinner.adapter = adapter
-        }
-
         return view.root
     }
 

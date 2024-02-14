@@ -36,7 +36,7 @@ class ThemeExperienceFragment : Fragment() {
         return view.root
     }
 
-    fun requestThemeName() {
+    private fun requestThemeName() {
         ThemeNameFragment().show(parentFragmentManager, ThemeNameFragment.THEME_NAME_FRAGMENT_TAG)
     }
 

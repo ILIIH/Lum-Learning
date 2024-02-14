@@ -20,6 +20,10 @@
     <string name="high">HIGH</string>
     <string name="middle">MIDDLE</string>
     <string name="low">LOW</string>
+    <string name="theme_mixed">Theme-mixed</string>
+    <string name="theme_formula">Theme-formula</string>
+    <string name="open_theme">Open-theme</string>
+    <string name="regular_theme">Regular-theme</string>
 
 
 </resources>
