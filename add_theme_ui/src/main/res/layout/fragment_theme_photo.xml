@@ -3,27 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:isScrollContainer="true">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".fragments.ThemeImportanceFragment"
-    android:gravity="center_horizontal"
-    >
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/inriasansbold"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/add_theme_photo"
+            android:textColor="#000000"
+            android:textSize="12pt" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/inriasansbold"
-        android:gravity="center_horizontal"
-        android:lines="1"
-        android:text="@string/add_theme_photo"
-        android:textColor="#000000"
-        android:textSize="12pt" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".fragments.ThemeImportanceFragment"
+            android:gravity="center"
+        >
 
-</LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
 </ScrollView>
