@@ -19,6 +19,8 @@ class ThemeNameFragment : DialogFragment() {
     ): View {
         val view = ThemeNameDialogBinding.inflate(inflater, container, false)
 
+        dialog?.setCancelable(false);
+
         view.continueButton.setOnClickListener {
             if (viewModule.setThemeName(view.themeTitleTextInput.text.toString())) {
                 dismiss()

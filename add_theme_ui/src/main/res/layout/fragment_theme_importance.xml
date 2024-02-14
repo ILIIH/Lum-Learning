@@ -1,127 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ThemeImportanceFragment"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/inriasansbold"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.ThemeImportanceFragment"
         android:gravity="center_horizontal"
-        android:lines="1"
-        android:text="@string/enter_theme_importance"
-        android:textColor="#000000"
-        android:textSize="12pt" />
-
-    <LinearLayout
-        android:id="@+id/high_importance_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:paddingLeft="10dp"
-        android:gravity="center"
-        android:layout_marginTop="80dp"
-        android:paddingRight="10dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="5dp">
-
-        <ImageView
-            android:id="@+id/high_icon"
-            android:layout_margin="20dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/high"
-            />
+        android:orientation="vertical">
 
         <TextView
-            android:fontFamily="@font/inriasansbold"
-            android:textColor="@color/black"
-            android:textSize="42sp"
-            android:gravity="center_vertical"
-            android:id="@+id/high_text"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/high" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/middle_level_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:paddingRight="10dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="5dp">
-
-        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/inriasansbold"
-            android:textColor="@color/black"
-            android:textSize="42sp"
-            android:gravity="center_vertical"
-            android:id="@+id/middle_text"
-            android:layout_marginStart="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/middle" />
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:text="@string/enter_theme_importance"
+            android:textColor="#000000"
+            android:textSize="12pt" />
 
-        <ImageView
-            android:id="@+id/middle_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/middle" />
+        <LinearLayout
+            android:id="@+id/high_importance_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:layout_marginTop="80dp"
+            android:paddingRight="10dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="5dp">
+
+            <ImageView
+                android:id="@+id/high_icon"
+                android:layout_margin="20dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/high"
+                />
+
+            <TextView
+                android:fontFamily="@font/inriasansbold"
+                android:textColor="@color/black"
+                android:textSize="42sp"
+                android:gravity="center_vertical"
+                android:id="@+id/high_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/high" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/middle_level_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:paddingRight="10dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="5dp">
+
+            <TextView
+                android:fontFamily="@font/inriasansbold"
+                android:textColor="@color/black"
+                android:textSize="42sp"
+                android:gravity="center_vertical"
+                android:id="@+id/middle_text"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/middle" />
+
+            <ImageView
+                android:id="@+id/middle_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="20dp"
+                android:src="@drawable/middle" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/low_importance_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:paddingRight="10dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="5dp">
+
+            <ImageView
+                android:id="@+id/low_icon"
+                android:layout_margin="20dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/low"
+                />
+
+            <TextView
+                android:fontFamily="@font/inriasansbold"
+                android:textColor="@color/black"
+                android:textSize="42sp"
+                android:gravity="center_vertical"
+                android:id="@+id/expert_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/low" />
+        </LinearLayout>
+
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/low_importance_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:paddingRight="10dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="5dp">
-
-        <ImageView
-            android:id="@+id/low_icon"
-            android:layout_margin="20dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/low"
-            />
-
-        <TextView
-            android:fontFamily="@font/inriasansbold"
-            android:textColor="@color/black"
-            android:textSize="42sp"
-            android:gravity="center_vertical"
-            android:id="@+id/expert_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/low" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

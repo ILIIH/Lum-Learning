@@ -26,7 +26,7 @@
         android:name="com.example.add_theme_ui.fragments.ThemeTypeFragment"
         android:label="ThemeTypeFragment" >
         <action
-            android:id="@+id/action_themeTypeFragment_to_themePhotoFragment"
+            android:id="@+id/to_themePhotoFragment"
             app:destination="@id/themePhotoFragment" />
     </fragment>
     <fragment
