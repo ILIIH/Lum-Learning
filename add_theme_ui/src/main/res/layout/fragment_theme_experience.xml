@@ -36,7 +36,7 @@
                     android:id="@+id/beginner_level_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_background"
+                    android:background="@drawable/rounded_black_background"
                     android:elevation="8dp"
                     android:orientation="horizontal"
                     android:layout_marginLeft="15dp"
@@ -57,7 +57,7 @@
 
                     <TextView
                         android:fontFamily="@font/inriasansbold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="42sp"
                         android:gravity="center_vertical"
                         android:id="@+id/beginer_text"
@@ -69,7 +69,7 @@
                     android:id="@+id/middle_level_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_background"
+                    android:background="@drawable/rounded_black_background"
                     android:elevation="8dp"
                     android:orientation="horizontal"
                     android:layout_marginLeft="15dp"
@@ -82,7 +82,7 @@
 
                     <TextView
                         android:fontFamily="@font/inriasansbold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="42sp"
                         android:gravity="center_vertical"
                         android:id="@+id/middle_text"
@@ -102,7 +102,7 @@
                     android:id="@+id/expert_level_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_background"
+                    android:background="@drawable/rounded_black_background"
                     android:elevation="8dp"
                     android:orientation="horizontal"
                     android:layout_marginLeft="15dp"
@@ -123,7 +123,7 @@
 
                     <TextView
                         android:fontFamily="@font/inriasansbold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="42sp"
                         android:gravity="center_vertical"
                         android:id="@+id/expert_text"

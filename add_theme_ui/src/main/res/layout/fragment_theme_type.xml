@@ -30,7 +30,7 @@
             android:id="@+id/regular_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/rounded_black_background"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:layout_marginLeft="15dp"
@@ -45,8 +45,8 @@
 
             <TextView
                 android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/black"
-                android:textSize="42sp"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 android:layout_margin="30dp"
                 android:gravity="center_vertical"
                 android:id="@+id/simple_them_text"
@@ -58,7 +58,7 @@
             android:id="@+id/open_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/rounded_black_background"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:layout_marginLeft="15dp"
@@ -73,8 +73,8 @@
 
             <TextView
                 android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/black"
-                android:textSize="42sp"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 android:layout_margin="30dp"
                 android:gravity="center_vertical"
                 android:id="@+id/open_theme_text"
@@ -86,7 +86,7 @@
             android:id="@+id/theme_formula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/rounded_black_background"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:layout_marginLeft="15dp"
@@ -101,8 +101,8 @@
 
             <TextView
                 android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/black"
-                android:textSize="42sp"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 android:layout_margin="30dp"
                 android:gravity="center_vertical"
                 android:id="@+id/theme_formula_text"
@@ -114,7 +114,7 @@
             android:id="@+id/mixed_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/rounded_black_background"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:layout_marginLeft="15dp"
@@ -130,8 +130,8 @@
 
             <TextView
                 android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/black"
-                android:textSize="42sp"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 android:layout_margin="30dp"
                 android:gravity="center_vertical"
                 android:id="@+id/theme_mixed_text"

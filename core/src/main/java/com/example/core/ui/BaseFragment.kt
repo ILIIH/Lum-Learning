@@ -33,7 +33,7 @@ open class BaseFragment : Fragment() {
         }
         val errorDialog = ErrorDialogFragment()
         errorDialog.arguments = messageArgs
-        errorDialog.show(parentFragmentManager, ErrorDialogFragment.error_message_tag)
+        errorDialog.show(childFragmentManager, ErrorDialogFragment.error_message_tag)
     }
 
         fun showLoading(){

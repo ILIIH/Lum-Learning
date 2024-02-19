@@ -1,4 +1,3 @@
-
 package com.example.add_theme_ui.fragments
 
 import android.app.Activity
@@ -9,37 +8,28 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.add_theme_ui.R
+import com.example.add_theme_ui.databinding.FragmentThemePhotoBinding
 import com.example.add_theme_ui.viewModels.ThemeAddViewModel
-import com.example.add_theme_ui.databinding.FragmentThemeAddBinding
 import com.example.core.ui.BaseFragment
 import org.koin.android.ext.android.inject
 
-class ThemeAddFragment : BaseFragment() {
+class ThemePhotoFragment : BaseFragment() {
 
     val viewModule: ThemeAddViewModel by inject()
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        val view = FragmentThemeAddBinding.inflate(inflater, container, false)
-
+        val view = FragmentThemePhotoBinding.inflate(inflater,container, false )
         view.continueBtn.setOnClickListener {
-            viewModule.addTheme(
-                view.themeTitleTextInput.text.toString(),
-                view.yesrsExpirenceTextInput.text.toString(),
-                view.themeImportanceSpinner.selectedItem.toString(),
-                view.themeTypeSpinner.selectedItem.toString(),
-            )
+            viewModule.addTheme()
         }
 
         viewModule._validation.observe(requireActivity()) {
@@ -55,12 +45,11 @@ class ThemeAddFragment : BaseFragment() {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             launcher.launch(intent)
         }
-
         return view.root
     }
 
     private val launcher: ActivityResultLauncher<Intent> =
-        registerForActivityResult<Intent, ActivityResult>(
+        registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK &&
@@ -72,12 +61,12 @@ class ThemeAddFragment : BaseFragment() {
                 } else {
                     MediaStore.Images.Media.getBitmap(requireContext().contentResolver, photoUri)
                 }
-                viewModule.setPhoto(getResizedBitmap(bitmap, 1000)!!)
+                viewModule.setPhoto(getResizedBitmap(bitmap))
                 viewModule.setPhotoURI(photoUri.toString())
             }
         }
 
-    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
+    private fun getResizedBitmap(image: Bitmap, maxSize: Int = 1000): Bitmap {
         var width: Int = image.getWidth()
         var height: Int = image.getHeight()
         val bitmapRatio = width.toFloat() / height.toFloat()
