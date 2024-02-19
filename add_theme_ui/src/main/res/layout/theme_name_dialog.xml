@@ -35,9 +35,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:singleLine="true"
             android:id="@+id/theme_text_field"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:background="@color/white"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:paddingTop="0dp"
@@ -51,6 +49,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:singleLine="true"
+                android:background="@color/white"
                 android:id="@+id/theme_title_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

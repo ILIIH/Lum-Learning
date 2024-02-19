@@ -57,43 +57,34 @@ class ThemeAddViewModel(
     fun setPhoto(bitmap: Bitmap) {
         photo.postValue(bitmap)
     }
-    fun validateFields(title: String, yearExperience: String): Boolean {
-        return when {
-            title.isEmpty() -> {
-                validation.postValue(ILError.VALIDATION_TITLE)
-                false
-            }
-            yearExperience.isEmpty() -> {
-                validation.postValue(ILError.VALIDATION_YEAR)
-                false
-            }
-            photoURI.value.isNullOrEmpty() -> {
-                validation.postValue(ILError.VALIDATION_PHOTO)
-                false
-            }
-            else -> true
-        }
+    fun validatePhoto(): Boolean {
+        return if ( photoURI.value.isNullOrEmpty() )  {
+            validation.postValue(ILError.VALIDATION_PHOTO)
+            false
+        } else true
     }
 
-    fun addTheme(tile: String, yearExperience: String, themeImportance: String, themeTesis: String) {
-        if(!validateFields(tile, yearExperience)) return
-        viewModelScope.launch {
-            val stream = ByteArrayOutputStream()
-            photo.value!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val imageByteArray: ByteArray = stream.toByteArray()
-            photo.value!!.recycle()
-            saveTheme.execute(
-                Theme(
-                    tile,
-                    photoURI.value!!,
-                    yearExperience.toInt(),
-                    themeImportance,
-                    themeTesis,
-                    imageByteArray,
-                ),
-            )
-        }
+    fun addTheme() {
+        if(!validatePhoto()) return
+        else {
+            viewModelScope.launch {
+                val stream = ByteArrayOutputStream()
+                photo.value!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                val imageByteArray: ByteArray = stream.toByteArray()
+                photo.value!!.recycle()
+                saveTheme.execute(
+                    Theme(
+                        themeName,
+                        photoURI.value!!,
+                        yearOfExperience,
+                        themeImportance,
+                        themeType,
+                        imageByteArray,
+                    ),
+                )
+            }
 
-        navigator.submit()
+            navigator.submit()
+        }
     }
 }

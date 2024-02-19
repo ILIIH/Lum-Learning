@@ -31,6 +31,6 @@
     </fragment>
     <fragment
         android:id="@+id/themePhotoFragment"
-        android:name="com.example.add_theme_ui.ThemePhotoFragment"
+        android:name="com.example.add_theme_ui.fragments.ThemePhotoFragment"
         android:label="ThemePhotoFragment" />
 </navigation>

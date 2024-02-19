@@ -5,7 +5,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val addThemeModule = module {
-    viewModel {
+    single {
         ThemeAddViewModel(get(), get())
     }
 }
