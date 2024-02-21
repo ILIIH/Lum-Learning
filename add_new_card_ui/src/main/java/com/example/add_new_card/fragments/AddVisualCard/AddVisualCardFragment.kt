@@ -23,14 +23,11 @@ import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
-import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AddVisualCardFragment : Fragment() {
 
-    val textFields = ArrayList<TextInputLayout>(13)
     val viewModel: AddVisualCardViewmodel by inject()
     val mainViewModel: ThemeInfoProvider by inject()
 
@@ -43,15 +40,13 @@ class AddVisualCardFragment : Fragment() {
     ): View {
         val view = FragmentAddVisualCardBinding.inflate(inflater, container, false)
 
-        textFields.add(view.question)
-
         view.answers.adapter = adapter
-        adapter.submitList(viewModel.answers)
+        adapter.submitList(viewModel.getAnswers())
 
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
-            adapter.submitList(viewModel.answers)
-            adapter.notifyItemInserted(viewModel.answers.size)
+            adapter.submitList(viewModel.getAnswers())
+            adapter.notifyItemInserted(viewModel.getAnswers().size)
         }
 
         val themeId = mainViewModel.getThemeId()
@@ -63,7 +58,6 @@ class AddVisualCardFragment : Fragment() {
 
         view.continueBtn.setOnClickListener {
             val answers = adapter.getAllAnswers()
-
             AlertDialog.Builder(context)
                 .setTitle("Creation card")
                 .setMessage("Do you want to continue creation or add this card and exit?")
@@ -77,11 +71,10 @@ class AddVisualCardFragment : Fragment() {
                         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
                         monthNumber = Date().month,
                     )
-                    textFields.forEach {
-                        it.editText?.text?.clear()
-                    }
                     view.Title.requestFocus()
                     view.addPhoto.setBackgroundResource(R.drawable.baseline_image_search_24)
+                    view.questionInputText.text?.clear()
+                    initEmptyAnswers()
                 }
                 .setNegativeButton(
                     R.string.save_and_exit,
@@ -140,5 +133,14 @@ class AddVisualCardFragment : Fragment() {
             width = (height * bitmapRatio).toInt()
         }
         return Bitmap.createScaledBitmap(image, width, height, true)
+    }
+
+    private fun initEmptyAnswers() {
+        adapter.clear()
+        val size = viewModel.getAnswers().size-1
+        viewModel.reInitAnswers()
+        adapter.submitList(viewModel.getAnswers())
+        adapter.notifyItemRangeRemoved(1, size)
+        adapter.notifyItemChanged(0)
     }
 }

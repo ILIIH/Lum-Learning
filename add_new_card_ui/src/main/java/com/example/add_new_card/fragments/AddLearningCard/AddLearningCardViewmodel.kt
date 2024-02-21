@@ -1,5 +1,6 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,10 +11,15 @@ import kotlinx.coroutines.launch
 
 class AddLearningCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
-    val answers = mutableListOf(Answer("", "", true))
+    private var _answers = mutableListOf(Answer("", "", true))
+    fun getAnswers():List<Answer>  = _answers
 
+    fun reInitAnswers() {
+        _answers.clear()
+        _answers.add(Answer("", "", true))
+    }
     fun addAnswer() {
-        answers.add(Answer("", "", true))
+        _answers.add(Answer("", "", true))
     }
 
     fun addNewCard(

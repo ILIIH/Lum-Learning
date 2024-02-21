@@ -64,6 +64,7 @@
                 android:layout_marginRight="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/question_input_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter quesstion"

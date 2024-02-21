@@ -25,16 +25,13 @@ import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
-import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AddAudioCardFragment : Fragment() {
 
-    val textFields = ArrayList<TextInputLayout>(13)
     val adapter = AnswersAdapters()
 
     lateinit var mr: MediaRecorder
@@ -47,18 +44,16 @@ class AddAudioCardFragment : Fragment() {
     ): View {
         val view = FragmentAddAudioCardBinding.inflate(inflater, container, false)
 
-        textFields.add(view.question)
-
         view.answers.adapter = adapter
-        adapter.submitList(viewModel.answers)
+        adapter.submitList(viewModel.getAnswers())
 
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
-            adapter.submitList(viewModel.answers)
-            adapter.notifyItemInserted(viewModel.answers.size)
+            adapter.submitList(viewModel.getAnswers())
+            adapter.notifyItemInserted(viewModel.getAnswers().size)
         }
 
-        viewModel._ciclableStopBtn.observe(viewLifecycleOwner) { status ->
+        viewModel._clickableStopBtn.observe(viewLifecycleOwner) { status ->
             if (status) {
                 view.stopRecord.setBackgroundResource(R.drawable.baseline_stop_circle_24)
             } else {
@@ -68,10 +63,10 @@ class AddAudioCardFragment : Fragment() {
 
         val themeId = mainViewModel.getThemeId()
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S) {
-            mr = MediaRecorder(requireContext())
+        mr = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S) {
+            MediaRecorder(requireContext())
         } else {
-            mr = MediaRecorder()
+            MediaRecorder()
         }
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
             != PackageManager.PERMISSION_GRANTED
@@ -123,6 +118,9 @@ class AddAudioCardFragment : Fragment() {
                         currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
                         monthNumber = Date().month,
                     )
+                    view.questionInputText.text?.clear()
+                    adapter.clear()
+                    initEmptyAnswers()
                 }
                 .setNegativeButton(
                     R.string.save_and_exit,
@@ -136,7 +134,6 @@ class AddAudioCardFragment : Fragment() {
 
                     )
                     hideKeyboard(activity as Activity)
-
                     findNavController().popBackStack()
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)
@@ -151,5 +148,13 @@ class AddAudioCardFragment : Fragment() {
             arrayOf<String>(RECORD_AUDIO, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE),
             1,
         )
+    }
+    private fun initEmptyAnswers() {
+        adapter.clear()
+        val size = viewModel.getAnswers().size-1
+        viewModel.reInitAnswers()
+        adapter.submitList(viewModel.getAnswers())
+        adapter.notifyItemRangeRemoved(1, size)
+        adapter.notifyItemChanged(0)
     }
 }

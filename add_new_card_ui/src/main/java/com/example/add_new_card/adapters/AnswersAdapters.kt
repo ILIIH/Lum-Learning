@@ -22,20 +22,16 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
         return AnswerItemViewHolder(view)
     }
 
-    fun getAllAnswers(): List<Answer> {
-        val answers = mutableListOf<Answer>()
-        for (binding in bindings) {
-            answers.add(
-                Answer(
-                    answer = binding.answer.text.toString(),
-                    description = binding.answerHint.text.toString(),
-                    correct = binding.answerTrue.isChecked,
-                ),
-            )
-        }
-        return answers
+    fun clear() {
+        bindings.clear()
     }
-
+    fun getAllAnswers() = bindings.map {
+            Answer(
+            answer = it.answer.text.toString(),
+            description = it.answerHint.text.toString(),
+            correct = it.answerTrue.isChecked,
+        )
+    }
     override fun onBindViewHolder(holder: AnswerItemViewHolder, position: Int) {
         holder.bind()
     }
@@ -44,6 +40,8 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
         private val binding: AnswerAdapterItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+            clearAnswerItem()
+
             binding.answerTrue.setOnClickListener { }
             binding.hint.setOnClickListener {
                 binding.answerHintLayout.visibility = if (binding.answerHintLayout.visibility == View.VISIBLE) {
@@ -53,6 +51,14 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
                 }
             }
             bindings.add(binding)
+        }
+
+        private fun clearAnswerItem() {
+            binding.answer.text.clear()
+            binding.hint.isChecked = false
+            binding.answerHint.text.clear()
+            binding.answerHintLayout.visibility = View.GONE
+            binding.answerTrue.isChecked = false
         }
     }
 

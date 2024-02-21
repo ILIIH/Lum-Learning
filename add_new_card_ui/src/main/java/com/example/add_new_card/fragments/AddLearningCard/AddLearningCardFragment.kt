@@ -19,7 +19,6 @@ import java.util.*
 
 class AddLearningCardFragment : Fragment() {
 
-    val textFields = ArrayList<TextInputLayout>(13)
     val viewModel: AddLearningCardViewmodel by inject()
     val mainViewModel: ThemeInfoProvider by inject()
 
@@ -33,12 +32,12 @@ class AddLearningCardFragment : Fragment() {
         val view = FragmentAddLearningCardBinding.inflate(inflater, container, false)
 
         view.answers.adapter = adapter
-        adapter.submitList(viewModel.answers)
+        adapter.submitList(viewModel.getAnswers())
 
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
-            adapter.submitList(viewModel.answers)
-            adapter.notifyItemInserted(viewModel.answers.size)
+            adapter.submitList(viewModel.getAnswers())
+            adapter.notifyItemInserted(viewModel.getAnswers().size)
         }
 
         val themeType = mainViewModel.getThemeType().value!!
@@ -46,8 +45,6 @@ class AddLearningCardFragment : Fragment() {
             view.description.visibility = View.VISIBLE
             view.descriptionTextInput.visibility = View.VISIBLE
         }
-
-        textFields.add(view.question)
 
         val themeID = mainViewModel.getThemeId()
 
@@ -85,11 +82,9 @@ class AddLearningCardFragment : Fragment() {
                             monthNumber = Date().month,
                         )
                     }
-
-                    textFields.forEach {
-                        it.editText?.text?.clear()
-                    }
                     view.Title.requestFocus()
+                    view.questionInputText.text?.clear()
+                    initEmptyAnswers()
                 }
                 .setNegativeButton(
                     R.string.save_and_exit,
@@ -128,5 +123,14 @@ class AddLearningCardFragment : Fragment() {
         }
 
         return view.root
+    }
+
+    private fun initEmptyAnswers() {
+        adapter.clear()
+        val size = viewModel.getAnswers().size-1
+        viewModel.reInitAnswers()
+        adapter.submitList(viewModel.getAnswers())
+        adapter.notifyItemRangeRemoved(1, size)
+        adapter.notifyItemChanged(0)
     }
 }
