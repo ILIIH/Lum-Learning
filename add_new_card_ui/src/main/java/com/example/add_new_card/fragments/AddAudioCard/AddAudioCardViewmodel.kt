@@ -13,18 +13,23 @@ import kotlinx.coroutines.sync.withLock
 
 class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
-    private val ciclableStopBtn = MutableLiveData<Boolean>()
-    val _ciclableStopBtn: LiveData<Boolean>
-        get() = ciclableStopBtn
+    private val clickableStopBtn = MutableLiveData<Boolean>()
+    val _clickableStopBtn: LiveData<Boolean>
+        get() = clickableStopBtn
 
-    val answers = mutableListOf(Answer("", "", true))
-    val recordIdMutex = Mutex()
+    private var _answers = mutableListOf(Answer("", "", true))
+    private val recordIdMutex = Mutex()
+    private var maxId = 0
+    fun getAnswers():List<Answer>  = _answers
 
-    var maxId = 0
-
-    fun addAnswer() {
-        answers.add(Answer("", "", true))
+    fun reInitAnswers() {
+        _answers.clear()
+        _answers.add(Answer("", "", true))
     }
+    fun addAnswer() {
+        _answers.add(Answer("", "", true))
+    }
+
 
     fun getAudioFilePath(playRecord: (maxID: Int) -> Unit) {
         playRecord(maxId)
@@ -69,9 +74,9 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     }
 
     fun setStopBtnClickable() {
-        ciclableStopBtn.value = true
+        clickableStopBtn.value = true
     }
     fun setStopBtnNonClickable() {
-        ciclableStopBtn.value = false
+        clickableStopBtn.value = false
     }
 }
