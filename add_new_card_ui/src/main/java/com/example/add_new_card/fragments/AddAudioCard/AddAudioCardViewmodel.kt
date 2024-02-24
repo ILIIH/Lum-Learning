@@ -21,7 +21,6 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     private val recordIdMutex = Mutex()
     private var maxId = 0
     fun getAnswers():List<Answer>  = _answers
-
     fun reInitAnswers() {
         _answers.clear()
         _answers.add(Answer("", "", true))
@@ -29,12 +28,9 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     fun addAnswer() {
         _answers.add(Answer("", "", true))
     }
-
-
     fun getAudioFilePath(playRecord: (maxID: Int) -> Unit) {
         playRecord(maxId)
     }
-
     fun addRecordPath(startRecord: (maxID: Int) -> Unit) {
         viewModelScope.launch {
             recordIdMutex.withLock {
@@ -44,7 +40,6 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
             }
         }
     }
-
     fun addNewCard(
         themeId: Int,
         answers: List<Answer>,
@@ -72,7 +67,6 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
             }
         }
     }
-
     fun setStopBtnClickable() {
         clickableStopBtn.value = true
     }
