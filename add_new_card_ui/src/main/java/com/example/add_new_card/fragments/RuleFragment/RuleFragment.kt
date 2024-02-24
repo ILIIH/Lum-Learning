@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
+import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.databinding.FragmentRuleBinding
 import org.koin.android.ext.android.inject
 
@@ -19,7 +21,7 @@ class RuleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentRuleBinding.inflate(inflater, container, false)
+        val view: FragmentRuleBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_rule, container, false)
         themeInfoProvider.generatePrediction()
         themeInfoProvider._themeType.observe(viewLifecycleOwner) { type ->
             when (type) {
@@ -65,6 +67,7 @@ class RuleFragment : Fragment() {
 
         val themeId = requireArguments().getInt("id")
         themeInfoProvider.setThemeId(themeId)
+        view.lifecycleOwner = viewLifecycleOwner
         return view.root
     }
 }

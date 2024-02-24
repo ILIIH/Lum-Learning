@@ -13,8 +13,8 @@ import java.io.ByteArrayOutputStream
 
 class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
-    private val photo = MutableLiveData<Bitmap>()
-    val _photo: LiveData<Bitmap>
+    private val photo = MutableLiveData<Bitmap?>(null)
+    val _photo: LiveData<Bitmap?>
         get() = photo
 
     private var _answers = mutableListOf(Answer("", "", true))

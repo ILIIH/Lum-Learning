@@ -12,19 +12,26 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.isEmpty
+import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
+import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
+import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
+import com.example.core.domain.ILError
 import org.koin.android.ext.android.inject
 import java.io.File
 import java.io.FileOutputStream
@@ -42,10 +49,14 @@ class AddAudioCardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentAddAudioCardBinding.inflate(inflater, container, false)
+        val view: FragmentAddAudioCardBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_audio_card, container, false)
 
         view.answers.adapter = adapter
         adapter.submitList(viewModel.getAnswers())
+
+        view.questionInputText.addTextChangedListener {
+            view.question.error = null
+        }
 
         view.addNewAnswer.setOnClickListener {
             viewModel.addAnswer()
@@ -68,7 +79,7 @@ class AddAudioCardFragment : Fragment() {
         } else {
             MediaRecorder()
         }
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
+        if (ContextCompat.checkSelfPermission(requireContext(), RECORD_AUDIO)
             != PackageManager.PERMISSION_GRANTED
         ) {
             RequestPermissions()
@@ -80,8 +91,7 @@ class AddAudioCardFragment : Fragment() {
             mr.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             viewModel.setStopBtnClickable()
 
-            viewModel.addRecordPath {
-                    max ->
+            viewModel.addRecordPath { max ->
                 val audioFile = File(requireActivity().cacheDir, "record$max")
                 mr.setOutputFile(FileOutputStream(audioFile).fd)
                 mr.prepare()
@@ -95,8 +105,7 @@ class AddAudioCardFragment : Fragment() {
         }
 
         view.playAudio.setOnClickListener {
-            viewModel.getAudioFilePath {
-                    max ->
+            viewModel.getAudioFilePath { max ->
                 val mp = MediaPlayer.create(requireContext(), File(requireActivity().cacheDir, "record$max").toUri())
                 mp.start()
             }
@@ -118,9 +127,10 @@ class AddAudioCardFragment : Fragment() {
                         currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
                         monthNumber = Date().month,
                     )
-                    view.questionInputText.text?.clear()
-                    adapter.clear()
-                    initEmptyAnswers()
+                    if(!adapter.validateAnswers()&& !validateCard(view)){
+                        view.questionInputText.text?.clear()
+                        initEmptyAnswers()
+                    }
                 }
                 .setNegativeButton(
                     R.string.save_and_exit,
@@ -139,18 +149,29 @@ class AddAudioCardFragment : Fragment() {
                 .setIcon(R.drawable.baseline_credit_card_24)
                 .show()
         }
+        view.lifecycleOwner = viewLifecycleOwner
         return view.root
+    }
+
+    fun validateCard(view: FragmentAddAudioCardBinding): Boolean {
+        return if(view.questionInputText.text.toString().isEmpty()){
+            view.question.error = getString(R.string.enter_question)
+            view.question.requestFocus()
+            true
+        }
+        else {
+            false
+        }
     }
 
     private fun RequestPermissions() {
         ActivityCompat.requestPermissions(
             requireActivity(),
-            arrayOf<String>(RECORD_AUDIO, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE),
+            arrayOf(RECORD_AUDIO, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE),
             1,
         )
     }
     private fun initEmptyAnswers() {
-        adapter.clear()
         val size = viewModel.getAnswers().size-1
         viewModel.reInitAnswers()
         adapter.submitList(viewModel.getAnswers())

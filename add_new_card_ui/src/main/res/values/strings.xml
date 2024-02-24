@@ -8,4 +8,7 @@
     <string name="hint">Hint</string>
     <string name="visual_hint">Visual hint</string>
     <string name="true_txt">True</string>
+    <string name="enter_answer">Enter answer</string>
+    <string name="enter_hint_to_answer">Enter hint to answer</string>
+    <string name="enter_question">Enter question</string>
 </resources>

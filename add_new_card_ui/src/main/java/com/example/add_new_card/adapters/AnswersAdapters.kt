@@ -1,11 +1,16 @@
 package com.example.add_new_card.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.add_new_card.R
 import com.example.add_new_card.databinding.AnswerAdapterItemBinding
 import com.example.add_new_card_data.model.Answer
 
@@ -22,8 +27,28 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
         return AnswerItemViewHolder(view)
     }
 
-    fun clear() {
+    fun validateAnswers(): Boolean {
+        var isAnswerInvalid = false
+        bindings.forEach {
+            if(it.answer.text.isEmpty()){
+                isAnswerInvalid = true
+                it.answerLayout.setBackgroundResource(R.drawable.answer_false_text_background)
+                it.answerLayout.requestFocus()
+            }
+            else {
+                it.answerLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+            }
+            if(it.hint.isChecked &&  it.answerHint.text.isEmpty()){
+                isAnswerInvalid = true
+                it.answerHintLayout.setBackgroundResource(R.drawable.answer_false_text_background)
+                it.answerHintLayout.requestFocus()
+            }
+            else {
+                it.answerHintLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+            }
+        }
         bindings.clear()
+        return isAnswerInvalid
     }
     fun getAllAnswers() = bindings.map {
             Answer(
@@ -39,8 +64,16 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
     inner class AnswerItemViewHolder(
         private val binding: AnswerAdapterItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind() {
             clearAnswerItem()
+
+            binding.answer.addTextChangedListener {
+                binding.answerLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+            }
+            binding.answerHint.addTextChangedListener {
+                binding.answerHintLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+            }
 
             binding.answerTrue.setOnClickListener { }
             binding.hint.setOnClickListener {
