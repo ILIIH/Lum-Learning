@@ -3,16 +3,22 @@ package com.example.add_new_card.fragments.AddLearningCard
 import android.app.AlertDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isEmpty
+import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
+import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card.util.hideKeyboard
+import com.example.core.domain.ILError
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -29,7 +35,11 @@ class AddLearningCardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentAddLearningCardBinding.inflate(inflater, container, false)
+        val view: FragmentAddLearningCardBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_learning_card, container, false)
+
+        view.questionInputText.addTextChangedListener {
+            view.question.error = null
+        }
 
         view.answers.adapter = adapter
         adapter.submitList(viewModel.getAnswers())
@@ -82,9 +92,11 @@ class AddLearningCardFragment : Fragment() {
                             monthNumber = Date().month,
                         )
                     }
-                    view.Title.requestFocus()
-                    view.questionInputText.text?.clear()
-                    initEmptyAnswers()
+                    if(!adapter.validateAnswers() && !validateCard(view)){
+                        view.Title.requestFocus()
+                        view.questionInputText.text?.clear()
+                        initEmptyAnswers()
+                    }
                 }
                 .setNegativeButton(
                     R.string.save_and_exit,
@@ -121,12 +133,20 @@ class AddLearningCardFragment : Fragment() {
                 .setIcon(R.drawable.baseline_credit_card_24)
                 .show()
         }
-
+        view.lifecycleOwner = viewLifecycleOwner
         return view.root
     }
 
+    fun validateCard(view: FragmentAddLearningCardBinding): Boolean {
+        return if(view.questionInputText.text.toString().isEmpty()) {
+            view.question.error = getString(R.string.enter_question)
+            view.question.requestFocus()
+            true
+        } else {
+            false
+        }
+    }
     private fun initEmptyAnswers() {
-        adapter.clear()
         val size = viewModel.getAnswers().size-1
         viewModel.reInitAnswers()
         adapter.submitList(viewModel.getAnswers())

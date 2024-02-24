@@ -1,116 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/add_new_answer_btn_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/rounded_background"
-    android:elevation="8dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="26dp"
-    android:layout_marginBottom="26dp"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/add_answer_btn"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:background="@drawable/add_new_answer"
-        android:scaleType="centerCrop"
-        android:src="@drawable/add_new_answer"
-        android:translationZ="999dp"
-        android:elevation="20dp"
-        />
+    <data>
+    </data>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/add_new_answer_btn_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.1"
         android:background="@drawable/rounded_background"
         android:elevation="8dp"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="26dp"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/answer_text_background">
+        <ImageView
+            android:id="@+id/add_answer_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:background="@drawable/add_new_answer"
+            android:scaleType="centerCrop"
+            android:src="@drawable/add_new_answer"
+            android:translationZ="999dp"
+            android:elevation="20dp"
+            />
 
-            <EditText
-                android:focusable="false"
-                android:id="@+id/answer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="@font/inriasanslight"
-                android:hint="Enter answer"
-                android:padding="14dp" />
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:alpha="0.1"
+            android:background="@drawable/rounded_background"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <CheckBox
-                android:id="@+id/answer_true"
-                style="@style/card_checkbox"
-                android:text="" />
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inriasanslight"
-                android:text="@string/true_txt" />
+                android:layout_marginTop="20dp"
+                android:background="@drawable/answer_true_text_background">
 
-            <CheckBox
-                android:id="@+id/hint"
-                style="@style/card_checkbox"
-                android:text="" />
+                <EditText
+                    android:focusable="false"
+                    android:id="@+id/answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/inriasanslight"
+                    android:hint="Enter answer"
+                    android:padding="14dp" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@string/hint"
-                android:text="@string/hint" />
-
-            <CheckBox
-                android:id="@+id/visual_hint"
-                style="@style/card_checkbox"
-                android:text="" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@string/hint"
-                android:text="@string/visual_hint" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/answer_hint_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/answer_text_background"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/answer_hint"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="@font/inriasanslight"
-                android:hint="Enter hint to answer"
-                android:padding="14dp" />
-        </RelativeLayout>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <CheckBox
+                    android:id="@+id/answer_true"
+                    style="@style/card_checkbox"
+                    android:text="" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inriasanslight"
+                    android:text="@string/true_txt" />
+
+                <CheckBox
+                    android:id="@+id/hint"
+                    style="@style/card_checkbox"
+                    android:text="" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@string/hint"
+                    android:text="@string/hint" />
+
+                <CheckBox
+                    android:id="@+id/visual_hint"
+                    style="@style/card_checkbox"
+                    android:text="" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@string/hint"
+                    android:text="@string/visual_hint" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/answer_hint_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/answer_true_text_background"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/answer_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/inriasanslight"
+                    android:hint="Enter hint to answer"
+                    android:padding="14dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
 
 
-</FrameLayout>
+    </FrameLayout>
+</layout>

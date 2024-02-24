@@ -1,89 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="26dp"
-    android:layout_marginBottom="26dp"
-    android:background="@drawable/rounded_background"
-    android:elevation="8dp"
-    android:orientation="vertical"
-    android:padding="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/answer_text_background">
-
-        <EditText
-            android:id="@+id/answer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:fontFamily="@font/inriasanslight"
-            android:hint="Enter answer"
-            android:padding="14dp" />
-    </RelativeLayout>
+    <data>
+    </data>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        >
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/rounded_background"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <CheckBox
-            android:id="@+id/answer_true"
-            android:text=""
-            style="@style/card_checkbox" />
-        <TextView
+        <RelativeLayout
+            android:id="@+id/answer_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/true_txt"
-            android:fontFamily="@font/inriasanslight"
-            />
+            android:layout_marginTop="20dp"
+            android:background="@drawable/answer_true_text_background">
 
-        <CheckBox
-            android:id="@+id/hint"
-            style="@style/card_checkbox"
-            android:text="" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hint"
-            android:fontFamily="@font/inriasanslight"
-            />
-        <CheckBox
-            android:id="@+id/visual_hint"
-            android:text=""
-            style="@style/card_checkbox"  />
+            <EditText
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/inriasanslight"
+                android:hint="@string/enter_answer"
+                android:padding="14dp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:maxLines="1"/>
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/visual_hint"
-            android:fontFamily="@string/hint"
-            />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/answer_hint_layout"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/answer_text_background">
-
-        <EditText
-            android:id="@+id/answer_hint"
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:fontFamily="@font/inriasanslight"
-            android:hint="Enter hint to answer"
-            android:padding="14dp" />
-    </RelativeLayout>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
 
-</LinearLayout>
+            <CheckBox
+                android:id="@+id/answer_true"
+                android:text=""
+                style="@style/card_checkbox" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/true_txt"
+                android:fontFamily="@font/inriasanslight"
+                />
+
+            <CheckBox
+                android:id="@+id/hint"
+                style="@style/card_checkbox"
+                android:text="" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint"
+                android:fontFamily="@font/inriasanslight"
+                />
+            <CheckBox
+                android:id="@+id/visual_hint"
+                android:text=""
+                style="@style/card_checkbox"  />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/visual_hint"
+                android:fontFamily="@string/hint"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/answer_hint_layout"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/answer_true_text_background">
+
+            <EditText
+                android:id="@+id/answer_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/inriasanslight"
+                android:hint="@string/enter_hint_to_answer"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:padding="14dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
