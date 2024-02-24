@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="onnx-jvm">
-    <output-path>$PROJECT_DIR$/onnx/build/libs</output-path>
-    <root id="archive" name="onnx-jvm.jar">
-      <element id="module-output" name="Memorizable.onnx.jvmMain" />
-    </root>
-  </artifact>
-</component>

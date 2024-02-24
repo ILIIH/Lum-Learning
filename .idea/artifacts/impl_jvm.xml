@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="impl-jvm">
-    <output-path>$PROJECT_DIR$/impl/build/libs</output-path>
-    <root id="archive" name="impl-jvm.jar">
-      <element id="module-output" name="Memorizable.impl.jvmMain" />
-    </root>
-  </artifact>
-</component>
