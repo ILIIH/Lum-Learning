@@ -21,12 +21,11 @@ import com.example.ask_answer_ui.viewModel.cardProvider
 import org.koin.android.ext.android.inject
 import java.util.*
 
-class LearningCard : Fragment() {
+class LearningCardFragment : Fragment() {
 
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
