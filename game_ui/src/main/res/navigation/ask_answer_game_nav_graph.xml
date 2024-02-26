@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_m_c" />
     <fragment
         android:id="@+id/learningCard"
-        android:name="com.example.ask_answer_ui.fragments.LearningCard"
+        android:name="com.example.ask_answer_ui.fragments.LearningCardFragment"
         android:label="fragment_learning_card"
         tools:layout="@layout/fragment_learning_card" />
     <include app:graph="@navigation/add_graph_navgraph" />

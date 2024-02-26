@@ -140,8 +140,9 @@ class SAFragment : Fragment() {
         handler.removeCallbacks(updateProgress)
         handler.post(updateProgress)
 
-        // Start playback
-        mp.start()
+        if(::mp.isInitialized){
+            mp.start()
+        }
     }
 
     // Runnable to update progress
@@ -155,7 +156,9 @@ class SAFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mp.stop()
+        if(::mp.isInitialized){
+            mp.stop()
+        }
     }
     fun goToNextCard() {
         Handler().postDelayed({

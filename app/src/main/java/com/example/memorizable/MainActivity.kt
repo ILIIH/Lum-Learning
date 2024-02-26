@@ -1,23 +1,26 @@
 package com.example.memorizable
 
-import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.work.*
-import com.example.ai.workers.*
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.ai.workers.DayPredictionWorker
+import com.example.ai.workers.MnemoTypeWorker
+import com.example.ai.workers.SpacedFactorWorker
+import com.example.ai.workers.ThemeTypeWorker
+import com.example.ai.workers.TimeLearningWorker
 import com.example.core.data.usecases.SetRandomLearningMethodType
 import com.example.navigation.CoreNavigation
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val navigator: CoreNavigation by inject()
-    val initMethodType: SetRandomLearningMethodType by inject()
-
+    private val navigator: CoreNavigation by inject()
+    private val initMethodType: SetRandomLearningMethodType by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,12 +32,24 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
+
         navigator.bind(navController)
 
         initWorkers()
     }
 
-    fun initWorkers() {
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        if(!resources.getStringArray(R.array.return_blocked_fragments_labels)
+            .contains(navController.currentDestination?.label)){
+            super.onBackPressed()
+        }
+    }
+
+    private fun initWorkers() {
         val mnemoTypeWorkRequest = OneTimeWorkRequestBuilder<MnemoTypeWorker>().build()
         WorkManager.getInstance().enqueue(mnemoTypeWorkRequest)
 

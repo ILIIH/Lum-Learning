@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Memorizable</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">IntelliLearn</string>
+    <string-array name="return_blocked_fragments_labels">
+        <item>fragment_ask_answer</item>
+        <item>fragment_learning_card</item>
+        <item>SAFragment</item>
+    </string-array>
 </resources>

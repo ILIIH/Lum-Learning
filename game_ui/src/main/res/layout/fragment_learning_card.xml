@@ -7,7 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/main_background"
 android:id="@+id/motion_layout"
-tools:context=".fragments.LearningCard"
+tools:context=".fragments.LearningCardFragment"
 android:orientation="vertical"
     >
 
