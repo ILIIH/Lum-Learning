@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
             android:layout_marginTop="40dp"
             android:elevation="12dp"
             app:cardCornerRadius="15dp"
@@ -36,8 +37,8 @@
 
             <ImageView
                 android:id="@+id/assosiation_img"
-                android:layout_width="250dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@drawable/assosiation_photo" />
         </androidx.cardview.widget.CardView>
