@@ -20,10 +20,6 @@ class ThemeTypeWorker(
 ) : CoroutineWorker(context, workerParams), KoinComponent {
 
     override suspend fun doWork(): Result {
-        Log.i(
-            "Prediction2",
-            "ThemeTypeWorker started}",
-        )
         val dataSet = downloadDataset()
         if (dataSet.size > 15) {
             val model = Model(
@@ -62,10 +58,6 @@ class ThemeTypeWorker(
             )
 
             saveMnemoType(prediction.returnFirstRow())
-            Log.i(
-                "Prediction2",
-                "ThemeTypeWorker ended}",
-            )
             return Result.success()
         } else {
             return Result.success()
@@ -73,7 +65,7 @@ class ThemeTypeWorker(
     }
 
     private suspend fun saveMnemoType(prediction: DoubleArray) {
-        // saveThemeTypePrediction.execute(prediction)
+         saveThemeTypePrediction.execute(prediction)
     }
 
     private suspend fun getBestPerformanceMetrics(): DoubleArray {
