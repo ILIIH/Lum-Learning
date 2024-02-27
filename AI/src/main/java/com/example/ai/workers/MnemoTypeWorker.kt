@@ -26,10 +26,6 @@ class MnemoTypeWorker(
     CoroutineWorker(context, workerParams), KoinComponent {
 
     override suspend fun doWork(): Result {
-        Log.i(
-            "Prediction2",
-            "Worker started}",
-        )
         val dataSet = downloadDataset()
         if (dataSet.size > 15) {
             val model = Model(
@@ -68,10 +64,6 @@ class MnemoTypeWorker(
             )
 
             saveMnemoType(prediction.returnFirstRow())
-            Log.i(
-                "Prediction2",
-                "Worker ended",
-            )
             return Result.success()
         } else {
             return Result.success()

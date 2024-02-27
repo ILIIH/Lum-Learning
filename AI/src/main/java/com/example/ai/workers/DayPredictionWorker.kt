@@ -21,10 +21,6 @@ class DayPredictionWorker(
     CoroutineWorker(context, workerParams), KoinComponent {
 
     override suspend fun doWork(): Result {
-        Log.i(
-            "Prediction2",
-            "DayPredictionWorker started}",
-        )
         val dataSet = downloadDataset()
         if(dataSet.size > 15)  {
             val model = Model(
@@ -63,17 +59,13 @@ class DayPredictionWorker(
             )
 
             saveDayPredictionType(prediction.returnFirstRow())
-            Log.i(
-                "Prediction2",
-                "DayPredictionWorker ended}",
-            )
             return Result.success()
         }
         else return Result.success()
     }
 
     private suspend fun saveDayPredictionType(prediction: DoubleArray) {
-        //  saveDayPrediction.execute(prediction)
+           saveDayPrediction.execute(prediction)
     }
 
     private suspend fun getBestPerformanceMetrics(): DoubleArray {

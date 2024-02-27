@@ -8,17 +8,17 @@ import androidx.room.PrimaryKey
 class GameResults(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "K")
-    val K: Double,
+    val K: Double = 0.0,
     @ColumnInfo(name = "D")
-    val D: Double,
+    val D: Double = 0.0,
     @ColumnInfo(name = "Ch")
-    val Ch: Double,
+    val Ch: Double = 0.0,
     @ColumnInfo(name = "T")
-    val T: Double,
+    val T: Double = 0.0,
     @ColumnInfo(name = "Tw1")
-    val Tw1: Double,
+    val Tw1: Double = 0.0,
     @ColumnInfo(name = "Tw2")
-    val Tw2: Double,
+    val Tw2: Double = 0.0,
     @ColumnInfo(name = "CurrentDay")
     val CurrentDay: Int,
     @ColumnInfo(name = "learningMethodId")
