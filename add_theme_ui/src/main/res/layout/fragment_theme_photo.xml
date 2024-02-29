@@ -40,7 +40,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:backgroundTint="#000000"
+            android:backgroundTint="@color/secondary"
             android:text="@string/Continue"
             android:textColor="#FFF"
             android:layout_gravity="bottom"

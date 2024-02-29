@@ -24,6 +24,9 @@
     <string name="theme_formula">Theme-formula</string>
     <string name="open_theme">Open-theme</string>
     <string name="regular_theme">Regular-theme</string>
-
+    <string name="regular_theme_description">This is the most regular theme; it will include all types of mnemonics. AI will choose the type of mnemonic that fits you better and which is better suited. It is the best type to start the learning process.</string>
+    <string name="open_theme_description">This theme will foster your ability to describe and self-reference your previous experiences. You will be involved in a self-retrospective learning process.</string>
+    <string name="theme_formula_description">This theme will fit best to learn large formulas, equations, chemical rules, and so on. The theme includes a formula builder that will make your card creation process better and faster.</string>
+    <string name="theme_mix_description">This theme will include all types of themes. This theme type will be fitting for general topics like "Philosophy," where different types of entities can be encountered.</string>
 
 </resources>

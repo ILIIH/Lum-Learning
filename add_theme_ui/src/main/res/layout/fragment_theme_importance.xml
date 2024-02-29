@@ -38,7 +38,7 @@
             android:id="@+id/high_importance_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:layout_marginLeft="15dp"
@@ -49,14 +49,21 @@
             android:paddingRight="10dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="5dp">
-
-            <ImageView
-                android:id="@+id/high_icon"
-                android:layout_margin="20dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/high"
-                />
+            <FrameLayout
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_white_background"
+                android:layout_margin="20dp" >
+                <ImageView
+                    android:id="@+id/high_icon"
+                    android:layout_margin="20dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/high"
+                    />
+            </FrameLayout>
 
             <TextView
                 android:fontFamily="@font/inriasansbold"
@@ -72,7 +79,7 @@
             android:id="@+id/middle_level_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -94,19 +101,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/middle" />
-
-            <ImageView
-                android:id="@+id/middle_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:src="@drawable/middle" />
+            <FrameLayout
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_white_background"
+                android:layout_margin="20dp" >
+                <ImageView
+                    android:id="@+id/middle_icon"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/middle" />
+            </FrameLayout>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/low_importance_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -118,13 +132,21 @@
             app:cardElevation="10dp"
             app:cardMaxElevation="5dp">
 
-            <ImageView
-                android:id="@+id/low_icon"
-                android:layout_margin="20dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/low"
-                />
+            <FrameLayout
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_white_background"
+                android:layout_margin="20dp" >
+                <ImageView
+                    android:id="@+id/low_icon"
+                    android:layout_margin="20dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/low"
+                    />
+            </FrameLayout>
 
             <TextView
                 android:fontFamily="@font/inriasansbold"

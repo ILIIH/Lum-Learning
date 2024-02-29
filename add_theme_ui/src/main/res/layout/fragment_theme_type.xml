@@ -30,115 +30,229 @@
             android:id="@+id/regular_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:paddingLeft="10dp"
             android:gravity="center"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="50dp"
             android:paddingRight="10dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="5dp">
 
-
-            <TextView
-                android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:layout_margin="30dp"
-                android:gravity="center_vertical"
-                android:id="@+id/simple_them_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="end"
                 android:layout_height="match_parent"
-                android:text="@string/regular_theme" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/simple_them_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="30dp"
+                    android:fontFamily="@font/inriasansbold"
+                    android:gravity="center_vertical"
+                    android:text="@string/regular_theme"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:id="@+id/regular_theme_more_info_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/more_info_icon" />
+            </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/simple_them_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/inriasanslight"
+                android:gravity="center_vertical"
+                android:text="@string/regular_theme_description"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/open_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:paddingLeft="10dp"
             android:gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:paddingRight="10dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="5dp">
 
-
-            <TextView
-                android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:layout_margin="30dp"
-                android:gravity="center_vertical"
-                android:id="@+id/open_theme_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="end"
                 android:layout_height="match_parent"
-                android:text="@string/open_theme" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/open_theme_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="30dp"
+                    android:fontFamily="@font/inriasansbold"
+                    android:gravity="center_vertical"
+                    android:text="@string/open_theme"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:id="@+id/open_theme_more_info_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/more_info_icon" />
+            </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/open_them_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/inriasanslight"
+                android:gravity="center_vertical"
+                android:text="@string/open_theme_description"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/theme_formula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:paddingLeft="10dp"
             android:gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:paddingRight="10dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="5dp">
 
-
-            <TextView
-                android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:layout_margin="30dp"
-                android:gravity="center_vertical"
-                android:id="@+id/theme_formula_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="end"
                 android:layout_height="match_parent"
-                android:text="@string/theme_formula" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/theme_formula_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="30dp"
+                    android:fontFamily="@font/inriasansbold"
+                    android:gravity="center_vertical"
+                    android:text="@string/theme_formula"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:id="@+id/theme_formula_more_info_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/more_info_icon" />
+            </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/them_formula_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/inriasanslight"
+                android:gravity="center_vertical"
+                android:text="@string/theme_formula_description"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/mixed_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_black_background"
+            android:background="@drawable/rounded_primary_background"
             android:elevation="8dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:paddingLeft="10dp"
             android:gravity="center"
-            android:layout_marginBottom="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:paddingRight="10dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="5dp">
 
-
-            <TextView
-                android:fontFamily="@font/inriasansbold"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:layout_margin="30dp"
-                android:gravity="center_vertical"
-                android:id="@+id/theme_mixed_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="end"
                 android:layout_height="match_parent"
-                android:text="@string/theme_mixed" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mixed_theme_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="30dp"
+                    android:fontFamily="@font/inriasansbold"
+                    android:gravity="center_vertical"
+                    android:text="@string/theme_mixed"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:id="@+id/mixed_theme_more_info_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/more_info_icon" />
+            </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/mixed_them_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/inriasanslight"
+                android:gravity="center_vertical"
+                android:text="@string/theme_mix_description"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
+
 
         </LinearLayout>
 

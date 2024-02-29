@@ -1,12 +1,9 @@
 package com.example.add_new_card.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +33,7 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
                 it.answerLayout.requestFocus()
             }
             else {
-                it.answerLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+                it.answerLayout.setBackgroundResource(com.example.core.R.drawable.rounded_edit_text_background)
             }
             if(it.hint.isChecked &&  it.answerHint.text.isEmpty()){
                 isAnswerInvalid = true
@@ -44,7 +41,7 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
                 it.answerHintLayout.requestFocus()
             }
             else {
-                it.answerHintLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+                it.answerHintLayout.setBackgroundResource(com.example.core.R.drawable.rounded_edit_text_background)
             }
         }
         bindings.clear()
@@ -69,10 +66,10 @@ class AnswersAdapters : ListAdapter<Answer, AnswersAdapters.AnswerItemViewHolder
             clearAnswerItem()
 
             binding.answer.addTextChangedListener {
-                binding.answerLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+                binding.answerLayout.setBackgroundResource(com.example.core.R.drawable.rounded_edit_text_background)
             }
             binding.answerHint.addTextChangedListener {
-                binding.answerHintLayout.setBackgroundResource(R.drawable.answer_true_text_background)
+                binding.answerHintLayout.setBackgroundResource(com.example.core.R.drawable.rounded_edit_text_background)
             }
 
             binding.answerTrue.setOnClickListener { }

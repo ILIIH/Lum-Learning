@@ -5,6 +5,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="half_transparent_background">#99000000</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="secondary_color">#B0F1FF</color>
+    <color name="secondary">#e68a4d</color>
     <color name="error_red">#F65858</color>
+    <color name="primary">#f3e5d7</color>
+
 </resources>
