@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.example.ask_answer_ui.R
 
 class timeView @JvmOverloads constructor(
     context: Context,
@@ -35,7 +37,7 @@ class timeView @JvmOverloads constructor(
             color = Color.WHITE
         }
         backgroundTimeIndex.apply {
-            color = Color.parseColor("#E2E3E5")
+            color = ContextCompat.getColor(context, com.example.core.R.color.primary)
         }
     }
 

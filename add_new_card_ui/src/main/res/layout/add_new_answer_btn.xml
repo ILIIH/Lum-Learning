@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/answer_true_text_background">
+                android:background="@drawable/rounded_edit_text_background">
 
                 <EditText
                     android:focusable="false"
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/answer_true_text_background"
+                android:background="@drawable/rounded_edit_text_background"
                 android:visibility="gone">
 
                 <EditText

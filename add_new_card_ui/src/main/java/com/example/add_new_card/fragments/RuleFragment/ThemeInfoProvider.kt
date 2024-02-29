@@ -18,7 +18,6 @@ class ThemeInfoProvider(private val getPrediction: getMnemoTypePrediction) {
     fun generatePrediction() {
         GlobalScope.launch {
             val prediction = getPrediction.execute()
-            Log.i("pred_log", prediction.toString())
             themeType.postValue(prediction)
         }
     }
