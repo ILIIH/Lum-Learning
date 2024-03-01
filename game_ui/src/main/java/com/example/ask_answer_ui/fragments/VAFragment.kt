@@ -2,14 +2,12 @@ package com.example.ask_answer_ui.fragments
 
 import android.graphics.BitmapFactory
 import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -28,7 +26,6 @@ class VAFragment : Fragment() {
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

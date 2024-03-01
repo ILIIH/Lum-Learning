@@ -1,28 +1,23 @@
 package com.example.add_theme_ui.fragments
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import com.example.add_theme_ui.databinding.FragmentThemePhotoBinding
 import com.example.add_theme_ui.viewModels.ThemeAddViewModel
-import com.example.core.ui.BaseFragment
+import com.example.core.data.PhotoManager
+import com.example.core.ui.MediaFragment
 import org.koin.android.ext.android.inject
 
-class ThemePhotoFragment : BaseFragment() {
+class ThemePhotoFragment : MediaFragment() {
 
-    val viewModule: ThemeAddViewModel by inject()
+    private val viewModule: ThemeAddViewModel by inject()
+    private val photoManage: PhotoManager by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,46 +32,34 @@ class ThemePhotoFragment : BaseFragment() {
         }
 
         viewModule._photo.observe(requireActivity()) {
-            view.themeAvatar.setImageDrawable(null)
-            view.themeAvatar.setImageBitmap(it)
+            view.themePhoto.setImageDrawable(null)
+            view.themePhoto.setImageBitmap(it)
         }
 
-        view.themeAvatar.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            launcher.launch(intent)
+        view.themePhoto.setOnClickListener {
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val chooserIntent = Intent.createChooser(galleryIntent, "Choose an option").apply {
+                putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
+            }
+            launcher.launch(chooserIntent)
         }
         return view.root
     }
 
-    private val launcher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-        ) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK &&
-                result.data != null
-            ) {
-                val photoUri: Uri = result.data!!.data!!
-                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, photoUri))
-                } else {
-                    MediaStore.Images.Media.getBitmap(requireContext().contentResolver, photoUri)
-                }
-                viewModule.setPhoto(getResizedBitmap(bitmap))
-                viewModule.setPhotoURI(photoUri.toString())
-            }
-        }
-
-    private fun getResizedBitmap(image: Bitmap, maxSize: Int = 1000): Bitmap {
-        var width: Int = image.getWidth()
-        var height: Int = image.getHeight()
-        val bitmapRatio = width.toFloat() / height.toFloat()
-        if (bitmapRatio > 1) {
-            width = maxSize
-            height = (width / bitmapRatio).toInt()
-        } else {
-            height = maxSize
-            width = (height * bitmapRatio).toInt()
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true)
+    override fun saveGalleryImageData(uri: Uri) {
+        val bitmap =photoManage.imageDecode(uri)
+        viewModule.setPhoto(photoManage.getResizedBitmap(bitmap,1000))
+        viewModule.setPhotoURI(uri.toString())
     }
+    override fun saveCameraImageData(bitmap: Bitmap){
+        viewModule.setPhoto(photoManage.getResizedBitmap(bitmap, 1000))
+        val photoUri =  photoManage.saveImageToGallery(bitmap)
+        if(photoUri != null) {
+            viewModule.setPhotoURI(photoUri.toString())
+        }
+    }
+
+
+
 }
