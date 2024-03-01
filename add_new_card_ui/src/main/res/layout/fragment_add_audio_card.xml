@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/add_new_title_background"
             android:gravity="center_horizontal"
+            android:elevation="20dp"
             android:orientation="vertical">
 
             <TextView

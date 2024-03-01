@@ -155,10 +155,10 @@ class SAFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         if(::mp.isInitialized){
             mp.stop()
         }
+        super.onDestroy()
     }
     fun goToNextCard() {
         Handler().postDelayed({
