@@ -44,14 +44,15 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_edit_text_background">
 
-                <EditText
+                <TextView
+                    android:focusableInTouchMode="true"
                     android:focusable="false"
                     android:id="@+id/answer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:fontFamily="@font/inriasanslight"
-                    android:hint="Enter answer"
+                    android:text="@string/enter_answer"
                     android:padding="14dp" />
             </RelativeLayout>
 
