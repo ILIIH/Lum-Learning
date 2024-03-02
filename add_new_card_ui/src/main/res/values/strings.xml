@@ -11,4 +11,5 @@
     <string name="enter_answer">Enter answer</string>
     <string name="enter_hint_to_answer">Enter hint to answer</string>
     <string name="enter_question">Enter question</string>
+    <string name="enter_quesstion">Enter quesstion</string>
 </resources>

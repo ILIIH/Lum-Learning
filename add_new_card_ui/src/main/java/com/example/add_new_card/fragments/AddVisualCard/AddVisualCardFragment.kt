@@ -32,12 +32,14 @@ class AddVisualCardFragment : MediaFragment() {
     private val adapter = AnswersAdapters()
     private val photoManage: PhotoManager by inject()
 
+    private lateinit var view: FragmentAddVisualCardBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val view: FragmentAddVisualCardBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_visual_card, container, false)
+        view = DataBindingUtil.inflate(inflater, R.layout.fragment_add_visual_card, container, false)
 
         view.questionInputText.addTextChangedListener {
             view.question.error = null
@@ -55,8 +57,12 @@ class AddVisualCardFragment : MediaFragment() {
         val themeId = mainViewModel.getThemeId()
 
         view.addPhotoLayout.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            launcher.launch(intent)
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val chooserIntent = Intent.createChooser(galleryIntent, getString(com.example.core.R.string.choose_an_option)).apply {
+                putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
+            }
+            launcher.launch(chooserIntent)
         }
 
         view.continueBtn.setOnClickListener {
@@ -133,8 +139,10 @@ class AddVisualCardFragment : MediaFragment() {
     override fun saveGalleryImageData(uri: Uri) {
         val bitmap =photoManage.imageDecode(uri)
         viewModel.setPhoto(photoManage.getResizedBitmap(bitmap,1000))
+        view.overlayPhoto.alpha = 0.5f
     }
     override fun saveCameraImageData(bitmap: Bitmap){
         viewModel.setPhoto(photoManage.getResizedBitmap(bitmap, 1000))
+        view.overlayPhoto.alpha = 0.5f
     }
 }
