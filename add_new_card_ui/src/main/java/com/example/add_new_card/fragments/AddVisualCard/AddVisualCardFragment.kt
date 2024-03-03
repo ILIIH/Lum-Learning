@@ -82,7 +82,7 @@ class AddVisualCardFragment : MediaFragment() {
                     )
                     if(!adapter.validateAnswers() && !validateCard(view)){
                         view.Title.requestFocus()
-                        view.addPhoto.setBackgroundResource(R.drawable.baseline_image_search_24)
+                        view.addPhoto.setImageDrawable(null)
                         view.questionInputText.text?.clear()
                         initEmptyAnswers()
                     }
@@ -122,7 +122,7 @@ class AddVisualCardFragment : MediaFragment() {
             result = true
         }
 
-        if(viewModel._photo.value != null){
+        if(viewModel._photo.value == null){
             showError(ILError.VALIDATION_PHOTO)
             result = true
         }
