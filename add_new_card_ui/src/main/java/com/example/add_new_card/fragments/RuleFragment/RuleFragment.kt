@@ -54,8 +54,6 @@ class RuleFragment : Fragment() {
                 }
             }
             view.startButton.setOnClickListener {
-                findNavController().navigate(R.id.to_addVA_Fragment)
-                /*
                 when (type) {
                     1 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TO_DO_CHANGE
                     2 -> findNavController().navigate(R.id.to_addLearningCardFragment)
@@ -64,7 +62,6 @@ class RuleFragment : Fragment() {
                     5 -> findNavController().navigate(R.id.to_addLearningCardFragment)
                     6 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TO_DO_CHANGE
                 }
-                 */
             }
         }
 
