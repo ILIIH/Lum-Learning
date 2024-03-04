@@ -1,6 +1,7 @@
 package com.example.add_new_card_data.model
 
 data class SA_Card(
+    val id: Int = 0,
     val audioFileId: Int,
     val themeId: Int,
     val question: String,
@@ -46,6 +47,7 @@ fun SA_Card.changeRA(thisGameResult: Boolean, currentMonth: Int): SA_Card {
     }
 
     val nexAL = SA_Card(
+        id = this.id,
         themeId = this.themeId,
         question = this.question,
         answers = this.answers,

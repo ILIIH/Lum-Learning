@@ -40,7 +40,6 @@ class CardListAdapter(private val deleteCard: (id: Int, type: CardType) -> Unit)
             with(binding) {
                 question.text = cardItem.question
                 deleteBtn.setOnClickListener {
-                    cardItem.type
                     deleteCard(cardItem.id, cardItem.type)
                     list.remove(cardItem)
                     notifyDataSetChanged()
