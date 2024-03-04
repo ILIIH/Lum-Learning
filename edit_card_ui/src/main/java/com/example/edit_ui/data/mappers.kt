@@ -8,4 +8,4 @@ fun LearningCardDomain.toCard() = Card(id = this.Id, type = CardType.LEARNING_CA
 
 fun VA_Card.toCard() = Card(id = this.Id, type = CardType.VA_CARD, question = this.question)
 
-fun SA_Card.toCard() = Card(id = this.audioFileId, type = CardType.SL_CARD, question = this.question)
+fun SA_Card.toCard() = Card(id = this.id, type = CardType.SL_CARD, question = this.question)

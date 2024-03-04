@@ -91,6 +91,7 @@ fun SA_Card.toDataWithId() = AudioLearningCard(
     audioFileId = audioFileId
 )
 fun AudioLearningCard.toDomain() = SA_Card(
+    id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {
