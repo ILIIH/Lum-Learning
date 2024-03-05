@@ -5,27 +5,8 @@
     android:id="@+id/onboarding_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="@color/secondary_onboarding"
     >
-
-    <Button
-        android:id="@+id/start_button"
-        style="@style/menu_btn"
-        android:layout_marginBottom="20dp"
-        android:text="@string/my_themes"
-        app:layout_constraintBottom_toTopOf="@+id/plain_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/plain_button"
-        style="@style/menu_btn"
-        android:layout_marginBottom="40dp"
-        android:text="@string/my_plane"
-        app:layout_constraintBottom_toTopOf="@+id/rabbit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/rabbit_platform"
@@ -38,6 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rabbit_platform" />
 
+    <ImageView
+        android:id="@+id/stars"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toTopOf="@+id/rabbit_platform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/stars" />
 
     <ImageView
         android:id="@+id/rabbit_shadow"
@@ -54,8 +44,8 @@
         android:id="@+id/rabbit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
         app:srcCompat="@drawable/learning_rabbit"
         style="@style/rabbit_style" />
 
@@ -99,7 +89,7 @@
         android:layout_width="60dp"
         android:layout_height="30dp"
         android:layout_marginTop="70dp"
-        android:background="@color/onboarding_additional"
+        android:background="@color/design_default_color_on_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -111,9 +101,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout2"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
         app:layout_constraintTop_toTopOf="@+id/frameLayout2"
-        style="@style/subtitle_style"
-        android:textColor="@color/onboarding_additional"
-        />
+        style="@style/subtitle_style" />
 
     <TextView
         android:id="@+id/title1"
@@ -121,16 +109,13 @@
         android:text="@string/art"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
-        style="@style/title"
-        android:textColor="@color/onboarding_additional"
-        />
+        style="@style/title" />
 
     <TextView
         android:id="@+id/title2"
         android:layout_marginTop="8dp"
         android:text="@string/of"
         style="@style/title"
-        android:textColor="@color/onboarding_additional"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title1" />
 
@@ -139,7 +124,6 @@
         android:layout_marginTop="8dp"
         android:text="@string/learning"
         style="@style/title"
-        android:textColor="@color/onboarding_additional"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="plain">План</string>
-    <string name="Start">Начать</string>
+    <string name="app_name">Lum-Learning</string>
+    <string name="welcome_home">Welcome home</string>
+    <string name="art">ART</string>
+    <string name="of">OF</string>
+    <string name="learning">LEARNING</string>
+    <string name="my_themes">My Themes</string>
+    <string name="my_plane">My Plane</string>
 </resources>
