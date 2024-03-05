@@ -25,6 +25,7 @@
         android:paddingBottom="20dp"
         android:textAlignment="viewStart"
         android:textSize="6pt"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/teatcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,6 +35,7 @@
         android:id="@+id/message_bottom_part"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:visibility="gone"
         android:src="@drawable/meassage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +43,7 @@
 
     <ImageView
         android:id="@+id/teatcher"
+        android:visibility="gone"
         android:layout_width="320dp"
         android:layout_height="320dp"
         android:layout_marginStart="16dp"
