@@ -8,6 +8,7 @@
     android:background="@color/secondary_onboarding"
     >
 
+
     <ImageView
         android:id="@+id/rabbit_platform"
         android:layout_width="400dp"
@@ -79,7 +80,7 @@
 
     <TextView
         android:id="@+id/app_name"
-        android:text="@string/app_name"
+        android:text="@string/app_name_subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
         style="@style/app_name_style" />

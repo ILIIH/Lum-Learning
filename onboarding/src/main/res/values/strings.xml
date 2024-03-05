@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lum-Learning</string>
+    <string name="app_name_subtitle">Lum-Learning</string>
     <string name="welcome_home">Welcome home</string>
     <string name="art">ART</string>
     <string name="of">OF</string>
