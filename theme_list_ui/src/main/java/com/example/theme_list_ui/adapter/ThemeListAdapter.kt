@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theme_list_data.Theme
 import com.example.theme_list_ui.databinding.ThemeItemBinding
-import com.example.theme_list_ui.themeListNavigation
+import com.example.theme_list_ui.ThemeListNavigation
 
 class ThemeAdapter(
-    private val navigator: themeListNavigation,
+    private val navigator: ThemeListNavigation,
 ) : ListAdapter<Theme, ThemeAdapter.ThemeItemViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeItemViewHolder {

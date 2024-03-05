@@ -1,10 +1,10 @@
 package com.example.add_theme_ui
 
 import androidx.lifecycle.ViewModel
-import com.example.onboarding.navigation.onboardingNavigation
+import com.example.onboarding.navigation.OnboardingNavigation
 
 class OnboardingViewModel(
-    private val navigator: onboardingNavigation
+    private val navigator: OnboardingNavigation
 ) : ViewModel() {
 
     fun navigateToThemeList() {

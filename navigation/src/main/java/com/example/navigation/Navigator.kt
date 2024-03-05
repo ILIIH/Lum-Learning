@@ -7,8 +7,9 @@ import androidx.navigation.NavOptions
 import com.example.about_theme_ui.AboutThemeNavigation
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.ask_answer_ui.navigation.GameNavigation
-import com.example.onboarding.navigation.onboardingNavigation
-import com.example.theme_list_ui.themeListNavigation
+import com.example.onboarding.navigation.OnboardingNavigation
+import com.example.plain_ui.navigation.PlainNavigation
+import com.example.theme_list_ui.ThemeListNavigation
 
 interface CoreNavigation {
     fun bind(navController: NavController)
@@ -17,11 +18,13 @@ interface CoreNavigation {
 
 class Navigator :
     CoreNavigation,
-    onboardingNavigation,
-    themeListNavigation,
+    OnboardingNavigation,
+    ThemeListNavigation,
     AddThemeNavigation,
     GameNavigation,
-    AboutThemeNavigation {
+    AboutThemeNavigation,
+    PlainNavigation
+{
 
     private var navController: NavController? = null
 
@@ -75,6 +78,10 @@ class Navigator :
         val bundle = Bundle()
         bundle.putInt("id", themeId)
         navController?.navigate(R.id.from_game_to_add_new_card, bundle)
+    }
+
+    override fun toCreateNewTheme() {
+        navController?.navigate(R.id.from_plain_to_create_theme)
     }
 }
 
