@@ -26,45 +26,33 @@ class RuleFragment : Fragment() {
         themeInfoProvider._themeType.observe(viewLifecycleOwner) { type ->
             when (type) {
                 1 -> {
-                    view.ruleText.text =
-                        "1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\n" +
-                        "2) Write down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n " +
-                        "3) Write down how you could use information in this question\n\n " +
-                        "4) Answer the question, your time is restricted \n\n "
+                    view.ruleText.text =getString(com.example.core.R.string.meta_mnem_rule)
                 }
                 2 -> {
-                    view.ruleText.text =
-                        "1) This is kind of simple learning card but when you will repit this question you will need to provide more specific information about this knowledge area\n\n" +
-                        "2) Answer the question, your time is restricted \n\n "
+                    view.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
                 }
                 3 -> {
-                    view.ruleText.text =
-                        "1) First you will see the photo association on answer to question\n\n" +
-                        "2) Answer the question, your time is restricted\n\n "
+                    view.ruleText.text =getString(com.example.core.R.string.visual_mnem_rule)
                 }
                 4 -> {
-                    view.ruleText.text =
-                        "1) First you will hear the audio association on answer to question\n\n" +
-                        "2) Answer the question, your time is restricted\n\n "
+                    view.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                 }
                 5 -> {
-                    view.ruleText.text =
-                        "1) First you will hear the audio association on answer to question\n\n" +
-                        "2) Answer the question, your time is restricted\n\n "
+                    view.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                 }
             }
             view.startButton.setOnClickListener {
                 when (type) {
-                    1 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TO_DO_CHANGE
+                    1 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TODO: Change approach
                     2 -> findNavController().navigate(R.id.to_addLearningCardFragment)
                     3 -> findNavController().navigate(R.id.to_addVA_Fragment)
                     4 -> findNavController().navigate(R.id.to_addAudioCardFragment)
                     5 -> findNavController().navigate(R.id.to_addLearningCardFragment)
-                    6 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TO_DO_CHANGE
+                    6 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TODO: Change approach
                 }
             }
         }
-
+        // TODO: change to safe args
         val themeId = requireArguments().getInt("id")
         themeInfoProvider.setThemeId(themeId)
         view.lifecycleOwner = viewLifecycleOwner

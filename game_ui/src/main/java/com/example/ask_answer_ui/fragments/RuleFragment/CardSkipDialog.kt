@@ -30,4 +30,8 @@ class CardSkipDialog (
         }
         return binding.root
     }
+
+    companion object{
+        const val CARD_SKIP_FRAGMENT_TAG = "CardSkipDialogFragmentTag"
+    }
 }

@@ -17,16 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_weight="1"
         android:justificationMode="inter_word"
-        android:text="Because the list appears in the dialog's content area, the dialog cannot show both a message and a list and you should set a title for the dialog with setTitle(). To specify the items for the list, call setItems(), passing an array. Alternatively, you can specify a list using setAdapter(). This allows you to back the list with dynamic data (such as from a database) using a ListAdapter"
         android:textSize="20sp" />
     </ScrollView>
     <Button
         android:id="@+id/continue_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:text="Continue" />
+        />
 </LinearLayout>

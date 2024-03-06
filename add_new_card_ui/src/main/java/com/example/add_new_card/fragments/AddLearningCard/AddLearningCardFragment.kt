@@ -15,11 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
-import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
-import com.example.add_new_card.util.hideKeyboard
-import com.example.core.domain.ILError
-import com.google.android.material.textfield.TextInputLayout
+import com.example.core.util.hideKeyboard
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -62,8 +59,8 @@ class AddLearningCardFragment : Fragment() {
             val answers = adapter.getAllAnswers()
 
             AlertDialog.Builder(context)
-                .setTitle("Creation card")
-                .setMessage("Do you want to continue creation or add this card and exit?")
+                .setTitle(getString(R.string.card_creation_title))
+                .setMessage(getString(R.string.card_creation_message))
                 .setPositiveButton(
                     getString(R.string.continue_creation),
                 ) { _, _ ->
@@ -73,7 +70,7 @@ class AddLearningCardFragment : Fragment() {
                             question = view.question.editText!!.text.toString(),
                             answers = answers,
                             themeType = themeType,
-                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
                                 Date(),
                             ),
                             description = view.description.editText!!.text.toString(),
@@ -85,7 +82,7 @@ class AddLearningCardFragment : Fragment() {
                             question = view.question.editText!!.text.toString(),
                             answers = answers,
                             themeType = themeType,
-                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
                                 Date(),
                             ),
                             description = "-",
@@ -107,7 +104,7 @@ class AddLearningCardFragment : Fragment() {
                             question = view.question.editText!!.text.toString(),
                             answers = answers,
                             themeType = themeType,
-                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
                                 Date(),
                             ),
                             description = view.description.editText!!.text.toString(),
@@ -119,7 +116,7 @@ class AddLearningCardFragment : Fragment() {
                             question = view.question.editText!!.text.toString(),
                             answers = answers,
                             themeType = themeType,
-                            currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(
+                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
                                 Date(),
                             ),
                             description = "-",

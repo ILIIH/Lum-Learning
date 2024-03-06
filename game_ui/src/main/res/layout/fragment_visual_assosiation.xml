@@ -25,7 +25,6 @@
             android:id="@+id/rounded_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="40dp"
             android:layout_marginTop="40dp"
             android:elevation="12dp"
@@ -53,7 +52,6 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="2"
-            android:text="What kind of action in the end of CA cycle ?  "
             android:textSize="24sp" />
     </LinearLayout>
 

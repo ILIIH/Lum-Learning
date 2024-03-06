@@ -35,7 +35,6 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="2"
-            android:text="What kind of action in the end of CA cycle ?  "
             android:textSize="24sp" />
 
 
@@ -45,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:text="Play sound assosiation" />
+            android:text="@string/play_sound_assosiation" />
 
         <LinearLayout
             android:layout_marginStart="20dp"

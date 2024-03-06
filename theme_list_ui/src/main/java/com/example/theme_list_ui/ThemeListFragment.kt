@@ -11,8 +11,8 @@ import org.koin.android.ext.android.inject
 
 class ThemeListFragment : Fragment() {
 
-    val viewModule: ThemeViewModule by inject()
-    val themeListAdapter: ThemeAdapter by inject()
+    private val viewModule: ThemeViewModule by inject()
+    private val themeListAdapter: ThemeAdapter by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class ThemeListFragment : Fragment() {
     ): View {
         val view = FragmentThemeListBinding.inflate(inflater, container, false)
 
-        viewModule.LoadThemeList()
+        viewModule.loadThemeList()
 
         view.themeList.adapter = themeListAdapter
 

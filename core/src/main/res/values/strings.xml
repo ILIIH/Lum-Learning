@@ -11,4 +11,21 @@
     <string name="next">NEXT</string>
     <string name="visual_mnemotechnic">visual mnemotechnic</string>
     <string name="choose_an_option">Choose an option</string>
+
+    <!-- Mnemonics rules -->
+
+    <string name="meta_mnem_title">Meta cognition test rule:</string>
+    <string name="meta_mnem_rule">1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\nWrite down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n 3) Write down how you could use information in this question\n\n4) Answer the question, your time is restricted \n\n</string>
+
+    <string name="description_mnem_title">Description association test rule: </string>
+    <string name="description_mnem_rule">1) First you will see long description fo this field / subject of the question \n\n2) Answer the question, your time is restricted\n\n</string>
+
+    <string name="visual_mnem_title">Visual association test rule: </string>
+    <string name="visual_mnem_rule">1) First you will see the photo association on answer to question\n\n2) Answer the question, your time is restricted\n\n </string>
+
+    <string name="sound_mnem_title">Audio association test rule: </string>
+    <string name="sound_mnem_rule">1) First you will hear the audio association on answer to question\n\n2) Answer the question, your time is restricted\n\n</string>
+
+    <string name="learning_card_rule">1) This is kind of simple learning card but when you will repeat this question you will need to provide more specific information about this knowledge area\n\n2) Answer the question, your time is restricted \n\n</string>
+    <string name="data_format">yyyy-MM-dd\'T\'HH:mm:ss.SSS</string>
 </resources>

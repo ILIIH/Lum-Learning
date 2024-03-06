@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card_data.model.SA_Card
+import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentSABinding
 import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
@@ -31,7 +32,7 @@ class SAFragment : Fragment() {
 
     val viewModel: SA_ViewModel by inject()
     val cardProvider: cardProvider by inject()
-    lateinit var answerAdapter: AnswerAdapter
+    private lateinit var answerAdapter: AnswerAdapter
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var  mp: MediaPlayer
     private lateinit var progressBar: ProgressBar
@@ -58,13 +59,13 @@ class SAFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            DescriptionDialog("Time is ended").show(
+                            DescriptionDialog(getString(R.string.tile_ended)).show(
                                 parentFragmentManager,
-                                "description_dialog",
+                                DescriptionDialog.DESCRIPTION_DIALOG_TAG,
                             )
                             cardProvider.updateSACardInfoAndMetrics(
                                 currentDate = Date(),
-                                cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                     currentCard.dateCreation,
                                 ),
                                 AverageRA = currentCard.AverageRA,
@@ -83,7 +84,7 @@ class SAFragment : Fragment() {
                     if (it) {
                         cardProvider.updateSACardInfoAndMetrics(
                             currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
                             AverageRA = currentCard.AverageRA,
@@ -94,7 +95,7 @@ class SAFragment : Fragment() {
                     } else {
                         cardProvider.updateSACardInfoAndMetrics(
                             currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
                             AverageRA = currentCard.AverageRA,
@@ -112,7 +113,7 @@ class SAFragment : Fragment() {
                     view.playSound.isClickable = false
                     mp = MediaPlayer.create(
                         requireContext(),
-                        File(requireActivity().cacheDir, "record${currentCard.audioFileId}").toUri()
+                        File(requireActivity().cacheDir, getString(R.string.record) + currentCard.audioFileId.toString()).toUri()
                     )
                     view.progressBar
                     mp.setOnCompletionListener {

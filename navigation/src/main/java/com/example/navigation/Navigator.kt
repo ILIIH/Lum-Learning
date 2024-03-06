@@ -30,6 +30,7 @@ class Navigator :
 
     override fun toAboutTheme(id: Int) {
         val bundle = Bundle()
+        // TODO: change to safe args
         bundle.putInt("id", id)
         navController?.navigate(R.id.to_about_theme, bundle)
     }

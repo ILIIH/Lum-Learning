@@ -9,7 +9,7 @@ class SetRandomLearningMethodType(val repo: GameRepository) {
         repo.insertLearningMethod(
             learningMethod(
                 Random.nextInt(1, 6),
-                1.4, // TO_DO
+                1.4, // TODO: Change approach
                 Random.nextInt(1, 8),
                 Random.nextInt(1, 7),
                 Random.nextInt(1, 3),

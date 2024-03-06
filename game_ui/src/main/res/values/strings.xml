@@ -15,4 +15,8 @@
     <string name="no">No</string>
     <string name="restart">RESTART</string>
     <string name="card_end_text">You have done a good job \nLearning cards is ended</string>
+    <string name="tile_ended">Time is ended</string>
+    <string name="description">Description</string>
+    <string name="record">record</string>
+    <string name="play_sound_assosiation">Play sound assosiation</string>
 </resources>

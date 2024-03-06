@@ -28,4 +28,8 @@ class DescriptionDialog(
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return dialog
     }
+
+    companion object{
+        const val DESCRIPTION_DIALOG_TAG = "description_dialog_tag"
+    }
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.example.memorizable.presentation.OnboardingFragment"
+        android:name="com.example.onboarding.OnboardingFragment"
         android:label="fragment_onboarding"
         tools:layout="@layout/fragment_onboarding" >
     </fragment>

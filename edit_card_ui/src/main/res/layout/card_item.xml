@@ -23,7 +23,6 @@
             android:gravity="center|start"
             android:maxLines="2"
             android:singleLine="false"
-            android:text="How are you babe i love you and i want to share all my life with you  ? "
             android:textSize="16sp" />
 
         <ImageView

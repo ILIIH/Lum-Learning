@@ -27,11 +27,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
-import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
-import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
-import com.example.add_new_card.util.hideKeyboard
-import com.example.core.domain.ILError
+import com.example.core.util.hideKeyboard
 import org.koin.android.ext.android.inject
 import java.io.File
 import java.io.FileOutputStream
@@ -115,8 +112,8 @@ class AddAudioCardFragment : Fragment() {
             val answers = adapter.getAllAnswers()
 
             AlertDialog.Builder(context)
-                .setTitle("Creation card")
-                .setMessage("Do you want to continue creation or add this card and exit?")
+                .setTitle(getString(R.string.card_creation_title))
+                .setMessage(getString(R.string.card_creation_message))
                 .setPositiveButton(
                     getString(R.string.continue_creation),
                 ) { _, _ ->
@@ -124,7 +121,7 @@ class AddAudioCardFragment : Fragment() {
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
                         answers = answers,
-                        currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
                         monthNumber = Date().month,
                     )
                     if(!adapter.validateAnswers()&& !validateCard(view)){
@@ -138,7 +135,7 @@ class AddAudioCardFragment : Fragment() {
                     viewModel.addNewCard(
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
-                        currentDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
                         monthNumber = Date().month,
                         answers = answers
 

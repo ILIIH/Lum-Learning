@@ -17,10 +17,10 @@ import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
-import com.example.add_new_card.util.hideKeyboard
 import com.example.core.data.PhotoManager
 import com.example.core.domain.ILError
 import com.example.core.ui.MediaFragment
+import com.example.core.util.hideKeyboard
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -68,8 +68,8 @@ class AddVisualCardFragment : MediaFragment() {
         view.continueBtn.setOnClickListener {
             val answers = adapter.getAllAnswers()
             AlertDialog.Builder(context)
-                .setTitle("Creation card")
-                .setMessage("Do you want to continue creation or add this card and exit?")
+                .setTitle(getString(R.string.card_creation_title))
+                .setMessage(getString(R.string.card_creation_message))
                 .setPositiveButton(
                     getString(R.string.continue_creation),
                 ) { _, _ ->
@@ -77,7 +77,7 @@ class AddVisualCardFragment : MediaFragment() {
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
                         answers,
-                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
                         monthNumber = Date().month,
                     )
                     if(!adapter.validateAnswers() && !validateCard(view)){
@@ -94,7 +94,7 @@ class AddVisualCardFragment : MediaFragment() {
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
                         answers,
-                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                        SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
                         monthNumber = Date().month,
                     )
                     hideKeyboard(requireActivity())
