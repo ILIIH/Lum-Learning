@@ -10,9 +10,7 @@ class ThemeRepoImp(val themeDB: ThemeDatabase) : ThemeRepo {
     override suspend fun getThemes(): Flow<List<Theme>> {
         return flow {
             val themeData = themeDB.themeDao().getAllTheme().map { it.toData() }
-            emit(
-                themeData
-            )
+            emit( themeData)
         }
     }
 }

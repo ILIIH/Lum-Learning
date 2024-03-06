@@ -55,19 +55,19 @@ class ThemeTypeFragment : Fragment() {
     }
     private fun configureNavigation(view : FragmentThemeTypeBinding){
         view.openTheme.setOnClickListener {
-            viewModule.setThemeType(getString(R.string.open_theme))
+            viewModule.setThemeType(1)
             findNavController().navigate(R.id.to_themePhotoFragment)
         }
         view.regularTheme.setOnClickListener {
-            viewModule.setThemeType(getString(R.string.regular_theme))
+            viewModule.setThemeType(2)
             findNavController().navigate(R.id.to_themePhotoFragment)
         }
         view.themeFormula.setOnClickListener {
-            viewModule.setThemeType(getString(R.string.theme_formula))
+            viewModule.setThemeType(3)
             findNavController().navigate(R.id.to_themePhotoFragment)
         }
         view.mixedTheme.setOnClickListener {
-            viewModule.setThemeType(getString(R.string.theme_mixed))
+            viewModule.setThemeType(4)
             findNavController().navigate(R.id.to_themePhotoFragment)
         }
     }

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    namespace 'com.example.plain_domain'
+    compileSdk 34
 
     defaultConfig {
-        minSdk 26
-        targetSdk 33
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,23 +27,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding = true
-    }
-    dataBinding {
-        enabled = true
-    }
 }
 
 dependencies {
-    implementation project(path: ':plain_data')
-    implementation project(path: ':core')
 
+    implementation project(path: ':plain_data')
+    implementation project(path: ':data_base')
+
+    
     implementation "io.insert-koin:koin-android:3.3.2"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation("androidx.room:room-runtime:2.5.0")
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+
 }

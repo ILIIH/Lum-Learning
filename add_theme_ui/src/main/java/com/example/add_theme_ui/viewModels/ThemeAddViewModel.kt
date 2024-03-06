@@ -19,7 +19,7 @@ class ThemeAddViewModel(
 
     private lateinit var themeName: String
     private lateinit var themeImportance: String
-    private lateinit var themeType: String
+    private var themeType: Int = 1
 
     private var yearOfExperience: Int = 0
 
@@ -41,7 +41,7 @@ class ThemeAddViewModel(
             true
         }
     }
-    fun setThemeType(type: String) {
+    fun setThemeType(type: Int) {
         themeType = type
     }
     fun setThemeImportance(importance: String) {

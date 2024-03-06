@@ -5,7 +5,7 @@ data class Theme(
     val imageUri: String,
     val yearExperience: Int,
     val themeImportance: String,
-    val themeType: String,
+    val themeType: Int,
     val photo: ByteArray
 
 )

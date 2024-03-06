@@ -14,10 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.plain_data.Task
 import com.example.plain_ui.databinding.FragmentPlainBinding
-import com.example.plain_ui.mappers.toTask
 import com.example.plain_ui.navigation.PlainNavigation
-import com.example.theme_list_data.Theme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -34,12 +33,11 @@ class PlainFragment : Fragment() {
     ): View {
         val view = FragmentPlainBinding.inflate(inflater, container, false)
         lifecycleScope.launch {
-            viewModel.themes.onEach { themes ->
-                if(themes.isNullOrEmpty()){
+            viewModel.tasks.onEach { themes ->
+                if (themes?.isEmpty() == true) {
                     renderEmptyThemes(view)
-                }
-                else{
-                    render(view, themes)
+                } else {
+                    themes?.let { render(view, it) }
                 }
             }.collect()
         }
@@ -75,17 +73,13 @@ class PlainFragment : Fragment() {
 
     }
 
-    private fun render(view: FragmentPlainBinding, themeList: List<Theme>){
+    private fun render(view: FragmentPlainBinding, tasksList: List<Task>){
         view.plainView.visibility = View.VISIBLE
 
         view.ruleText.visibility = View.GONE
         view.teatcher.visibility = View.GONE
         view.messageBottomPart.visibility = View.GONE
 
-        view.plainView.setTasks(
-            themeList.map {
-                it.toTask()
-            }
-        )
+        view.plainView.setTasks(tasksList)
     }
 }

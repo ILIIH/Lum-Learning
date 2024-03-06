@@ -10,6 +10,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.plain_ui.R
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.temporal.IsoFields
 
 class GrantDiagram @JvmOverloads constructor(
@@ -109,10 +110,10 @@ class GrantDiagram @JvmOverloads constructor(
 
     // endregion
 
-    private var tasks: List<Task> = emptyList()
+    private var tasks: List<com.example.plain_data.Task> = emptyList()
     private var uiTasks: List<UiTask> = emptyList()
 
-    fun setTasks(tasks: List<Task>) {
+    fun setTasks(tasks: List<com.example.plain_data.Task>) {
         if (tasks != this.tasks) {
             this.tasks = tasks
             uiTasks = tasks.map(::UiTask)
@@ -296,7 +297,7 @@ class GrantDiagram @JvmOverloads constructor(
         }
     }
 
-    private inner class UiTask(val task: Task) {
+    private inner class UiTask(val task: com.example.plain_data.Task) {
         // Rect с учетом всех преобразований
         val rect = RectF()
 
