@@ -1,6 +1,6 @@
 package com.example.onboarding.navigation
 
-interface onboardingNavigation {
+interface OnboardingNavigation {
     fun toThemeList()
     fun toPlain()
 }

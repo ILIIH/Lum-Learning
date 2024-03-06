@@ -16,6 +16,7 @@ import com.example.core.data.coreDataModule
 import com.example.edit_ui.di.editCardUiModule
 import com.example.navigation.di.navigationModule
 import com.example.onboarding.di.onBoardingModule
+import com.example.plain_ui.di.planModule
 import com.example.theme_list_domain.di.ThemeListDomainModule
 import com.example.theme_list_ui.di.themeListModule
 import org.koin.android.ext.android.getKoin
@@ -49,6 +50,7 @@ class MyApplication : Application(), KoinComponent {
                 askAnswerDomainModule,
                 coreDataModule,
                 editCardUiModule,
+                planModule,
             )
         }
         setupWorkManagerFactory()

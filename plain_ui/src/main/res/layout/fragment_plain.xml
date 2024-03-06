@@ -6,6 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".PlainFragment">
 
+    <TextView
+        android:id="@+id/rule_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/message_background"
+        android:elevation="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/inriasanslight"
+        android:gravity="center_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="20dp"
+        android:textAlignment="viewStart"
+        android:textSize="6pt"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/teatcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/message_bottom_part"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:visibility="gone"
+        android:src="@drawable/meassage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rule_text" />
+
+    <ImageView
+        android:id="@+id/teatcher"
+        android:visibility="gone"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/teatcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.example.plain_ui.customView.GrantDiagram
         android:id="@+id/plain_view"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_theme_created" >No theme was created.\nCreate theme and return back to see\nlearning recommendation </string>
+    <string name="create_theme" >Create theme</string>
 </resources>

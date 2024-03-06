@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class ThemeViewModule(
     private val getTheme: GetTheme,
-    private val navigator: themeListNavigation
+    private val navigator: ThemeListNavigation
 ) : ViewModel() {
 
     private val themes = MutableLiveData<List<Theme>>()

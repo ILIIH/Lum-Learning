@@ -73,6 +73,11 @@
     <navigation android:id="@+id/plain_navigation_graph"
         app:startDestination="@id/plain_nav_graph">
         <include app:graph="@navigation/plain_nav_graph" />
+        <action
+            android:id="@+id/from_plain_to_create_theme"
+            app:destination="@id/add_new_theme_nav"
+            app:popUpTo="@id/onboarding_nav"
+            app:popUpToInclusive="true" />
     </navigation>
     <navigation android:id="@+id/add_new_card_graph">
         <include app:graph="@navigation/add_graph_navgraph" />

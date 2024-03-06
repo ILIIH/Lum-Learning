@@ -36,6 +36,10 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':theme_list_data')
+    implementation project(path: ':core')
+
+    implementation "io.insert-koin:koin-android:3.3.2"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

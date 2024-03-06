@@ -1,6 +1,6 @@
 package com.example.theme_list_ui
 
-interface themeListNavigation {
+interface ThemeListNavigation {
     fun toAboutTheme(id: Int)
     fun toAddNewTheme()
 }

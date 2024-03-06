@@ -56,7 +56,7 @@ dependencies {
     implementation project(path: ':learning_card_domain')
     implementation project(path: ':add_new_card_ui')
     implementation project(path: ':edit_card_ui')
-
+    implementation project(path: ':plain_ui')
 
     implementation 'io.insert-koin:koin-android:3.3.3'
     implementation 'io.insert-koin:koin-androidx-workmanager:3.3.3'
