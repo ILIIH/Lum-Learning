@@ -33,7 +33,7 @@ class ThemeAboutViewModel(
     init {
         viewModelScope.launch {
             val result = getPredictedMnemoType.execute()
-            prefferedLearningMethod.postValue(result!!)
+            prefferedLearningMethod.postValue(result)
         }
     }
 }

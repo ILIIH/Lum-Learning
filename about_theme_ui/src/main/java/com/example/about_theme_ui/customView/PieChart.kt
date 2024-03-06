@@ -117,8 +117,6 @@ class PieChart @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        Log.i("RA_test", "inside onDraw PieChart")
-
         var index = 0
         data?.pieSlices?.let { slices ->
             slices.forEach {

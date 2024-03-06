@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name_subtitle">Lum-Learning</string>
     <string name="welcome_home">Welcome home</string>
-    <string name="art">ART</string>
-    <string name="of">OF</string>
-    <string name="learning">LEARNING</string>
+    <string name="art"><u>ART</u></string>
+    <string name="of"><u>OF</u></string>
+    <string name="learning"><u>LEARNING</u></string>
     <string name="my_themes">My Themes</string>
     <string name="my_plane">My Plane</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.memorizable.presentation
+package com.example.onboarding
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -2,4 +2,20 @@
 <resources>
     <string name="continue_creation">Continue</string>
     <string name="save_and_exit">Save and exit</string>
+    <string name="text_mnemotechnik">text mnemotechnik</string>
+    <string name="audio_mnemotechnik">audio mnemotechnik</string>
+    <string name="create">CREATE</string>
+    <string name="answers">Answers :</string>
+    <string name="association">Association :</string>
+    <string name="hint">Hint</string>
+    <string name="visual_hint">Visual hint</string>
+    <string name="true_txt">True</string>
+    <string name="enter_answer">Enter answer</string>
+    <string name="enter_hint_to_answer">Enter hint to answer</string>
+    <string name="enter_question">Enter question</string>
+    <string name="enter_quesstion">Enter quesstion</string>
+    <string name="write_question">Write question</string>
+    <string name="write_description">Write description</string>
+    <string name="card_creation_title">Creation card</string>
+    <string name="card_creation_message">Do you want to continue creation or add this card and exit?</string>
 </resources>

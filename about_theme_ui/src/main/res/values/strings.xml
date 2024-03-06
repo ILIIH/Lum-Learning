@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">about_theme_ui</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start_game">START GAME</string>
     <string name="create_card">CREATE CARD</string>
     <string name="edit">EDIT</string>
     <string name="play_game">play game</string>
     <string name="there_will_be_your_statistics">There will be your statistics</string>
+    <string name="true_answ">True answ</string>
+    <string name="wrong_answ">"Wrong answ"</string>
+    <string name="last_mounth">Prev month wrong answ</string>
+    <!-- colors -->
+    <string name="true_answ_color">#FF00A49D</string>
+    <string name="wrong_answ_color">#900D09</string>
+    <string name="last_mounth_color">#000000</string>
+
+
 </resources>

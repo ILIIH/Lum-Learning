@@ -100,7 +100,7 @@ class RuleFragment : BaseFragment() {
             val createIndex = indexOf(create)
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    findNavController().navigate(R.id.to_add_new_card, Bundle().apply { putInt("id", themeId) })
+                    findNavController().navigate(R.id.to_add_new_card, Bundle().apply { putInt(ARG_THEME_ID, themeId) })
                 }
             }
 
@@ -132,48 +132,30 @@ class RuleFragment : BaseFragment() {
                     callEndDialog(themeId, view)
                 } else {
                     when (this) {
-                        // TO_DO_MILLER_LAW at 1
+                        // TODO: MILLER_LAW at 1
                         is LearningCardDomain -> {
                             val currentCard = this
                             when (currentCard.themeType) {
                                 2 -> {
-                                    view.subTitle.text = "Meta cognition test rule: "
-                                    view.ruleText.text =
-                                        "1) Write down description of the question field. try to write as much information sa possible. This information have not to be true, this is oly your general knowledge test\n\n" +
-                                                "2) Write down what is it hardest thing in question, why it could be hard exactly to yo to remember this answer\n\n " +
-                                                "3) Write down how you could use information in this question\n\n " +
-                                                "4) Answer the question, your time is restricted \n\n "
+                                    view.subTitle.text = getString(com.example.core.R.string.meta_mnem_title)
+                                    view.ruleText.text = getString(com.example.core.R.string.meta_mnem_rule)
                                 }
 
                                 5 -> {
-                                    view.subTitle.text = "Description association test rule: "
-                                    view.ruleText.text =
-                                        "1) First you will see long description fo this field / subject of the question \n\n" +
-                                                "2) Answer the question, your time is restricted\n\n "
-                                }
-
-                                else -> {
-                                    // NEED REFACTOR
-                                    view.subTitle.text = "Description association test rule: "
-                                    view.ruleText.text =
-                                        "1) First you will see long description fo this field / subject of the question \n\n" +
-                                                "2) Answer the question, your time is restricted\n\n "
+                                    view.subTitle.text = getString(com.example.core.R.string.description_mnem_title)
+                                    view.ruleText.text = getString(com.example.core.R.string.description_mnem_rule)
                                 }
                             }
                         }
 
                         is VA_Card -> {
-                            view.subTitle.text = "Visual association test rule: "
-                            view.ruleText.text =
-                                "1) First you will see the photo association on answer to question\n\n" +
-                                        "2) Answer the question, your time is restricted\n\n "
+                            view.subTitle.text = getString(com.example.core.R.string.visual_mnem_title)
+                            view.ruleText.text = getString(com.example.core.R.string.visual_mnem_rule)
                         }
 
                         is SA_Card -> {
-                            view.subTitle.text = "Audio association test rule: "
-                            view.ruleText.text =
-                                "1) First you will hear the audio association on answer to question\n\n" +
-                                        "2) Answer the question, your time is restricted\n\n "
+                            view.subTitle.text = getString(com.example.core.R.string.sound_mnem_title)
+                            view.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                         }
                     }
                 }
@@ -190,7 +172,7 @@ class RuleFragment : BaseFragment() {
 
     private fun navigateToGame(card:Any?) {
         when (card) {
-            // TO_DO_MILLER_LAW at 1
+            // TODO: MILLER_LAW at 1
             is LearningCardDomain -> {
                     when (card.themeType) {
                         2 -> {
@@ -202,7 +184,7 @@ class RuleFragment : BaseFragment() {
                         }
 
                         else -> {
-                            findNavController().navigate(R.id.to_LearningCard) // TO_DO NEED_REFACTOR
+                            findNavController().navigate(R.id.to_LearningCard) // TODO: NEED_REFACTOR
                         }
                     }
             }
@@ -215,13 +197,13 @@ class RuleFragment : BaseFragment() {
             else -> {
                 TODO()
             }
-            // TO_DO_COMBINED_APPROACH at 6
+            // TODO: ADD COMBINED_APPROACH at 6
         }
     }
 
     private fun showSkipDescrDialog(cardType: String, navigateToGame: () -> Unit) {
         CardSkipDialog({ cardProvider.setSkipCardDescription(cardType) },navigateToGame)
-            .show(parentFragmentManager, "CardSkipDialogFragmentTag")
+            .show(parentFragmentManager, CardSkipDialog.CARD_SKIP_FRAGMENT_TAG)
     }
 
     private fun callEndDialog(themeId: Int, view: FragmentGameRuleBinding) {
@@ -235,7 +217,7 @@ class RuleFragment : BaseFragment() {
                 cardProvider.saveGameResult(
                     currentDay = LocalDateTime.now().dayOfWeek.value,
                     themeId = themeId,
-                    date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                    date = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
 
                     )
             } else {
@@ -248,7 +230,7 @@ class RuleFragment : BaseFragment() {
                 cardProvider.saveGameResult(
                     currentDay = LocalDateTime.now().dayOfWeek.value,
                     themeId = themeId,
-                    date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date()),
+                    date = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
                     )
             } else {
                 TODO()

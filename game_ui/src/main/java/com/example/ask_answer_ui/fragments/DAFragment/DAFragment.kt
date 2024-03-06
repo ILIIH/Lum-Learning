@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card_data.model.LearningCardDomain
+import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentDABinding
 import com.example.ask_answer_ui.viewModel.DA_ViewModel
@@ -25,9 +26,7 @@ class DAFragment : Fragment() {
 
     val viewModel: DA_ViewModel by inject()
     val cardProvider: cardProvider by inject()
-    lateinit var answerAdapter: AnswerAdapter
-
-    @RequiresApi(Build.VERSION_CODES.N)
+    private lateinit var answerAdapter: AnswerAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +43,7 @@ class DAFragment : Fragment() {
                     if (it) {
                         cardProvider.updateLearningCardInfoAndMetrics(
                             currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
                             AverageRA = currentCard.AverageRA,
@@ -55,7 +54,7 @@ class DAFragment : Fragment() {
                     } else {
                         cardProvider.updateLearningCardInfoAndMetrics(
                             currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
                             AverageRA = currentCard.AverageRA,
@@ -69,14 +68,13 @@ class DAFragment : Fragment() {
 
                 DescriptionDialog(currentCard.discription).show(
                     parentFragmentManager,
-                    "description_dialog",
+                    DescriptionDialog.DESCRIPTION_DIALOG_TAG,
                 )
 
                 view.answerList.adapter = answerAdapter
 
                 view.answerList.isNestedScrollingEnabled = false
 
-                Log.i("card_logging", "Question : " + currentCard.question)
                 view.question.text = currentCard.question
 
                 val endTime = 10000L
@@ -89,13 +87,13 @@ class DAFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            DescriptionDialog("Time is ended").show(
+                            DescriptionDialog(getString(R.string.tile_ended)).show(
                                 parentFragmentManager,
-                                "description_dialog",
+                                DescriptionDialog.DESCRIPTION_DIALOG_TAG,
                             )
                             cardProvider.updateLearningCardInfoAndMetrics(
                                 currentDate = Date(),
-                                cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                     currentCard.dateCreation,
                                 ),
                                 AverageRA = currentCard.AverageRA,
@@ -128,7 +126,7 @@ class DAFragment : Fragment() {
             val currentCard = cardProvider.getCurrentCard() as LearningCardDomain
             answerAdapter.submitList(currentCard.answers)
             view.question.text = currentCard.question
-            DescriptionDialog("Description").show(parentFragmentManager, "description_dialog")
+            DescriptionDialog(getString(R.string.description)).show(parentFragmentManager, DescriptionDialog.DESCRIPTION_DIALOG_TAG)
         }
     }
 }

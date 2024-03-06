@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card_data.model.LearningCardDomain
+import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentLearningCardBinding
 import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
@@ -43,7 +44,7 @@ class LearningCardFragment : Fragment() {
                     if (it) {
                         cardProvider.updateLearningCardInfoAndMetrics(
                             currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
                             AverageRA = currentCard.AverageRA,
@@ -54,7 +55,7 @@ class LearningCardFragment : Fragment() {
                     } else {
                         cardProvider.updateLearningCardInfoAndMetrics(
                             currentDate = Date(),
-                            cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                            cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
                             AverageRA = currentCard.AverageRA,
@@ -70,7 +71,6 @@ class LearningCardFragment : Fragment() {
 
                 view.answerList.isNestedScrollingEnabled = false
 
-                Log.i("card_logging", "Question : " + currentCard.question)
                 view.question.text = currentCard.question
 
                 val endTime = 10000L
@@ -83,13 +83,13 @@ class LearningCardFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            DescriptionDialog("Time is ended").show(
+                            DescriptionDialog(getString(R.string.tile_ended)).show(
                                 parentFragmentManager,
-                                "description_dialog",
+                                DescriptionDialog.DESCRIPTION_DIALOG_TAG,
                             )
                             cardProvider.updateLearningCardInfoAndMetrics(
                                 currentDate = Date(),
-                                cardDateCreation = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(
+                                cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                     currentCard.dateCreation,
                                 ),
                                 AverageRA = currentCard.AverageRA,

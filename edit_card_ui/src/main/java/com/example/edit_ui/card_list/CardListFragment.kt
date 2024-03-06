@@ -28,6 +28,7 @@ class CardListFragment : Fragment() {
             }
         }
 
+        // TODO: Change to safe arg
         val themeId = arguments?.getInt("id", 0) ?: 0
         viewModel.downloadCards(themeId)
 

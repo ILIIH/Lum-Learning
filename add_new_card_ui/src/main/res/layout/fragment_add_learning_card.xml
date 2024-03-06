@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Write question">
+                    android:hint="@string/write_question">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/question_input_text"
@@ -85,7 +85,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Write description"
+                    android:hint="@string/write_description"
                     android:visibility="gone">
 
                     <com.google.android.material.textfield.TextInputEditText

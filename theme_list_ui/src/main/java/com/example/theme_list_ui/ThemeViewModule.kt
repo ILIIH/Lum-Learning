@@ -19,7 +19,7 @@ class ThemeViewModule(
     val _themes: LiveData<List<Theme>>
         get() = themes
 
-    fun LoadThemeList() {
+    fun loadThemeList() {
         viewModelScope.launch {
             getTheme.execute().onEach {
                 themes.postValue(it)
