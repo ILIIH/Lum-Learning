@@ -444,6 +444,6 @@ class GrantDiagram @JvmOverloads constructor(
     companion object {
         // Количество месяцев до и после текущей даты
         private const val MONTH_COUNT = 2L
-        private const val MAX_SCALE = 2f
+        private const val MAX_SCALE = 5f
     }
 }
