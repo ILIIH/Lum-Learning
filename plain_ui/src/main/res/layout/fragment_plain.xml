@@ -53,6 +53,7 @@
 
     <com.example.plain_ui.customView.GrantDiagram
         android:id="@+id/plain_view"
+        android:paddingStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

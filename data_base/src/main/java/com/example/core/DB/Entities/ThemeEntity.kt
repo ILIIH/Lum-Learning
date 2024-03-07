@@ -11,6 +11,6 @@ class ThemeEntity(
     @ColumnInfo(name = "photoThemeURI") val photoThemeURI: String?,
     @ColumnInfo(name = "yearExperience") val yearExperience: Int,
     @ColumnInfo(name = "themeImportance") val themeImportance: String,
-    @ColumnInfo(name = "themeTesis") val themeType: String,
+    @ColumnInfo(name = "themeType") val themeType: Int,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val photo: ByteArray
 )

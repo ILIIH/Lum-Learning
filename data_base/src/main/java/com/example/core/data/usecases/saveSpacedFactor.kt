@@ -23,7 +23,7 @@ class saveSpacedFactor(val repo: GameRepository) {
                     spacedFactor,
                     Random.nextInt(1, 8),
                     Random.nextInt(1, 7),
-                    Random.nextInt(1, 3),
+                    Random.nextInt(1, 4),
                 ),
             )
         } else {
