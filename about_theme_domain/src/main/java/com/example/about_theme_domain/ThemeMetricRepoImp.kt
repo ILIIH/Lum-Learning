@@ -5,6 +5,7 @@ import com.example.about_theme_data.ThemeMetricRepo
 import com.example.core.DB.DAO.CardsDAO
 import com.example.core.DB.DAO.ThemeDAO
 import com.example.core.DB.ThemeDatabase
+import com.example.core.domain.ThemeType
 
 class ThemeMetricRepoImp(private val cardsDAO: CardsDAO, private val themeDAO: ThemeDAO) : ThemeMetricRepo {
     override suspend fun getThemeMetric(id: Int): ThemeMetric {
@@ -40,7 +41,6 @@ class ThemeMetricRepoImp(private val cardsDAO: CardsDAO, private val themeDAO: T
             sumAveraheRA += it.AverageRA
             cardCount++
         }
-
         if (cardCount == 0) {
             return ThemeMetric(
                 0.0,
@@ -50,7 +50,7 @@ class ThemeMetricRepoImp(private val cardsDAO: CardsDAO, private val themeDAO: T
                 theme.photoThemeURI,
                 theme.yearExperience,
                 theme.themeImportance,
-                theme.themeType,
+                ThemeType.fromInt(theme.themeType).name,
             )
         } else {
             return ThemeMetric(
@@ -61,7 +61,7 @@ class ThemeMetricRepoImp(private val cardsDAO: CardsDAO, private val themeDAO: T
                 theme.photoThemeURI,
                 theme.yearExperience,
                 theme.themeImportance,
-                theme.themeType,
+                ThemeType.fromInt(theme.themeType).name,
 
             )
         }

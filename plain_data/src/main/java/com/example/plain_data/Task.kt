@@ -5,6 +5,6 @@ import java.time.LocalDateTime
 
 data class Task(
     val name: String,
-    val dateStart: LocalDate,
-    val dateEnd: LocalDate
+    val dateStart: LocalDateTime,
+    val dateEnd: LocalDateTime
 )

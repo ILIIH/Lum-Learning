@@ -32,6 +32,8 @@ android {
 
 dependencies {
 
+    implementation project(path: ':core')
+
     implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
 
     implementation "io.insert-koin:koin-android:3.3.2"

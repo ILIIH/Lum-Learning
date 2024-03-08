@@ -80,6 +80,16 @@ class PlainFragment : Fragment() {
         view.teatcher.visibility = View.GONE
         view.messageBottomPart.visibility = View.GONE
 
+        view.day.setOnClickListener {
+            view.plainView.changePeriodType(getString(R.string.day))
+        }
+        view.week.setOnClickListener {
+            view.plainView.changePeriodType(getString(R.string.week))
+        }
+        view.month.setOnClickListener {
+            view.plainView.changePeriodType(getString(R.string.month))
+        }
+
         view.plainView.setTasks(tasksList)
     }
 }

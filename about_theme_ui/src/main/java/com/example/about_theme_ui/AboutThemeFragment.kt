@@ -66,7 +66,7 @@ class AboutThemeFragment : Fragment() {
                 view.emptyStatsImg.visibility = View.VISIBLE
             }
 
-            view.themeType.text = it.themeType.toString()
+            view.themeType.text = it.themeType
             view.title.text = it.title
         }
 

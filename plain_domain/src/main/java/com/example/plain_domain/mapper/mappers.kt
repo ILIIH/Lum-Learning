@@ -8,5 +8,5 @@ fun Int.learningIntervalStart() = TRANSITION_MATRIX[this]
 
 fun Int.learningIntervalEnd() : Int{
     val index = if(this + 1 > TRANSITION_MATRIX.size) 0 else this + 1
-    return  TRANSITION_MATRIX[index]
+    return  TRANSITION_MATRIX[index-1]
 }
