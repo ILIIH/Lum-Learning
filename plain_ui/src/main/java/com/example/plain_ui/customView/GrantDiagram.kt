@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.plain_ui.R
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.temporal.IsoFields
 
@@ -35,7 +35,8 @@ class GrantDiagram @JvmOverloads constructor(
     }
 
     // Для фигур тасок
-    private val taskShapePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
+    private val taskShapePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL }
 
     // Для названий тасок
     private val taskNamePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -90,9 +91,9 @@ class GrantDiagram @JvmOverloads constructor(
     // endregion
 
     // region Время
-    private val today = LocalDate.now()
+    private val today = LocalDateTime.now()
 
-    private var periodType = PeriodType.MONTH
+    private var periodType = PeriodType.WEEK
     private val periods = initPeriods()
     // endregion
 
@@ -280,13 +281,37 @@ class GrantDiagram @JvmOverloads constructor(
         }
     }
 
+    fun changePeriodType(period: String) {
+        when(period){
+            "DAY" -> this.periodType = PeriodType.DAY
+            "WEEK" -> this.periodType = PeriodType.WEEK
+            "MONTH" -> this.periodType = PeriodType.MONTH
+        }
+        invalidate()
+        updateTasksRects()
+    }
+
     // endregion
 
     private fun initPeriods(): Map<PeriodType, List<String>> {
         // Один раз получаем все названия периодов для каждого из PeriodType
         return PeriodType.values().associateWith { periodType ->
-            val startDate = today.minusMonths(MONTH_COUNT)
-            val endDate = today.plusMonths(MONTH_COUNT)
+            var startDate  = today
+            var endDate = today
+            if (periodType == PeriodType.MONTH ) {
+                startDate = today.minusMonths(today.month.value.toLong())
+                endDate = today.plusMonths(MONTH_SCALE)
+            }
+            else if(periodType == PeriodType.DAY) {
+                startDate = today.minusHours(today.hour.toLong())
+                endDate = today.plusHours(HOUR_SCALE)
+            }
+            else if(periodType == PeriodType.WEEK) {
+                startDate = today.minusDays(today.dayOfWeek.value.toLong())
+                endDate = today.plusDays(DAY_SCALE)
+
+            }
+
             var lastDate = startDate
             mutableListOf<String>().apply {
                 while (lastDate <= endDate) {
@@ -315,9 +340,9 @@ class GrantDiagram @JvmOverloads constructor(
             get() = rect.top < height && (rect.right > 0 || rect.left < width)
 
         fun updateInitialRect(index: Int) {
-            fun getX(date: LocalDate): Float? {
+            fun getX(date: LocalDateTime): Float? {
                 val periodIndex = periods.getValue(periodType).indexOf(periodType.getDateString(date))
-                return if (periodIndex >= 0) {
+                 return if (periodIndex >= 0) {
                     periodWidth * (periodIndex + periodType.getPercentOfPeriod(date))
                 } else {
                     null
@@ -327,7 +352,7 @@ class GrantDiagram @JvmOverloads constructor(
             untransformedRect.set(
                 getX(task.dateStart) ?: -taskCornerRadius,
                 rowHeight * (index + 1f) + taskVerticalMargin,
-                getX(task.dateEnd) ?: width + taskCornerRadius,
+                getX(task.dateEnd) ?: (width + taskCornerRadius),
                 rowHeight * (index + 2f) - taskVerticalMargin,
             )
             rect.set(untransformedRect)
@@ -378,7 +403,17 @@ class GrantDiagram @JvmOverloads constructor(
 
         // Относительное увеличение на sx
         fun addScale(sx: Float) {
-            scaleX = (scaleX * sx).coerceIn(1f, MAX_SCALE)
+            var scale = 0f
+            if(periodType == PeriodType.DAY) {
+                scale = HOUR_SCALE.toFloat()
+            }
+            else if (periodType == PeriodType.MONTH){
+                scale = MONTH_SCALE.toFloat()
+            }
+            else if(periodType == PeriodType.WEEK){
+                scale = DAY_SCALE.toFloat()
+            }
+            scaleX = (scaleX * sx).coerceIn(1f, scale)
             recalculateTranslationX()
             transformTasks()
         }
@@ -420,30 +455,40 @@ class GrantDiagram @JvmOverloads constructor(
 
     private enum class PeriodType {
         MONTH {
-            override fun increment(date: LocalDate): LocalDate = date.plusMonths(1)
+            override fun increment(date: LocalDateTime): LocalDateTime = date.plusMonths(1)
 
-            override fun getDateString(date: LocalDate): String = date.month.name
+            override fun getDateString(date: LocalDateTime): String = date.month.name
 
-            override fun getPercentOfPeriod(date: LocalDate): Float = (date.dayOfMonth - 1f) / date.lengthOfMonth()
+            override fun getPercentOfPeriod(date: LocalDateTime): Float = (date.dayOfMonth - 1f) / date.month.length(false)
         },
         WEEK {
-            override fun increment(date: LocalDate): LocalDate = date.plusWeeks(1)
+            override fun increment(date: LocalDateTime): LocalDateTime = date.plusDays(1)
 
-            override fun getDateString(date: LocalDate): String = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR).toString()
+            override fun getDateString(date: LocalDateTime): String = date.dayOfWeek.name
 
-            override fun getPercentOfPeriod(date: LocalDate): Float = (date.dayOfWeek.value - 1f) / 7
+            override fun getPercentOfPeriod(date: LocalDateTime): Float = date.dayOfWeek.ordinal - 1f / 7
+        },
+
+        DAY {
+            override fun increment(date: LocalDateTime): LocalDateTime = date.plusHours(1)
+
+            override fun getDateString(date: LocalDateTime): String = date.hour.toString()+ ":00"
+
+            override fun getPercentOfPeriod(date: LocalDateTime): Float = (date.hour - 1f) / 24
         };
 
-        abstract fun increment(date: LocalDate): LocalDate
+        abstract fun increment(date: LocalDateTime): LocalDateTime
 
-        abstract fun getDateString(date: LocalDate): String
+        abstract fun getDateString(date: LocalDateTime): String
 
-        abstract fun getPercentOfPeriod(date: LocalDate): Float
+        abstract fun getPercentOfPeriod(date: LocalDateTime): Float
     }
 
     companion object {
-        // Количество месяцев до и после текущей даты
-        private const val MONTH_COUNT = 2L
-        private const val MAX_SCALE = 5f
+        private const val MONTH_SCALE = 12L
+
+        private const val HOUR_SCALE = 24L
+
+        private const val DAY_SCALE =7L
     }
 }

@@ -8,5 +8,5 @@ data class ThemeMetric(
     val imageUri: String?,
     val yearExperience: Int?,
     val themeImportance: String?,
-    val themeType: Int,
+    val themeType: String,
 )

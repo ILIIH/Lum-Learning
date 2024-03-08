@@ -1,4 +1,7 @@
 <resources>
     <string name="no_theme_created" >No theme was created.\nCreate theme and return back to see\nlearning recommendation </string>
     <string name="create_theme" >Create theme</string>
+    <string name="day">DAY</string>
+    <string name="week">WEEK</string>
+    <string name="month">MONTH</string>
 </resources>
