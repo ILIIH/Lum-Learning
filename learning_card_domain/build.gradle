@@ -20,25 +20,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 }
 
 dependencies {
     implementation project(path: ':learning_card_data')
     implementation project(path: ':data_base')
-    implementation "io.insert-koin:koin-android:3.3.2"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
-    implementation("androidx.room:room-runtime:2.5.0")
-    annotationProcessor("androidx.room:room-compiler:2.5.0")
-
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-
+    implementation("androidx.room:room-runtime:$room_runtime")
+    annotationProcessor("androidx.room:room-compiler:$room_compiler")
 }

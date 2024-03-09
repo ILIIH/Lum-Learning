@@ -51,6 +51,7 @@ class GamesDatabaseTest {
         assertEquals(insertedGame.first().themeId, gameResult.themeId)
     }
 
+
     @Test
     fun testDeleteUser() = runBlocking {
         val gameResult = GameResults(

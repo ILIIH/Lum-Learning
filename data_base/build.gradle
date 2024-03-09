@@ -21,43 +21,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 }
 
 dependencies {
 
     implementation project(path: ':core')
 
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
+    implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
 
-    implementation "io.insert-koin:koin-android:3.3.2"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
-    implementation("androidx.room:room-runtime:2.5.0")
-    implementation 'androidx.test.ext:junit-ktx:1.1.5'
-    testImplementation 'junit:junit:4.12'
-    annotationProcessor("androidx.room:room-compiler:2.5.0")
-
-    implementation 'com.google.code.gson:gson:2.10.1'
-
-    // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:2.5.0")
-
-      // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.5.0")
-
-    androidTestImplementation "androidx.test.ext:junit:1.1.5"
-    androidTestImplementation "androidx.test:runner:1.5.2"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
-    androidTestImplementation "androidx.room:room-testing:2.5.1"
-
-    androidTestImplementation 'androidx.test:core:1.4.0'
-
-
-
+    implementation("androidx.room:room-runtime:$room_runtime")
+    implementation "com.google.code.gson:gson:$gson_version"
+    kapt("androidx.room:room-compiler:$room_compiler")
+    implementation("androidx.room:room-ktx:$room_ktx_version")
+    annotationProcessor("androidx.room:room-compiler:$room_compiler")
 }

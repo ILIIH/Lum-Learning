@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Memorizable"
+
 include ':app'
 include ':theme_list_ui'
 

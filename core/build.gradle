@@ -5,20 +5,11 @@ plugins {
 
 android {
     compileSdk 33
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
     defaultConfig {
         minSdk 26
         targetSdk 33
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     buildFeatures {
         viewBinding = true
     }
@@ -28,11 +19,5 @@ android {
 }
 
 dependencies {
-    implementation "io.insert-koin:koin-android:3.3.2"
-
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-
+    implementation "androidx.appcompat:appcompat:$app_compat_version"
 }

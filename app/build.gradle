@@ -23,27 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
     dataBinding {
         enabled = true
     }
 }
 
 dependencies {
-
     implementation project(path: ':theme_list_ui')
     implementation project(path: ':theme_list_domain')
     implementation project(path: ':core')
     implementation project(path: ':data_base')
-    runtimeOnly project(path: ':data_base')
     implementation project(path: ':add_theme_ui')
     implementation project(path: ':add_theme_domain')
     implementation project(path: ':navigation')
@@ -59,15 +48,13 @@ dependencies {
     implementation project(path: ':plain_ui')
     implementation project(path: ':plain_domain')
 
-    implementation 'io.insert-koin:koin-android:3.3.3'
-    implementation 'io.insert-koin:koin-androidx-workmanager:3.3.3'
+    runtimeOnly project(path: ':data_base')
 
-    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$work_manager_version"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation "androidx.work:work-runtime-ktx:$work_manager_runtime_version"
 
-
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_ui_version"
 }

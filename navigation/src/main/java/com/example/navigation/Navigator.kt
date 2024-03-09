@@ -68,7 +68,7 @@ class Navigator :
     }
 
     override fun toCreate() {
-        navController?.navigateSafe(AboutThemeNavDirections.toFormulaBuilder())
+        TODO("Not yet implemented")
     }
 
     override fun finshGame() {
