@@ -42,11 +42,9 @@ dependencies {
     implementation project(path: ':game_ui')
     implementation project(path: ':plain_ui')
     implementation project(path: ':game_ui')
-
-    implementation "io.insert-koin:koin-android:$koin_version"
-
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
     implementation project(path: ':data_base')
 
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
 
 }

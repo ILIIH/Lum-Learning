@@ -30,14 +30,11 @@ android {
 }
 
 dependencies {
-
     implementation project(path: ':plain_data')
     implementation project(path: ':data_base')
-
 
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation("androidx.room:room-runtime:$room_runtime")
     annotationProcessor("androidx.room:room-compiler:$room_compiler")
-
 }
