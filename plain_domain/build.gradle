@@ -35,9 +35,9 @@ dependencies {
     implementation project(path: ':data_base')
 
 
-    implementation "io.insert-koin:koin-android:3.3.2"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
-    implementation("androidx.room:room-runtime:2.5.0")
-    annotationProcessor("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-runtime:$room_runtime")
+    annotationProcessor("androidx.room:room-compiler:$room_compiler")
 
 }

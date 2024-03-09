@@ -1,4 +1,6 @@
 buildscript {
+    apply from: 'build-const.gradle'
+
     repositories {
         google()
         mavenCentral()
@@ -17,14 +19,14 @@ plugins {
     id 'com.android.application' version '7.4.2' apply false
     id 'com.android.library' version '7.4.2' apply false
     id 'org.jetbrains.kotlin.android' version '1.6.21' apply false
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10' apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0' apply false
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy {
         exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
 

@@ -30,9 +30,9 @@ android {
 
 dependencies {
     implementation project(path: ':data_base')
-    implementation 'io.insert-koin:koin-android:3.3.3'
-    implementation 'androidx.work:work-runtime-ktx:2.7.1'
-    implementation 'io.insert-koin:koin-androidx-workmanager:3.3.3'
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "androidx.work:work-runtime-ktx:$work_manager_runtime_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$work_manager_version"
 
 }
 

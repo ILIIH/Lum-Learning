@@ -5,13 +5,6 @@
     android:id="@+id/main_navigation_graph"
     app:startDestination="@id/onboarding_nav">
 
-
-    <navigation android:id="@+id/formula_builder_graph"
-        app:startDestination="@id/formula_builder_navgraph">
-        <include app:graph="@navigation/formula_builder_navgraph" />
-    </navigation>
-
-
     <navigation android:id="@+id/theme_list_nav"
         app:startDestination="@id/theme_list_nav_graph">
         <include app:graph="@navigation/theme_list_nav_graph" />
@@ -22,15 +15,10 @@
         <action
             android:id="@+id/to_about_theme"
             app:destination="@id/about_theme_nav"
-            app:popUpTo="@id/theme_list_nav">
-            />
-
-        </action>
-
-
-
+            app:popUpTo="@id/theme_list_nav"/>
 
     </navigation>
+
     <navigation android:id="@+id/add_new_theme_nav"
         app:startDestination="@id/add_new_theme_nav_graph">
         <include app:graph="@navigation/add_new_theme_nav_graph" />
@@ -44,9 +32,6 @@
         <action
             android:id="@+id/to_ask_answer_game"
             app:destination="@id/ask_answer_ui_navigation" />
-        <action
-            android:id="@+id/to_formula_builder"
-            app:destination="@id/formula_builder_graph" />
     </navigation>
     <navigation android:id="@+id/onboarding_nav"
         app:startDestination="@id/onboarding_nav_gaph">
