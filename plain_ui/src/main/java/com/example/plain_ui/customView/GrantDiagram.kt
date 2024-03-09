@@ -75,8 +75,8 @@ class GrantDiagram @JvmOverloads constructor(
     )
 
     // Цвета градиента
-    private val gradientStartColor = ContextCompat.getColor(context, R.color.blue_700)
-    private val gradientEndColor = ContextCompat.getColor(context, R.color.blue_200)
+    private val gradientStartColor = ContextCompat.getColor(context, com.example.core.R.color.secondary)
+    private val gradientEndColor = ContextCompat.getColor(context, com.example.core.R.color.primary)
 
     private val contentWidth: Int
         get() = periodWidth * periods.getValue(periodType).size

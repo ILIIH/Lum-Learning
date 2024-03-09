@@ -1,5 +1,7 @@
 package com.example.plain_ui
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -22,10 +24,12 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
+
 class PlainFragment : Fragment() {
 
     private val viewModel: PlainViewModel by inject()
     private val navigation: PlainNavigation by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,16 +84,51 @@ class PlainFragment : Fragment() {
         view.teatcher.visibility = View.GONE
         view.messageBottomPart.visibility = View.GONE
 
+        val states = arrayOf(
+            intArrayOf(-android.R.attr.state_enabled),
+            intArrayOf(android.R.attr.state_enabled)
+        )
+        val colorUnselectedStateList = ColorStateList(
+            states, intArrayOf(
+                Color.BLACK,
+                Color.BLACK
+            )
+        )
+
+        val colorSelectedStateList = ColorStateList(
+            states , intArrayOf(
+                Color.BLACK,
+                resources.getColor(com.example.core.R.color.secondary)
+            )
+        )
+
+
         view.day.setOnClickListener {
+            turnOffRadioBtn(view, colorUnselectedStateList, colorSelectedStateList)
             view.plainView.changePeriodType(getString(R.string.day))
+            view.day.buttonTintList = colorSelectedStateList
+
         }
         view.week.setOnClickListener {
+            turnOffRadioBtn(view, colorUnselectedStateList, colorSelectedStateList)
             view.plainView.changePeriodType(getString(R.string.week))
+            view.week.buttonTintList =  colorSelectedStateList
+
         }
         view.month.setOnClickListener {
+            turnOffRadioBtn(view, colorUnselectedStateList, colorSelectedStateList)
             view.plainView.changePeriodType(getString(R.string.month))
+            view.month.buttonTintList = colorSelectedStateList
         }
 
         view.plainView.setTasks(tasksList)
+    }
+
+    private fun turnOffRadioBtn(view : FragmentPlainBinding, colorUnselectedStateList:ColorStateList, colorSelectedStateList:ColorStateList ){
+        view.day.buttonTintList =  colorUnselectedStateList
+
+        view.week.buttonTintList =  colorUnselectedStateList
+
+        view.month.buttonTintList =  colorUnselectedStateList
     }
 }

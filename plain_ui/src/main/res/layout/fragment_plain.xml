@@ -59,27 +59,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/day"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/day" />
-        <Button
-            android:id="@+id/week"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/week" />
-        <Button
-            android:id="@+id/month"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/month" />
+        <RadioGroup
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+            <RadioButton
+                android:id="@+id/day"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/day"
+                android:buttonTint="@color/black"
+                />
+            <RadioButton
+                android:id="@+id/week"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/week" />
+            <RadioButton
+                android:id="@+id/month"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/month" />
+
+
+        </RadioGroup>
+
+
     </LinearLayout>
 
     <com.example.plain_ui.customView.GrantDiagram
