@@ -21,26 +21,20 @@ class ThemeMetricRepoImp(private val cardsDAO: CardsDAO, private val themeDAO: T
         val VL_Card = cardsDAO.getAllVLCrad().filter { it.themeId == id }
         val LearningCard = cardsDAO.getAllLearningCrad().filter { it.themeId == id }
 
-        AL_Card.forEach {
+        val cardStats = cardsDAO.getAllCardStats().filter {cardStat ->
+            AL_Card.any { it.id == cardStat.cardID } ||
+            VL_Card.any { it.id == cardStat.cardID } ||
+            LearningCard.any{it.id == cardStat.cardID}
+        }
+
+        cardStats.forEach {
             sumCurMonthRA += it.RACurrentMonth
             sumLastMonthRA += it.RALastMonth
             sumAveraheRA += it.AverageRA
             cardCount++
         }
 
-        VL_Card.forEach {
-            sumCurMonthRA += it.RACurrentMonth
-            sumLastMonthRA += it.RALastMonth
-            sumAveraheRA += it.AverageRA
-            cardCount++
-        }
 
-        LearningCard.forEach {
-            sumCurMonthRA += it.RACurrentMonth
-            sumLastMonthRA += it.RALastMonth
-            sumAveraheRA += it.AverageRA
-            cardCount++
-        }
         if (cardCount == 0) {
             return ThemeMetric(
                 0.0,

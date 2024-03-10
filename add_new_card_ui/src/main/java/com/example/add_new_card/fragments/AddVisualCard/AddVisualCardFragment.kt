@@ -78,7 +78,6 @@ class AddVisualCardFragment : MediaFragment() {
                         question = view.question.editText!!.text.toString(),
                         answers,
                         SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                        monthNumber = Date().month,
                     )
                     if(!adapter.validateAnswers() && !validateCard(view)){
                         view.Title.requestFocus()
@@ -95,7 +94,6 @@ class AddVisualCardFragment : MediaFragment() {
                         question = view.question.editText!!.text.toString(),
                         answers,
                         SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                        monthNumber = Date().month,
                     )
                     hideKeyboard(requireActivity())
                     findNavController().popBackStack()

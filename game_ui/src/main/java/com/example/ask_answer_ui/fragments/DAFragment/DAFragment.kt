@@ -1,15 +1,12 @@
 package com.example.ask_answer_ui.fragments.DAFragment
 
 import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -41,26 +38,24 @@ class DAFragment : Fragment() {
 
                 answerAdapter = AnswerAdapter {
                     if (it) {
-                        cardProvider.updateLearningCardInfoAndMetrics(
+                        cardProvider.updateCardStatsAndMetrics(
                             currentDate = Date(),
                             cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
-                            AverageRA = currentCard.AverageRA,
                             result = true,
                             Time = begin - System.nanoTime(),
-                            card = currentCard,
+                            cardId = currentCard.Id,
                         )
                     } else {
-                        cardProvider.updateLearningCardInfoAndMetrics(
+                        cardProvider.updateCardStatsAndMetrics(
                             currentDate = Date(),
                             cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
-                            AverageRA = currentCard.AverageRA,
                             result = false,
                             Time = begin - System.nanoTime(),
-                            card = currentCard,
+                            cardId = currentCard.Id,
                         )
                     }
                     goToNextCard(view)
@@ -91,15 +86,14 @@ class DAFragment : Fragment() {
                                 parentFragmentManager,
                                 DescriptionDialog.DESCRIPTION_DIALOG_TAG,
                             )
-                            cardProvider.updateLearningCardInfoAndMetrics(
+                            cardProvider.updateCardStatsAndMetrics(
                                 currentDate = Date(),
                                 cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                     currentCard.dateCreation,
                                 ),
-                                AverageRA = currentCard.AverageRA,
                                 result = false,
                                 Time = begin - System.nanoTime(),
-                                card = currentCard,
+                                cardId = currentCard.Id,
                             )
                             goToNextCard(view)
                         }

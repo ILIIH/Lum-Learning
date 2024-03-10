@@ -2,11 +2,21 @@ package com.example.core.DB.DAO
 
 import androidx.room.*
 import com.example.core.DB.Entities.AudioLearningCard
+import com.example.core.DB.Entities.CardStats
 import com.example.core.DB.Entities.LearningCrad
 import com.example.core.DB.Entities.VisualLearningCard
 
 @Dao
 interface CardsDAO {
+    @Insert
+    suspend fun insertCardStats(vararg cardStat: CardStats)
+    @Delete
+    suspend fun deleteCardStats(vararg cardStat: CardStats)
+    @Query("SELECT * FROM CardStats")
+    suspend fun getAllCardStats(): List<CardStats>
+
+    @Update
+    suspend fun changeCardStat(vararg cardStat: CardStats)
     @Insert
     suspend fun insertLearningCrad(vararg card: LearningCrad)
 

@@ -15,22 +15,11 @@ class LearningCrad(
     val question: String,
     @ColumnInfo(name = "answers")
     val answers: List<Answer>,
-    @ColumnInfo(name = "RACurrentMonth")
-    val RACurrentMonth: Double,
-    @ColumnInfo(name = "RALastMonth")
-    val RALastMonth: Double,
-    @ColumnInfo(name = "AverageRA")
-    val AverageRA: Double,
     @ColumnInfo(name = "themeType")
     val themeType: Int,
     @ColumnInfo(name = "dateCreation")
     val dateCreation: String,
     @ColumnInfo(name = "description")
     val description: String,
-    @ColumnInfo(name = "repetitionAmount")
-    val repetitionAmount: Int,
-    @ColumnInfo(name = "lastUpdateNumber")
-    val lastUpdateNumber: Int,
-    @ColumnInfo(name = "lastMonthRepetitionNumber")
-    val lastMonthRepetitionNumber: Int,
+
 )

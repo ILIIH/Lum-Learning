@@ -122,7 +122,6 @@ class AddAudioCardFragment : Fragment() {
                         question = view.question.editText!!.text.toString(),
                         answers = answers,
                         currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                        monthNumber = Date().month,
                     )
                     if(!adapter.validateAnswers()&& !validateCard(view)){
                         view.questionInputText.text?.clear()
@@ -136,7 +135,6 @@ class AddAudioCardFragment : Fragment() {
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
                         currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                        monthNumber = Date().month,
                         answers = answers
 
                     )

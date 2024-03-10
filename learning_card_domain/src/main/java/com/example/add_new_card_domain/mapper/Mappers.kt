@@ -1,5 +1,6 @@
 package com.example.add_new_card_domain.mapper
 
+import com.example.add_new_card_data.model.CardStats
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
@@ -14,15 +15,9 @@ fun LearningCardDomain.toDataWithSaveId() = LearningCrad(
     answers = answers.map {
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
     themeType = themeType,
     dateCreation = dateCreation,
     description = discription,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    lastUpdateNumber = lastMonthUpdateNumber,
-    repetitionAmount = repetitionAmount,
 )
 fun LearningCardDomain.toData() = LearningCrad(
     themeId = themeId,
@@ -30,15 +25,9 @@ fun LearningCardDomain.toData() = LearningCrad(
     answers = answers.map {
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
     themeType = themeType,
     dateCreation = dateCreation,
     description = discription,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    lastUpdateNumber = lastMonthUpdateNumber,
-    repetitionAmount = repetitionAmount,
 )
 
 fun LearningCrad.toDomain() = LearningCardDomain(
@@ -48,15 +37,9 @@ fun LearningCrad.toDomain() = LearningCardDomain(
     answers = answers.map {
         com.example.add_new_card_data.model.Answer(it.answer, it.description, it.correct)
     },
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
     themeType = themeType,
     dateCreation = dateCreation,
     discription = description,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    repetitionAmount = repetitionAmount,
-    lastMonthUpdateNumber = lastUpdateNumber,
 )
 
 fun SA_Card.toData() = AudioLearningCard(
@@ -65,13 +48,7 @@ fun SA_Card.toData() = AudioLearningCard(
     answers = answers.map {
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
     dateCreation = dateCreation,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    lastUpdateNumber = lastMonthUpdateNumber,
-    repetitionAmount = repetitionAmount,
     audioFileId = audioFileId
 )
 
@@ -81,13 +58,7 @@ fun SA_Card.toDataWithId() = AudioLearningCard(
     answers = answers.map {
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
     dateCreation = dateCreation,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    lastUpdateNumber = lastMonthUpdateNumber,
-    repetitionAmount = repetitionAmount,
     audioFileId = audioFileId
 )
 fun AudioLearningCard.toDomain() = SA_Card(
@@ -97,15 +68,8 @@ fun AudioLearningCard.toDomain() = SA_Card(
     answers = answers.map {
         com.example.add_new_card_data.model.Answer(it.answer, it.description, it.correct)
     },
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
     dateCreation = dateCreation,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    repetitionAmount = repetitionAmount,
-    lastMonthUpdateNumber = lastUpdateNumber,
     audioFileId = audioFileId
-
 )
 
 fun VA_Card.toData() = VisualLearningCard(
@@ -115,13 +79,7 @@ fun VA_Card.toData() = VisualLearningCard(
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
     photo = photo,
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
-    dateCreation = dateCreation,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    lastUpdateNumber = lastMonthUpdateNumber,
-    repetitionAmount = repetitionAmount,
+    dateCreation = dateCreation
 )
 
 fun VA_Card.toDataWithId() = VisualLearningCard(
@@ -132,13 +90,7 @@ fun VA_Card.toDataWithId() = VisualLearningCard(
         com.example.core.DB.Entities.Answer(it.answer, it.description, it.correct)
     },
     photo = photo,
-    RACurrentMonth = RACurrentMonth,
-    RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
-    dateCreation = dateCreation,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
-    lastUpdateNumber = lastMonthUpdateNumber,
-    repetitionAmount = repetitionAmount,
+    dateCreation = dateCreation
 )
 
 fun VisualLearningCard.toDomain() = VA_Card(
@@ -149,11 +101,25 @@ fun VisualLearningCard.toDomain() = VA_Card(
         com.example.add_new_card_data.model.Answer(it.answer, it.description, it.correct)
     },
     photo = photo,
-    RACurrentMonth = RACurrentMonth,
+    dateCreation = dateCreation
+)
+fun CardStats.toData() = com.example.core.DB.Entities.CardStats(
+    id = id,
+    RACurrentMonth =  RACurrentMonth,
     RALastMonth = RALastMonth,
-    AverageRA = AverageRA,
-    dateCreation = dateCreation,
-    lastMonthRepetitionNumber = lastMonthRepetitionNumber,
+    AverageRA =  AverageRA,
+    cardID = cardID,
+    repetitionAmount = repetitionAmount,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber
+)
+fun com.example.core.DB.Entities.CardStats.toDomain() = CardStats(
+    id = id,
+    RACurrentMonth =  RACurrentMonth,
+    RALastMonth = RALastMonth,
+    AverageRA =  AverageRA,
+    cardID = cardID,
     repetitionAmount = repetitionAmount,
     lastMonthUpdateNumber = lastUpdateNumber,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber
 )

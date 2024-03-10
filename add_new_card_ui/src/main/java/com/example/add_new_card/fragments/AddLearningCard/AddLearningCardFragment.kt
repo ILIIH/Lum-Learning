@@ -74,7 +74,6 @@ class AddLearningCardFragment : Fragment() {
                                 Date(),
                             ),
                             description = view.description.editText!!.text.toString(),
-                            monthNumber = Date().month,
                         )
                     } else {
                         viewModel.addNewCard(
@@ -86,7 +85,6 @@ class AddLearningCardFragment : Fragment() {
                                 Date(),
                             ),
                             description = "-",
-                            monthNumber = Date().month,
                         )
                     }
                     if(!adapter.validateAnswers() && !validateCard(view)){
@@ -108,7 +106,6 @@ class AddLearningCardFragment : Fragment() {
                                 Date(),
                             ),
                             description = view.description.editText!!.text.toString(),
-                            monthNumber = Date().month,
                         )
                     } else {
                         viewModel.addNewCard(
@@ -120,8 +117,6 @@ class AddLearningCardFragment : Fragment() {
                                 Date(),
                             ),
                             description = "-",
-                            monthNumber = Date().month,
-
                         )
                     }
                     hideKeyboard(requireActivity())

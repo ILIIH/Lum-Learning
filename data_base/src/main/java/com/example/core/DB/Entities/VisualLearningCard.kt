@@ -16,19 +16,6 @@ class VisualLearningCard(
     @ColumnInfo(name = "answers")
     val answers: List<Answer>,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val photo: ByteArray,
-    @ColumnInfo(name = "RACurrentMonth")
-    val RACurrentMonth: Double,
-    @ColumnInfo(name = "RALastMonth")
-    val RALastMonth: Double,
-    @ColumnInfo(name = "AverageRA")
-    val AverageRA: Double,
     @ColumnInfo(name = "dateCreation")
     val dateCreation: String,
-    @ColumnInfo(name = "repetitionAmount")
-    val repetitionAmount: Int,
-    @ColumnInfo(name = "lastUpdateNumber")
-    val lastUpdateNumber: Int,
-    @ColumnInfo(name = "lastMonthRepetitionNumber")
-    val lastMonthRepetitionNumber: Int,
-
 )

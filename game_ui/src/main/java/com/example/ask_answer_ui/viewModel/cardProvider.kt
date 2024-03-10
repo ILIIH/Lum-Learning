@@ -1,9 +1,7 @@
 package com.example.ask_answer_ui.viewModel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
@@ -85,7 +83,7 @@ class cardProvider(
     }
 
     fun saveGameResult(currentDay: Int, themeId: Int, date: String) {
-        GlobalScope.launch {
+        viewModelScope.launch {
             when (cardList.value) {
                 is ResultOf.Success -> {
                     val list = (cardList.value as ResultOf.Success<ArrayList<Any>>).value
@@ -115,65 +113,25 @@ class cardProvider(
             }
         }
     }
-
-    fun updateVACardInfoAndMetrics(
+    fun updateCardStatsAndMetrics(
         currentDate: Date,
         cardDateCreation: Date,
         result: Boolean,
-        AverageRA: Double,
         Time: Long,
-        card: VA_Card,
+        cardId: Int,
     ) {
-        GlobalScope.launch {
-            repo.editVACard(card.changeRA(result, currentDate.month))
-        }
-        calculateGameMetrics(
-            currentDate = currentDate,
-            cardDateCreation = cardDateCreation,
-            AverageRA = AverageRA,
-            Time = Time,
-            result = result,
-        )
-    }
+        viewModelScope.launch {
+            val cardStat = repo.getCardStat(cardId)
+            repo.editCardStat(cardStat.changeRA(result, currentDate.month))
 
-    fun updateSACardInfoAndMetrics(
-        currentDate: Date,
-        cardDateCreation: Date,
-        result: Boolean,
-        AverageRA: Double,
-        Time: Long,
-        card: SA_Card,
-    ) {
-        GlobalScope.launch {
-            repo.editALCard(card.changeRA(result, currentDate.month))
+            calculateGameMetrics(
+                currentDate = currentDate,
+                cardDateCreation = cardDateCreation,
+                AverageRA = cardStat.AverageRA,
+                Time = Time,
+                result = result,
+            )
         }
-        calculateGameMetrics(
-            currentDate = currentDate,
-            cardDateCreation = cardDateCreation,
-            AverageRA = AverageRA,
-            Time = Time,
-            result = result,
-        )
-    }
-
-    fun updateLearningCardInfoAndMetrics(
-        currentDate: Date,
-        cardDateCreation: Date,
-        result: Boolean,
-        AverageRA: Double,
-        Time: Long,
-        card: LearningCardDomain,
-    ) {
-        GlobalScope.launch {
-            repo.editLearningCard(card.changeRA(result, currentDate.month))
-        }
-        calculateGameMetrics(
-            currentDate = currentDate,
-            cardDateCreation = cardDateCreation,
-            AverageRA = AverageRA,
-            Time = Time,
-            result = result,
-        )
     }
 
     fun calculateGameMetrics(
@@ -295,7 +253,7 @@ class cardProvider(
 
         val startTime = System.currentTimeMillis()
 
-        GlobalScope.launch {
+        viewModelScope.launch {
             try {
                 val currentList = ArrayList<Any>(100)
                 currentList.addAll(repo.getAllALCardByThemeId(id))
