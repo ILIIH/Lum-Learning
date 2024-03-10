@@ -2,17 +2,14 @@ package com.example.ask_answer_ui.fragments
 
 import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +18,7 @@ import com.example.add_new_card_data.model.SA_Card
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentSABinding
-import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
+import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
 import com.example.ask_answer_ui.viewModel.SA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
@@ -60,9 +57,9 @@ class SAFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            DescriptionDialog(getString(R.string.tile_ended)).show(
+                            CardEndsDialog(getString(R.string.tile_ended)).show(
                                 parentFragmentManager,
-                                DescriptionDialog.DESCRIPTION_DIALOG_TAG,
+                                CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                             )
                             cardProvider.updateCardStatsAndMetrics(
                                 currentDate = Date(),

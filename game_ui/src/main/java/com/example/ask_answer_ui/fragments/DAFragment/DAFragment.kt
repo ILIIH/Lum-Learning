@@ -3,7 +3,6 @@ package com.example.ask_answer_ui.fragments.DAFragment
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,9 +61,9 @@ class DAFragment : Fragment() {
                     goToNextCard(view)
                 }
 
-                DescriptionDialog(currentCard.discription).show(
+                CardEndsDialog(currentCard.discription).show(
                     parentFragmentManager,
-                    DescriptionDialog.DESCRIPTION_DIALOG_TAG,
+                    CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                 )
 
                 view.answerList.adapter = answerAdapter
@@ -83,9 +82,9 @@ class DAFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            DescriptionDialog(getString(R.string.tile_ended)).show(
+                            CardEndsDialog(getString(R.string.tile_ended)).show(
                                 parentFragmentManager,
-                                DescriptionDialog.DESCRIPTION_DIALOG_TAG,
+                                CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                             )
                             cardProvider.updateCardStatsAndMetrics(
                                 currentDate = Date(),
@@ -120,7 +119,7 @@ class DAFragment : Fragment() {
             val currentCard = cardProvider.getCurrentCard() as LearningCardDomain
             answerAdapter.submitList(currentCard.answers)
             view.question.text = currentCard.question
-            DescriptionDialog(getString(R.string.description)).show(parentFragmentManager, DescriptionDialog.DESCRIPTION_DIALOG_TAG)
+            CardEndsDialog(getString(R.string.description)).show(parentFragmentManager, CardEndsDialog.DESCRIPTION_DIALOG_TAG)
         }
     }
 }
