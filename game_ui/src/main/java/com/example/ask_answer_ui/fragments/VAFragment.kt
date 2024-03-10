@@ -40,26 +40,24 @@ class VAFragment : Fragment() {
 
                 answerAdapter = AnswerAdapter {
                     if (it) {
-                        cardProvider.updateVACardInfoAndMetrics(
+                        cardProvider.updateCardStatsAndMetrics(
                             currentDate = Date(),
                             cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
-                            AverageRA = currentCard.AverageRA,
                             result = true,
                             Time = begin - System.nanoTime(),
-                            card = currentCard,
+                            cardId = currentCard.Id,
                         )
                     } else {
-                        cardProvider.updateVACardInfoAndMetrics(
+                        cardProvider.updateCardStatsAndMetrics(
                             currentDate = Date(),
                             cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                 currentCard.dateCreation,
                             ),
-                            AverageRA = currentCard.AverageRA,
                             result = false,
                             Time = begin - System.nanoTime(),
-                            card = currentCard,
+                            cardId = currentCard.Id,
                         )
                     }
 
@@ -87,15 +85,14 @@ class VAFragment : Fragment() {
                                 parentFragmentManager,
                                 DescriptionDialog.DESCRIPTION_DIALOG_TAG,
                             )
-                            cardProvider.updateVACardInfoAndMetrics(
+                            cardProvider.updateCardStatsAndMetrics(
                                 currentDate = Date(),
                                 cardDateCreation = SimpleDateFormat(getString(com.example.core.R.string.data_format)).parse(
                                     currentCard.dateCreation,
                                 ),
-                                AverageRA = currentCard.AverageRA,
                                 result = false,
                                 Time = begin - System.nanoTime(),
-                                card = currentCard,
+                                cardId = currentCard.Id,
                             )
                             goToNextCard()
                         }

@@ -2,6 +2,7 @@ package com.example.add_new_card_domain
 
 import android.util.Log
 import com.example.add_new_card_data.CardRepository
+import com.example.add_new_card_data.model.CardStats
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
@@ -12,6 +13,14 @@ import com.example.add_new_card_domain.mapper.toDomain
 import com.example.core.DB.ThemeDatabase
 
 class CardRepositoryImp(private val repo: ThemeDatabase) : CardRepository {
+    override suspend fun getCardStat(cardId: Int): CardStats {
+        return repo.cardsDAO().getAllCardStats().first { it.cardID == cardId }.toDomain()
+    }
+
+    override suspend fun editCardStat(cardStats: CardStats) {
+        repo.cardsDAO().changeCardStat(cardStats.toData())
+    }
+
     override suspend fun insertCard(card: LearningCardDomain) {
         repo.cardsDAO().insertLearningCrad(card.toData())
     }

@@ -45,7 +45,6 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         answers: List<Answer>,
         question: String,
         currentDate: String,
-        monthNumber: Int,
     ) {
         viewModelScope.launch {
             recordIdMutex.withLock {
@@ -54,14 +53,8 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
                         themeId = themeId,
                         question = question,
                         answers = answers,
-                        RALastMonth = 0.0,
-                        RACurrentMonth = 0.0,
-                        AverageRA = 0.0,
                         audioFileId = maxId,
-                        dateCreation = currentDate,
-                        repetitionAmount = 0,
-                        lastMonthUpdateNumber = monthNumber,
-                        lastMonthRepetitionNumber = 0,
+                        dateCreation = currentDate
                     ),
                 )
             }

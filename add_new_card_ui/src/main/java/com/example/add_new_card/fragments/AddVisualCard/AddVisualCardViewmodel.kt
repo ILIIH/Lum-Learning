@@ -31,7 +31,7 @@ class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
         _answers.add(Answer("", "", true))
     }
 
-    fun addNewCard(themeId: Int, question: String, answers: List<Answer>, currentDate: String, monthNumber: Int) {
+    fun addNewCard(themeId: Int, question: String, answers: List<Answer>, currentDate: String) {
         viewModelScope.launch {
             val stream = ByteArrayOutputStream()
             photo.value?.compress(Bitmap.CompressFormat.PNG, 90, stream)
@@ -42,13 +42,7 @@ class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
                     question = question,
                     answers = answers,
                     photo = image,
-                    RALastMonth = 0.0,
-                    RACurrentMonth = 0.0,
-                    AverageRA = 0.0,
                     dateCreation = currentDate,
-                    repetitionAmount = 0,
-                    lastMonthUpdateNumber = monthNumber,
-                    lastMonthRepetitionNumber = 0,
                     Id = 0,
                 ),
             )

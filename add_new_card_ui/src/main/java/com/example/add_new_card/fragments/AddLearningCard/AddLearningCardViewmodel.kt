@@ -29,7 +29,6 @@ class AddLearningCardViewmodel(private val repo: CardRepository) : ViewModel() {
         themeType: Int,
         currentDate: String,
         description: String,
-        monthNumber: Int,
     ) {
         viewModelScope.launch {
             repo.insertCard(
@@ -37,15 +36,9 @@ class AddLearningCardViewmodel(private val repo: CardRepository) : ViewModel() {
                     themeId = themeId,
                     question = question,
                     answers = answers,
-                    RALastMonth = 0.0,
-                    RACurrentMonth = 0.0,
-                    AverageRA = 0.0,
                     themeType = themeType,
                     dateCreation = currentDate,
                     discription = description,
-                    repetitionAmount = 0,
-                    lastMonthUpdateNumber = monthNumber,
-                    lastMonthRepetitionNumber = 0,
                     Id = 0,
                 ),
             )
