@@ -17,6 +17,7 @@ import com.example.ask_answer_ui.databinding.FragmentMCBinding
 import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
 import com.example.ask_answer_ui.viewModel.MC_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
+import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -45,7 +46,7 @@ class MCFragment : Fragment() {
                                 currentCard.dateCreation,
                             ),
                             result = true,
-                            Time = begin - System.nanoTime(),
+                            time = begin - System.nanoTime(),
                             cardId = currentCard.Id,
                         )
                     } else {
@@ -55,7 +56,7 @@ class MCFragment : Fragment() {
                                 currentCard.dateCreation,
                             ),
                             result = false,
-                            Time = begin - System.nanoTime(),
+                            time = begin - System.nanoTime(),
                             cardId = currentCard.Id,
                         )
                     }
@@ -88,7 +89,7 @@ class MCFragment : Fragment() {
                                     currentCard.dateCreation,
                                 ),
                                 result = false,
-                                Time = begin - System.nanoTime(),
+                                time = begin - System.nanoTime(),
                                 cardId = currentCard.Id,
                             )
                             goToNextCard()
@@ -106,10 +107,9 @@ class MCFragment : Fragment() {
 
     fun goToNextCard() {
         cardProvider.goToNextCard()
-        Handler().postDelayed({
-            lifecycleScope.launchWhenResumed {
-                findNavController().popBackStack()
-            }
-        }, 1000)
+        lifecycleScope.launchWhenResumed {
+            delay(1000)
+            findNavController().popBackStack()
+        }
     }
 }

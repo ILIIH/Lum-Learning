@@ -79,7 +79,7 @@ class Matrix(val m: Int, val n: Int, var name: String = "matrix") {
     }
 
     operator fun div(m2: Matrix): Matrix {
-        val res = Matrix(m2!!.m, m2!!.n)
+        val res = Matrix(m2.m, m2.n)
         for (i in 0 until m2.m) {
             for (j in 0 until m2.n) {
                 res.set(i, j, data[ i ][ j ] / m2.get(i, j))
@@ -88,8 +88,8 @@ class Matrix(val m: Int, val n: Int, var name: String = "matrix") {
         return res
     }
 
-    operator fun times(m2: Matrix?): Matrix {
-        val product = Matrix(m2!!.m, m2!!.n)
+    operator fun times(m2: Matrix): Matrix {
+        val product = Matrix(m2.m, m2.n)
         for (i in 0 until m2.m) {
             for (j in 0 until m2.n) {
                 val mObj = m2.get(i, j)

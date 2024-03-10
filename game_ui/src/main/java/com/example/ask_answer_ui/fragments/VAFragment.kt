@@ -18,6 +18,7 @@ import com.example.ask_answer_ui.databinding.FragmentVisualAssosiationBinding
 import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
 import com.example.ask_answer_ui.viewModel.VA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
+import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -46,7 +47,7 @@ class VAFragment : Fragment() {
                                 currentCard.dateCreation,
                             ),
                             result = true,
-                            Time = begin - System.nanoTime(),
+                            time = begin - System.nanoTime(),
                             cardId = currentCard.Id,
                         )
                     } else {
@@ -56,7 +57,7 @@ class VAFragment : Fragment() {
                                 currentCard.dateCreation,
                             ),
                             result = false,
-                            Time = begin - System.nanoTime(),
+                            time = begin - System.nanoTime(),
                             cardId = currentCard.Id,
                         )
                     }
@@ -91,7 +92,7 @@ class VAFragment : Fragment() {
                                     currentCard.dateCreation,
                                 ),
                                 result = false,
-                                Time = begin - System.nanoTime(),
+                                time = begin - System.nanoTime(),
                                 cardId = currentCard.Id,
                             )
                             goToNextCard()
@@ -109,10 +110,9 @@ class VAFragment : Fragment() {
 
     fun goToNextCard() {
         cardProvider.goToNextCard()
-        Handler().postDelayed({
-            lifecycleScope.launchWhenResumed {
-                findNavController().popBackStack()
-            }
-        }, 1000)
+        lifecycleScope.launchWhenResumed {
+            delay(1000)
+            findNavController().popBackStack()
+        }
     }
 }

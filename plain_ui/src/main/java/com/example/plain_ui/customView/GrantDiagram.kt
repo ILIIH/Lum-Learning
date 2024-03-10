@@ -444,11 +444,9 @@ class GrantDiagram @JvmOverloads constructor(
 
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(detector: ScaleGestureDetector): Boolean {
-            return if (detector != null) {
+            return run {
                 transformations.addScale(detector.scaleFactor)
                 true
-            } else {
-                false
             }
         }
     }

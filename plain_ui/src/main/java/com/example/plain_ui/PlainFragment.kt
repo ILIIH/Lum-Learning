@@ -14,6 +14,7 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.plain_data.Task
@@ -66,7 +67,9 @@ class PlainFragment : Fragment() {
             }
 
             setSpan(clickableSpan, createIndex, createIndex + create.length, 0)
-            setSpan(ForegroundColorSpan(resources.getColor(android.R.color.black)), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(ForegroundColorSpan( ContextCompat.getColor(requireContext(),android.R.color.black )),
+                createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
 
             setSpan(StyleSpan(Typeface.BOLD), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             setSpan(UnderlineSpan(), createIndex, +createIndex+ create.length, 0)
@@ -98,7 +101,7 @@ class PlainFragment : Fragment() {
         val colorSelectedStateList = ColorStateList(
             states , intArrayOf(
                 Color.BLACK,
-                resources.getColor(com.example.core.R.color.secondary)
+                ContextCompat.getColor(requireContext(),com.example.core.R.color.secondary)
             )
         )
 

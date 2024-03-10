@@ -45,24 +45,24 @@ class MainActivity : AppCompatActivity() {
 
         if(!resources.getStringArray(R.array.return_blocked_fragments_labels)
             .contains(navController.currentDestination?.label)){
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
     private fun initWorkers() {
         val mnemoTypeWorkRequest = OneTimeWorkRequestBuilder<MnemoTypeWorker>().build()
-        WorkManager.getInstance().enqueue(mnemoTypeWorkRequest)
+        WorkManager.getInstance(applicationContext).enqueue(mnemoTypeWorkRequest)
 
         val spacedFactorWorkRequest = OneTimeWorkRequestBuilder<SpacedFactorWorker>().build()
-        WorkManager.getInstance().enqueue(spacedFactorWorkRequest)
+        WorkManager.getInstance(applicationContext).enqueue(spacedFactorWorkRequest)
 
         val dayPredictionWorkRequest = OneTimeWorkRequestBuilder<DayPredictionWorker>().build()
-        WorkManager.getInstance().enqueue(dayPredictionWorkRequest)
+        WorkManager.getInstance(applicationContext).enqueue(dayPredictionWorkRequest)
 
         val themeTypeWorkRequest = OneTimeWorkRequestBuilder<ThemeTypeWorker>().build()
-        WorkManager.getInstance().enqueue(themeTypeWorkRequest)
+        WorkManager.getInstance(applicationContext).enqueue(themeTypeWorkRequest)
 
         val timeLearningWorkerRequest = OneTimeWorkRequestBuilder<TimeLearningWorker>().build()
-        WorkManager.getInstance().enqueue(timeLearningWorkerRequest)
+        WorkManager.getInstance(applicationContext).enqueue(timeLearningWorkerRequest)
     }
 }

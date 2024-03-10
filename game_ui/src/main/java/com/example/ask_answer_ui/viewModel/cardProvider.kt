@@ -78,6 +78,7 @@ class cardProvider(
                     }
                 }
             }
+            else -> {}
         }
         return Any()
     }
@@ -110,6 +111,7 @@ class cardProvider(
                     Tw2 = 0.0
                     list.clear()
                 }
+                else -> {}
             }
         }
     }
@@ -117,20 +119,21 @@ class cardProvider(
         currentDate: Date,
         cardDateCreation: Date,
         result: Boolean,
-        Time: Long,
+        time: Long,
         cardId: Int,
     ) {
         viewModelScope.launch {
-            val cardStat = repo.getCardStat(cardId)
-            repo.editCardStat(cardStat.changeRA(result, currentDate.month))
+            repo.getCardStat(cardId)?.let { cardStat ->
+                repo.editCardStat(cardStat.changeRA(result, currentDate.month))
 
-            calculateGameMetrics(
-                currentDate = currentDate,
-                cardDateCreation = cardDateCreation,
-                AverageRA = cardStat.AverageRA,
-                Time = Time,
-                result = result,
-            )
+                calculateGameMetrics(
+                    currentDate = currentDate,
+                    cardDateCreation = cardDateCreation,
+                    averageRA = cardStat.AverageRA,
+                    time = time,
+                    result = result,
+                )
+            }
         }
     }
 
@@ -138,21 +141,21 @@ class cardProvider(
         currentDate: Date,
         cardDateCreation: Date,
         result: Boolean,
-        AverageRA: Double,
-        Time: Long,
+        averageRA: Double,
+        time: Long,
     ) {
-        T += Time
+        T += time
         if (currentDate.time - (7 * DAY_IN_MS) < cardDateCreation.time &&
             currentDate.time - (14 * DAY_IN_MS) > cardDateCreation.time && !result
         ) {
             K += 1.0
         } else if (currentDate.time - (14 * DAY_IN_MS) < cardDateCreation.time && !result) {
             D += 1.0
-        } else if (AverageRA < 15 && currentDate.time - (14 * DAY_IN_MS) < cardDateCreation.time && !result) {
-            Tw1 += Time
+        } else if (averageRA < 15 && currentDate.time - (14 * DAY_IN_MS) < cardDateCreation.time && !result) {
+            Tw1 += time
             Ch += 1
-        } else if (AverageRA < 15 && currentDate.time - (14 * DAY_IN_MS) < cardDateCreation.time && result) {
-            Tw2 += Time
+        } else if (averageRA < 15 && currentDate.time - (14 * DAY_IN_MS) < cardDateCreation.time && result) {
+            Tw2 += time
         }
     }
 

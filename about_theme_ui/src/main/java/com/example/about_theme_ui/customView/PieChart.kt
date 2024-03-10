@@ -86,7 +86,6 @@ class PieChart @JvmOverloads constructor(
         bottom: Float = layoutParams.height.toFloat(),
         left: Float = ((width / 2).toFloat()),
         right: Float = (width / 2).toFloat(),
-        value: Int,
     ) {
         val random = (0..50).random().toFloat()
 
@@ -110,7 +109,7 @@ class PieChart @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
         setGraphicSizes()
         data?.pieSlices?.forEach {
-            setCircleBounds(value = it.value.value.toInt())
+            setCircleBounds()
             setIndicatorLocation(it.key)
         }
     }

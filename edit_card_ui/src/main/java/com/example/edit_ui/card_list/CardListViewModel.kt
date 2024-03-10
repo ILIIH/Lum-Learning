@@ -10,6 +10,7 @@ import com.example.edit_ui.data.Card
 import com.example.edit_ui.data.toCard
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.lang.Error
 import java.util.ArrayList
 
 class CardListViewModel(
@@ -41,7 +42,7 @@ class CardListViewModel(
     fun downloadCards(id: Int) {
         cardList.postValue(ResultOf.Loading(arrayListOf()))
 
-        GlobalScope.launch {
+        viewModelScope.launch {
             try {
                 val currentList = ArrayList<Card>(100)
                 currentList.addAll(repo.getAllALCardByThemeId(id).map { it.toCard() })

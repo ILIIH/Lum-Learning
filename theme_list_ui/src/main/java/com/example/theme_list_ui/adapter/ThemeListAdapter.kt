@@ -43,8 +43,8 @@ class ThemeAdapter(
                 }
 
                 val bitmap = BitmapFactory.decodeByteArray(themeItem.photo, 0, themeItem.photo.size)
-                val bitmapDr: Drawable = BitmapDrawable(bitmap)
-                baceImgLayout.setBackgroundDrawable(bitmapDr)
+                val bitmapDr: Drawable = BitmapDrawable(binding.root.context.resources , bitmap)
+                baceImgLayout.background = bitmapDr
             }
         }
     }

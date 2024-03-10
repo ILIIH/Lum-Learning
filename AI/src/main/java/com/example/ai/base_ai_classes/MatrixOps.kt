@@ -8,7 +8,7 @@ class MatrixOps {
     companion object {
 
         private fun dot(x1: DoubleArray, x2: DoubleArray): Double {
-            return DoubleArray(x1.size).mapIndexed { index, d -> x1[ index ] * x2[ index ] }.sum()
+            return DoubleArray(x1.size).mapIndexed { index, _ -> x1[ index ] * x2[ index ] }.sum()
         }
 
         fun zerosLike(p: Matrix): Matrix {

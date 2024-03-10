@@ -16,6 +16,7 @@ import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentDABinding
 import com.example.ask_answer_ui.viewModel.DA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
+import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -44,7 +45,7 @@ class DAFragment : Fragment() {
                                 currentCard.dateCreation,
                             ),
                             result = true,
-                            Time = begin - System.nanoTime(),
+                            time = begin - System.nanoTime(),
                             cardId = currentCard.Id,
                         )
                     } else {
@@ -54,7 +55,7 @@ class DAFragment : Fragment() {
                                 currentCard.dateCreation,
                             ),
                             result = false,
-                            Time = begin - System.nanoTime(),
+                            time = begin - System.nanoTime(),
                             cardId = currentCard.Id,
                         )
                     }
@@ -92,7 +93,7 @@ class DAFragment : Fragment() {
                                     currentCard.dateCreation,
                                 ),
                                 result = false,
-                                Time = begin - System.nanoTime(),
+                                time = begin - System.nanoTime(),
                                 cardId = currentCard.Id,
                             )
                             goToNextCard(view)
@@ -111,11 +112,10 @@ class DAFragment : Fragment() {
     fun goToNextCard(view: FragmentDABinding) {
         cardProvider.goToNextCard()
         if (!cardProvider.hasLearningCard()) {
-            Handler().postDelayed({
-                lifecycleScope.launchWhenResumed {
-                    findNavController().popBackStack()
-                }
-            }, 1000)
+            lifecycleScope.launchWhenResumed {
+                delay(1000)
+                findNavController().popBackStack()
+            }
         } else {
             val currentCard = cardProvider.getCurrentCard() as LearningCardDomain
             answerAdapter.submitList(currentCard.answers)
