@@ -35,12 +35,12 @@ open class BaseFragment : Fragment() {
         errorDialog.show(childFragmentManager, ErrorDialogFragment.error_message_tag)
     }
 
-        fun showLoading(){
-            if (loadingFragment == null) {
-                loadingFragment = LoadingFragment()
-                loadingFragment?.show(parentFragmentManager, LoadingFragment.loading_fragment_tag)
-            }
-        }
+    fun showLoading(){
+       if (loadingFragment == null) {
+           loadingFragment = LoadingFragment()
+           loadingFragment?.show(parentFragmentManager, LoadingFragment.loading_fragment_tag)
+       }
+    }
 
     fun dismissLoading(){
         loadingFragment?.let {

@@ -37,7 +37,7 @@ class Model(private var inputDims: Int, var layers: Array<Dense>) {
             val theta = layers[ i ].forward(layerInput)
             layerInput = theta
         }
-        return layerInput!!
+        return layerInput
     }
 
     fun backward() {

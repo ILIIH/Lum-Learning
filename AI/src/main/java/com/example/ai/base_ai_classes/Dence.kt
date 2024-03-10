@@ -7,36 +7,36 @@ class Dense(
 ) {
 
     // Inputs to this layer
-    var X: Matrix? = null
+    lateinit var X: Matrix
 
     // Weights
-    var W: Matrix? = null
+    lateinit var W: Matrix
 
     // Biases
     var B: Matrix = MatrixOps.onesLike(1, units)
 
     // The output this layer will produce
-    var y: Matrix? = null
+    lateinit var y: Matrix
 
     // The value of WX + B
-    var theta: Matrix? = null
+    lateinit var theta: Matrix
 
     // Some gradients
-    var dy_dtheta: Matrix? = null
-    var dtheta_dW: Matrix? = null
-    var dtheta_dX: Matrix? = null
+    lateinit var dy_dtheta: Matrix
+    lateinit var dtheta_dW: Matrix
+    lateinit var dtheta_dX: Matrix
 
     fun forward(inputs: Matrix): Matrix {
         X = inputs
         // Check is bias is required
         if (requiresBias) {
-            theta = MatrixOps.dot(inputs, W!!) + B
+            theta = MatrixOps.dot(inputs, W) + B
         } else {
-            theta = MatrixOps.dot(inputs, W!!)
+            theta = MatrixOps.dot(inputs, W)
         }
         // Call the activation function
-        y = activation.call(theta!!)
-        return y!!
+        y = activation.call(theta)
+        return y
     }
 
     // These methods are called by the back propagation algorithm.
@@ -44,7 +44,7 @@ class Dense(
         W = MatrixOps.initEmpty(inputDims, units)
     }
     fun computeGradients() {
-        dy_dtheta = activation.gradient(theta!!)
+        dy_dtheta = activation.gradient(theta)
         dtheta_dW = X
         dtheta_dX = W
     }

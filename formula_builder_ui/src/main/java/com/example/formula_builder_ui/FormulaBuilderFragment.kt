@@ -49,6 +49,9 @@ class FormulaBuilderFragment : Fragment() {
                 Category.MATH_OPERATORS -> {
                     operatorsAdapter.submitList(mathSymbols)
                 }
+                else -> {
+                    operatorsAdapter.submitList(mathOperators)
+                }
             }
         }
         view.backButton.setOnClickListener {

@@ -7,7 +7,7 @@ import com.example.add_new_card_data.model.VA_Card
 
 interface CardRepository {
     suspend fun editCardStat(cardStats: CardStats)
-    suspend fun getCardStat(cardId: Int): CardStats
+    suspend fun getCardStat(cardId: Int): CardStats?
 
     suspend fun insertCard(card: LearningCardDomain)
     suspend fun getAllCardByThemeId(id: Int): List<LearningCardDomain>

@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card_data.model.LearningCardDomain
@@ -105,7 +106,7 @@ class RuleFragment : BaseFragment() {
             }
 
             setSpan(clickableSpan, createIndex, createIndex + create.length, 0)
-            setSpan(ForegroundColorSpan(resources.getColor(android.R.color.black)), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(), android.R.color.black)), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
             setSpan(StyleSpan(Typeface.BOLD), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             setSpan(UnderlineSpan(), createIndex, +createIndex+ create.length, 0)
@@ -195,7 +196,7 @@ class RuleFragment : BaseFragment() {
                     findNavController().navigate(R.id.to_SAFragment)
             }
             else -> {
-                TODO()
+                // TODO() A
             }
             // TODO: ADD COMBINED_APPROACH at 6
         }

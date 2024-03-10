@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.ask_answer_data.ResultOf
+import com.example.core.ui.BaseFragment
 import com.example.edit_ui.adapter.CardListAdapter
 import com.example.edit_ui.data.CardType
 import com.example.edit_ui.databinding.FragmentCardListBinding
 import org.koin.android.ext.android.inject
 
-class CardListFragment : Fragment() {
+class CardListFragment : BaseFragment() {
 
     val viewModel: CardListViewModel by inject()
     override fun onCreateView(
@@ -36,7 +37,15 @@ class CardListFragment : Fragment() {
         viewModel._cardList.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultOf.Success -> {
+                    dismissLoading()
                     listAdapter.setListData(it.value)
+                }
+                is ResultOf.Failure -> {
+                    dismissLoading()
+                    showError(it.error)
+                }
+                is ResultOf.Loading -> {
+                    showLoading()
                 }
             }
         }

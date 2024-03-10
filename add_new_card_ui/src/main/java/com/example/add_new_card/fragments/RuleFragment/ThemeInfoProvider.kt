@@ -15,11 +15,9 @@ class ThemeInfoProvider(private val getPrediction: getMnemoTypePrediction) {
     val _themeType: LiveData<Int>
         get() = themeType
 
-    fun generatePrediction() {
-        GlobalScope.launch {
-            val prediction = getPrediction.execute()
-            themeType.postValue(prediction)
-        }
+    suspend fun generatePrediction() {
+        val prediction = getPrediction.execute()
+        themeType.postValue(prediction)
     }
 
     fun setThemeId(id: Int) {
