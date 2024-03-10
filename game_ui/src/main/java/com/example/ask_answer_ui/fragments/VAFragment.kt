@@ -4,7 +4,6 @@ import android.graphics.BitmapFactory
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentVisualAssosiationBinding
-import com.example.ask_answer_ui.fragments.DAFragment.DescriptionDialog
+import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
 import com.example.ask_answer_ui.viewModel.VA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
@@ -82,9 +81,9 @@ class VAFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            DescriptionDialog(getString(R.string.tile_ended)).show(
+                            CardEndsDialog(getString(R.string.tile_ended)).show(
                                 parentFragmentManager,
-                                DescriptionDialog.DESCRIPTION_DIALOG_TAG,
+                                CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                             )
                             cardProvider.updateCardStatsAndMetrics(
                                 currentDate = Date(),
