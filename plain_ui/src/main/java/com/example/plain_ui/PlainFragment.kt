@@ -52,10 +52,11 @@ class PlainFragment : Fragment() {
     private fun renderEmptyThemes(view: FragmentPlainBinding){
 
         view.plainView.visibility = View.GONE
+        view.teacher.startButton.visibility = View.GONE
 
-        view.ruleText.visibility = View.VISIBLE
-        view.teatcher.visibility = View.VISIBLE
-        view.messageBottomPart.visibility = View.VISIBLE
+        view.teacher.ruleText.visibility = View.VISIBLE
+        view.teacher.root.visibility = View.VISIBLE
+        view.teacher.messageBottomPart.visibility = View.VISIBLE
 
         SpannableString(getString(R.string.no_theme_created)).apply {
             val create = getString(R.string.create_theme)
@@ -74,8 +75,8 @@ class PlainFragment : Fragment() {
             setSpan(StyleSpan(Typeface.BOLD), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             setSpan(UnderlineSpan(), createIndex, +createIndex+ create.length, 0)
 
-            view.ruleText.text = this
-            view.ruleText.movementMethod = LinkMovementMethod.getInstance()
+            view.teacher.ruleText.text = this
+            view.teacher.ruleText.movementMethod = LinkMovementMethod.getInstance()
         }
 
     }
@@ -83,9 +84,9 @@ class PlainFragment : Fragment() {
     private fun render(view: FragmentPlainBinding, tasksList: List<Task>){
         view.plainView.visibility = View.VISIBLE
 
-        view.ruleText.visibility = View.GONE
-        view.teatcher.visibility = View.GONE
-        view.messageBottomPart.visibility = View.GONE
+        view.teacher.ruleText.visibility = View.GONE
+        view.teacher.root.visibility = View.GONE
+        view.teacher.messageBottomPart.visibility = View.GONE
 
         val states = arrayOf(
             intArrayOf(-android.R.attr.state_enabled),
