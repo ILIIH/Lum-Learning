@@ -53,6 +53,7 @@ class PlainFragment : Fragment() {
 
         view.plainView.visibility = View.GONE
         view.teacher.startButton.visibility = View.GONE
+        view.buttonsLayout.visibility = View.GONE
 
         view.teacher.ruleText.visibility = View.VISIBLE
         view.teacher.root.visibility = View.VISIBLE

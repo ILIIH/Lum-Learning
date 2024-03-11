@@ -24,7 +24,10 @@
         <include app:graph="@navigation/add_new_theme_nav_graph" />
         <action
             android:id="@+id/continue_to_theme_list"
-            app:destination="@id/theme_list_nav" />
+            app:destination="@id/theme_list_nav"
+            app:popUpTo="@+id/add_new_theme_nav"
+            app:popUpToInclusive="true"
+            />
     </navigation>
     <navigation android:id="@+id/about_theme_nav"
         app:startDestination="@id/abot_theme_navigation">
@@ -50,7 +53,7 @@
         <action
             android:id="@+id/from_game_to_add_new_card"
             app:destination="@id/add_new_card_graph"
-            app:popUpTo="@id/about_theme_nav"
+            app:popUpTo="@id/ask_answer_ui_navigation"
             app:popUpToInclusive="true" />
 
     </navigation>

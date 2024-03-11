@@ -84,7 +84,7 @@ class ThemeAddViewModel(
                 )
             }
 
-            navigator.submit()
+            navigator.submitNewTheme()
         }
     }
 }

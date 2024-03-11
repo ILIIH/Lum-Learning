@@ -33,7 +33,9 @@ class ThemePhotoFragment : MediaFragment() {
 
         viewModule._photo.observe(requireActivity()) {
             view.themePhoto.setImageDrawable(null)
-            view.themePhoto.setImageBitmap(it)
+            if(!it.isRecycled){
+                view.themePhoto.setImageBitmap(it)
+            }
         }
 
         view.themePhoto.setOnClickListener {

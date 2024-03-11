@@ -105,7 +105,9 @@ class AddVisualCardFragment : MediaFragment() {
         viewModel._photo.observe(requireActivity()) {
             it?.let { photo ->
                 view.addPhoto.setImageDrawable(null)
-                view.addPhoto.setImageBitmap(photo)
+                if(!photo.isRecycled) {
+                    view.addPhoto.setImageBitmap(photo)
+                }
             }
         }
         view.lifecycleOwner = viewLifecycleOwner

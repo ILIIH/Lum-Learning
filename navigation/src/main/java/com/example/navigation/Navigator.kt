@@ -55,7 +55,7 @@ class Navigator :
         navController = null
     }
 
-    override fun submit() {
+    override fun submitNewTheme() {
         navController?.navigateSafe(AddNewThemeNavDirections.continueToThemeList())
     }
 
