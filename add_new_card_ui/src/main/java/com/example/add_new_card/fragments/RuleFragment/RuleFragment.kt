@@ -38,22 +38,22 @@ class RuleFragment : Fragment() {
             themeInfoProvider._themeType.observe(viewLifecycleOwner) { type ->
                 when (type) {
                     1 -> {
-                        view.ruleText.text =getString(com.example.core.R.string.meta_mnem_rule)
+                        view.teacher.ruleText.text =getString(com.example.core.R.string.meta_mnem_rule)
                     }
                     2 -> {
-                        view.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
+                        view.teacher.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
                     }
                     3 -> {
-                        view.ruleText.text =getString(com.example.core.R.string.visual_mnem_rule)
+                        view.teacher.ruleText.text =getString(com.example.core.R.string.visual_mnem_rule)
                     }
                     4 -> {
-                        view.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
+                        view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                     }
                     5 -> {
-                        view.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
+                        view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                     }
                 }
-                view.startButton.setOnClickListener {
+                view.teacher.startButton.setOnClickListener {
                     when (type) {
                         1 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TODO: Change approach
                         2 -> findNavController().navigate(R.id.to_addLearningCardFragment)

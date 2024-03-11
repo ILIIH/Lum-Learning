@@ -4,7 +4,6 @@
     <string name="discribe_how_hard_to_learn_this_info">Describe how hard to learn this info</string>
     <string name="use">Describe how you can use this info</string>
     <string name="repeat_again">Repeat again</string>
-    <string name="exit">Exit</string>
     <string name="test_rule">Test rule:</string>
     <string name="start">START</string>
     <string name="create_new_card">CREATE NEW CARD</string>
@@ -13,7 +12,6 @@
     <string name="skip_description">Skip description ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="restart">RESTART</string>
     <string name="card_end_text">You have done a good job \nLearning cards is ended</string>
     <string name="tile_ended">Your time is end</string>
     <string name="description">Description</string>

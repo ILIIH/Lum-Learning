@@ -94,7 +94,7 @@ class RuleFragment : BaseFragment() {
     }
 
     fun showEmptyListRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
-        view.startButton.text = getString(R.string.create_new_card)
+        view.teacher.startButton.text = getString(R.string.create_new_card)
 
         SpannableString(getString(R.string.no_card_was_created)).apply {
             val create = getString(R.string.create_btn_text)
@@ -111,25 +111,25 @@ class RuleFragment : BaseFragment() {
             setSpan(StyleSpan(Typeface.BOLD), createIndex, createIndex + create.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             setSpan(UnderlineSpan(), createIndex, +createIndex+ create.length, 0)
 
-            view.ruleText.text = this
-            view.ruleText.movementMethod = LinkMovementMethod.getInstance()
+            view.teacher.ruleText.text = this
+            view.teacher.ruleText.movementMethod = LinkMovementMethod.getInstance()
         }
 
 
-        view.startButton.visibility = View.GONE
+        view.teacher.startButton.visibility = View.GONE
     }
 
     fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
-        view.startButton.visibility = View.VISIBLE
-        view.exitButton.visibility = View.GONE
+        view.teacher.startButton.visibility = View.VISIBLE
+        view.teacher.exitButton.visibility = View.GONE
 
-        view.startButton.text = getString(com.example.core.R.string.next)
+        view.teacher.startButton.text = getString(com.example.core.R.string.next)
 
         lifecycleScope.launchWhenStarted {
             cardProvider.getCurrentCard().apply {
                 if (cardProvider.isItTheEndOfCardList()) {
                     dismissLoading()
-                    view.exitButton.visibility = View.VISIBLE
+                    view.teacher.exitButton.visibility = View.VISIBLE
                     callEndDialog(themeId, view)
                 } else {
                     when (this) {
@@ -139,24 +139,24 @@ class RuleFragment : BaseFragment() {
                             when (currentCard.themeType) {
                                 2 -> {
                                     view.subTitle.text = getString(com.example.core.R.string.meta_mnem_title)
-                                    view.ruleText.text = getString(com.example.core.R.string.meta_mnem_rule)
+                                    view.teacher.ruleText.text = getString(com.example.core.R.string.meta_mnem_rule)
                                 }
 
                                 5 -> {
                                     view.subTitle.text = getString(com.example.core.R.string.description_mnem_title)
-                                    view.ruleText.text = getString(com.example.core.R.string.description_mnem_rule)
+                                    view.teacher.ruleText.text = getString(com.example.core.R.string.description_mnem_rule)
                                 }
                             }
                         }
 
                         is VA_Card -> {
                             view.subTitle.text = getString(com.example.core.R.string.visual_mnem_title)
-                            view.ruleText.text = getString(com.example.core.R.string.visual_mnem_rule)
+                            view.teacher.ruleText.text = getString(com.example.core.R.string.visual_mnem_rule)
                         }
 
                         is SA_Card -> {
                             view.subTitle.text = getString(com.example.core.R.string.sound_mnem_title)
-                            view.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
+                            view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                         }
                     }
                 }
@@ -164,7 +164,7 @@ class RuleFragment : BaseFragment() {
         }
         lifecycleScope.launchWhenStarted {
             cardProvider.getCurrentCard().apply {
-                view.startButton.setOnClickListener {
+                view.teacher.startButton.setOnClickListener {
                     showSkipDescrDialog(this::class.getFullName()) { navigateToGame(this) }
                 }
             }
@@ -208,11 +208,11 @@ class RuleFragment : BaseFragment() {
     }
 
     private fun callEndDialog(themeId: Int, view: FragmentGameRuleBinding) {
-        view.startButton.visibility = View.GONE
-        view.restartButton.visibility = View.VISIBLE
-        view.ruleText.text = getString(R.string.card_end_text)
+        view.teacher.startButton.visibility = View.GONE
+        view.teacher.restartButton.visibility = View.VISIBLE
+        view.teacher.ruleText.text = getString(R.string.card_end_text)
 
-        view.restartButton.setOnClickListener {
+        view.teacher.restartButton.setOnClickListener {
             cardProvider.startFromFirstCard(themeId)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cardProvider.saveGameResult(
@@ -225,7 +225,7 @@ class RuleFragment : BaseFragment() {
                 TODO()
             }
         }
-        view.exitButton.setOnClickListener {
+        view.teacher.exitButton.setOnClickListener {
             cardProvider.exitTheme()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 cardProvider.saveGameResult(
