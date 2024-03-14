@@ -30,12 +30,14 @@ dependencies {
 
     implementation project(path: ':add_theme_ui')
     implementation project(path: ':about_theme_ui')
+    implementation project(path: ':add_new_card_ui')
     implementation project(path: ':theme_list_ui')
     implementation project(path: ':onboarding')
     implementation project(path: ':game_ui')
     implementation project(path: ':plain_ui')
     implementation project(path: ':game_ui')
     implementation project(path: ':data_base')
+    implementation project(path: ':edit_card_ui')
 
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"

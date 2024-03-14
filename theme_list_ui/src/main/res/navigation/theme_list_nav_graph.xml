@@ -9,11 +9,6 @@
         android:id="@+id/themeListFragment"
         android:name="com.example.theme_list_ui.ThemeListFragment"
         android:label="fragment_theme_list"
-        tools:layout="@layout/fragment_theme_list" >
-        <action
-            android:id="@+id/to_about_theme"
-            app:destination="@id/abot_theme_navigation" />
-            </fragment>
-    <include app:graph="@navigation/abot_theme_navigation" />
+        tools:layout="@layout/fragment_theme_list" />
 
 </navigation>

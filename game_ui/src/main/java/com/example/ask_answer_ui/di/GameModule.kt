@@ -1,7 +1,10 @@
 package com.example.ask_answer_ui.di
 
+import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.ask_answer_ui.viewModel.*
+import com.example.core.domain.Scopes
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val flashCardUiModule = module {
@@ -18,7 +21,7 @@ val flashCardUiModule = module {
         MC_ViewModel(get())
     }
 
-    single {
-        cardProvider(get(), get(), get())
+    scope(named(Scopes.GAME_SCOPE.scope)) {
+        scoped { cardProvider(get(), get(), get()) }
     }
 }

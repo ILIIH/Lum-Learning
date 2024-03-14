@@ -14,11 +14,13 @@ import com.example.add_theme_ui.viewModels.ThemeAddViewModel
 import com.example.core.data.PhotoManager
 import com.example.core.ui.MediaFragment
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ThemePhotoFragment : MediaFragment() {
 
-    private val viewModule: ThemeAddViewModel by inject()
+    private val viewModule: ThemeAddViewModel by sharedViewModel()
     private val photoManage: PhotoManager by inject()
+
     private lateinit var view : FragmentThemePhotoBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

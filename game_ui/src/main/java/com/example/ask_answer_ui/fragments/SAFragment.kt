@@ -24,12 +24,13 @@ import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
 import java.io.File
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class SAFragment : Fragment() {
 
     val viewModel: SA_ViewModel by inject()
-    val cardProvider: cardProvider by inject()
+    val cardProvider: cardProvider by sharedViewModel()
     private lateinit var answerAdapter: AnswerAdapter
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var  mp: MediaPlayer

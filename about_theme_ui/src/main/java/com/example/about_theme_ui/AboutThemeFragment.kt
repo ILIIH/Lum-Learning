@@ -16,7 +16,8 @@ import kotlin.math.roundToInt
 
 class AboutThemeFragment : Fragment() {
 
-    val viewModel: ThemeAboutViewModel by inject()
+    private val viewModel: ThemeAboutViewModel by inject()
+    private val navigator: AboutThemeNavigation by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,27 +72,15 @@ class AboutThemeFragment : Fragment() {
         }
 
         view.toTrain.setOnClickListener {
-            val bundle = Bundle()
-            // TODO: change to safe args
-            bundle.putInt("mnemo_type", viewModel.getMnemoType())
-            bundle.putInt("theme_type", viewModel.getThemeType())
-            bundle.putInt("id", themeId)
-
-            findNavController().navigate(R.id.to_ask_answer_game, bundle)
+            navigator.toTrain(themeId)
         }
 
         view.toEdit.setOnClickListener {
-            val bundle = Bundle()
-            // TODO: change to safe args
-            bundle.putInt("id", themeId)
-            findNavController().navigate(R.id.to_edit_cards_navgraph, bundle)
+            navigator.toEdit(themeId)
         }
 
         view.createNewItem.setOnClickListener {
-            val bundle = Bundle()
-            // TODO: change to safe args
-            bundle.putInt("id", themeId)
-            findNavController().navigate(R.id.to_add_new_card, bundle)
+            navigator.toCreateNewCard(themeId)
         }
 
         return view.root

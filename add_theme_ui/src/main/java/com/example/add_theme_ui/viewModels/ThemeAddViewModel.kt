@@ -1,5 +1,6 @@
 package com.example.add_theme_ui.viewModels
 
+import android.content.Context
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,13 +10,17 @@ import com.example.add_theme_data.SaveTheme
 import com.example.add_theme_data.Theme
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.core.domain.ILError
+import com.example.core.domain.Scopes
 import kotlinx.coroutines.launch
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
+import org.koin.java.KoinJavaComponent.getKoin
 import java.io.ByteArrayOutputStream
+class ThemeAddViewModel() : ViewModel() {
 
-class ThemeAddViewModel(
-    private val saveTheme: SaveTheme,
-    private val navigator: AddThemeNavigation,
-) : ViewModel() {
+    private val saveTheme: SaveTheme
+    private val navigator: AddThemeNavigation
+    private val scope: Scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_THEME_SCOPE.scope, named(Scopes.ADD_NEW_THEME_SCOPE.scope) )
 
     private lateinit var themeName: String
     private lateinit var themeImportance: String
@@ -33,6 +38,15 @@ class ThemeAddViewModel(
 
     private val photoURI = MutableLiveData<String>()
 
+    init {
+        saveTheme = scope.get<SaveTheme>()
+        navigator = scope.get<AddThemeNavigation>()
+    }
+
+    override fun onCleared() {
+        scope.close()
+        super.onCleared()
+    }
     fun setThemeName(name: String) : Boolean{
         return if(name.isEmpty()) {
             false
@@ -57,7 +71,7 @@ class ThemeAddViewModel(
     fun setPhoto(bitmap: Bitmap) {
         photo.postValue(bitmap)
     }
-    fun validatePhoto(): Boolean {
+    private fun validatePhoto(): Boolean {
         return if ( photoURI.value.isNullOrEmpty() )  {
             validation.postValue(ILError.VALIDATION_PHOTO)
             false

@@ -40,8 +40,6 @@ class CardListViewModel(
     }
 
     fun downloadCards(id: Int) {
-        cardList.postValue(ResultOf.Loading(arrayListOf()))
-
         viewModelScope.launch {
             try {
                 val currentList = ArrayList<Card>(100)

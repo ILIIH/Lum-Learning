@@ -12,11 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.add_theme_ui.R
 import com.example.add_theme_ui.databinding.FragmentThemeTypeBinding
 import com.example.add_theme_ui.viewModels.ThemeAddViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ThemeTypeFragment : Fragment() {
 
-    private val viewModule: ThemeAddViewModel by inject()
+    private val viewModule: ThemeAddViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

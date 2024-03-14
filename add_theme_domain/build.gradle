@@ -24,6 +24,7 @@ android {
 dependencies {
     implementation project(path: ':add_theme_data')
     implementation project(path: ':data_base')
+    implementation project(path: ':core')
 
     implementation("androidx.room:room-runtime:$room_runtime")
     annotationProcessor("androidx.room:room-compiler:$room_compiler")

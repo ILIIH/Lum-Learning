@@ -19,11 +19,12 @@ import com.example.ask_answer_ui.viewModel.VA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class VAFragment : Fragment() {
 
-    val viewModel: VA_ViewModel by inject()
+    val viewModel: VA_ViewModel by sharedViewModel()
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
 
