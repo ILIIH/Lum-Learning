@@ -8,7 +8,4 @@ val themeListModule = module {
     viewModel {
         ThemeViewModule(get(), get())
     }
-    single {
-        ThemeAdapter(get())
-    }
 }

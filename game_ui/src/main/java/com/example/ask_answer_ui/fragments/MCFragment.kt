@@ -18,12 +18,13 @@ import com.example.ask_answer_ui.viewModel.MC_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class MCFragment : Fragment() {
 
     val viewModel: MC_ViewModel by inject()
-    val cardProvider: cardProvider by inject()
+    val cardProvider: cardProvider by sharedViewModel()
     lateinit var answerAdapter: AnswerAdapter
 
     override fun onCreateView(

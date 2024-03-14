@@ -1,6 +1,7 @@
 package com.example.add_new_card.fragments.AddVisualCard
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.icu.text.SimpleDateFormat
@@ -19,15 +20,22 @@ import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.core.data.PhotoManager
 import com.example.core.domain.ILError
+import com.example.core.domain.Scopes
 import com.example.core.ui.MediaFragment
 import com.example.core.util.hideKeyboard
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.fragmentScope
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 import java.util.*
 
 class AddVisualCardFragment : MediaFragment() {
 
     private val viewModel: AddVisualCardViewmodel by inject()
-    private val mainViewModel: ThemeInfoProvider by inject()
+    private lateinit var themeInfoProvider: ThemeInfoProvider
 
     private val adapter = AnswersAdapters()
     private val photoManage: PhotoManager by inject()
@@ -40,7 +48,6 @@ class AddVisualCardFragment : MediaFragment() {
         savedInstanceState: Bundle?,
     ): View {
         view = DataBindingUtil.inflate(inflater, R.layout.fragment_add_visual_card, container, false)
-
         view.questionInputText.addTextChangedListener {
             view.question.error = null
         }
@@ -54,7 +61,7 @@ class AddVisualCardFragment : MediaFragment() {
             adapter.notifyItemInserted(viewModel.getAnswers().size)
         }
 
-        val themeId = mainViewModel.getThemeId()
+        val themeId = themeInfoProvider.getThemeId()
 
         view.addPhotoLayout.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -112,6 +119,12 @@ class AddVisualCardFragment : MediaFragment() {
         }
         view.lifecycleOwner = viewLifecycleOwner
         return view.root
+    }
+
+    override fun onAttach(context: Context) {
+        val  scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
+        themeInfoProvider = scope.get<ThemeInfoProvider>()
+        super.onAttach(context)
     }
 
     fun validateCard(view: FragmentAddVisualCardBinding): Boolean {

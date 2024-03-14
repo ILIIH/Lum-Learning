@@ -26,9 +26,12 @@ import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
 import com.example.ask_answer_ui.viewModel.cardProvider
 import com.example.core.domain.ILError
+import com.example.core.domain.Scopes
 import com.example.core.ui.BaseFragment
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
 import org.koin.ext.getFullName
 import java.time.LocalDateTime
 import java.util.*
@@ -42,7 +45,7 @@ class RuleFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentGameRuleBinding.inflate(inflater, container, false)
-        val themeId = requireArguments().getInt(ARG_THEME_ID)
+        val themeId = arguments?.getInt(ARG_THEME_ID,0)?:0
 
         cardProvider.downloadCards(themeId)
         setupCardListObserver(binding, themeId)

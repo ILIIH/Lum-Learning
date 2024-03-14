@@ -18,6 +18,5 @@ val navigationModule = module {
         AddThemeNavigation::class,
         AboutThemeNavigation::class,
         PlainNavigation::class
-
     )
 }

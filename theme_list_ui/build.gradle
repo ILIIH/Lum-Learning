@@ -29,7 +29,6 @@ android {
 
 dependencies {
     implementation project(path: ':theme_list_data')
-    implementation project(path: ':about_theme_ui')
     implementation project(path: ':data_base')
 
     implementation "io.insert-koin:koin-android:$koin_version"

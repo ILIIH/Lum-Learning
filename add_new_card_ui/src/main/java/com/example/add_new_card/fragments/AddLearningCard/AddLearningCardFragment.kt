@@ -1,6 +1,7 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
 import android.app.AlertDialog
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +17,19 @@ import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.core.domain.Scopes
 import com.example.core.util.hideKeyboard
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.ScopeFragment
+import org.koin.core.qualifier.named
 import java.util.*
 
 class AddLearningCardFragment : Fragment() {
 
     val viewModel: AddLearningCardViewmodel by inject()
-    val mainViewModel: ThemeInfoProvider by inject()
+    private lateinit var themeInfoProvider: ThemeInfoProvider
 
     val adapter = AnswersAdapters()
 
@@ -47,13 +53,13 @@ class AddLearningCardFragment : Fragment() {
             adapter.notifyItemInserted(viewModel.getAnswers().size)
         }
 
-        val themeType = mainViewModel.getThemeType().value!!
+        val themeType = themeInfoProvider.getThemeType().value!!
         if (themeType == 5) {
             view.description.visibility = View.VISIBLE
             view.descriptionTextInput.visibility = View.VISIBLE
         }
 
-        val themeID = mainViewModel.getThemeId()
+        val themeID = themeInfoProvider.getThemeId()
 
         view.continueBtn.setOnClickListener {
             val answers = adapter.getAllAnswers()
@@ -145,4 +151,11 @@ class AddLearningCardFragment : Fragment() {
         adapter.notifyItemRangeRemoved(1, size)
         adapter.notifyItemChanged(0)
     }
+
+    override fun onAttach(context: Context) {
+        val  scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
+        themeInfoProvider = scope.get<ThemeInfoProvider>()
+        super.onAttach(context)
+    }
+
 }

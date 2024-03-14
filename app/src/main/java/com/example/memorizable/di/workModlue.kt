@@ -15,7 +15,4 @@ val workerModule = module {
 
     worker<TimeLearningWorker> { TimeLearningWorker(get(), get(), get(), get(),get(),get()) }
 
-
-
-
 }

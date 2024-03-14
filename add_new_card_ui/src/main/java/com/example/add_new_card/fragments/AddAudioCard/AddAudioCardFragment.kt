@@ -6,6 +6,7 @@ import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
@@ -28,8 +29,14 @@ import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.core.domain.Scopes
 import com.example.core.util.hideKeyboard
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.ScopeFragment
+import org.koin.androidx.scope.scope
+import org.koin.core.qualifier.named
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -39,7 +46,7 @@ class AddAudioCardFragment : Fragment() {
     val adapter = AnswersAdapters()
 
     lateinit var mr: MediaRecorder
-    val mainViewModel: ThemeInfoProvider by inject()
+    private lateinit var themeInfoProvider: ThemeInfoProvider
     val viewModel: AddAudioCardViewmodel by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +76,7 @@ class AddAudioCardFragment : Fragment() {
             }
         }
 
-        val themeId = mainViewModel.getThemeId()
+        val themeId = themeInfoProvider.getThemeId()
 
         mr = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S) {
             MediaRecorder(requireContext())
@@ -173,4 +180,11 @@ class AddAudioCardFragment : Fragment() {
         adapter.notifyItemRangeRemoved(1, size)
         adapter.notifyItemChanged(0)
     }
+
+    override fun onAttach(context: Context) {
+        val  scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
+        themeInfoProvider = scope.get<ThemeInfoProvider>()
+        super.onAttach(context)
+    }
+
 }

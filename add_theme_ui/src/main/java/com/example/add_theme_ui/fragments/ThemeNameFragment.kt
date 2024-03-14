@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.add_theme_ui.databinding.ThemeNameDialogBinding
 import com.example.add_theme_ui.viewModels.ThemeAddViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ThemeNameFragment : DialogFragment() {
 
-    private val viewModule: ThemeAddViewModel by inject()
-
+    private val viewModule: ThemeAddViewModel by sharedViewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

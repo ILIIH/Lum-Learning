@@ -9,6 +9,9 @@ import kotlinx.coroutines.launch
 
 class ThemeInfoProvider(private val getPrediction: getMnemoTypePrediction) {
 
+    init{
+        Log.i("lyfecycle_check", "ThemeInfoProvider init")
+    }
     private var themeId: Int = 1
 
     private val themeType = MutableLiveData<Int> ()

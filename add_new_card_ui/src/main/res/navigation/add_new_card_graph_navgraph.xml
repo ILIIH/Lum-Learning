@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/add_visual_card"
+    android:id="@+id/add_new_card_graph_navgraph"
     app:startDestination="@id/ruleFragment">
 
     <fragment
@@ -24,6 +24,9 @@
         <action
             android:id="@+id/to_addLearningCardFragment"
             app:destination="@id/addLearningCardFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addAudioCardFragment"

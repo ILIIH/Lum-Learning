@@ -30,7 +30,6 @@ class Navigator :
 
     override fun toAboutTheme(id: Int) {
         val bundle = Bundle()
-        // TODO: change to safe args
         bundle.putInt("id", id)
         navController?.navigate(R.id.to_about_theme, bundle)
     }
@@ -59,16 +58,22 @@ class Navigator :
         navController?.navigateSafe(AddNewThemeNavDirections.continueToThemeList())
     }
 
-    override fun toTrain() {
-        navController?.navigateSafe(AboutThemeNavDirections.toAskAnswerGame())
+    override fun toTrain(themeId: Int ){
+        val bundle = Bundle()
+        bundle.putInt("id", themeId)
+        navController?.navigate(R.id.to_ask_answer_game,bundle)
     }
 
-    override fun toEdit() {
-        TODO("Not yet implemented")
+    override fun toEdit(themeId: Int) {
+        val bundle = Bundle()
+        bundle.putInt("id", themeId)
+        navController?.navigate(R.id.to_edit_card, bundle)
     }
 
-    override fun toCreate() {
-        TODO("Not yet implemented")
+    override fun toCreateNewCard(themeId: Int) {
+        val bundle = Bundle()
+        bundle.putInt("id", themeId)
+        navController?.navigate(R.id.from_about_theme_to_add_new_card, bundle)
     }
 
     override fun finshGame() {
@@ -84,6 +89,7 @@ class Navigator :
     override fun toCreateNewTheme() {
         navController?.navigate(R.id.from_plain_to_create_theme)
     }
+
 }
 
 fun NavController.navigateSafe(directions: NavDirections, navOptions: NavOptions? = null) {

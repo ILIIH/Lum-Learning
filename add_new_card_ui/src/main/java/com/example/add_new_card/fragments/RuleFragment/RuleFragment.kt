@@ -1,22 +1,27 @@
 package com.example.add_new_card.fragments.RuleFragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
-import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.databinding.FragmentRuleBinding
+import com.example.core.domain.Scopes
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.get
+import org.koin.androidx.scope.ScopeFragment
+import org.koin.core.qualifier.named
 
-class RuleFragment : Fragment() {
+class RuleFragment : ScopeFragment() {
 
-    val themeInfoProvider: ThemeInfoProvider by inject()
+    private lateinit var themeInfoProvider: ThemeInfoProvider
+    val ourSession = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,10 +30,10 @@ class RuleFragment : Fragment() {
     ): View {
         val view: FragmentRuleBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_rule, container, false)
         configureThemeType(view)
-        // TODO: change to safe args
-        val themeId = requireArguments().getInt("id")
-        themeInfoProvider.setThemeId(themeId)
+
+        themeInfoProvider.setThemeId(arguments?.getInt("id",0)?:0)
         view.lifecycleOwner = viewLifecycleOwner
+
         return view.root
     }
 
@@ -66,4 +71,11 @@ class RuleFragment : Fragment() {
             }
         }
     }
+
+    override fun onAttach(context: Context) {
+        scope.linkTo(ourSession)
+        themeInfoProvider = get<ThemeInfoProvider>()
+        super.onAttach(context)
+    }
+
 }

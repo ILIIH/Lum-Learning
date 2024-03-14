@@ -29,9 +29,7 @@ class CardListFragment : BaseFragment() {
             }
         }
 
-        // TODO: Change to safe arg
-        val themeId = arguments?.getInt("id", 0) ?: 0
-        viewModel.downloadCards(themeId)
+        viewModel.downloadCards(arguments?.getInt("id",0)?:0)
 
         view.list.adapter = listAdapter
         viewModel._cardList.observe(viewLifecycleOwner) {

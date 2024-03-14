@@ -9,5 +9,9 @@
         android:id="@+id/cardListFragment"
         android:name="com.example.edit_ui.card_list.CardListFragment"
         android:label="fragment_card_list"
-        tools:layout="@layout/fragment_card_list" />
+        tools:layout="@layout/fragment_card_list" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

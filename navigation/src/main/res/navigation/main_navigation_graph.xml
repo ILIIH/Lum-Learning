@@ -15,7 +15,8 @@
         <action
             android:id="@+id/to_about_theme"
             app:destination="@id/about_theme_nav"
-            app:popUpTo="@id/theme_list_nav"/>
+            app:popUpTo="@id/about_theme_nav"
+            app:popUpToInclusive="true" />
 
     </navigation>
 
@@ -34,7 +35,16 @@
         <include app:graph="@navigation/abot_theme_navigation" />
         <action
             android:id="@+id/to_ask_answer_game"
-            app:destination="@id/ask_answer_ui_navigation" />
+            app:destination="@id/ask_answer_ui_navigation" >
+        </action>
+        <action
+            android:id="@+id/from_about_theme_to_add_new_card"
+            app:destination="@id/add_new_card_graph"
+            app:popUpTo="@id/add_new_card_graph"
+          />
+        <action
+            android:id="@+id/to_edit_card"
+            app:destination="@id/edit_cards_navigation" />
     </navigation>
     <navigation android:id="@+id/onboarding_nav"
         app:startDestination="@id/onboarding_nav_gaph">
@@ -67,8 +77,15 @@
             app:popUpTo="@id/onboarding_nav"
             app:popUpToInclusive="true" />
     </navigation>
-    <navigation android:id="@+id/add_new_card_graph">
-        <include app:graph="@navigation/add_graph_navgraph" />
+    <navigation android:id="@+id/add_new_card_graph"
+        app:startDestination="@id/add_new_card_graph_navgraph">
+        <include app:graph="@navigation/add_new_card_graph_navgraph" />
+    </navigation>
+
+
+    <navigation android:id="@+id/edit_cards_navigation"
+        app:startDestination="@id/edit_cards_navgraph">
+    <include app:graph="@navigation/edit_cards_navgraph" />
     </navigation>
 
 

@@ -29,9 +29,6 @@ android {
 
 dependencies {
     implementation project(path: ':about_theme_data')
-    implementation project(path: ':game_ui')
-    implementation project(path: ':add_new_card_ui')
-    implementation project(path: ':edit_card_ui')
     implementation project(path: ':data_base')
 
     implementation "io.insert-koin:koin-android:$koin_version"
