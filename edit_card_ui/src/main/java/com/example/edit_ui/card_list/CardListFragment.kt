@@ -29,7 +29,7 @@ class CardListFragment : BaseFragment() {
             }
         }
 
-        viewModel.downloadCards(arguments?.getInt("id",0)?:0)
+        viewModel.downloadCards(CardListFragmentArgs.fromBundle(requireArguments()).themeId)
 
         view.list.adapter = listAdapter
         viewModel._cardList.observe(viewLifecycleOwner) {

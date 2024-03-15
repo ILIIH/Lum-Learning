@@ -26,12 +26,18 @@ class Navigator :
     PlainNavigation
 {
 
+    override fun bind(navController: NavController) {
+        this.navController = navController
+    }
+
+    override fun unbind() {
+        navController = null
+    }
+
     private var navController: NavController? = null
 
     override fun toAboutTheme(id: Int) {
-        val bundle = Bundle()
-        bundle.putInt("id", id)
-        navController?.navigate(R.id.to_about_theme, bundle)
+        navController?.navigateSafe(ThemeListNavDirections.toAboutTheme(id))
     }
 
     override fun toAddNewTheme() {
@@ -46,44 +52,26 @@ class Navigator :
         navController?.navigateSafe(OnboardingNavDirections.toPlainNavigationGraph())
     }
 
-    override fun bind(navController: NavController) {
-        this.navController = navController
-    }
-
-    override fun unbind() {
-        navController = null
-    }
-
     override fun submitNewTheme() {
         navController?.navigateSafe(AddNewThemeNavDirections.continueToThemeList())
     }
 
     override fun toTrain(themeId: Int ){
-        val bundle = Bundle()
-        bundle.putInt("id", themeId)
-        navController?.navigate(R.id.to_ask_answer_game,bundle)
+        navController?.navigateSafe(AboutThemeNavDirections.toAskAnswerGame(themeId))
     }
 
     override fun toEdit(themeId: Int) {
-        val bundle = Bundle()
-        bundle.putInt("id", themeId)
-        navController?.navigate(R.id.to_edit_card, bundle)
+        navController?.navigateSafe(AboutThemeNavDirections.toEditCard(themeId))
     }
 
     override fun toCreateNewCard(themeId: Int) {
-        val bundle = Bundle()
-        bundle.putInt("id", themeId)
-        navController?.navigate(R.id.from_about_theme_to_add_new_card, bundle)
+        navController?.navigateSafe(AboutThemeNavDirections.fromAboutThemeToAddNewCard(themeId))
     }
 
-    override fun finshGame() {
-        TODO("Not yet implemented")
-    }
 
-    override fun toAddNewCard(themeId: Int) {
-        val bundle = Bundle()
-        bundle.putInt("id", themeId)
-        navController?.navigate(R.id.from_game_to_add_new_card, bundle)
+    override fun fromGameToAddNewCard(themeId: Int) {
+        navController?.navigateSafe(AskAnswerUiNavigationDirections.fromGameToAddNewCard(themeId))
+
     }
 
     override fun toCreateNewTheme() {

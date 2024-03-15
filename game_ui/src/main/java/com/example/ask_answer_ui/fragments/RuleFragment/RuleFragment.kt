@@ -11,41 +11,40 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.add_new_card.fragments.RuleFragment.RuleFragmentArgs
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.VA_Card
 import com.example.ask_answer_data.ResultOf
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
+import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.ask_answer_ui.viewModel.cardProvider
 import com.example.core.domain.ILError
-import com.example.core.domain.Scopes
 import com.example.core.ui.BaseFragment
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
-import org.koin.core.qualifier.named
 import org.koin.ext.getFullName
 import java.time.LocalDateTime
 import java.util.*
 const val ARG_THEME_ID = "id"
 class RuleFragment : BaseFragment() {
 
-    val cardProvider: cardProvider by inject()
+    private val cardProvider: cardProvider by inject()
+    private val navigator: GameNavigation by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentGameRuleBinding.inflate(inflater, container, false)
-        val themeId = arguments?.getInt(ARG_THEME_ID,0)?:0
+        val themeId = RuleFragmentArgs.fromBundle(requireArguments()).themeId
 
         cardProvider.downloadCards(themeId)
         setupCardListObserver(binding, themeId)
@@ -104,7 +103,7 @@ class RuleFragment : BaseFragment() {
             val createIndex = indexOf(create)
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    findNavController().navigate(R.id.to_add_new_card, Bundle().apply { putInt(ARG_THEME_ID, themeId) })
+                    navigator.fromGameToAddNewCard(themeId)
                 }
             }
 
