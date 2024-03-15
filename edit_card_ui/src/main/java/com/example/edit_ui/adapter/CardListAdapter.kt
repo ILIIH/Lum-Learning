@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.edit_ui.data.Card
-import com.example.edit_ui.data.CardType
+import com.example.add_new_card_data.model.Card
 import com.example.edit_ui.databinding.CardItemBinding
 
-class CardListAdapter(private val deleteCard: (id: Int, type: CardType) -> Unit) : ListAdapter<Card, CardListAdapter.CardItemViewHolder>(DiffCallBack()) {
+class CardListAdapter(private val deleteCard: (id: Int) -> Unit) : ListAdapter<Card, CardListAdapter.CardItemViewHolder>(DiffCallBack()) {
 
     private val list = ArrayList<Card>(20)
 
@@ -40,7 +39,7 @@ class CardListAdapter(private val deleteCard: (id: Int, type: CardType) -> Unit)
             with(binding) {
                 question.text = cardItem.question
                 deleteBtn.setOnClickListener {
-                    deleteCard(cardItem.id, cardItem.type)
+                    deleteCard(cardItem.id)
                     list.remove(cardItem)
                     notifyDataSetChanged()
                 }
@@ -50,9 +49,9 @@ class CardListAdapter(private val deleteCard: (id: Int, type: CardType) -> Unit)
 
     internal class DiffCallBack : DiffUtil.ItemCallback<Card>() {
         override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean =
-            (oldItem.id == newItem.id) && (oldItem.type == newItem.type)
+            (oldItem.id == newItem.id)
 
         override fun areContentsTheSame(oldItem: Card, newItem: Card): Boolean =
-            oldItem == newItem
+            (oldItem.id == newItem.id)&& (oldItem.answers.containsAll(newItem.answers))
     }
 }

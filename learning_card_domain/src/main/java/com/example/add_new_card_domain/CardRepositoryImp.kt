@@ -2,6 +2,7 @@ package com.example.add_new_card_domain
 
 import android.util.Log
 import com.example.add_new_card_data.CardRepository
+import com.example.add_new_card_data.model.Card
 import com.example.add_new_card_data.model.CardStats
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
@@ -36,58 +37,34 @@ class CardRepositoryImp(private val repo: ThemeDatabase) : CardRepository {
         repo.cardsDAO().changeCardStat(cardStats.toData())
     }
 
-    override suspend fun insertCard(card: LearningCardDomain) {
-        repo.cardsDAO().insertLearningCrad(card.toData())
-    }
-
-    override suspend fun getAllCardByThemeId(id: Int): List<LearningCardDomain> =
-        repo.cardsDAO().getAllLearningCrad().map { it.toDomain() }.filter { it.themeId == id }
-
-    override suspend fun editLearningCard(card: LearningCardDomain) {
-        repo.cardsDAO().changeLearningCrad(card.toDataWithSaveId())
-    }
-
-    override suspend fun deleteLearningCard(id: Int) {
-        repo.cardsDAO().deleteLearningCardById(id)
-    }
-
-    override suspend fun insertALCard(card: SA_Card) {
-        repo.cardsDAO().insertALCard(card.toData())
-    }
-
-    override suspend fun getAllALCardByThemeId(id: Int): List<SA_Card> {
-        val cards = repo.cardsDAO().getAllALCrad()
-        val cardsAmount = cards.count { it.themeId == id  }
-        return if(cardsAmount > 0){
-            cards.map { it.toDomain() }.filter { it.themeId == id }
-        } else{
-            listOf()
+    override suspend fun insertCard(card: Card) {
+        when(card) {
+            is LearningCardDomain -> {repo.cardsDAO().insertLearningCrad(card.toData())}
+            is SA_Card -> {repo.cardsDAO().insertALCard(card.toData())}
+            is VA_Card -> {repo.cardsDAO().insertVLCard(card.toData())}
         }
     }
 
-    override suspend fun getAllALCard(): List<SA_Card> =
-        repo.cardsDAO().getAllALCrad().map { it.toDomain() }
-
-    override suspend fun editALCard(card: SA_Card) {
-        repo.cardsDAO().changeALCrad(card.toDataWithId())
-    }
-
-    override suspend fun deleteALCard(id: Int) {
-        repo.cardsDAO().deleteALCardId(id)
-    }
-
-    override suspend fun insertVACard(card: VA_Card) {
-        repo.cardsDAO().insertVLCard(card.toData())
-    }
-
-    override suspend fun getAllVACardByThemeId(id: Int): List<VA_Card> =
+    override suspend fun getAllCardByThemeId(id: Int): List<Card>  =
+        repo.cardsDAO().getAllLearningCrad().map { it.toDomain() }.filter { it.themeId == id } +
+        repo.cardsDAO().getAllALCrad().map { it.toDomain() }.filter { it.themeId == id } +
         repo.cardsDAO().getAllVLCrad().map { it.toDomain() }.filter { it.themeId == id }
 
-    override suspend fun editVACard(card: VA_Card) {
-        repo.cardsDAO().changeVLCrad(card.toDataWithId())
+
+
+
+    override suspend fun editCard(card: Card) {
+        when(card) {
+            is LearningCardDomain -> {repo.cardsDAO().changeLearningCrad(card.toData())}
+            is SA_Card -> {repo.cardsDAO().changeALCrad(card.toData())}
+            is VA_Card -> {repo.cardsDAO().changeVLCrad(card.toData())}
+        }
     }
 
-    override suspend fun deleteVACard(id: Int) {
+    override suspend fun deleteCard(id: Int) {
+        repo.cardsDAO().deleteLearningCardById(id)
+        repo.cardsDAO().deleteALCardId(id)
         repo.cardsDAO().deleteVACardId(id)
     }
+
 }

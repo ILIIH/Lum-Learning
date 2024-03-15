@@ -45,7 +45,7 @@ class DAFragment : Fragment() {
                             ),
                             result = true,
                             time = begin - System.nanoTime(),
-                            cardId = currentCard.Id,
+                            cardId = currentCard.id,
                         )
                     } else {
                         cardProvider.updateCardStatsAndMetrics(
@@ -55,13 +55,13 @@ class DAFragment : Fragment() {
                             ),
                             result = false,
                             time = begin - System.nanoTime(),
-                            cardId = currentCard.Id,
+                            cardId = currentCard.id,
                         )
                     }
                     goToNextCard(view)
                 }
 
-                CardEndsDialog(currentCard.discription).show(
+                CardEndsDialog(currentCard.description).show(
                     parentFragmentManager,
                     CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                 )
@@ -93,7 +93,7 @@ class DAFragment : Fragment() {
                                 ),
                                 result = false,
                                 time = begin - System.nanoTime(),
-                                cardId = currentCard.Id,
+                                cardId = currentCard.id,
                             )
                             goToNextCard(view)
                         }

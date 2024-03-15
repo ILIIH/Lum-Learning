@@ -9,7 +9,7 @@ import com.example.core.DB.Entities.LearningCrad
 import com.example.core.DB.Entities.VisualLearningCard
 
 fun LearningCardDomain.toDataWithSaveId() = LearningCrad(
-    id = Id,
+    id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -17,7 +17,7 @@ fun LearningCardDomain.toDataWithSaveId() = LearningCrad(
     },
     themeType = themeType,
     dateCreation = dateCreation,
-    description = discription,
+    description = description,
 )
 fun LearningCardDomain.toData() = LearningCrad(
     themeId = themeId,
@@ -27,11 +27,11 @@ fun LearningCardDomain.toData() = LearningCrad(
     },
     themeType = themeType,
     dateCreation = dateCreation,
-    description = discription,
+    description = description,
 )
 
 fun LearningCrad.toDomain() = LearningCardDomain(
-    Id = id,
+    id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -39,7 +39,7 @@ fun LearningCrad.toDomain() = LearningCardDomain(
     },
     themeType = themeType,
     dateCreation = dateCreation,
-    discription = description,
+    description = description,
 )
 
 fun SA_Card.toData() = AudioLearningCard(
@@ -83,7 +83,7 @@ fun VA_Card.toData() = VisualLearningCard(
 )
 
 fun VA_Card.toDataWithId() = VisualLearningCard(
-    id = Id,
+    id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {
@@ -94,7 +94,7 @@ fun VA_Card.toDataWithId() = VisualLearningCard(
 )
 
 fun VisualLearningCard.toDomain() = VA_Card(
-    Id = id,
+    id = id,
     themeId = themeId,
     question = question,
     answers = answers.map {

@@ -47,7 +47,7 @@ class MCFragment : Fragment() {
                             ),
                             result = true,
                             time = begin - System.nanoTime(),
-                            cardId = currentCard.Id,
+                            cardId = currentCard.id,
                         )
                     } else {
                         cardProvider.updateCardStatsAndMetrics(
@@ -57,7 +57,7 @@ class MCFragment : Fragment() {
                             ),
                             result = false,
                             time = begin - System.nanoTime(),
-                            cardId = currentCard.Id,
+                            cardId = currentCard.id,
                         )
                     }
                     goToNextCard()
@@ -90,7 +90,7 @@ class MCFragment : Fragment() {
                                 ),
                                 result = false,
                                 time = begin - System.nanoTime(),
-                                cardId = currentCard.Id,
+                                cardId = currentCard.id,
                             )
                             goToNextCard()
                         }

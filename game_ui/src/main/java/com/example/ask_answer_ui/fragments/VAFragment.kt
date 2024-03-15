@@ -48,7 +48,7 @@ class VAFragment : Fragment() {
                             ),
                             result = true,
                             time = begin - System.nanoTime(),
-                            cardId = currentCard.Id,
+                            cardId = currentCard.id,
                         )
                     } else {
                         cardProvider.updateCardStatsAndMetrics(
@@ -58,7 +58,7 @@ class VAFragment : Fragment() {
                             ),
                             result = false,
                             time = begin - System.nanoTime(),
-                            cardId = currentCard.Id,
+                            cardId = currentCard.id,
                         )
                     }
 
@@ -93,7 +93,7 @@ class VAFragment : Fragment() {
                                 ),
                                 result = false,
                                 time = begin - System.nanoTime(),
-                                cardId = currentCard.Id,
+                                cardId = currentCard.id,
                             )
                             goToNextCard()
                         }
