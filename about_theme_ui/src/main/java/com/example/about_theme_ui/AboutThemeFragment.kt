@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.about_theme_ui.customView.PieData
 import com.example.about_theme_ui.databinding.FragmentAboutThemeBinding
 import org.koin.android.ext.android.inject
-import org.koin.java.KoinJavaComponent.inject
 import kotlin.math.roundToInt
 
 class AboutThemeFragment : Fragment() {
@@ -24,9 +22,8 @@ class AboutThemeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentAboutThemeBinding.inflate(inflater, container, false)
+        val themeId = AboutThemeFragmentArgs.fromBundle(requireArguments()).themeId
 
-        // TODO: change to safe args
-        val themeId = requireArguments().getInt("id")
         viewModel.loadThemeInfo(themeId)
 
         val data = PieData()

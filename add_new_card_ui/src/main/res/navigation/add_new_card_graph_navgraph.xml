@@ -25,7 +25,7 @@
             android:id="@+id/to_addLearningCardFragment"
             app:destination="@id/addLearningCardFragment" />
         <argument
-            android:name="id"
+            android:name="themeId"
             app:argType="integer" />
     </fragment>
     <fragment

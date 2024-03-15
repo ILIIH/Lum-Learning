@@ -21,7 +21,7 @@ val flashCardUiModule = module {
         MC_ViewModel(get())
     }
 
-    scope(named(Scopes.GAME_SCOPE.scope)) {
-        scoped { cardProvider(get(), get(), get()) }
+    single {
+        cardProvider(get(), get(), get())
     }
 }

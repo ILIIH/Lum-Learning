@@ -45,6 +45,9 @@
         <action
             android:id="@+id/to_edit_card"
             app:destination="@id/edit_cards_navigation" />
+        <argument
+            android:name="theme_id"
+            app:argType="integer" />
     </navigation>
     <navigation android:id="@+id/onboarding_nav"
         app:startDestination="@id/onboarding_nav_gaph">
@@ -65,6 +68,9 @@
             app:destination="@id/add_new_card_graph"
             app:popUpTo="@id/ask_answer_ui_navigation"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="themeId"
+            app:argType="integer" />
 
     </navigation>
 
@@ -80,12 +86,18 @@
     <navigation android:id="@+id/add_new_card_graph"
         app:startDestination="@id/add_new_card_graph_navgraph">
         <include app:graph="@navigation/add_new_card_graph_navgraph" />
+        <argument
+            android:name="themeId"
+            app:argType="integer" />
     </navigation>
 
 
     <navigation android:id="@+id/edit_cards_navigation"
         app:startDestination="@id/edit_cards_navgraph">
     <include app:graph="@navigation/edit_cards_navgraph" />
+        <argument
+            android:name="themeId"
+            app:argType="integer" />
     </navigation>
 
 

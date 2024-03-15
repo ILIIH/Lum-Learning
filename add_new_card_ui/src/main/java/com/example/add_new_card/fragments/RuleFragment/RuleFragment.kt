@@ -31,7 +31,7 @@ class RuleFragment : ScopeFragment() {
         val view: FragmentRuleBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_rule, container, false)
         configureThemeType(view)
 
-        themeInfoProvider.setThemeId(arguments?.getInt("id",0)?:0)
+        themeInfoProvider.setThemeId(RuleFragmentArgs.fromBundle(requireArguments()).themeId)
         view.lifecycleOwner = viewLifecycleOwner
 
         return view.root
