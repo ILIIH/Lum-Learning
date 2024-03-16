@@ -1,6 +1,5 @@
 package com.example.add_new_card.fragments.AddAudioCard
 
-import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -13,7 +12,6 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,15 +91,16 @@ class AddAudioCardFragment : Fragment() {
             mr.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             viewModel.setStopBtnClickable()
 
-            viewModel.addRecordPath { max ->
+            viewModel.addRecordPath(
+                themeId
+            ) { max ->
                 val audioFile = File(requireActivity().cacheDir, "record$max")
                 mr.setOutputFile(FileOutputStream(audioFile).fd)
                 mr.prepare()
                 mr.start()
-            }
-        }
+            } }
 
-        view.stopRecord.setOnClickListener {
+            view.stopRecord.setOnClickListener {
             mr.stop()
             viewModel.setStopBtnNonClickable()
         }

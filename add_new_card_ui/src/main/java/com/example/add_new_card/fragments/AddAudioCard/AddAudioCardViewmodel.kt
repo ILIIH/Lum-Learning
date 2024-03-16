@@ -31,10 +31,10 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     fun getAudioFilePath(playRecord: (maxID: Int) -> Unit) {
         playRecord(maxId)
     }
-    fun addRecordPath(startRecord: (maxID: Int) -> Unit) {
+    fun addRecordPath(themeId: Int, startRecord: (maxID: Int) -> Unit) {
         viewModelScope.launch {
             recordIdMutex.withLock {
-                val max = repo.getAllALCard().maxByOrNull { it.audioFileId }
+                val max = repo.getAllCardByThemeId(themeId).filterIsInstance<SA_Card>().maxByOrNull { it.audioFileId }
                 maxId = max?.audioFileId?.plus(1) ?: 0
                 startRecord(maxId)
             }
@@ -48,8 +48,9 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
     ) {
         viewModelScope.launch {
             recordIdMutex.withLock {
-                repo.insertALCard(
+                repo.insertCard(
                     SA_Card(
+                        id = 0,
                         themeId = themeId,
                         question = question,
                         answers = answers,

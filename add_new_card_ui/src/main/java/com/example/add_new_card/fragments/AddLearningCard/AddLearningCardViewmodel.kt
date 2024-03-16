@@ -1,7 +1,5 @@
 package com.example.add_new_card.fragments.AddLearningCard
 
-import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
@@ -38,8 +36,8 @@ class AddLearningCardViewmodel(private val repo: CardRepository) : ViewModel() {
                     answers = answers,
                     themeType = themeType,
                     dateCreation = currentDate,
-                    discription = description,
-                    Id = 0,
+                    description = description,
+                    id = 0,
                 ),
             )
         }

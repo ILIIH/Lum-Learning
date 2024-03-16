@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.example.add_new_card_data.model.Card
 import com.example.ask_answer_data.ResultOf
 import com.example.core.ui.BaseFragment
 import com.example.edit_ui.adapter.CardListAdapter
-import com.example.edit_ui.data.CardType
 import com.example.edit_ui.databinding.FragmentCardListBinding
 import org.koin.android.ext.android.inject
 
@@ -21,13 +20,7 @@ class CardListFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentCardListBinding.inflate(inflater, container, false)
-        val listAdapter = CardListAdapter { id, type ->
-            when (type) {
-                CardType.LEARNING_CARD -> viewModel.deleteLearningCardById(id)
-                CardType.VA_CARD -> viewModel.deleteVACardById(id)
-                CardType.SL_CARD -> viewModel.deleteALCardById(id)
-            }
-        }
+        val listAdapter = CardListAdapter { id  -> viewModel.deleteCardById(id) }
 
         viewModel.downloadCards(CardListFragmentArgs.fromBundle(requireArguments()).themeId)
 
@@ -36,7 +29,7 @@ class CardListFragment : BaseFragment() {
             when (it) {
                 is ResultOf.Success -> {
                     dismissLoading()
-                    listAdapter.setListData(it.value)
+                    listAdapter.setListData(ArrayList(it.value))
                 }
                 is ResultOf.Failure -> {
                     dismissLoading()

@@ -36,14 +36,14 @@ class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
             val stream = ByteArrayOutputStream()
             photo.value?.compress(Bitmap.CompressFormat.PNG, 90, stream)
             val image = stream.toByteArray()
-            repo.insertVACard(
+            repo.insertCard(
                 VA_Card(
                     themeId = themeId,
                     question = question,
                     answers = answers,
                     photo = image,
                     dateCreation = currentDate,
-                    Id = 0,
+                    id = 0,
                 ),
             )
         }

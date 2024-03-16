@@ -3,6 +3,7 @@ package com.example.ask_answer_ui.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
+import com.example.add_new_card_data.model.Card
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.VA_Card
@@ -44,9 +45,9 @@ class cardProvider(
     val doSkipDescription: SharedFlow<Any>
         get() = _skipDescription.asSharedFlow()
     private val _skipDescription = MutableSharedFlow<Any>(extraBufferCapacity = 1)
-    val cardList: StateFlow<ResultOf<ArrayList<Any>>>
+    val cardList: StateFlow<ResultOf<List<Card>>>
         get() = _cardList.asStateFlow()
-    private val _cardList = MutableStateFlow<ResultOf<ArrayList<Any>>>(ResultOf.Loading(arrayListOf()))
+    private val _cardList = MutableStateFlow<ResultOf<List<Card>>>(ResultOf.Loading(arrayListOf()))
     fun exitTheme() {
         this.K = 0.0
         this.D = 0.0
@@ -258,13 +259,7 @@ class cardProvider(
 
         viewModelScope.launch {
             try {
-                val currentList = ArrayList<Any>(100)
-                currentList.addAll(repo.getAllALCardByThemeId(id))
-                currentList.addAll(repo.getAllVACardByThemeId(id))
-                currentList.addAll(repo.getAllCardByThemeId(id))
-
-
-
+                val currentList = repo.getAllCardByThemeId(id)
                 val loadingTime = System.currentTimeMillis() - startTime
 
                 if (loadingTime < 1000) {

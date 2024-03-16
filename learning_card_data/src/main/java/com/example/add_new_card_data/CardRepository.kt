@@ -1,5 +1,6 @@
 package com.example.add_new_card_data
 
+import com.example.add_new_card_data.model.Card
 import com.example.add_new_card_data.model.CardStats
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.LearningCardDomain
@@ -9,21 +10,9 @@ interface CardRepository {
     suspend fun editCardStat(cardStats: CardStats)
     suspend fun getCardStat(cardId: Int): CardStats?
 
-    suspend fun insertCard(card: LearningCardDomain)
-    suspend fun getAllCardByThemeId(id: Int): List<LearningCardDomain>
-    suspend fun editLearningCard(card: LearningCardDomain)
-    suspend fun deleteLearningCard(id: Int)
-
-    suspend fun insertALCard(card: SA_Card)
-    suspend fun getAllALCardByThemeId(id: Int): List<SA_Card>
-    suspend fun getAllALCard(): List<SA_Card>
-    suspend fun editALCard(card: SA_Card)
-    suspend fun deleteALCard(id: Int)
-
-
-    suspend fun insertVACard(card: VA_Card)
-    suspend fun getAllVACardByThemeId(id: Int): List<VA_Card>
-    suspend fun editVACard(card: VA_Card)
-    suspend fun deleteVACard(id: Int)
+    suspend fun insertCard(card: Card)
+    suspend fun getAllCardByThemeId(id: Int): List<Card>
+    suspend fun editCard(card: Card)
+    suspend fun deleteCard(id: Int)
 
 }
