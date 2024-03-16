@@ -1,5 +1,6 @@
 package com.example.ask_answer_ui.fragments.RuleFragment
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -14,9 +15,11 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
 import com.example.add_new_card.fragments.RuleFragment.RuleFragmentArgs
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.SA_Card
@@ -210,37 +213,33 @@ class RuleFragment : BaseFragment() {
     }
 
     private fun callEndDialog(themeId: Int, view: FragmentGameRuleBinding) {
-        view.teacher.startButton.visibility = View.GONE
-        view.teacher.restartButton.visibility = View.VISIBLE
-        view.teacher.ruleText.text = getString(R.string.card_end_text)
+        with(view.teacher) {
+            startButton.visibility = View.GONE
+            restartButton.visibility = View.VISIBLE
+            ruleText.text = getString(R.string.card_end_text)
 
-        view.teacher.restartButton.setOnClickListener {
-            cardProvider.startFromFirstCard(themeId)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                cardProvider.saveGameResult(
-                    currentDay = LocalDateTime.now().dayOfWeek.value,
-                    themeId = themeId,
-                    date = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
+            restartButton.setOnClickListener {
+                cardProvider.startFromFirstCard(themeId)
+                saveGameResult(themeId)
+            }
 
-                    )
-            } else {
-                TODO()
-            }
-        }
-        view.teacher.exitButton.setOnClickListener {
-            cardProvider.exitTheme()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                cardProvider.saveGameResult(
-                    currentDay = LocalDateTime.now().dayOfWeek.value,
-                    themeId = themeId,
-                    date = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                    )
-            } else {
-                TODO()
-            }
-            lifecycleScope.launchWhenResumed {
-                findNavController().popBackStack()
+            exitButton.setOnClickListener {
+                cardProvider.exitTheme()
+                saveGameResult(themeId)
+                lifecycleScope.launchWhenResumed {
+                    findNavController().popBackStack()
+                }
             }
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun ViewBinding.saveGameResult(themeId: Int) {
+        val date = SimpleDateFormat(context?.getString(com.example.core.R.string.data_format)).format(Date())
+        cardProvider.saveGameResult(
+            currentDay = LocalDateTime.now().dayOfWeek.value,
+            themeId = themeId,
+            date = date
+        )
+    }
+
 }
