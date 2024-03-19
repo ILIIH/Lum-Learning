@@ -1,5 +1,6 @@
 package com.example.ask_answer_ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
@@ -13,17 +14,41 @@ import com.example.core.SharedPrefManager.SharedPrefManager
 import com.example.core.data.usecases.insertGameResult
 import com.example.core.domain.ILError
 import com.example.core.domain.models.gameResult
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.lastOrNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.produceIn
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import org.koin.ext.getFullName
 import java.util.*
+import kotlin.collections.ArrayList
 
 var DAY_IN_MS = (1000 * 60 * 60 * 24).toLong()
 
@@ -34,6 +59,7 @@ class cardProvider(
 ) : ViewModel() {
 
     private var currentCardIndex = 0
+    private var themeIdDeferred: Int = 0
 
     var K: Double = 0.0
     var D: Double = 0.0
@@ -61,7 +87,8 @@ class cardProvider(
 
     fun isItTheEndOfCardList(): Boolean {
         return if (cardList.value is ResultOf.Success) {
-            currentCardIndex > (cardList.value as ResultOf.Success).value.size - 1
+            Log.i("card_list_logging", "size ${(cardList.value as ResultOf.Success).value.size} currentCardIndex ${currentCardIndex}" )
+            currentCardIndex >= (cardList.value as ResultOf.Success).value.size
         } else {
             false
         }
@@ -70,19 +97,9 @@ class cardProvider(
     fun setSkipCardDescription(className: String){
         sharedPrefManager.setSkipCardDescription(className)
     }
-    fun getCurrentCard() : Any {
-        when (cardList.value) {
-            is ResultOf.Success -> {
-                with((cardList.value as ResultOf.Success)) {
-                    if (currentCardIndex < this.value.size) {
-                        return this.value[currentCardIndex]
-                    }
-                }
-            }
-            else -> {}
-        }
-        return Any()
-    }
+    fun getCurrentCard() = _cardList.filter { it is ResultOf.Success }.
+        filter{(it as ResultOf.Success).value.size > currentCardIndex}.
+        map { (it as ResultOf.Success).value[currentCardIndex] }
 
     fun saveGameResult(currentDay: Int, themeId: Int, date: String) {
         viewModelScope.launch {
@@ -169,82 +186,6 @@ class cardProvider(
         this.currentCardIndex = currentCardIndex + 1
     }
 
-    fun hasALCard(): Boolean {
-        when (cardList.value) {
-            is ResultOf.Success -> {
-                with((cardList.value as ResultOf.Success)) {
-                    return if (currentCardIndex < this.value.size) {
-                        this.value[currentCardIndex] is SA_Card
-                    } else {
-                        false
-                    }
-                }
-            }
-            else -> {
-                return false
-            }
-        }
-    }
-
-    fun hasVACard(): Boolean {
-        when (cardList.value) {
-            is ResultOf.Success -> {
-                with((cardList.value as ResultOf.Success)) {
-                    return if (currentCardIndex < this.value.size) {
-                        this.value[currentCardIndex] is VA_Card
-                    } else {
-                        false
-                    }
-                }
-            }
-            else -> {
-                return false
-            }
-        }
-    }
-
-    fun hasLearningCard(): Boolean {
-        when (cardList.value) {
-            is ResultOf.Success -> {
-                with((cardList.value as ResultOf.Success)) {
-                    return if (currentCardIndex < this.value.size) {
-                        if (this.value[currentCardIndex] is LearningCardDomain) {
-                            (this.value.get(currentCardIndex) as LearningCardDomain).themeType == 5
-                        } else {
-                            false
-                        }
-                    } else {
-                        false
-                    }
-                }
-            }
-            else -> {
-                return false
-            }
-        }
-    }
-
-    fun hasMCCard(): Boolean {
-        when (cardList.value) {
-            is ResultOf.Success -> {
-                with((cardList.value as ResultOf.Success)) {
-                    return if (currentCardIndex < this.value.size) {
-                        if (this.value[currentCardIndex] is LearningCardDomain) {
-                            (this.value[currentCardIndex] as LearningCardDomain).themeType == 2
-                        } else {
-                            false
-                        }
-                    } else {
-                        false
-                    }
-                }
-            }
-            else -> {
-                return false
-            }
-        }
-    }
-
     private fun doSkipDescription(card: Any) {
         val className = card::class.getFullName()
         val doSkip = sharedPrefManager.doSkipCardDescription(className)
@@ -254,7 +195,7 @@ class cardProvider(
     }
     fun downloadCards(id: Int) {
         _cardList.tryEmit(ResultOf.Loading(arrayListOf()))
-
+        themeIdDeferred = id
         val startTime = System.currentTimeMillis()
 
         viewModelScope.launch {

@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.databinding.FragmentRuleBinding
 import com.example.core.domain.Scopes
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.get
@@ -40,7 +42,7 @@ class RuleFragment : ScopeFragment() {
     private fun configureThemeType(view: FragmentRuleBinding) {
         lifecycleScope.launch {
             themeInfoProvider.generatePrediction()
-            themeInfoProvider._themeType.observe(viewLifecycleOwner) { type ->
+            themeInfoProvider._themeType.onEach{ type ->
                 when (type) {
                     1 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.meta_mnem_rule)
@@ -68,7 +70,7 @@ class RuleFragment : ScopeFragment() {
                         6 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TODO: Change approach
                     }
                 }
-            }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
     }
 

@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.about_theme_ui.customView.PieData
 import com.example.about_theme_ui.databinding.FragmentAboutThemeBinding
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 import kotlin.math.roundToInt
 
@@ -34,8 +37,8 @@ class AboutThemeFragment : Fragment() {
 
         view.pieChart.setData(data)
 
-        viewModel._themeInfo.observe(viewLifecycleOwner) {
-            if (it.AverageRA != 0.0) {
+        viewModel._themeInfo.onEach {
+            if (it?.AverageRA != 0.0 && it != null ) {
                 val dataNotNull = PieData()
                 view.pieChart.visibility = View.VISIBLE
 
@@ -64,9 +67,9 @@ class AboutThemeFragment : Fragment() {
                 view.emptyStatsImg.visibility = View.VISIBLE
             }
 
-            view.themeType.text = it.themeType
-            view.title.text = it.title
-        }
+            view.themeType.text = it?.themeType
+            view.title.text = it?.title
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         view.toTrain.setOnClickListener {
             navigator.toTrain(themeId)

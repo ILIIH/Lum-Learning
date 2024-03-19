@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
@@ -23,6 +24,9 @@ import com.example.core.domain.ILError
 import com.example.core.domain.Scopes
 import com.example.core.ui.MediaFragment
 import com.example.core.util.hideKeyboard
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
@@ -109,14 +113,15 @@ class AddVisualCardFragment : MediaFragment() {
                 .show()
         }
 
-        viewModel._photo.observe(requireActivity()) {
+        viewModel._photo.onEach {
             it?.let { photo ->
                 view.addPhoto.setImageDrawable(null)
                 if(!photo.isRecycled) {
                     view.addPhoto.setImageBitmap(photo)
                 }
             }
-        }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
         view.lifecycleOwner = viewLifecycleOwner
         return view.root
     }

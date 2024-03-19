@@ -60,11 +60,11 @@ class RuleFragment : BaseFragment() {
         lifecycleScope.launchWhenStarted {
             cardProvider.cardList.collect { result ->
                 when (result) {
-                        is ResultOf.Success -> handleCardListSuccess(binding, result.value, themeId)
-                        is ResultOf.Loading -> showLoading()
-                        is ResultOf.Failure -> handleFailure(result.error)
-                    }
+                    is ResultOf.Success -> handleCardListSuccess(binding, result.value, themeId)
+                    is ResultOf.Loading -> showLoading()
+                    is ResultOf.Failure -> handleFailure(result.error)
                 }
+            }
         }
     }
 
@@ -127,21 +127,22 @@ class RuleFragment : BaseFragment() {
     fun showRuleScreen(view: FragmentGameRuleBinding, themeId: Int) {
         view.teacher.startButton.visibility = View.VISIBLE
         view.teacher.exitButton.visibility = View.GONE
+        view.teacher.restartButton.visibility = View.GONE
 
         view.teacher.startButton.text = getString(com.example.core.R.string.next)
 
+        if (cardProvider.isItTheEndOfCardList()) {
+            dismissLoading()
+            view.teacher.exitButton.visibility = View.VISIBLE
+            callEndDialog(themeId, view)
+        }
+
         lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply {
-                if (cardProvider.isItTheEndOfCardList()) {
-                    dismissLoading()
-                    view.teacher.exitButton.visibility = View.VISIBLE
-                    callEndDialog(themeId, view)
-                } else {
-                    when (this) {
+            cardProvider.getCurrentCard().collect {card ->
+                 when (card) {
                         // TODO: MILLER_LAW at 1
                         is LearningCardDomain -> {
-                            val currentCard = this
-                            when (currentCard.themeType) {
+                            when (card.themeType) {
                                 2 -> {
                                     view.subTitle.text = getString(com.example.core.R.string.meta_mnem_title)
                                     view.teacher.ruleText.text = getString(com.example.core.R.string.meta_mnem_rule)
@@ -164,13 +165,12 @@ class RuleFragment : BaseFragment() {
                             view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                         }
                     }
-                }
             }
         }
         lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply {
+            cardProvider.getCurrentCard().collect {card ->
                 view.teacher.startButton.setOnClickListener {
-                    showSkipDescrDialog(this::class.getFullName()) { navigateToGame(this) }
+                    showSkipDescrDialog(card::class.getFullName()) { navigateToGame(card) }
                 }
             }
         }
@@ -180,25 +180,25 @@ class RuleFragment : BaseFragment() {
         when (card) {
             // TODO: MILLER_LAW at 1
             is LearningCardDomain -> {
-                    when (card.themeType) {
-                        2 -> {
-                            findNavController().navigate(R.id.to_MCFragment)
-                        }
-
-                        5 -> {
-                            findNavController().navigate(R.id.to_LearningCard)
-                        }
-
-                        else -> {
-                            findNavController().navigate(R.id.to_LearningCard) // TODO: NEED_REFACTOR
-                        }
+                when (card.themeType) {
+                    2 -> {
+                        findNavController().navigate(R.id.to_MCFragment)
                     }
+
+                    5 -> {
+                        findNavController().navigate(R.id.to_LearningCard)
+                    }
+
+                    else -> {
+                        findNavController().navigate(R.id.to_LearningCard) // TODO: NEED_REFACTOR
+                    }
+                }
             }
             is VA_Card -> {
-                    findNavController().navigate(R.id.to_VAFragment)
+                findNavController().navigate(R.id.to_VAFragment)
             }
             is SA_Card -> {
-                    findNavController().navigate(R.id.to_SAFragment)
+                findNavController().navigate(R.id.to_SAFragment)
             }
             else -> {
                 // TODO() A
@@ -233,7 +233,7 @@ class RuleFragment : BaseFragment() {
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun ViewBinding.saveGameResult(themeId: Int) {
+    private fun saveGameResult(themeId: Int) {
         val date = SimpleDateFormat(context?.getString(com.example.core.R.string.data_format)).format(Date())
         cardProvider.saveGameResult(
             currentDay = LocalDateTime.now().dayOfWeek.value,

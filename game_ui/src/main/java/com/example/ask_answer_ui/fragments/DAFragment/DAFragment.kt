@@ -3,25 +3,28 @@ package com.example.ask_answer_ui.fragments.DAFragment
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentDABinding
-import com.example.ask_answer_ui.viewModel.DA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.util.*
 
 class DAFragment : Fragment() {
 
-    val viewModel: DA_ViewModel by inject()
     val cardProvider: cardProvider by inject()
     private lateinit var answerAdapter: AnswerAdapter
     override fun onCreateView(
@@ -31,8 +34,8 @@ class DAFragment : Fragment() {
     ): View {
         val view = FragmentDABinding.inflate(inflater, container, false)
         lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply {
-                val currentCard = this as LearningCardDomain
+            cardProvider.getCurrentCard().collect {
+                val currentCard = it as LearningCardDomain
 
                 val begin = System.nanoTime()
 
@@ -58,7 +61,7 @@ class DAFragment : Fragment() {
                             cardId = currentCard.id,
                         )
                     }
-                    goToNextCard(view)
+                    goToNextCard()
                 }
 
                 CardEndsDialog(currentCard.description).show(
@@ -95,7 +98,7 @@ class DAFragment : Fragment() {
                                 time = begin - System.nanoTime(),
                                 cardId = currentCard.id,
                             )
-                            goToNextCard(view)
+                            goToNextCard()
                         }
                     }
                 }
@@ -108,18 +111,14 @@ class DAFragment : Fragment() {
         return view.root
     }
 
-    fun goToNextCard(view: FragmentDABinding) {
-        cardProvider.goToNextCard()
-        if (!cardProvider.hasLearningCard()) {
+    fun goToNextCard() {
+        lifecycleScope.launch{
+            cardProvider.goToNextCard()
             lifecycleScope.launchWhenResumed {
                 delay(1000)
                 findNavController().popBackStack()
             }
-        } else {
-            val currentCard = cardProvider.getCurrentCard() as LearningCardDomain
-            answerAdapter.submitList(currentCard.answers)
-            view.question.text = currentCard.question
-            CardEndsDialog(getString(R.string.description)).show(parentFragmentManager, CardEndsDialog.DESCRIPTION_DIALOG_TAG)
         }
     }
+
 }

@@ -15,16 +15,17 @@ import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentVisualAssosiationBinding
 import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
-import com.example.ask_answer_ui.viewModel.VA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class VAFragment : Fragment() {
 
-    val viewModel: VA_ViewModel by sharedViewModel()
     val cardProvider: cardProvider by inject()
     lateinit var answerAdapter: AnswerAdapter
 
@@ -34,9 +35,9 @@ class VAFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentVisualAssosiationBinding.inflate(inflater, container, false)
-        lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply{
-                val currentCard = this as VA_Card
+        lifecycleScope.launch {
+            cardProvider.getCurrentCard().collect { card ->
+                val currentCard = card as VA_Card
                 val begin = System.nanoTime()
 
                 answerAdapter = AnswerAdapter {
