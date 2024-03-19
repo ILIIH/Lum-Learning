@@ -3,6 +3,7 @@ package com.example.ask_answer_ui.fragments
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,8 @@ import com.example.ask_answer_ui.databinding.FragmentLearningCardBinding
 import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
-import org.koin.android.ext.android.inject
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
@@ -32,9 +34,9 @@ class LearningCardFragment : Fragment() {
     ): View {
         val view = FragmentLearningCardBinding.inflate(inflater, container, false)
 
-        lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply {
-                val currentCard = this as LearningCardDomain
+        viewLifecycleOwner.lifecycleScope.launch  {
+            cardProvider.getCurrentCard().collect {
+                val currentCard = it as LearningCardDomain
 
                 val begin = System.nanoTime()
 

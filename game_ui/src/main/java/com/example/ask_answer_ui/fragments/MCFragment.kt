@@ -3,6 +3,7 @@ package com.example.ask_answer_ui.fragments
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +15,17 @@ import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentMCBinding
 import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
-import com.example.ask_answer_ui.viewModel.MC_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
-import org.koin.android.ext.android.inject
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class MCFragment : Fragment() {
 
-    val viewModel: MC_ViewModel by inject()
     val cardProvider: cardProvider by sharedViewModel()
     lateinit var answerAdapter: AnswerAdapter
 
@@ -33,9 +35,10 @@ class MCFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         val view = FragmentMCBinding.inflate(inflater, container, false)
-        lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply {
-                val currentCard = this as LearningCardDomain
+        lifecycleScope.launchWhenStarted  {
+            cardProvider.getCurrentCard().collect {
+
+                val currentCard = it as LearningCardDomain
                 val begin = System.nanoTime()
 
                 answerAdapter = AnswerAdapter {

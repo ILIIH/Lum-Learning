@@ -19,17 +19,18 @@ import com.example.ask_answer_ui.R
 import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentSABinding
 import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
-import com.example.ask_answer_ui.viewModel.SA_ViewModel
 import com.example.ask_answer_ui.viewModel.cardProvider
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import java.io.File
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class SAFragment : Fragment() {
 
-    val viewModel: SA_ViewModel by inject()
     val cardProvider: cardProvider by sharedViewModel()
     private lateinit var answerAdapter: AnswerAdapter
     private val handler = Handler(Looper.getMainLooper())
@@ -43,10 +44,9 @@ class SAFragment : Fragment() {
     ): View {
         val view = FragmentSABinding.inflate(inflater, container, false)
         progressBar = view.progressBar
-
-        lifecycleScope.launchWhenStarted {
-            cardProvider.getCurrentCard().apply {
-                val currentCard = this as SA_Card
+        lifecycleScope.launch {
+            cardProvider.getCurrentCard().collect { card ->
+                val currentCard = card as SA_Card
                 val begin = System.nanoTime()
                 val endTime = 10000L
                 view.timeView.setEndingTime(endTime.toFloat())
@@ -98,7 +98,7 @@ class SAFragment : Fragment() {
                             result = false,
                             time = begin - System.nanoTime(),
                             cardId = currentCard.id,
-                            )
+                        )
                     }
                     cardProvider.goToNextCard()
                     goToNextCard()
@@ -108,7 +108,10 @@ class SAFragment : Fragment() {
                     view.playSound.isClickable = false
                     mp = MediaPlayer.create(
                         requireContext(),
-                        File(requireActivity().cacheDir, getString(R.string.record) + currentCard.audioFileId.toString()).toUri()
+                        File(
+                            requireActivity().cacheDir,
+                            getString(R.string.record) + currentCard.audioFileId.toString()
+                        ).toUri()
                     )
                     view.progressBar
                     mp.setOnCompletionListener {

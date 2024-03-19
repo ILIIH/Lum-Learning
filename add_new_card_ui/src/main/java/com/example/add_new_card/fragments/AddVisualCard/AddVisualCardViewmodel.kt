@@ -1,26 +1,26 @@
 package com.example.add_new_card.fragments.AddVisualCard
 
 import android.graphics.Bitmap
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
 import com.example.add_new_card_data.model.Answer
 import com.example.add_new_card_data.model.VA_Card
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
-    private val photo = MutableLiveData<Bitmap?>(null)
-    val _photo: LiveData<Bitmap?>
+    private val photo = MutableStateFlow<Bitmap?>(null)
+    val _photo: StateFlow<Bitmap?>
         get() = photo
 
     private var _answers = mutableListOf(Answer("", "", true))
     fun getAnswers():List<Answer>  = _answers
     fun setPhoto(bitmap: Bitmap) {
-        photo.postValue(bitmap)
+        photo.tryEmit(bitmap)
     }
 
     fun reInitAnswers() {

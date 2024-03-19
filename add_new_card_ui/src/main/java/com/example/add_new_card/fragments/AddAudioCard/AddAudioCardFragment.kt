@@ -21,6 +21,7 @@ import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AnswersAdapters
@@ -28,6 +29,8 @@ import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.core.domain.Scopes
 import com.example.core.util.hideKeyboard
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.ScopeFragment
@@ -64,13 +67,13 @@ class AddAudioCardFragment : Fragment() {
             adapter.notifyItemInserted(viewModel.getAnswers().size)
         }
 
-        viewModel._clickableStopBtn.observe(viewLifecycleOwner) { status ->
+        viewModel._clickableStopBtn.onEach{ status ->
             if (status) {
                 view.stopRecord.setBackgroundResource(R.drawable.baseline_stop_circle_24)
             } else {
                 view.stopRecord.setBackgroundResource(R.drawable.baseline_stop_circle_non_clicable)
             }
-        }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         val themeId = themeInfoProvider.getThemeId()
 

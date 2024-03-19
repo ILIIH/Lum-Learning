@@ -1,20 +1,20 @@
 package com.example.add_new_card.fragments.AddAudioCard
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
 import com.example.add_new_card_data.model.Answer
 import com.example.add_new_card_data.model.SA_Card
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
-    private val clickableStopBtn = MutableLiveData<Boolean>()
-    val _clickableStopBtn: LiveData<Boolean>
+    private val clickableStopBtn = MutableStateFlow<Boolean>(false)
+    val _clickableStopBtn: StateFlow<Boolean>
         get() = clickableStopBtn
 
     private var _answers = mutableListOf(Answer("", "", true))
@@ -62,9 +62,9 @@ class AddAudioCardViewmodel(private val repo: CardRepository) : ViewModel() {
         }
     }
     fun setStopBtnClickable() {
-        clickableStopBtn.value = true
+        clickableStopBtn.tryEmit(true)
     }
     fun setStopBtnNonClickable() {
-        clickableStopBtn.value = false
+        clickableStopBtn.tryEmit(false)
     }
 }

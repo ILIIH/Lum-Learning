@@ -1,9 +1,6 @@
 package com.example.add_theme_ui.viewModels
 
-import android.content.Context
 import android.graphics.Bitmap
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_theme_data.SaveTheme
@@ -11,6 +8,8 @@ import com.example.add_theme_data.Theme
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.core.domain.ILError
 import com.example.core.domain.Scopes
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
@@ -28,15 +27,15 @@ class ThemeAddViewModel() : ViewModel() {
 
     private var yearOfExperience: Int = 0
 
-    private val photo = MutableLiveData<Bitmap>()
-    val _photo: LiveData<Bitmap>
+    private val photo = MutableStateFlow<Bitmap?>(null)
+    val _photo: StateFlow<Bitmap?>
         get() = photo
 
-    private val validation = MutableLiveData<ILError>()
-    val _validation: LiveData<ILError>
+    private val validation = MutableStateFlow<ILError?>(null)
+    val _validation: MutableStateFlow<ILError?>
         get() = validation
 
-    private val photoURI = MutableLiveData<String>()
+    private val photoURI = MutableStateFlow(String())
 
     init {
         saveTheme = scope.get<SaveTheme>()
@@ -65,15 +64,15 @@ class ThemeAddViewModel() : ViewModel() {
         yearOfExperience = expLevel
     }
     fun setPhotoURI(URI: String) {
-        photoURI.postValue(URI)
+        photoURI.tryEmit(URI)
     }
 
     fun setPhoto(bitmap: Bitmap) {
-        photo.postValue(bitmap)
+        photo.tryEmit(bitmap)
     }
     private fun validatePhoto(): Boolean {
         return if ( photoURI.value.isNullOrEmpty() )  {
-            validation.postValue(ILError.VALIDATION_PHOTO)
+            validation.tryEmit(ILError.VALIDATION_PHOTO)
             false
         } else true
     }
@@ -89,7 +88,7 @@ class ThemeAddViewModel() : ViewModel() {
                 saveTheme.execute(
                     Theme(
                         themeName,
-                        photoURI.value!!,
+                        photoURI.value,
                         yearOfExperience,
                         themeImportance,
                         themeType,

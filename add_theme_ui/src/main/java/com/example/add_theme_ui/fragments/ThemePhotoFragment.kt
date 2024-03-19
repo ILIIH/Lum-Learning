@@ -8,11 +8,15 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.core.R
 import com.example.add_theme_ui.databinding.FragmentThemePhotoBinding
 import com.example.add_theme_ui.viewModels.ThemeAddViewModel
 import com.example.core.data.PhotoManager
 import com.example.core.ui.MediaFragment
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -29,16 +33,16 @@ class ThemePhotoFragment : MediaFragment() {
         view = FragmentThemePhotoBinding.inflate(inflater,container, false )
         view.continueBtn.setOnClickListener { viewModule.addTheme() }
 
-        viewModule._validation.observe(requireActivity()) {
+        viewModule._validation.filterNotNull().onEach {
             showError(it)
-        }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        viewModule._photo.observe(requireActivity()) {
+        viewModule._photo.onEach {
             view.themePhoto.setImageDrawable(null)
-            if(!it.isRecycled){
+            if(it?.isRecycled != true){
                 view.themePhoto.setImageBitmap(it)
             }
-        }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         view.themePhoto.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

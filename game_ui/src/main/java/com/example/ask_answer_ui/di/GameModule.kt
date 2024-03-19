@@ -8,19 +8,6 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val flashCardUiModule = module {
-    viewModel {
-        VA_ViewModel(get())
-    }
-    viewModel {
-        SA_ViewModel(get())
-    }
-    viewModel {
-        DA_ViewModel(get())
-    }
-    viewModel {
-        MC_ViewModel(get())
-    }
-
     single {
         cardProvider(get(), get(), get())
     }
