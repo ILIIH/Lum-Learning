@@ -1,5 +1,6 @@
 package com.example.ask_answer_ui.fragments
 
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -20,18 +21,21 @@ import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentSABinding
 import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
 import com.example.ask_answer_ui.viewModel.cardProvider
+import com.example.core.domain.Scopes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.getKoin
 import java.io.File
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.qualifier.named
 import java.util.*
 
 class SAFragment : Fragment() {
 
-    val cardProvider: cardProvider by sharedViewModel()
+    lateinit var cardProvider: cardProvider
     private lateinit var answerAdapter: AnswerAdapter
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var  mp: MediaPlayer
@@ -164,5 +168,10 @@ class SAFragment : Fragment() {
             delay(1000)
             findNavController().popBackStack()
         }
+    }
+    override fun onAttach(context: Context) {
+        val  scope = getKoin().getOrCreateScope(Scopes.GAME_SCOPE.scope, named(Scopes.GAME_SCOPE.scope))
+        cardProvider = scope.get<cardProvider>()
+        super.onAttach(context)
     }
 }

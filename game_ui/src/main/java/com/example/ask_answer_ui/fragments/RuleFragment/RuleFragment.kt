@@ -1,6 +1,7 @@
 package com.example.ask_answer_ui.fragments.RuleFragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Typeface
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -21,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.add_new_card.fragments.RuleFragment.RuleFragmentArgs
+import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.VA_Card
@@ -30,17 +32,31 @@ import com.example.ask_answer_ui.databinding.FragmentGameRuleBinding
 import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.ask_answer_ui.viewModel.cardProvider
 import com.example.core.domain.ILError
+import com.example.core.domain.Scopes
 import com.example.core.ui.BaseFragment
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.fragmentScope
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 import org.koin.ext.getFullName
 import java.time.LocalDateTime
 import java.util.*
-const val ARG_THEME_ID = "id"
-class RuleFragment : BaseFragment() {
+class RuleFragment : BaseFragment() , AndroidScopeComponent {
 
-    private val cardProvider: cardProvider by inject()
+    override val scope: Scope by fragmentScope()
+
+    private lateinit var cardProvider: cardProvider
     private val navigator: GameNavigation by inject()
 
+    override fun onAttach(context: Context) {
+        val ourSession = getKoin().getOrCreateScope(Scopes.GAME_SCOPE.scope, named(Scopes.GAME_SCOPE.scope))
+        scope.linkTo(ourSession)
+        cardProvider = get<cardProvider>()
+        super.onAttach(context)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -170,7 +186,9 @@ class RuleFragment : BaseFragment() {
         lifecycleScope.launchWhenStarted {
             cardProvider.getCurrentCard().collect {card ->
                 view.teacher.startButton.setOnClickListener {
-                    showSkipDescrDialog(card::class.getFullName()) { navigateToGame(card) }
+                    showSkipDescrDialog(card::class.getFullName()) {
+                        navigateToGame(card)
+                    }
                 }
             }
         }
@@ -226,6 +244,7 @@ class RuleFragment : BaseFragment() {
             exitButton.setOnClickListener {
                 cardProvider.exitTheme()
                 saveGameResult(themeId)
+                scope.close()
                 lifecycleScope.launchWhenResumed {
                     findNavController().popBackStack()
                 }

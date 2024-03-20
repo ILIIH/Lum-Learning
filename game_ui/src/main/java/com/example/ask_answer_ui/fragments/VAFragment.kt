@@ -1,5 +1,6 @@
 package com.example.ask_answer_ui.fragments
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
@@ -16,17 +17,20 @@ import com.example.ask_answer_ui.adapter.AnswerAdapter
 import com.example.ask_answer_ui.databinding.FragmentVisualAssosiationBinding
 import com.example.ask_answer_ui.fragments.DAFragment.CardEndsDialog
 import com.example.ask_answer_ui.viewModel.cardProvider
+import com.example.core.domain.Scopes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
 import java.util.*
 
 class VAFragment : Fragment() {
 
-    val cardProvider: cardProvider by inject()
+    lateinit var cardProvider: cardProvider
     lateinit var answerAdapter: AnswerAdapter
 
     override fun onCreateView(
@@ -115,5 +119,10 @@ class VAFragment : Fragment() {
             delay(1000)
             findNavController().popBackStack()
         }
+    }
+    override fun onAttach(context: Context) {
+        val  scope = getKoin().getOrCreateScope(Scopes.GAME_SCOPE.scope, named(Scopes.GAME_SCOPE.scope))
+        cardProvider = scope.get<cardProvider>()
+        super.onAttach(context)
     }
 }

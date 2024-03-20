@@ -87,7 +87,6 @@ class cardProvider(
 
     fun isItTheEndOfCardList(): Boolean {
         return if (cardList.value is ResultOf.Success) {
-            Log.i("card_list_logging", "size ${(cardList.value as ResultOf.Success).value.size} currentCardIndex ${currentCardIndex}" )
             currentCardIndex >= (cardList.value as ResultOf.Success).value.size
         } else {
             false
