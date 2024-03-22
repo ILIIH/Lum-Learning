@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
+import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
@@ -29,6 +30,7 @@ class AddLearningCardFragment : Fragment() {
 
     val viewModel: AddLearningCardViewmodel by inject()
     private lateinit var themeInfoProvider: ThemeInfoProvider
+    private lateinit var animationManager : AddCardAnimations
 
     val adapter = AnswersAdapters()
 
@@ -42,6 +44,8 @@ class AddLearningCardFragment : Fragment() {
         view.questionInputText.addTextChangedListener {
             view.question.error = null
         }
+
+        animationManager.addTopBardCloseAnimation(view.topBar, view.nestedScrollView )
 
         view.answers.adapter = adapter
         adapter.submitList(viewModel.getAnswers())
@@ -154,6 +158,7 @@ class AddLearningCardFragment : Fragment() {
     override fun onAttach(context: Context) {
         val  scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
         themeInfoProvider = scope.get<ThemeInfoProvider>()
+        animationManager = scope.get<AddCardAnimations>()
         super.onAttach(context)
     }
 

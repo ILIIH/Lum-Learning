@@ -3,6 +3,7 @@ package com.example.add_new_card.fragments.AddAudioCard
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -12,9 +13,11 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -24,6 +27,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
+import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
@@ -33,8 +37,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
-import org.koin.androidx.scope.ScopeFragment
-import org.koin.androidx.scope.scope
 import org.koin.core.qualifier.named
 import java.io.File
 import java.io.FileOutputStream
@@ -44,7 +46,9 @@ class AddAudioCardFragment : Fragment() {
 
     val adapter = AnswersAdapters()
 
+
     lateinit var mr: MediaRecorder
+    private lateinit var animationManager : AddCardAnimations
     private lateinit var themeInfoProvider: ThemeInfoProvider
     val viewModel: AddAudioCardViewmodel by inject()
     override fun onCreateView(
@@ -56,6 +60,9 @@ class AddAudioCardFragment : Fragment() {
 
         view.answers.adapter = adapter
         adapter.submitList(viewModel.getAnswers())
+
+        animationManager.addTopBardCloseAnimation(view.topBar, view.nestedScrollView )
+
 
         view.questionInputText.addTextChangedListener {
             view.question.error = null
@@ -184,6 +191,7 @@ class AddAudioCardFragment : Fragment() {
     override fun onAttach(context: Context) {
         val  scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
         themeInfoProvider = scope.get<ThemeInfoProvider>()
+        animationManager = scope.get<AddCardAnimations>()
         super.onAttach(context)
     }
 

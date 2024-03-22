@@ -13,6 +13,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/top_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/add_new_title_background"
@@ -25,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/inriasansbold"
                 android:text="@string/enter_question_info"
                 android:textColor="#000000"
@@ -35,7 +36,6 @@
                 android:id="@+id/sub_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="40dp"
                 android:fontFamily="@font/inriasanslight"
                 android:text="@string/audio_mnemotechnik"
@@ -49,6 +49,7 @@
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
            >

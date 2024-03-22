@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
+import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
@@ -40,6 +41,7 @@ class AddVisualCardFragment : MediaFragment() {
 
     private val viewModel: AddVisualCardViewmodel by inject()
     private lateinit var themeInfoProvider: ThemeInfoProvider
+    private lateinit var animationManager : AddCardAnimations
 
     private val adapter = AnswersAdapters()
     private val photoManage: PhotoManager by inject()
@@ -55,6 +57,8 @@ class AddVisualCardFragment : MediaFragment() {
         view.questionInputText.addTextChangedListener {
             view.question.error = null
         }
+
+        animationManager.addTopBardCloseAnimation(view.topBar, view.nestedScrollView )
 
         view.answers.adapter = adapter
         adapter.submitList(viewModel.getAnswers())
@@ -128,6 +132,7 @@ class AddVisualCardFragment : MediaFragment() {
 
     override fun onAttach(context: Context) {
         val  scope = getKoin().getOrCreateScope(Scopes.ADD_NEW_CARD_SCOPE.scope, named(Scopes.ADD_NEW_CARD_SCOPE.scope))
+        animationManager = scope.get<AddCardAnimations>()
         themeInfoProvider = scope.get<ThemeInfoProvider>()
         super.onAttach(context)
     }
