@@ -145,15 +145,17 @@ class AddAudioCardFragment : Fragment() {
                 .setNegativeButton(
                     R.string.save_and_exit,
                 ) { _, _ ->
-                    viewModel.addNewCard(
-                        themeId = themeId,
-                        question = view.question.editText!!.text.toString(),
-                        currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                        answers = answers
+                    if(!adapter.validateAnswers() && !validateCard(view)){
+                        viewModel.addNewCard(
+                            themeId = themeId,
+                            question = view.question.editText!!.text.toString(),
+                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
+                            answers = answers
 
-                    )
-                    hideKeyboard(activity as Activity)
-                    findNavController().popBackStack()
+                        )
+                        hideKeyboard(activity as Activity)
+                        findNavController().popBackStack()
+                    }
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)
                 .show()

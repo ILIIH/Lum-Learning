@@ -105,31 +105,33 @@ class AddLearningCardFragment : Fragment() {
                 .setNegativeButton(
                     R.string.save_and_exit,
                 ) { _, _ ->
-                    if (themeType == 5) {
-                        viewModel.addNewCard(
-                            themeId = themeID,
-                            question = view.question.editText!!.text.toString(),
-                            answers = answers,
-                            themeType = themeType,
-                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
-                                Date(),
-                            ),
-                            description = view.description.editText!!.text.toString(),
-                        )
-                    } else {
-                        viewModel.addNewCard(
-                            themeId = themeID,
-                            question = view.question.editText!!.text.toString(),
-                            answers = answers,
-                            themeType = themeType,
-                            currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
-                                Date(),
-                            ),
-                            description = "-",
-                        )
+                    if(!adapter.validateAnswers() && !validateCard(view)){
+                        if (themeType == 5) {
+                            viewModel.addNewCard(
+                                themeId = themeID,
+                                question = view.question.editText!!.text.toString(),
+                                answers = answers,
+                                themeType = themeType,
+                                currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
+                                    Date(),
+                                ),
+                                description = view.description.editText!!.text.toString(),
+                            )
+                        } else {
+                            viewModel.addNewCard(
+                                themeId = themeID,
+                                question = view.question.editText!!.text.toString(),
+                                answers = answers,
+                                themeType = themeType,
+                                currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(
+                                    Date(),
+                                ),
+                                description = "-",
+                            )
+                        }
+                        hideKeyboard(requireActivity())
+                        findNavController().popBackStack()
                     }
-                    hideKeyboard(requireActivity())
-                    findNavController().popBackStack()
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)
                 .show()

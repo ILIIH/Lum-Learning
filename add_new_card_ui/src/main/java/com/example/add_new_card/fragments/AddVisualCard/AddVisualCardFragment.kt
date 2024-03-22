@@ -104,14 +104,16 @@ class AddVisualCardFragment : MediaFragment() {
                 .setNegativeButton(
                     R.string.save_and_exit,
                 ) { _, _ ->
-                    viewModel.addNewCard(
-                        themeId = themeId,
-                        question = view.question.editText!!.text.toString(),
-                        answers,
-                        SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
-                    )
-                    hideKeyboard(requireActivity())
-                    findNavController().popBackStack()
+                    if(!adapter.validateAnswers() && !validateCard(view)){
+                        viewModel.addNewCard(
+                            themeId = themeId,
+                            question = view.question.editText!!.text.toString(),
+                            answers,
+                            SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
+                        )
+                        hideKeyboard(requireActivity())
+                        findNavController().popBackStack()
+                    }
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)
                 .show()
