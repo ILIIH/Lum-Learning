@@ -30,4 +30,5 @@ ext {
     test_runner_version = "1.5.2"
     test_rules_version = "1.4.0"
     espresso_version = "3.4.0"
+
 }
