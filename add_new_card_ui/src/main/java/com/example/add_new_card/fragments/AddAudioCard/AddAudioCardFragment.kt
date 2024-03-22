@@ -31,6 +31,7 @@ import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddAudioCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.add_new_card.navigation.AddNewCardNavigation
 import com.example.core.domain.Scopes
 import com.example.core.util.hideKeyboard
 import kotlinx.coroutines.flow.launchIn
@@ -50,7 +51,10 @@ class AddAudioCardFragment : Fragment() {
     lateinit var mr: MediaRecorder
     private lateinit var animationManager : AddCardAnimations
     private lateinit var themeInfoProvider: ThemeInfoProvider
+
     val viewModel: AddAudioCardViewmodel by inject()
+    private val navigator: AddNewCardNavigation by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -154,7 +158,7 @@ class AddAudioCardFragment : Fragment() {
 
                         )
                         hideKeyboard(activity as Activity)
-                        findNavController().popBackStack()
+                        navigator.saveNewCardAndExit(themeId)
                     }
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)

@@ -89,6 +89,11 @@
         <argument
             android:name="themeId"
             app:argType="integer" />
+        <action
+            android:id="@+id/save_new_card_and_exit"
+            app:destination="@id/about_theme_nav"
+            app:popUpTo="@id/about_theme_nav"
+            app:popUpToInclusive="false" />
     </navigation>
 
 
