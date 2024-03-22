@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import com.example.about_theme_ui.AboutThemeNavigation
+import com.example.add_new_card.navigation.AddNewCardNavigation
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.onboarding.navigation.OnboardingNavigation
@@ -23,7 +24,8 @@ class Navigator :
     AddThemeNavigation,
     GameNavigation,
     AboutThemeNavigation,
-    PlainNavigation
+    PlainNavigation,
+    AddNewCardNavigation
 {
 
     override fun bind(navController: NavController) {
@@ -76,6 +78,10 @@ class Navigator :
 
     override fun toCreateNewTheme() {
         navController?.navigate(R.id.from_plain_to_create_theme)
+    }
+
+    override fun saveNewCardAndExit(themeId: Int) {
+        navController?.navigateSafe(AddNewCardGraphDirections.saveNewCardAndExit(themeId))
     }
 
 }

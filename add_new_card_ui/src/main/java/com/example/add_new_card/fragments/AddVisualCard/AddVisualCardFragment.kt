@@ -20,6 +20,7 @@ import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddVisualCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.add_new_card.navigation.AddNewCardNavigation
 import com.example.core.data.PhotoManager
 import com.example.core.domain.ILError
 import com.example.core.domain.Scopes
@@ -45,6 +46,7 @@ class AddVisualCardFragment : MediaFragment() {
 
     private val adapter = AnswersAdapters()
     private val photoManage: PhotoManager by inject()
+    private val navigator: AddNewCardNavigation by inject()
 
     private lateinit var view: FragmentAddVisualCardBinding
 
@@ -112,7 +114,7 @@ class AddVisualCardFragment : MediaFragment() {
                             SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
                         )
                         hideKeyboard(requireActivity())
-                        findNavController().popBackStack()
+                        navigator.saveNewCardAndExit(themeId)
                     }
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)

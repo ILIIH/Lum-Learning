@@ -18,6 +18,7 @@ import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
 import com.example.add_new_card.databinding.FragmentAddLearningCardBinding
 import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
+import com.example.add_new_card.navigation.AddNewCardNavigation
 import com.example.core.domain.Scopes
 import com.example.core.util.hideKeyboard
 import org.koin.android.ext.android.getKoin
@@ -29,6 +30,8 @@ import java.util.*
 class AddLearningCardFragment : Fragment() {
 
     val viewModel: AddLearningCardViewmodel by inject()
+    private val navigator: AddNewCardNavigation by inject()
+
     private lateinit var themeInfoProvider: ThemeInfoProvider
     private lateinit var animationManager : AddCardAnimations
 
@@ -130,7 +133,7 @@ class AddLearningCardFragment : Fragment() {
                             )
                         }
                         hideKeyboard(requireActivity())
-                        findNavController().popBackStack()
+                        navigator.saveNewCardAndExit(themeID)
                     }
                 }
                 .setIcon(R.drawable.baseline_credit_card_24)
