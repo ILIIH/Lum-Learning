@@ -3,6 +3,7 @@ package com.example.navigation.di
 import com.example.about_theme_ui.AboutThemeNavigation
 import com.example.add_new_card.navigation.AddNewCardNavigation
 import com.example.add_theme_ui.AddThemeNavigation
+import com.example.ask_answer_ui.navigation.GameNavigation
 import com.example.navigation.CoreNavigation
 import com.example.navigation.Navigator
 import com.example.onboarding.navigation.OnboardingNavigation
@@ -19,6 +20,7 @@ val navigationModule = module {
         AddThemeNavigation::class,
         AboutThemeNavigation::class,
         PlainNavigation::class,
-        AddNewCardNavigation::class
+        AddNewCardNavigation::class,
+        GameNavigation::class
     )
 }

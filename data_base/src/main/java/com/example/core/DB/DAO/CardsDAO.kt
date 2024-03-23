@@ -9,7 +9,7 @@ import com.example.core.DB.Entities.VisualLearningCard
 @Dao
 interface CardsDAO {
     @Insert
-    suspend fun insertCardStats(vararg cardStat: CardStats)
+    suspend fun insertCardStat(vararg cardStat: CardStats)
     @Delete
     suspend fun deleteCardStats(vararg cardStat: CardStats)
     @Query("SELECT * FROM CardStats")

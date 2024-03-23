@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ThemeAboutViewModel(
-    private val getTheme: GetThemeMetric,
+    private val getThemeMetric: GetThemeMetric,
     private val getPredictedMnemoType: getPredictedMnemoType,
 ) : ViewModel() {
     private val themeInfo = MutableStateFlow<ThemeMetric?>(null)
@@ -22,7 +22,7 @@ class ThemeAboutViewModel(
 
     fun loadThemeInfo(id: Int) {
         viewModelScope.launch {
-            val theme = getTheme.execute(id)
+            val theme = getThemeMetric.execute(id)
             themeInfo.tryEmit(theme)
         }
     }

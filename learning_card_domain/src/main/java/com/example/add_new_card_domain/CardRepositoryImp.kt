@@ -10,6 +10,7 @@ import com.example.add_new_card_data.model.VA_Card
 import com.example.add_new_card_domain.mapper.toData
 import com.example.add_new_card_domain.mapper.toDataWithId
 import com.example.add_new_card_domain.mapper.toDataWithSaveId
+import com.example.add_new_card_domain.mapper.toDbEntity
 import com.example.add_new_card_domain.mapper.toDomain
 import com.example.core.DB.ThemeDatabase
 
@@ -34,7 +35,13 @@ class CardRepositoryImp(private val repo: ThemeDatabase) : CardRepository {
     }
 
     override suspend fun editCardStat(cardStats: CardStats) {
-        repo.cardsDAO().changeCardStat(cardStats.toData())
+        if( repo.cardsDAO().getAllCardStats().count {  it.cardID == cardStats.cardID } > 0) {
+            repo.cardsDAO().changeCardStat(cardStats.toData())
+        }
+        else {
+            repo.cardsDAO().insertCardStat(cardStats.toDbEntity())
+        }
+
     }
 
     override suspend fun insertCard(card: Card) {

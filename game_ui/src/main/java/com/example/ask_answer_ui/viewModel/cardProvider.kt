@@ -142,7 +142,6 @@ class cardProvider(
         viewModelScope.launch {
             repo.getCardStat(cardId)?.let { cardStat ->
                 repo.editCardStat(cardStat.changeRA(result, currentDate.month))
-
                 calculateGameMetrics(
                     currentDate = currentDate,
                     cardDateCreation = cardDateCreation,

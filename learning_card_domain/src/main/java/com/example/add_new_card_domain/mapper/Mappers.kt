@@ -8,6 +8,16 @@ import com.example.core.DB.Entities.AudioLearningCard
 import com.example.core.DB.Entities.LearningCrad
 import com.example.core.DB.Entities.VisualLearningCard
 
+fun CardStats.toDbEntity() = com.example.core.DB.Entities.CardStats(
+    id = 0,
+    cardID  = cardID,
+    RACurrentMonth = RACurrentMonth,
+    RALastMonth = RALastMonth,
+    AverageRA = AverageRA,
+    repetitionAmount = repetitionAmount,
+    lastUpdateNumber = lastMonthUpdateNumber,
+    lastMonthRepetitionNumber = lastMonthRepetitionNumber
+)
 fun LearningCardDomain.toDataWithSaveId() = LearningCrad(
     id = id,
     themeId = themeId,
