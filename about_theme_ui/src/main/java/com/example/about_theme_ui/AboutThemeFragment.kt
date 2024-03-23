@@ -41,6 +41,7 @@ class AboutThemeFragment : Fragment() {
             if (it?.AverageRA != 0.0 && it != null ) {
                 val dataNotNull = PieData()
                 view.pieChart.visibility = View.VISIBLE
+                view.emptyStatsImg.visibility = View.GONE
 
                 view.horizontalPrevMonthRight.visibility = View.VISIBLE
                 view.horizontalChartWrong.visibility = View.VISIBLE
