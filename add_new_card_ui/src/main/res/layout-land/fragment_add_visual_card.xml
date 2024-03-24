@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_new_title_background"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/inriasansbold"
+                android:text="@string/enter_question_info"
+                android:textColor="#000000"
+                android:textSize="15pt" />
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/question"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="200dp"
+                        android:layout_height="97dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/question_input_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enter_quesstion"
+                            android:inputType="textMultiLine"
+                            android:lines="2"
+                            android:minLines="4" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/assosiation_subtitle_style"
+                            android:textSize="10pt"
+                            android:text="@string/association"
+                            />
+                        <FrameLayout
+                            android:id="@+id/add_photo_layout"
+                            android:layout_width="170dp"
+                            android:layout_height="170dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/rounded_background"
+                            android:elevation="8dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/add_photo"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="2dp"
+                                />
+
+                            <ImageView
+                                android:id="@+id/overlay_photo"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/baseline_image_search_24"
+                                />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    style="@style/assosiation_subtitle2_style"
+                    android:text="@string/answers"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/answers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <FrameLayout
+                    android:id="@+id/add_new_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/add_new_answer_btn" />
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/continue_btn"
+                    android:text="@string/create"
+                    style="@style/create_btn" />
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>
