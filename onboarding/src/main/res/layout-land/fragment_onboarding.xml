@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/onboarding_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Button
         android:id="@+id/start_button"
         style="@style/menu_btn"
-        android:layout_marginBottom="20dp"
+        android:layout_width="300dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/my_themes"
         app:layout_constraintBottom_toTopOf="@+id/plain_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/plain_button"
         style="@style/menu_btn"
-        android:layout_marginBottom="40dp"
+        android:layout_width="300dp"
+        android:layout_marginBottom="24dp"
+
         android:text="@string/my_plane"
-        app:layout_constraintBottom_toTopOf="@+id/rabbit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/right_brush"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/rabbit_platform"
@@ -32,8 +32,6 @@
         android:layout_height="70dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rabbit_platform" />
 
@@ -42,7 +40,7 @@
         android:id="@+id/rabbit_shadow"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/rabbit"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/rabbit"
@@ -51,18 +49,19 @@
 
     <ImageView
         android:id="@+id/rabbit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        style="@style/rabbit_style"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="44dp"
         android:visibility="visible"
-        app:srcCompat="@drawable/learning_rabbit"
-        style="@style/rabbit_style" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:srcCompat="@drawable/learning_rabbit" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="36dp"
         android:background="@color/onboarding_additional"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,45 +77,30 @@
         app:srcCompat="@drawable/brush" />
 
     <ImageView
+        android:id="@+id/left_right_brush"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintStart_toEndOf="@+id/rabbit"
+        app:srcCompat="@drawable/brush" />
+
+    <ImageView
         android:id="@+id/right_brush"
         android:layout_width="140dp"
         android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rabbit"
         app:srcCompat="@drawable/right_brush" />
 
 
     <TextView
         android:id="@+id/app_name"
+        style="@style/app_name_style"
         android:text="@string/app_name_subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-        style="@style/app_name_style" />
+        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
 
-    <TextView
-        android:id="@+id/title1"
-        style="@style/title"
-        android:layout_marginTop="156dp"
-        android:text="@string/art"
-        android:textColor="@color/onboarding_additional"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title2"
-        android:layout_marginTop="8dp"
-        android:text="@string/of"
-        style="@style/title"
-        android:textColor="@color/onboarding_additional"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title1" />
-
-    <TextView
-        android:id="@+id/title3"
-        android:layout_marginTop="8dp"
-        android:text="@string/learning"
-        style="@style/title"
-        android:textColor="@color/onboarding_additional"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
