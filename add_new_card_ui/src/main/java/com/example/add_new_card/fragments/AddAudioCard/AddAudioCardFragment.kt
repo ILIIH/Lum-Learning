@@ -3,7 +3,6 @@ package com.example.add_new_card.fragments.AddAudioCard
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -13,11 +12,9 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -25,7 +22,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
@@ -38,6 +34,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 import java.io.File
 import java.io.FileOutputStream
@@ -52,7 +49,7 @@ class AddAudioCardFragment : Fragment() {
     private lateinit var animationManager : AddCardAnimations
     private lateinit var themeInfoProvider: ThemeInfoProvider
 
-    val viewModel: AddAudioCardViewmodel by inject()
+    val cardViewModel: AddAudioCardViewmodel by viewModel()
     private val navigator: AddNewCardNavigation by inject()
 
     override fun onCreateView(
@@ -63,7 +60,7 @@ class AddAudioCardFragment : Fragment() {
         val view: FragmentAddAudioCardBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_audio_card, container, false)
 
         view.answers.adapter = adapter
-        adapter.submitList(viewModel.getAnswers())
+        adapter.submitList(cardViewModel.getAnswers())
 
         animationManager.addTopBardCloseAnimation(view.topBar, view.nestedScrollView )
 
@@ -73,12 +70,12 @@ class AddAudioCardFragment : Fragment() {
         }
 
         view.addNewAnswer.setOnClickListener {
-            viewModel.addAnswer()
-            adapter.submitList(viewModel.getAnswers())
-            adapter.notifyItemInserted(viewModel.getAnswers().size)
+            cardViewModel.addAnswer()
+            adapter.submitList(cardViewModel.getAnswers())
+            adapter.notifyItemInserted(cardViewModel.getAnswers().size)
         }
 
-        viewModel._clickableStopBtn.onEach{ status ->
+        cardViewModel._clickableStopBtn.onEach{ status ->
             if (status) {
                 view.stopRecord.setBackgroundResource(R.drawable.baseline_stop_circle_24)
             } else {
@@ -103,9 +100,9 @@ class AddAudioCardFragment : Fragment() {
             mr.setAudioSource(MediaRecorder.AudioSource.MIC)
             mr.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
             mr.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            viewModel.setStopBtnClickable()
+            cardViewModel.setStopBtnClickable()
 
-            viewModel.addRecordPath(
+            cardViewModel.addRecordPath(
                 themeId
             ) { max ->
                 val audioFile = File(requireActivity().cacheDir, "record$max")
@@ -116,11 +113,11 @@ class AddAudioCardFragment : Fragment() {
 
             view.stopRecord.setOnClickListener {
             mr.stop()
-            viewModel.setStopBtnNonClickable()
+            cardViewModel.setStopBtnNonClickable()
         }
 
         view.playAudio.setOnClickListener {
-            viewModel.getAudioFilePath { max ->
+            cardViewModel.getAudioFilePath { max ->
                 val mp = MediaPlayer.create(requireContext(), File(requireActivity().cacheDir, "record$max").toUri())
                 mp.start()
             }
@@ -135,7 +132,7 @@ class AddAudioCardFragment : Fragment() {
                 .setPositiveButton(
                     getString(R.string.continue_creation),
                 ) { _, _ ->
-                    viewModel.addNewCard(
+                    cardViewModel.addNewCard(
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
                         answers = answers,
@@ -150,7 +147,7 @@ class AddAudioCardFragment : Fragment() {
                     R.string.save_and_exit,
                 ) { _, _ ->
                     if(!adapter.validateAnswers() && !validateCard(view)){
-                        viewModel.addNewCard(
+                        cardViewModel.addNewCard(
                             themeId = themeId,
                             question = view.question.editText!!.text.toString(),
                             currentDate = SimpleDateFormat(getString(com.example.core.R.string.data_format)).format(Date()),
@@ -187,9 +184,9 @@ class AddAudioCardFragment : Fragment() {
         )
     }
     private fun initEmptyAnswers() {
-        val size = viewModel.getAnswers().size-1
-        viewModel.reInitAnswers()
-        adapter.submitList(viewModel.getAnswers())
+        val size = cardViewModel.getAnswers().size-1
+        cardViewModel.reInitAnswers()
+        adapter.submitList(cardViewModel.getAnswers())
         adapter.notifyItemRangeRemoved(1, size)
         adapter.notifyItemChanged(0)
     }

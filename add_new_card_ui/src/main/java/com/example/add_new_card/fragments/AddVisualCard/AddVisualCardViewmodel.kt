@@ -1,6 +1,7 @@
 package com.example.add_new_card.fragments.AddVisualCard
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.add_new_card_data.CardRepository
@@ -13,6 +14,9 @@ import java.io.ByteArrayOutputStream
 
 class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
+    init{
+        Log.i("lifecycle_logging", "Init AddVisualCardViewmodel")
+    }
     private val photo = MutableStateFlow<Bitmap?>(null)
     val _photo: StateFlow<Bitmap?>
         get() = photo

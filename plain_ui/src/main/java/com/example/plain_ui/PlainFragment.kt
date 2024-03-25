@@ -24,11 +24,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PlainFragment : Fragment() {
 
-    private val viewModel: PlainViewModel by inject()
+    private val viewModel: PlainViewModel  by viewModel()
     private val navigation: PlainNavigation by inject()
 
     override fun onCreateView(

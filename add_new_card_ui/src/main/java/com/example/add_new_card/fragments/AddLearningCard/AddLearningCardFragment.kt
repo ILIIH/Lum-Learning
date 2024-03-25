@@ -4,15 +4,12 @@ import android.app.AlertDialog
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isEmpty
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
@@ -23,13 +20,13 @@ import com.example.core.domain.Scopes
 import com.example.core.util.hideKeyboard
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
-import org.koin.androidx.scope.ScopeFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 import java.util.*
 
 class AddLearningCardFragment : Fragment() {
 
-    val viewModel: AddLearningCardViewmodel by inject()
+    val cardViewModel: AddLearningCardViewmodel by viewModel()
     private val navigator: AddNewCardNavigation by inject()
 
     private lateinit var themeInfoProvider: ThemeInfoProvider
@@ -51,12 +48,12 @@ class AddLearningCardFragment : Fragment() {
         animationManager.addTopBardCloseAnimation(view.topBar, view.nestedScrollView )
 
         view.answers.adapter = adapter
-        adapter.submitList(viewModel.getAnswers())
+        adapter.submitList(cardViewModel.getAnswers())
 
         view.addNewAnswer.setOnClickListener {
-            viewModel.addAnswer()
-            adapter.submitList(viewModel.getAnswers())
-            adapter.notifyItemInserted(viewModel.getAnswers().size)
+            cardViewModel.addAnswer()
+            adapter.submitList(cardViewModel.getAnswers())
+            adapter.notifyItemInserted(cardViewModel.getAnswers().size)
         }
 
         val themeType = themeInfoProvider.getThemeType().value!!
@@ -77,7 +74,7 @@ class AddLearningCardFragment : Fragment() {
                     getString(R.string.continue_creation),
                 ) { _, _ ->
                     if (themeType == 5) {
-                        viewModel.addNewCard(
+                        cardViewModel.addNewCard(
                             themeId = themeID,
                             question = view.question.editText!!.text.toString(),
                             answers = answers,
@@ -88,7 +85,7 @@ class AddLearningCardFragment : Fragment() {
                             description = view.description.editText!!.text.toString(),
                         )
                     } else {
-                        viewModel.addNewCard(
+                        cardViewModel.addNewCard(
                             themeId = themeID,
                             question = view.question.editText!!.text.toString(),
                             answers = answers,
@@ -110,7 +107,7 @@ class AddLearningCardFragment : Fragment() {
                 ) { _, _ ->
                     if(!adapter.validateAnswers() && !validateCard(view)){
                         if (themeType == 5) {
-                            viewModel.addNewCard(
+                            cardViewModel.addNewCard(
                                 themeId = themeID,
                                 question = view.question.editText!!.text.toString(),
                                 answers = answers,
@@ -121,7 +118,7 @@ class AddLearningCardFragment : Fragment() {
                                 description = view.description.editText!!.text.toString(),
                             )
                         } else {
-                            viewModel.addNewCard(
+                            cardViewModel.addNewCard(
                                 themeId = themeID,
                                 question = view.question.editText!!.text.toString(),
                                 answers = answers,
@@ -153,9 +150,9 @@ class AddLearningCardFragment : Fragment() {
         }
     }
     private fun initEmptyAnswers() {
-        val size = viewModel.getAnswers().size-1
-        viewModel.reInitAnswers()
-        adapter.submitList(viewModel.getAnswers())
+        val size = cardViewModel.getAnswers().size-1
+        cardViewModel.reInitAnswers()
+        adapter.submitList(cardViewModel.getAnswers())
         adapter.notifyItemRangeRemoved(1, size)
         adapter.notifyItemChanged(0)
     }
