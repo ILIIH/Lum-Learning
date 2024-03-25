@@ -13,10 +13,11 @@ import com.example.edit_ui.databinding.FragmentCardListBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CardListFragment : BaseFragment() {
 
-    val viewModel: CardListViewModel by inject()
+    val viewModel: CardListViewModel  by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

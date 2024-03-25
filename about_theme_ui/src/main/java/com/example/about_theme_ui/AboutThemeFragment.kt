@@ -13,11 +13,12 @@ import com.example.about_theme_ui.databinding.FragmentAboutThemeBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
 
 class AboutThemeFragment : Fragment() {
 
-    private val viewModel: ThemeAboutViewModel by inject()
+    private val viewModel: ThemeAboutViewModel  by viewModel()
     private val navigator: AboutThemeNavigation by inject()
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -11,10 +11,11 @@ import com.example.theme_list_ui.databinding.FragmentThemeListBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThemeListFragment : Fragment() {
 
-    private val viewModule: ThemeViewModule by inject()
+    private val viewModule: ThemeViewModule  by viewModel()
     private val navigator: ThemeListNavigation by inject()
     lateinit var themeListAdapter: ThemeAdapter
 

@@ -8,13 +8,13 @@ import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.add_new_card.R
 import com.example.add_new_card.adapters.AddCardAnimations
 import com.example.add_new_card.adapters.AnswersAdapters
@@ -26,21 +26,17 @@ import com.example.core.domain.ILError
 import com.example.core.domain.Scopes
 import com.example.core.ui.MediaFragment
 import com.example.core.util.hideKeyboard
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
-import org.koin.android.scope.AndroidScopeComponent
-import org.koin.androidx.scope.fragmentScope
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
-import org.koin.core.scope.Scope
 import java.util.*
 
 class AddVisualCardFragment : MediaFragment() {
 
-    private val viewModel: AddVisualCardViewmodel by inject()
+    private val cardViewModel: AddVisualCardViewmodel by viewModel()
     private lateinit var themeInfoProvider: ThemeInfoProvider
     private lateinit var animationManager : AddCardAnimations
 
@@ -63,12 +59,12 @@ class AddVisualCardFragment : MediaFragment() {
         animationManager.addTopBardCloseAnimation(view.topBar, view.nestedScrollView )
 
         view.answers.adapter = adapter
-        adapter.submitList(viewModel.getAnswers())
+        adapter.submitList(cardViewModel.getAnswers())
 
         view.addNewAnswer.setOnClickListener {
-            viewModel.addAnswer()
-            adapter.submitList(viewModel.getAnswers())
-            adapter.notifyItemInserted(viewModel.getAnswers().size)
+            cardViewModel.addAnswer()
+            adapter.submitList(cardViewModel.getAnswers())
+            adapter.notifyItemInserted(cardViewModel.getAnswers().size)
         }
 
         val themeId = themeInfoProvider.getThemeId()
@@ -90,7 +86,7 @@ class AddVisualCardFragment : MediaFragment() {
                 .setPositiveButton(
                     getString(R.string.continue_creation),
                 ) { _, _ ->
-                    viewModel.addNewCard(
+                    cardViewModel.addNewCard(
                         themeId = themeId,
                         question = view.question.editText!!.text.toString(),
                         answers,
@@ -107,7 +103,7 @@ class AddVisualCardFragment : MediaFragment() {
                     R.string.save_and_exit,
                 ) { _, _ ->
                     if(!adapter.validateAnswers() && !validateCard(view)){
-                        viewModel.addNewCard(
+                        cardViewModel.addNewCard(
                             themeId = themeId,
                             question = view.question.editText!!.text.toString(),
                             answers,
@@ -121,7 +117,7 @@ class AddVisualCardFragment : MediaFragment() {
                 .show()
         }
 
-        viewModel._photo.onEach {
+        cardViewModel._photo.onEach {
             it?.let { photo ->
                 view.addPhoto.setImageDrawable(null)
                 if(!photo.isRecycled) {
@@ -149,27 +145,27 @@ class AddVisualCardFragment : MediaFragment() {
             result = true
         }
 
-        if(viewModel._photo.value == null){
+        if(cardViewModel._photo.value == null){
             showError(ILError.VALIDATION_PHOTO)
             result = true
         }
         return result
     }
     private fun initEmptyAnswers() {
-        val size = viewModel.getAnswers().size-1
-        viewModel.reInitAnswers()
-        adapter.submitList(viewModel.getAnswers())
+        val size = cardViewModel.getAnswers().size-1
+        cardViewModel.reInitAnswers()
+        adapter.submitList(cardViewModel.getAnswers())
         adapter.notifyItemRangeRemoved(1, size)
         adapter.notifyItemChanged(0)
     }
 
     override fun saveGalleryImageData(uri: Uri) {
         val bitmap =photoManage.imageDecode(uri)
-        viewModel.setPhoto(photoManage.getResizedBitmap(bitmap,1000))
+        cardViewModel.setPhoto(photoManage.getResizedBitmap(bitmap,1000))
         view.overlayPhoto.alpha = 0.5f
     }
     override fun saveCameraImageData(bitmap: Bitmap){
-        viewModel.setPhoto(photoManage.getResizedBitmap(bitmap, 1000))
+        cardViewModel.setPhoto(photoManage.getResizedBitmap(bitmap, 1000))
         view.overlayPhoto.alpha = 0.5f
     }
 }
