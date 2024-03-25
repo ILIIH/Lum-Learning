@@ -14,9 +14,6 @@ import java.io.ByteArrayOutputStream
 
 class AddVisualCardViewmodel(private val repo: CardRepository) : ViewModel() {
 
-    init{
-        Log.i("lifecycle_logging", "Init AddVisualCardViewmodel")
-    }
     private val photo = MutableStateFlow<Bitmap?>(null)
     val _photo: StateFlow<Bitmap?>
         get() = photo

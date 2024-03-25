@@ -86,9 +86,9 @@ class LearningCardFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            CardEndsDialog(getString(R.string.tile_ended)).show(
+                            CardEndsDialog(getString(R.string.tile_ended), ::goToNextCard).show(
                                 parentFragmentManager,
-                                CardEndsDialog.DESCRIPTION_DIALOG_TAG,
+                                CardEndsDialog.DESCRIPTION_DIALOG_TAG
                             )
                             cardProvider.updateCardStatsAndMetrics(
                                 currentDate = Date(),
@@ -99,7 +99,6 @@ class LearningCardFragment : Fragment() {
                                 time = begin - System.nanoTime(),
                                 cardId = currentCard.id,
                             )
-                            goToNextCard()
                         }
                     }
                 }

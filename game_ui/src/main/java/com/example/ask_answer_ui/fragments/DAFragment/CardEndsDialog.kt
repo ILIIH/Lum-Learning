@@ -1,9 +1,11 @@
 package com.example.ask_answer_ui.fragments.DAFragment
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -13,10 +15,15 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CardEndsDialog(
-    private val description: String
+    private val description: String,
+    private val onDismissCallback: ()->Unit = {}
 ) : DialogFragment() {
 
     private lateinit var binding: DescriptionDialogBinding
+    override fun onDismiss(dialog: DialogInterface) {
+        onDismissCallback()
+        super.onDismiss(dialog)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DescriptionDialogBinding.inflate(LayoutInflater.from(context))
@@ -27,7 +34,7 @@ class CardEndsDialog(
         binding.description.text = description
 
         lifecycleScope.launch {
-            delay(8000)
+            delay(1000)
             dismiss()
         }
 
