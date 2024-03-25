@@ -40,8 +40,9 @@ class RuleFragment : ScopeFragment() {
     }
 
     private fun configureThemeType(view: FragmentRuleBinding) {
-        lifecycleScope.launch {
-            themeInfoProvider.generatePrediction()
+
+            ChooseTypeDialog().show(parentFragmentManager, ChooseTypeDialog.CHOOSE_TYPE_DIALOG_TAG)
+
             themeInfoProvider._themeType.onEach{ type ->
                 when (type) {
                     1 -> {
@@ -71,7 +72,6 @@ class RuleFragment : ScopeFragment() {
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
-        }
     }
 
     override fun onAttach(context: Context) {

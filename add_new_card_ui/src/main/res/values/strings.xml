@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="random_or_ai">Random or AI ?</string>
+    <string name="random">Random</string>
+    <string name="ai">AIs tip</string>
+    <string name="who_should_choose_card_type">who should choose card type</string>
+</resources>
