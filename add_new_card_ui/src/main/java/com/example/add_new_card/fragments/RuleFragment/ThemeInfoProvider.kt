@@ -13,8 +13,8 @@ class ThemeInfoProvider(private val getPrediction: getMnemoTypePrediction) {
     val _themeType: StateFlow<Int>
         get() = themeType
 
-    suspend fun generatePrediction() {
-        val prediction = getPrediction.execute()
+    suspend fun generatePrediction(changeType: Boolean = false) {
+        val prediction = getPrediction.execute(changeType)
         themeType.tryEmit(prediction)
     }
 
