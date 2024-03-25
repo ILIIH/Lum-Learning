@@ -86,7 +86,7 @@ class MCFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            CardEndsDialog(getString(R.string.tile_ended)).show(
+                            CardEndsDialog(getString(R.string.tile_ended), ::goToNextCard).show(
                                 parentFragmentManager,
                                 CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                             )
@@ -99,7 +99,6 @@ class MCFragment : Fragment() {
                                 time = begin - System.nanoTime(),
                                 cardId = currentCard.id,
                             )
-                            goToNextCard()
                         }
                     }
                 }

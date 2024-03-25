@@ -62,7 +62,7 @@ class SAFragment : Fragment() {
 
                     override fun onFinish() {
                         if (isResumed) {
-                            CardEndsDialog(getString(R.string.tile_ended)).show(
+                            CardEndsDialog(getString(R.string.tile_ended), ::goToNextCard).show(
                                 parentFragmentManager,
                                 CardEndsDialog.DESCRIPTION_DIALOG_TAG,
                             )
@@ -76,7 +76,6 @@ class SAFragment : Fragment() {
                                 cardId = currentCard.id,
                             )
                             this.cancel()
-                            goToNextCard()
                         }
                     }
                 }
