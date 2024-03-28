@@ -17,13 +17,19 @@
         tools:layout="@layout/fragment_rule" >
         <action
             android:id="@+id/to_addVA_Fragment"
-            app:destination="@id/addVA_Fragment" />
+            app:destination="@id/addVA_Fragment"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/to_addAudioCardFragment"
-            app:destination="@id/addAudioCardFragment" />
+            app:destination="@id/addAudioCardFragment"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/to_addLearningCardFragment"
-            app:destination="@id/addLearningCardFragment" />
+            app:destination="@id/addLearningCardFragment"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="themeId"
             app:argType="integer" />

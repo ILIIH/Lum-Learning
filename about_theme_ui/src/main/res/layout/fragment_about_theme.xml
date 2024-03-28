@@ -60,46 +60,33 @@
 
     <Button
         android:id="@+id/to_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/secondary"
+        style="@style/about_theme_btn"
         android:text="@string/edit"
-        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/to_train" />
 
     <Button
         android:id="@+id/to_train"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="400dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/secondary"
         android:text="@string/start_game"
-        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        style="@style/about_theme_btn" />
 
     <Button
         android:id="@+id/create_new_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/secondary"
         android:text="@string/create_card"
-        android:textColor="#FFF"
+        style="@style/about_theme_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/to_edit" />
 
