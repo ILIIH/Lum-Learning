@@ -63,9 +63,9 @@
                     android:id="@+id/regular_theme_more_info_btn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="30dp"
                     android:src="@drawable/more_info_icon" />
             </LinearLayout>
             <TextView
@@ -120,9 +120,9 @@
                     android:id="@+id/open_theme_more_info_btn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="30dp"
                     android:src="@drawable/more_info_icon" />
             </LinearLayout>
             <TextView
@@ -177,9 +177,9 @@
                     android:id="@+id/theme_formula_more_info_btn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="30dp"
                     android:src="@drawable/more_info_icon" />
             </LinearLayout>
             <TextView
@@ -233,9 +233,9 @@
                     android:id="@+id/mixed_theme_more_info_btn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="30dp"
                     android:src="@drawable/more_info_icon" />
             </LinearLayout>
             <TextView

@@ -42,6 +42,7 @@ class RuleFragment : ScopeFragment() {
     private fun configureThemeType(view: FragmentRuleBinding) {
 
             ChooseTypeDialog().show(parentFragmentManager, ChooseTypeDialog.CHOOSE_TYPE_DIALOG_TAG)
+            view.teacher.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
 
             themeInfoProvider._themeType.onEach{ type ->
                 when (type) {
