@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">edit_ui</string>
+    <string name="no_card">No card was created.\nCreate card and return back to see\nlearning recommendation </string>
+    <string name="create_card">Create card</string>
 </resources>

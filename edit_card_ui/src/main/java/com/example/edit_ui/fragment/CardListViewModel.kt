@@ -1,4 +1,4 @@
-package com.example.edit_ui.card_list
+package com.example.edit_ui.fragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

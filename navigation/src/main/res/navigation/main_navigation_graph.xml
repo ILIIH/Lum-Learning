@@ -103,6 +103,11 @@
         <argument
             android:name="themeId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_global_add_new_card_graph"
+            app:destination="@id/add_new_card_graph"
+            app:popUpTo="@id/edit_cards_navigation"
+            app:popUpToInclusive="true" />
     </navigation>
 
 
