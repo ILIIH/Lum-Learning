@@ -8,6 +8,7 @@ import com.example.about_theme_ui.AboutThemeNavigation
 import com.example.add_new_card.navigation.AddNewCardNavigation
 import com.example.add_theme_ui.AddThemeNavigation
 import com.example.ask_answer_ui.navigation.GameNavigation
+import com.example.edit_ui.navigator.EditCardNavigation
 import com.example.onboarding.navigation.OnboardingNavigation
 import com.example.plain_ui.navigation.PlainNavigation
 import com.example.theme_list_ui.ThemeListNavigation
@@ -25,7 +26,8 @@ class Navigator :
     GameNavigation,
     AboutThemeNavigation,
     PlainNavigation,
-    AddNewCardNavigation
+    AddNewCardNavigation,
+    EditCardNavigation
 {
 
     override fun bind(navController: NavController) {
@@ -81,7 +83,12 @@ class Navigator :
     }
 
     override fun saveNewCardAndExit(themeId: Int) {
+
         navController?.navigateSafe(AddNewCardGraphDirections.saveNewCardAndExit(themeId))
+    }
+
+    override fun fromEditCardToAddNewCard(themeId: Int) {
+        navController?.navigateSafe(EditCardsNavigationDirections.actionGlobalAddNewCardGraph(themeId))
     }
 
 }
