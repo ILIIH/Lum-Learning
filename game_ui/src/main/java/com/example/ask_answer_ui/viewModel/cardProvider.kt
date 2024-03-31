@@ -45,6 +45,7 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.produceIn
 import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.koin.ext.getFullName
 import java.util.*
@@ -73,7 +74,7 @@ class cardProvider(
     private val _skipDescription = MutableSharedFlow<Any>(extraBufferCapacity = 1)
     val cardList: StateFlow<ResultOf<List<Card>>>
         get() = _cardList.asStateFlow()
-    private val _cardList = MutableStateFlow<ResultOf<List<Card>>>(ResultOf.Loading(arrayListOf()))
+    private val _cardList = MutableStateFlow<ResultOf<List<Card>>>(ResultOf.Success(listOf()))
     fun exitTheme() {
         this.K = 0.0
         this.D = 0.0
@@ -192,27 +193,32 @@ class cardProvider(
         }
     }
     fun downloadCards(id: Int) {
-        _cardList.tryEmit(ResultOf.Loading(arrayListOf()))
         themeIdDeferred = id
-        val startTime = System.currentTimeMillis()
+
+        val loadingTimerCoroutine = viewModelScope.launch {
+            var mseconds = 0
+            while (isActive) {
+                if(mseconds == 2){
+                    _cardList.tryEmit(ResultOf.Loading(arrayListOf()))
+                }
+                mseconds++
+                delay(100)
+            }
+        }
 
         viewModelScope.launch {
             try {
                 val currentList = repo.getAllCardByThemeId(id)
-                val loadingTime = System.currentTimeMillis() - startTime
-
-                if (loadingTime < 1000) {
-                    delay(1000 - loadingTime) // Delay to show stub downloading animation
-                }
-
                 _cardList.tryEmit(ResultOf.Success(currentList))
-
+                loadingTimerCoroutine.cancel()
                 if(currentCardIndex<currentList.size){
                     doSkipDescription(currentList[currentCardIndex])
                 }
 
             } catch (e: Throwable) {
+                loadingTimerCoroutine.cancel()
                 _cardList.tryEmit(ResultOf.Failure(ILError.IO_ERROR))
+
             }
         }
     }

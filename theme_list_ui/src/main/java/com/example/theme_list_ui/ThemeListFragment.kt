@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.ask_answer_data.ResultOf
+import com.example.core.ui.BaseFragment
 import com.example.theme_list_ui.adapter.ThemeAdapter
 import com.example.theme_list_ui.databinding.FragmentThemeListBinding
 import kotlinx.coroutines.flow.launchIn
@@ -13,7 +14,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThemeListFragment : Fragment() {
+class ThemeListFragment : BaseFragment() {
 
     private val viewModule: ThemeViewModule  by viewModel()
     private val navigator: ThemeListNavigation by inject()
@@ -31,8 +32,19 @@ class ThemeListFragment : Fragment() {
         themeListAdapter = ThemeAdapter(navigator)
         view.themeList.adapter = themeListAdapter
 
-        viewModule._themes.onEach  {
-            themeListAdapter.submitList(it)
+        viewModule._themes.onEach  { result ->
+            when (result) {
+                is ResultOf.Success -> {
+                    dismissLoading()
+                    themeListAdapter.submitList(result.value)
+                }
+                is ResultOf.Loading -> showLoading()
+                is ResultOf.Failure -> {
+                    dismissLoading()
+                    showError(result.error)
+                }
+            }
+
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         view.addNewTheme.setOnClickListener {
