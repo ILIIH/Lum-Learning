@@ -45,18 +45,23 @@ class RuleFragment : ScopeFragment() {
                 when (type) {
                     1 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.meta_mnem_rule)
+                        view.subTitle.text = getString(com.example.core.R.string.meta_mnem_title)
                     }
                     2 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
+                        view.subTitle.text = getString(com.example.core.R.string.simple_card)
                     }
                     3 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.visual_mnem_rule)
+                        view.subTitle.text = getString(com.example.core.R.string.visual_mnem_title)
                     }
                     4 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
+                        view.subTitle.text = getString(com.example.core.R.string.sound_mnem_title)
                     }
                     else -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
+                        view.subTitle.text = getString(com.example.core.R.string.simple_card)
                     }
                 }
                 view.teacher.startButton.setOnClickListener {

@@ -9,7 +9,8 @@
     <string name="enter_question_info">Create card</string>
     <string name="card_rule">Card rule</string>
     <string name="next">NEXT</string>
-    <string name="visual_mnemotechnic">visual mnemotechnic</string>
+    <string name="simple_card">Simple card</string>
+
     <string name="choose_an_option">Choose an option</string>
     <string name="restart">RESTART</string>
     <string name="exit">Exit</string>
