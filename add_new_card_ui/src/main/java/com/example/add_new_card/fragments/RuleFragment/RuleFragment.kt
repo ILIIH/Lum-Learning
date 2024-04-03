@@ -2,6 +2,7 @@ package com.example.add_new_card.fragments.RuleFragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,9 +41,7 @@ class RuleFragment : ScopeFragment() {
     }
 
     private fun configureThemeType(view: FragmentRuleBinding) {
-
             ChooseTypeDialog().show(parentFragmentManager, ChooseTypeDialog.CHOOSE_TYPE_DIALOG_TAG)
-            view.teacher.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
 
             themeInfoProvider._themeType.onEach{ type ->
                 when (type) {
@@ -58,18 +57,17 @@ class RuleFragment : ScopeFragment() {
                     4 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
                     }
-                    5 -> {
-                        view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)
+                    else -> {
+                        view.teacher.ruleText.text =getString(com.example.core.R.string.learning_card_rule)
                     }
                 }
                 view.teacher.startButton.setOnClickListener {
                     when (type) {
-                        1 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TODO: Change approach
+                        1 -> findNavController().navigate(R.id.to_addLearningCardFragment)
                         2 -> findNavController().navigate(R.id.to_addLearningCardFragment)
                         3 -> findNavController().navigate(R.id.to_addVA_Fragment)
                         4 -> findNavController().navigate(R.id.to_addAudioCardFragment)
-                        5 -> findNavController().navigate(R.id.to_addLearningCardFragment)
-                        6 -> findNavController().navigate(R.id.to_addLearningCardFragment) // TODO: Change approach
+                        else -> findNavController().navigate(R.id.to_addLearningCardFragment)
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)

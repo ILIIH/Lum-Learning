@@ -56,10 +56,14 @@ class AddLearningCardFragment : Fragment() {
             adapter.notifyItemInserted(cardViewModel.getAnswers().size)
         }
 
-        val themeType = themeInfoProvider.getThemeType().value!!
-        if (themeType == 5) {
+        val themeType = themeInfoProvider.getThemeType().value
+        if (themeType == 1) {
             view.description.visibility = View.VISIBLE
             view.descriptionTextInput.visibility = View.VISIBLE
+        }
+        else {
+            view.description.visibility = View.GONE
+            view.descriptionTextInput.visibility = View.GONE
         }
 
         val themeID = themeInfoProvider.getThemeId()
