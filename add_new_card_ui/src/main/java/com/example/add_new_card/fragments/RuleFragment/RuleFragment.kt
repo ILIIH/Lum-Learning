@@ -2,7 +2,6 @@ package com.example.add_new_card.fragments.RuleFragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.example.add_new_card.databinding.FragmentRuleBinding
 import com.example.core.domain.Scopes
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.get
 import org.koin.androidx.scope.ScopeFragment

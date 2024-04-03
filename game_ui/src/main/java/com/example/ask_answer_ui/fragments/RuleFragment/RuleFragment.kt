@@ -1,6 +1,5 @@
 package com.example.ask_answer_ui.fragments.RuleFragment
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.icu.text.SimpleDateFormat
@@ -20,9 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.viewbinding.ViewBinding
 import com.example.add_new_card.fragments.RuleFragment.RuleFragmentArgs
-import com.example.add_new_card.fragments.RuleFragment.ThemeInfoProvider
 import com.example.add_new_card_data.model.LearningCardDomain
 import com.example.add_new_card_data.model.SA_Card
 import com.example.add_new_card_data.model.VA_Card
