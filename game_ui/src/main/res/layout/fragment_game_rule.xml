@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
         android:fontFamily="@font/inriasanslight"
-        android:text="@string/visual_mnemotechnic"
+        android:text="@string/visual_mnem_title"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="6pt"
         />

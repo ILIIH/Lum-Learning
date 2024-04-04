@@ -8,18 +8,18 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.memorizable"
+        applicationId = bundleID
         minSdk 26
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
-
+        versionCode =  versionMajor*10000+versionMinor*1000+versionPatch*100
+        versionName =  "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
