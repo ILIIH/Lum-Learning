@@ -160,7 +160,6 @@ class RuleFragment : BaseFragment() , AndroidScopeComponent {
                                     view.subTitle.text = getString(com.example.core.R.string.meta_mnem_title)
                                     view.teacher.ruleText.text = getString(com.example.core.R.string.meta_mnem_rule)
                                 }
-
                                 5 -> {
                                     view.subTitle.text = getString(com.example.core.R.string.description_mnem_title)
                                     view.teacher.ruleText.text = getString(com.example.core.R.string.description_mnem_rule)

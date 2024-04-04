@@ -31,4 +31,16 @@
         app:tint="@color/white"
         android:contentDescription="@string/add_new_theme_button" />
 
+    <TextView
+        android:id="@+id/create_new_theme_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_new_theme"
+        android:fontFamily="@font/inriasansbold"
+        android:textSize="20pt"
+        app:layout_constraintBottom_toBottomOf="@+id/theme_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/theme_list"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
