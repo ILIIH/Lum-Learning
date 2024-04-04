@@ -36,7 +36,13 @@ class ThemeListFragment : BaseFragment() {
             when (result) {
                 is ResultOf.Success -> {
                     dismissLoading()
-                    themeListAdapter.submitList(result.value)
+                    if(result.value.isNotEmpty()){
+                        view.createNewThemeTitle?.visibility = View.GONE
+                        themeListAdapter.submitList(result.value)
+                    }
+                    else {
+                        view.createNewThemeTitle?.visibility = View.VISIBLE
+                    }
                 }
                 is ResultOf.Loading -> showLoading()
                 is ResultOf.Failure -> {
