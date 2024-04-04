@@ -169,7 +169,7 @@ class RuleFragment : BaseFragment() , AndroidScopeComponent {
                         }
 
                         is VA_Card -> {
-                            view.subTitle.text = getString(com.example.core.R.string.visual_mnem_title)
+                            view.subTitle.text = getString(com.example.core.R.string.visual_title)
                             view.teacher.ruleText.text = getString(com.example.core.R.string.visual_mnem_rule)
                         }
 
