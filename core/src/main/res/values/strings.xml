@@ -23,7 +23,7 @@
     <string name="description_mnem_title">Description association test rule: </string>
     <string name="description_mnem_rule">1) First you will see long description fo this field / subject of the question \n\n2) Answer the question, your time is restricted\n\n</string>
 
-    <string name="visual_mnem_title">Visual association test rule: </string>
+    <string name="visual_title">Visual association test rule: </string>
     <string name="visual_mnem_rule">1) First you will see the photo association on answer to question\n\n2) Answer the question, your time is restricted\n\n </string>
 
     <string name="sound_mnem_title">Audio association test rule: </string>

@@ -53,7 +53,7 @@ class RuleFragment : ScopeFragment() {
                     }
                     3 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.visual_mnem_rule)
-                        view.subTitle.text = getString(com.example.core.R.string.visual_mnem_title)
+                        view.subTitle.text = getString(com.example.core.R.string.visual_title)
                     }
                     4 -> {
                         view.teacher.ruleText.text =getString(com.example.core.R.string.sound_mnem_rule)

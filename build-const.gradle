@@ -1,5 +1,4 @@
 ext {
-
     // DI
     koin_version = "3.3.3"
 
@@ -31,4 +30,9 @@ ext {
     test_rules_version = "1.4.0"
     espresso_version = "3.4.0"
 
+    // app settings
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 0
+    bundleID = "com.example.memorizable"
 }
