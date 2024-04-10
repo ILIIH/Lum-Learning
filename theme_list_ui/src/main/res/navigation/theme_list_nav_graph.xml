@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/themeListFragment"
-        android:name="com.example.theme_list_ui.ThemeListFragment"
+        android:name="com.lum.theme_list_ui.ThemeListFragment"
         android:label="fragment_theme_list"
         tools:layout="@layout/fragment_theme_list" />
 

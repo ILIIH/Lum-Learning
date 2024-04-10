@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/aboutThemeFragment"
-        android:name="com.example.about_theme_ui.AboutThemeFragment"
+        android:name="com.lum.about_theme_ui.AboutThemeFragment"
         android:label="AboutThemeFragment" >
         <argument
             android:name="theme_id"

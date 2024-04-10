@@ -34,5 +34,5 @@ ext {
     versionMajor = 1
     versionMinor = 0
     versionPatch = 0
-    bundleID = "com.example.memorizable"
+    bundleID = "com.lum.memorizable"
 }

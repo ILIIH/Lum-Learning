@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/addVA_Fragment"
-        android:name="com.example.add_new_card.fragments.AddVisualCard.AddVisualCardFragment"
+        android:name="com.lum.add_new_card.fragments.AddVisualCard.AddVisualCardFragment"
         android:label="fragment_add_v_a_"
         tools:layout="@layout/fragment_add_visual_card" />
     <fragment
         android:id="@+id/ruleFragment"
-        android:name="com.example.add_new_card.fragments.RuleFragment.RuleFragment"
+        android:name="com.lum.add_new_card.fragments.RuleFragment.RuleFragment"
         android:label="fragment_rule"
         tools:layout="@layout/fragment_rule" >
         <action
@@ -36,11 +36,11 @@
     </fragment>
     <fragment
         android:id="@+id/addAudioCardFragment"
-        android:name="com.example.add_new_card.fragments.AddAudioCard.AddAudioCardFragment"
+        android:name="com.lum.add_new_card.fragments.AddAudioCard.AddAudioCardFragment"
         android:label="AddAudioCardFragment" />
     <fragment
         android:id="@+id/addLearningCardFragment"
-        android:name="com.example.add_new_card.fragments.AddLearningCard.AddLearningCardFragment"
+        android:name="com.lum.add_new_card.fragments.AddLearningCard.AddLearningCardFragment"
         android:label="fragment_add_learning_card"
         tools:layout="@layout/fragment_add_learning_card" />
 </navigation>

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.example.about_theme_ui.customView.PieChart
+    <com.lum.about_theme_ui.customView.PieChart
         android:id="@+id/pie_chart"
         android:layout_width="180dp"
         android:layout_height="180dp"
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pie_chart">
 
-        <com.example.about_theme_ui.customView.horizontalChart
+        <com.lum.about_theme_ui.customView.horizontalChart
             android:id="@+id/horizontal_chart_right"
             android:layout_width="80dp"
             android:layout_height="40dp"
@@ -45,7 +45,7 @@
             android:layout_marginEnd="20dp"
             />
 
-        <com.example.about_theme_ui.customView.horizontalChart
+        <com.lum.about_theme_ui.customView.horizontalChart
             android:id="@+id/horizontal_prev_month_right"
             android:layout_width="80dp"
             android:layout_height="40dp"
@@ -54,7 +54,7 @@
             android:visibility="gone"
             />
 
-        <com.example.about_theme_ui.customView.horizontalChart
+        <com.lum.about_theme_ui.customView.horizontalChart
             android:id="@+id/horizontal_chart_wrong"
             android:layout_width="80dp"
             android:layout_height="40dp"

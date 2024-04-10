@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.edit_ui'
+    namespace 'com.lum.edit_ui'
     compileSdk 33
 
     defaultConfig {
