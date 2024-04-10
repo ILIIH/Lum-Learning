@@ -112,14 +112,8 @@ class GrantDiagram @JvmOverloads constructor(
     private val lastPoint = PointF()
     private var lastPointerId = 0
 
-    // Отвечает за зум и сдвиги
     private val transformations = Transformations()
-
-    // Обнаружение и расчет скейла
     private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
-
-    // endregion
-
     private var tasks: List<Task> = emptyList()
     private var uiTasks: List<UiTask> = emptyList()
 
@@ -128,15 +122,10 @@ class GrantDiagram @JvmOverloads constructor(
             this.tasks = tasks
             uiTasks = tasks.map{UiTask(it)}
             updateTasksRects()
-
-            // Сообщаем, что нужно пересчитать размеры
             requestLayout()
-            // Сообщаем, что нужно перерисоваться
             invalidate()
         }
     }
-
-    // region Измерения размеров
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val width = if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED) {
