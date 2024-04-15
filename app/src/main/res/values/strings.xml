@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">lum</string>
+    <string name="app_name">Lum-Learning</string>
     <string-array name="return_blocked_fragments_labels">
         <item>fragment_ask_answer</item>
         <item>fragment_learning_card</item>
