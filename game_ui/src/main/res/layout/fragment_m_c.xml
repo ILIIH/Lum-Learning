@@ -120,7 +120,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.example.ask_answer_ui.customView.timeView
+    <com.lum.ask_answer_ui.customView.timeView
         android:id="@+id/timeView"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"

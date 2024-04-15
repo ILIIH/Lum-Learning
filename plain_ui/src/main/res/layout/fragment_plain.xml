@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlainFragment">
+    tools:context="com.lum.plain_ui.PlainFragment">
 
     <LinearLayout
         android:id="@+id/buttons_layout"
@@ -50,7 +50,7 @@
 
     </LinearLayout>
 
-    <com.example.plain_ui.customView.GrantDiagram
+    <com.lum.plain_ui.customView.GrantDiagram
         android:id="@+id/plain_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

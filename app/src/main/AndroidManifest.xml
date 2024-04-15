@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.memorizable">
+    package="com.lum.memorizable">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -12,7 +12,7 @@
     <application
         android:exported="true"
         android:largeHeap="true"
-        android:name=".di.MyApplication"
+        android:name="com.lum.memorizable.di.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,7 +24,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.lum.memorizable.SplashScreenActivity"
             android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.lum.memorizable.MainActivity"
             android:exported="true">
         </activity>
 

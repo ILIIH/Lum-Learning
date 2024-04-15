@@ -1,4 +1,5 @@
 ext {
+
     // DI
     koin_version = "3.3.3"
 
@@ -34,5 +35,5 @@ ext {
     versionMajor = 1
     versionMinor = 0
     versionPatch = 0
-    bundleID = "com.example.memorizable"
+    bundleID = "com.lum.memorizable"
 }

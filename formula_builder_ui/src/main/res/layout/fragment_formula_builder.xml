@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bacground"
-    tools:context=".FormulaBuilderFragment">
+    tools:context="com.lum.formula_builder_ui.FormulaBuilderFragment">
 
-    <com.example.formula_builder_ui.customView.FormulaBuilderView
+    <com.lum.formula_builder_ui.customView.FormulaBuilderView
         android:id="@+id/formulaBuilderView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

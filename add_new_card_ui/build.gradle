@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.add_new_card'
+    namespace 'com.lum.add_new_card'
     compileSdk 33
 
     defaultConfig {

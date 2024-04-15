@@ -7,7 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/main_background"
 android:id="@+id/motion_layout"
-tools:context=".fragments.LearningCardFragment"
+tools:context="com.lum.ask_answer_ui.fragments.LearningCardFragment"
 android:orientation="vertical"
     >
 
@@ -56,7 +56,7 @@ android:orientation="vertical"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/photo_question_background" />
 
-<com.example.ask_answer_ui.customView.timeView
+<com.lum.ask_answer_ui.customView.timeView
     android:id="@+id/timeView"
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"

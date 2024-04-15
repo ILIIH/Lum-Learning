@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cardListFragment"
-        android:name="com.example.edit_ui.fragment.CardListFragment"
+        android:name="com.lum.edit_ui.fragment.CardListFragment"
         android:label="fragment_card_list"
         tools:layout="@layout/fragment_card_list" >
         <argument

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/visualAssociationFragment"
-        android:name="com.example.ask_answer_ui.fragments.VAFragment"
+        android:name="com.lum.ask_answer_ui.fragments.VAFragment"
         android:label="fragment_ask_answer"
         tools:layout="@layout/fragment_visual_assosiation" />
     <fragment
         android:id="@+id/ruleFragment"
-        android:name="com.example.ask_answer_ui.fragments.RuleFragment.RuleFragment"
+        android:name="com.lum.ask_answer_ui.fragments.RuleFragment.RuleFragment"
         android:label="fragment_rule"
         tools:layout="@layout/fragment_rule" >
         <action
@@ -41,20 +41,20 @@
     </fragment>
     <fragment
         android:id="@+id/SAFragment"
-        android:name="com.example.ask_answer_ui.fragments.SAFragment"
+        android:name="com.lum.ask_answer_ui.fragments.SAFragment"
         android:label="SAFragment" />
     <fragment
         android:id="@+id/DAFragment"
-        android:name="com.example.ask_answer_ui.fragments.DAFragment.DAFragment"
+        android:name="com.lum.ask_answer_ui.fragments.DAFragment.DAFragment"
         android:label="DAFragment" />
     <fragment
         android:id="@+id/MCFragment"
-        android:name="com.example.ask_answer_ui.fragments.MCFragment"
+        android:name="com.lum.ask_answer_ui.fragments.MCFragment"
         android:label="fragment_m_c"
         tools:layout="@layout/fragment_m_c" />
     <fragment
         android:id="@+id/learningCard"
-        android:name="com.example.ask_answer_ui.fragments.LearningCardFragment"
+        android:name="com.lum.ask_answer_ui.fragments.LearningCardFragment"
         android:label="fragment_learning_card"
         tools:layout="@layout/fragment_learning_card" />
 </navigation>

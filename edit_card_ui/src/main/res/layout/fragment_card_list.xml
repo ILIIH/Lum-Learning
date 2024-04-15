@@ -12,13 +12,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:name="com.example.edit_ui.CardListFragment"
+        android:name="com.lum.edit_ui.CardListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:context=".fragment.CardListFragment"
+        tools:context="com.lum.edit_ui.fragment.CardListFragment"
         tools:listitem="@layout/card_item" />
 
 </LinearLayout>
