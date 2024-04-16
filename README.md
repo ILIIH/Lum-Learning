@@ -4,6 +4,8 @@
 
 In today's information age, we are constantly surrounded by various forms of information. Success isn't merely about understanding a topic; it requires comprehensive knowledge of all aspects related to it. The primary goal of this application is to provide users with the opportunity to enhance their learning speed, allowing them to grasp a wide range of information quickly and effectively, empowering them to thrive in this fast-paced digital era. The Android application centered around personalized learning harnesses the power of a neural network, enabling the creation of a highly tailored and adaptive learning experience for the user.
 
+Start testing expirence : 
+
 ## **Contents:**
 
 1. [Project Overview](#1-overview)
