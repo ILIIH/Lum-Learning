@@ -68,7 +68,7 @@
             <TextView
                 android:fontFamily="@font/inriasansbold"
                 android:textColor="@color/white"
-                android:textSize="42sp"
+                android:textSize="30sp"
                 android:gravity="center_vertical"
                 android:id="@+id/high_text"
                 android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
             <TextView
                 android:fontFamily="@font/inriasansbold"
                 android:textColor="@color/white"
-                android:textSize="42sp"
+                android:textSize="30sp"
                 android:gravity="center_vertical"
                 android:id="@+id/middle_text"
                 android:layout_marginStart="30dp"
@@ -151,7 +151,7 @@
             <TextView
                 android:fontFamily="@font/inriasansbold"
                 android:textColor="@color/white"
-                android:textSize="42sp"
+                android:textSize="30sp"
                 android:gravity="center_vertical"
                 android:id="@+id/expert_text"
                 android:layout_width="wrap_content"

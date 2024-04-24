@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
-    >
+    android:background="@color/primary">
 
     <Button
         android:id="@+id/start_button"
@@ -51,12 +51,12 @@
 
     <ImageView
         android:id="@+id/rabbit"
+        style="@style/rabbit_style"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
-        app:srcCompat="@drawable/learning_rabbit"
-        style="@style/rabbit_style" />
+        app:srcCompat="@drawable/learning_rabbit" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -88,35 +88,43 @@
 
     <TextView
         android:id="@+id/app_name"
+        style="@style/app_name_style"
         android:text="@string/app_name_subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-        style="@style/app_name_style" />
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout" />
 
-    <TextView
-        android:id="@+id/title1"
-        style="@style/title"
-        android:layout_marginTop="156dp"
-        android:text="@string/art"
-        android:textColor="@color/onboarding_additional"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/start_button"
+        app:layout_constraintEnd_toEndOf="@+id/start_button"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/title2"
-        android:layout_marginTop="8dp"
-        android:text="@string/of"
-        style="@style/title"
-        android:textColor="@color/onboarding_additional"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title1" />
+        <TextView
+            android:id="@+id/title1"
+            style="@style/title"
+            android:text="@string/art"
+            android:textColor="@color/onboarding_additional"
+            app:layout_constraintBottom_toTopOf="@+id/title2"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/title3"
-        android:layout_marginTop="8dp"
-        android:text="@string/learning"
-        style="@style/title"
-        android:textColor="@color/onboarding_additional"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title2" />
+        <TextView
+            android:id="@+id/title2"
+            style="@style/title"
+            android:text="@string/of"
+            android:textColor="@color/onboarding_additional"
+            app:layout_constraintBottom_toTopOf="@+id/title3"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/title3"
+            style="@style/title"
+            android:text="@string/learning"
+            android:textColor="@color/onboarding_additional"
+            app:layout_constraintBottom_toTopOf="@+id/start_button"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
