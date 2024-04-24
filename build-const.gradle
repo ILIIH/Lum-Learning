@@ -35,5 +35,6 @@ ext {
     versionMajor = 1
     versionMinor = 0
     versionPatch = 1
+
     bundleID = "com.lum.memorizable"
 }
