@@ -34,7 +34,7 @@ ext {
     // app settings
     versionMajor = 1
     versionMinor = 0
-    versionPatch = 1
+    versionPatch = 2
 
     bundleID = "com.lum.memorizable"
 }
