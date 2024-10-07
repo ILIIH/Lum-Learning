@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk compileAppSdk
 
     defaultConfig {
         applicationId = bundleID
-        minSdk 26
-        targetSdk 33
+        minSdk minAppSdk
+        targetSdk targetAppSdk
         versionCode =  versionMajor*10000+versionMinor*1000+versionPatch*100
         versionName =  "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

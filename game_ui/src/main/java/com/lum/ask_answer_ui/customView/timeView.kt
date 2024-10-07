@@ -129,24 +129,24 @@ class timeView @JvmOverloads constructor(
             right = 130F
         }
     }
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         prepareBackground()
 
-        canvas?.drawPath(backgroundRect, backgroundColor)
-        canvas?.drawCircle(100F, (height / 2).toFloat(), clockRadius, backgroundClock)
-        canvas?.drawCircle(70F, (height / 3).toFloat(), clockSecondRadius, backgroundClock)
-        canvas?.drawCircle(130F, (height / 3).toFloat(), clockSecondRadius, backgroundClock)
+        canvas.drawPath(backgroundRect, backgroundColor)
+        canvas.drawCircle(100F, (height / 2).toFloat(), clockRadius, backgroundClock)
+        canvas.drawCircle(70F, (height / 3).toFloat(), clockSecondRadius, backgroundClock)
+        canvas.drawCircle(130F, (height / 3).toFloat(), clockSecondRadius, backgroundClock)
 
         setTimeIndexOval()
 
         var traitWithOffset = (width * 20 / 100).toFloat()
         for (i in 0..this.lineTrait) {
             prepareTrait(traitWithOffset)
-            canvas?.drawPath(traitRect, backgroundClock)
+            canvas.drawPath(traitRect, backgroundClock)
             traitWithOffset += (width * 3 / 100).toFloat() + (width * 1 / 100).toFloat()
         }
 
-        canvas?.drawArc(rectCircleIndex, -90F, currentTimeAngle, true, backgroundTimeIndex)
+        canvas.drawArc(rectCircleIndex, -90F, currentTimeAngle, true, backgroundTimeIndex)
     }
 }

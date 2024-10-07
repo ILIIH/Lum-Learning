@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.about_theme_domain",
+  "applicationId": "com.lum.about_theme_domain",
   "variantName": "debug",
   "elements": [
     {

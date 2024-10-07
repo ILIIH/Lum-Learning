@@ -114,13 +114,13 @@ class PieChart @JvmOverloads constructor(
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         var index = 0
         data?.pieSlices?.let { slices ->
             slices.forEach {
-                canvas?.drawArc(ovals[index], it.value.startAngle, it.value.sweepAngle, true, it.value.paint)
-                canvas?.drawArc(ovals[index], it.value.startAngle, it.value.sweepAngle, true, borderPaint)
+                canvas.drawArc(ovals[index], it.value.startAngle, it.value.sweepAngle, true, it.value.paint)
+                canvas.drawArc(ovals[index], it.value.startAngle, it.value.sweepAngle, true, borderPaint)
                 drawIndicators(canvas, it.value)
                 index++
             }

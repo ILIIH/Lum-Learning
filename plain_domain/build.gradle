@@ -5,10 +5,11 @@ plugins {
 
 android {
     namespace 'com.lum.plain_domain'
-    compileSdk 34
+    compileSdk compileAppSdk
 
     defaultConfig {
-        minSdk 26
+        minSdk minAppSdk
+        targetSdk targetAppSdk
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }

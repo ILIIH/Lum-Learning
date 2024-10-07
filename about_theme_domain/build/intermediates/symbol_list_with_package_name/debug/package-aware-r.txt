@@ -1,1 +1,1 @@
-com.example.about_theme_domain
+com.lum.about_theme_domain

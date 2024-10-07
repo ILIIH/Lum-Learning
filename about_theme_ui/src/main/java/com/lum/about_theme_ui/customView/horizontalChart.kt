@@ -30,20 +30,20 @@ class horizontalChart @JvmOverloads constructor(
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         val topMiddleStickMagrin = +height / 2 - MIDDLE_STICK_WITH / 2
         val bottomMiddleStickMagrin = height / 2 + MIDDLE_STICK_WITH / 2
 
-        canvas?.drawRect((width * 0.1).toFloat(), topMiddleStickMagrin, (width - width * 0.1).toFloat(), bottomMiddleStickMagrin, middleStickPaint)
+        canvas.drawRect((width * 0.1).toFloat(), topMiddleStickMagrin, (width - width * 0.1).toFloat(), bottomMiddleStickMagrin, middleStickPaint)
 
         val topPercentageIndexMagrin = +height / 2 - PERCENTAGE_INDEX_WITH / 2
         val bottomPercentageIndexMagrin = height / 2 + PERCENTAGE_INDEX_WITH / 2
 
         percentageIndexPaint.color = percentageColor
         val percentageMargin = (0.6 * width * percentage) / 100
-        canvas?.drawRect((width * 0.2).toFloat(), topPercentageIndexMagrin, (percentageMargin + width * 0.2).toFloat(), bottomPercentageIndexMagrin, percentageIndexPaint)
+        canvas.drawRect((width * 0.2).toFloat(), topPercentageIndexMagrin, (percentageMargin + width * 0.2).toFloat(), bottomPercentageIndexMagrin, percentageIndexPaint)
     }
 
     fun setData(percentage: Float, color: Int) {

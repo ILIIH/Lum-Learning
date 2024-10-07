@@ -36,5 +36,9 @@ ext {
     versionMinor = 0
     versionPatch = 2
 
+    compileAppSdk = 34
+    minAppSdk =  26
+    targetAppSdk = 34
+
     bundleID = "com.lum.memorizable"
 }

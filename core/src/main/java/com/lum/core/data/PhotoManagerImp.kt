@@ -55,7 +55,8 @@ class PhotoManagerImp(private val context: Context): PhotoManager {
         imageUri?.let { uri ->
             try {
                 val outputStream = contentResolver.openOutputStream(uri)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+                if(outputStream!=null)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
                 outputStream?.close()
             } catch (e: Exception) {
                 e.printStackTrace()
