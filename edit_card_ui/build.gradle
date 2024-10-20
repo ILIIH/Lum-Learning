@@ -20,16 +20,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     buildFeatures {
         viewBinding = true
     }
+
     dataBinding {
         enabled = true
+    }
+
+    // Set Java compatibility
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Set Kotlin JVM target
+    kotlinOptions {
+        jvmTarget = '17'
     }
 }
 
 dependencies {
-
     implementation project(path: ':learning_card_data')
     implementation project(path: ':core')
 
@@ -43,4 +55,4 @@ dependencies {
     implementation "androidx.cardview:cardview:$card_view_version"
 
     implementation "androidx.appcompat:appcompat:$app_compat_version"
-   }
+}

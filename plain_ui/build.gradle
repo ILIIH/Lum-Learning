@@ -23,8 +23,20 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
     dataBinding {
         enabled = true
+    }
+
+    // Set Java compatibility
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Set Kotlin JVM target
+    kotlinOptions {
+        jvmTarget = '17'
     }
 }
 

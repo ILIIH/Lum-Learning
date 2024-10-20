@@ -197,7 +197,7 @@ class RuleFragment : BaseFragment() , AndroidScopeComponent {
             is LearningCardDomain -> {
                 when (card.themeType) {
                     2 -> {
-                        findNavController().navigate(R.id.to_MCFragment)
+                        findNavController().navigate(R.id.to_LearningCard)
                     }
 
                     5 -> {
@@ -210,10 +210,10 @@ class RuleFragment : BaseFragment() , AndroidScopeComponent {
                 }
             }
             is VA_Card -> {
-                findNavController().navigate(R.id.to_VAFragment)
+                findNavController().navigate(R.id.to_LearningCard)
             }
             is SA_Card -> {
-                findNavController().navigate(R.id.to_SAFragment)
+                findNavController().navigate(R.id.to_LearningCard)
             }
             else -> {
                 // TODO() A
